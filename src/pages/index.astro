@@ -1,11 +1,1121 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Home">
+	<!-- 1. HERO -->
+	<section class="home-hero">
+		<div class="hero-bg">
+			<img
+				class="hero-bg-image"
+				src="/images/entdecke_deine_neuen_seiten.webp"
+				alt=""
+				fetchpriority="high"
+			/>
+			<div class="hero-overlay"></div>
+		</div>
+		<div class="container hero-inner">
+			<div class="hero-content">
+				<h1 class="hero-title">Entdecke deine neuen Seiten</h1>
+				<p class="hero-subtext">Romane, die dein Leben verändern</p>
+				<div class="hero-buttons">
+					<a href="/buecher" class="btn btn-primary">Jetzt lesen</a>
+					<a href="/ueber-mich" class="btn btn-ghost-dark-bg">Über mich</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- 2. BÜCHER -->
+	<section class="home-books">
+		<div class="container books-inner">
+			<div class="books-left">
+				<h2 class="section-title">Meine Bücher</h2>
+				<p class="books-intro">
+					Lesen und persönliche Entwicklung – das geht bei meinen Büchern Hand in Hand. Tauche ein in
+					inspirierende Geschichten aus dem Alltag, die dir zu persönlichem Wachstum verhelfen.
+				</p>
+				<div style="display: flex; width: fit-content;">
+					<a href="/buecher" class="btn btn-primary" style="width: auto; display: inline-block;">Jetzt lesen</a>
+				</div>
+			</div>
+			<div class="books-right">
+				<a href="/buecher" class="book-cover-link">
+					<div class="book-cover-placeholder"></div>
+				</a>
+				<a href="/buecher" class="book-cover-link">
+					<div class="book-cover-placeholder"></div>
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- 3. TESTIMONIALS – spotlight, auto-rotating -->
+	<section class="home-testimonials">
+		<div class="container testimonials-spotlight">
+			<p class="testimonials-label">LESERSTIMMEN</p>
+			<div class="testimonials-stars">★★★★★</div>
+			<figure class="testimonial-spotlight">
+				<blockquote class="testimonial-quote-lg"></blockquote>
+				<figcaption class="testimonial-author-lg"></figcaption>
+			</figure>
+			<div class="testimonial-progress">
+				<div class="testimonial-progress-bar"></div>
+			</div>
+			<div class="testimonial-nav" aria-label="Zitatnavigation">
+				<button
+					type="button"
+					class="testimonial-arrow testimonial-arrow--prev"
+					aria-label="Vorheriges Zitat"
+				>
+					←
+				</button>
+				<div class="testimonial-dots" role="tablist" aria-label="Leserstimmen">
+					<button
+						type="button"
+						class="testimonial-dot"
+						data-index="0"
+						role="tab"
+						aria-label="Zitat 1"
+					></button>
+					<button
+						type="button"
+						class="testimonial-dot"
+						data-index="1"
+						role="tab"
+						aria-label="Zitat 2"
+					></button>
+					<button
+						type="button"
+						class="testimonial-dot"
+						data-index="2"
+						role="tab"
+						aria-label="Zitat 3"
+					></button>
+					<button
+						type="button"
+						class="testimonial-dot"
+						data-index="3"
+						role="tab"
+						aria-label="Zitat 4"
+					></button>
+					<button
+						type="button"
+						class="testimonial-dot"
+						data-index="4"
+						role="tab"
+						aria-label="Zitat 5"
+					></button>
+				</div>
+				<button
+					type="button"
+					class="testimonial-arrow testimonial-arrow--next"
+					aria-label="Nächstes Zitat"
+				>
+					→
+				</button>
+			</div>
+		</div>
+	</section>
+
+	<!-- 4. ÜBER MICH (full viewport Smaragd, content max-width 1300px) -->
+	<section class="home-about">
+		<div class="about-inner">
+			<div class="about-content">
+				<h2 class="section-title about-title">Über mich</h2>
+				<p class="about-text">
+					Viele Autoren schreiben schon ihr Leben lang. Ich habe meine Leidenschaft fürs Schreiben
+					erst während Corona für mich entdeckt.
+				</p>
+				<p class="about-text">
+					Alles, was es dafür brauchte, war eine Folge Gemischtes Hack, die Suche nach einer
+					kreativen Beschäftigung und der Mut, einfach mal etwas Neues auszuprobieren.
+				</p>
+			</div>
+			<div class="about-image">
+				<div class="about-image-placeholder"></div>
+			</div>
+			<div class="about-cta">
+				<a href="/ueber-mich" class="btn btn-ghost-dark-bg">Mehr</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- 5. QUOTE BAND (Off-White background, decorative quote) -->
+	<section class="home-quote-band">
+		<div class="quote-band-inner">
+			<span class="quote-mark" aria-hidden="true">„</span>
+			<blockquote class="quote-text quote-centered">
+				Manchmal reicht ein einziges Wort aus,<br />
+				um einen neuen Impuls für den eigenen Alltag zu bekommen.
+			</blockquote>
+		</div>
+	</section>
+
+	<!-- 6. WARUM LESEN + MILLENNIAL WORKSHOP (two columns, design system, emerald blocks) -->
+	<section class="home-two-col">
+		<div class="container two-col-inner">
+			<div class="two-col-card">
+				<div class="two-col-block two-col-block--emerald"></div>
+				<h2 class="section-title">Warum Lesen</h2>
+				<p class="two-col-text">
+					Warum Geschichten wichtig sind und was sie mit uns machen – hier teile ich meine Gedanken
+					zum Lesen und zur persönlichen Entwicklung.
+				</p>
+				<a href="/warum-lesen" class="btn btn-ghost">Mehr erfahren</a>
+			</div>
+			<div class="two-col-card">
+				<div class="two-col-block two-col-block--emerald"></div>
+				<h2 class="section-title">Millennial Workshop</h2>
+				<p class="two-col-text">
+					Workshop-Angebote rund um die Themen der Bücher: Formate, Inhalte und wie du teilnehmen
+					kannst.
+				</p>
+				<a href="/millennial-workshop" class="btn btn-ghost">Mehr erfahren</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- 7. BLOG PREVIEW -->
+	<section class="home-blog">
+		<div class="container blog-inner">
+			<h2 class="section-title section-title--center">Blog</h2>
+			<p class="blog-intro blog-intro--center">
+				Noch mehr spannende Artikel über das Schreiben, mentale Gesundheit und persönliche
+				Entwicklung.
+			</p>
+			<div class="blog-grid">
+				<div class="blog-card">
+					<div class="blog-card-image"></div>
+					<div class="blog-card-content">
+						<h3 class="blog-card-title">Blog-Artikel Titel</h3>
+						<p class="blog-card-excerpt">Kurze Beschreibung des Artikels...</p>
+					</div>
+				</div>
+				<div class="blog-card">
+					<div class="blog-card-image"></div>
+					<div class="blog-card-content">
+						<h3 class="blog-card-title">Blog-Artikel Titel</h3>
+						<p class="blog-card-excerpt">Kurze Beschreibung des Artikels...</p>
+					</div>
+				</div>
+				<div class="blog-card">
+					<div class="blog-card-image"></div>
+					<div class="blog-card-content">
+						<h3 class="blog-card-title">Blog-Artikel Titel</h3>
+						<p class="blog-card-excerpt">Kurze Beschreibung des Artikels...</p>
+					</div>
+				</div>
+			</div>
+			<div class="blog-cta blog-cta--center">
+				<a href="/blog" class="btn btn-ghost">Stöbern</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- 8. SOCIAL / KONTAKT -->
+	<section class="home-social">
+		<div class="container social-inner">
+			<h2 class="section-title section-title--center">Hier findest du mich</h2>
+			<p class="social-intro">
+				Werde Teil meiner Community. Ich freue mich, von dir zu hören!
+			</p>
+			<div class="social-gallery">
+				<div class="social-gallery-item"></div>
+				<div class="social-gallery-item"></div>
+				<div class="social-gallery-item"></div>
+				<div class="social-gallery-item"></div>
+			</div>
+			<div class="social-icons">
+				<a href="#" class="social-icon" aria-label="Instagram">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path
+							d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+							fill="currentColor"
+						/>
+					</svg>
+				</a>
+				<a href="#" class="social-icon" aria-label="Facebook">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path
+							d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+							fill="currentColor"
+						/>
+					</svg>
+				</a>
+				<a href="#" class="social-icon" aria-label="YouTube">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path
+							d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+							fill="currentColor"
+						/>
+					</svg>
+				</a>
+			</div>
+			<div class="social-cta">
+				<a href="/kontakt" class="btn btn-primary">Jetzt kontaktieren</a>
+			</div>
+		</div>
+	</section>
 </Layout>
+
+<script>
+	if (typeof window !== 'undefined') {
+		window.addEventListener('DOMContentLoaded', () => {
+			const TESTIMONIALS = [
+				{ quote: 'Charaktere zum Identifizieren', author: 'LESERATTE' },
+				{ quote: 'Lehrreich, emotional, fesselnd', author: 'MÄRTHE' },
+				{ quote: 'Persönlichkeitsentwicklung zum Anfassen!', author: 'DN' },
+				{ quote: 'Ein Buch zum Nachdenken', author: 'YANNIC' },
+				{ quote: 'Sehr inspirierendes Buch', author: 'KRISTINA' },
+			];
+
+			const quoteEl = document.querySelector('.testimonial-quote-lg');
+			const authorEl = document.querySelector('.testimonial-author-lg');
+			const dots = Array.from(document.querySelectorAll('.testimonial-dot'));
+			const prevBtn = document.querySelector('.testimonial-arrow--prev');
+			const nextBtn = document.querySelector('.testimonial-arrow--next');
+			const progressBar = document.querySelector('.testimonial-progress-bar');
+
+			if (!quoteEl || !authorEl || !dots.length || !prevBtn || !nextBtn || !progressBar) {
+				return;
+			}
+
+			let current = 0;
+			let timerId;
+			const ROTATE_MS = 4000;
+			const FADE_MS = 400;
+
+			function startProgress() {
+				progressBar.classList.remove('is-animating');
+				// force reflow to restart animation
+				// eslint-disable-next-line no-unused-expressions
+				progressBar.offsetWidth;
+				progressBar.classList.add('is-animating');
+			}
+
+			function setActive(index) {
+				current = (index + TESTIMONIALS.length) % TESTIMONIALS.length;
+
+				quoteEl.classList.add('testimonial-fade');
+				authorEl.classList.add('testimonial-fade');
+
+				window.setTimeout(() => {
+					quoteEl.textContent = `„${TESTIMONIALS[current].quote}“`;
+					authorEl.textContent = TESTIMONIALS[current].author;
+					quoteEl.classList.remove('testimonial-fade');
+					authorEl.classList.remove('testimonial-fade');
+				}, FADE_MS);
+
+				dots.forEach((dot, i) => {
+					const isActive = i === current;
+					dot.classList.toggle('is-active', isActive);
+					dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
+				});
+
+				if (timerId) window.clearTimeout(timerId);
+				startProgress();
+				timerId = window.setTimeout(() => {
+					setActive(current + 1);
+				}, ROTATE_MS);
+			}
+
+			dots.forEach((dot, index) => {
+				dot.addEventListener('click', () => {
+					setActive(index);
+				});
+			});
+
+			prevBtn.addEventListener('click', () => {
+				setActive(current - 1);
+			});
+
+			nextBtn.addEventListener('click', () => {
+				setActive(current + 1);
+			});
+
+			setActive(0);
+		});
+	}
+</script>
+
+<style>
+	/* Button Styles – unified across Home page */
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: auto;
+		padding: 0.85rem 2rem;
+		font-family: 'Manrope', sans-serif;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		border-radius: 0;
+		cursor: pointer;
+		transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+		text-decoration: none;
+		white-space: nowrap;
+		box-sizing: border-box;
+	}
+
+	/* Primary: Smaragd filled */
+	.btn-primary {
+		background-color: #1a3a30;
+		color: #f5f0e8;
+		border: none;
+	}
+
+	.btn-primary:hover {
+		background-color: #243d35;
+	}
+
+	/* Ghost on light background */
+	.btn-ghost {
+		background-color: transparent;
+		color: var(--text);
+		border: 1px solid rgba(28, 28, 28, 0.2);
+	}
+
+	.btn-ghost:hover {
+		border-color: var(--text);
+	}
+
+	/* Ghost on dark background (hero, Über mich) */
+	.btn-ghost-dark-bg {
+		background-color: transparent;
+		color: #f5f0e8;
+		border: 1px solid rgba(245, 240, 232, 0.4);
+	}
+
+	.btn-ghost-dark-bg:hover {
+		border-color: #f5f0e8;
+	}
+
+	/* Section Styles */
+	section {
+		padding-block: 7rem;
+	}
+
+	.section-title {
+		font-family: 'Manrope', sans-serif;
+		font-size: clamp(1.75rem, 3vw, 2.25rem);
+		font-weight: 700;
+		margin: 0 0 var(--space-4);
+		color: var(--text);
+	}
+
+	/* 1. HERO – Variante A: 92vh, centered, image + gradient overlay */
+	.home-hero {
+		position: relative;
+		width: 100vw;
+		margin-left: calc(50% - 50vw);
+		margin-top: -72px;
+		padding-top: 0;
+		min-height: 92vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-sizing: border-box;
+	}
+
+	.hero-bg {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+	}
+
+	.hero-bg-image {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+	}
+
+	.hero-overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.55) 100%);
+		z-index: 1;
+	}
+
+	.hero-inner {
+		position: relative;
+		z-index: 2;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		text-align: center;
+	}
+
+	.hero-content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		max-width: 800px;
+	}
+
+	.hero-title {
+		font-family: 'Manrope', sans-serif;
+		font-size: 72px;
+		font-weight: 700;
+		line-height: 1.05;
+		letter-spacing: -0.02em;
+		margin: 0 0 1.5rem;
+		color: #f5f0e8;
+	}
+
+	.hero-subtext {
+		font-family: 'Manrope', sans-serif;
+		font-size: 16px;
+		font-weight: 300;
+		letter-spacing: 0.05em;
+		margin: 0 0 3rem;
+		color: #f5f0e8;
+		opacity: 0.8;
+	}
+
+	.hero-buttons {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: var(--space-2);
+	}
+
+	/* Hero-specific buttons: primary Off-White bg, ghost Off-White border */
+	.home-hero .btn-primary {
+		background-color: #f5f0e8;
+		color: #1c1c1c;
+		border: none;
+	}
+
+	.home-hero .btn-primary:hover {
+		background-color: rgba(245, 240, 232, 0.85);
+		color: #1c1c1c;
+	}
+
+	.home-hero .btn-ghost-dark-bg {
+		background-color: transparent;
+		color: #f5f0e8;
+		border: 1px solid rgba(245, 240, 232, 0.5);
+	}
+
+	.home-hero .btn-ghost-dark-bg:hover {
+		border-color: #f5f0e8;
+		color: #f5f0e8;
+	}
+
+	/* 2. BÜCHER – intro left, two covers right */
+	.home-books {
+		background-color: var(--bg);
+		padding-block: 7rem;
+	}
+
+	.books-inner {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		gap: var(--space-6);
+		align-items: center;
+	}
+
+	.books-left {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3);
+		max-width: 36rem;
+	}
+
+	.books-intro {
+		font-family: 'Manrope', sans-serif;
+		font-size: 16px;
+		font-weight: 300;
+		line-height: 1.7;
+		margin: 0;
+		color: var(--muted);
+	}
+
+	.home-books .books-intro {
+		color: var(--muted);
+	}
+
+	.home-books .btn {
+		width: auto;
+		padding: 0.85rem 2rem;
+	}
+
+	.books-right {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+		align-items: center;
+	}
+
+	.book-cover-link {
+		display: block;
+		text-decoration: none;
+		color: var(--text);
+		transition: opacity 0.2s ease;
+	}
+
+	.book-cover-link:hover {
+		opacity: 0.85;
+	}
+
+	.books-right .book-cover-placeholder {
+		width: 100%;
+		min-width: 120px;
+		height: 240px;
+		background-color: var(--muted);
+		opacity: 0.35;
+		border-radius: var(--radius);
+	}
+
+	@media (min-width: 961px) {
+		.books-right .book-cover-placeholder {
+			width: 160px;
+			min-width: 160px;
+		}
+	}
+
+	/* 3. TESTIMONIALS – spotlight, auto-rotating */
+	.home-testimonials {
+		background-color: var(--bg);
+		padding-block: 7rem;
+	}
+
+	.testimonials-spotlight {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	.testimonials-label {
+		font-family: 'Manrope', sans-serif;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.28em;
+		color: var(--gold);
+		margin: 0 0 1.5rem;
+	}
+
+	.testimonials-stars {
+		font-size: 14px;
+		color: var(--gold);
+		letter-spacing: 6px;
+		margin-bottom: 3rem;
+	}
+
+	.testimonial-spotlight {
+		margin: 0;
+		max-width: 560px;
+	}
+
+	.testimonial-quote-lg {
+		font-family: 'Manrope', sans-serif;
+		font-size: 30px;
+		font-weight: 300;
+		font-style: italic;
+		line-height: 1.45;
+		margin: 0;
+		color: var(--text);
+		opacity: 1;
+		transition: opacity 0.4s ease;
+	}
+
+	.testimonial-author-lg {
+		font-family: 'Manrope', sans-serif;
+		font-size: 10px;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.3em;
+		margin-top: 1rem;
+		color: var(--muted);
+		opacity: 1;
+		transition: opacity 0.4s ease;
+	}
+
+	.testimonial-fade {
+		opacity: 0;
+	}
+
+	.testimonial-progress {
+		margin-top: 3.5rem;
+		width: 48px;
+		height: 1px;
+		background-color: rgba(0, 0, 0, 0.1);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.testimonial-progress-bar {
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 0;
+		background-color: var(--gold);
+	}
+
+	.testimonial-progress-bar.is-animating {
+		animation: testimonial-progress-fill 4s linear forwards;
+	}
+
+	@keyframes testimonial-progress-fill {
+		from {
+			width: 0;
+		}
+		to {
+			width: 100%;
+		}
+	}
+
+	.testimonial-nav {
+		margin-top: 3rem;
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-3);
+	}
+
+	.testimonial-arrow {
+		background: transparent;
+		border: none;
+		padding: 0;
+		font-family: 'Manrope', sans-serif;
+		font-size: 14px;
+		color: var(--muted);
+		cursor: pointer;
+		transition: color 0.2s ease;
+	}
+
+	.testimonial-arrow:hover {
+		color: var(--emerald);
+	}
+
+	.testimonial-dots {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-1);
+	}
+
+	.testimonial-dot {
+		width: 4px;
+		height: 4px;
+		border-radius: 0;
+		border: none;
+		background-color: var(--muted);
+		padding: 0;
+		cursor: pointer;
+		transition:
+			width 0.2s ease,
+			background-color 0.2s ease;
+	}
+
+	.testimonial-dot.is-active {
+		width: 18px;
+		background-color: var(--emerald);
+	}
+
+	/* 4. ÜBER MICH – full viewport Smaragd, content max-width 1300px, Off-White text */
+	.home-about {
+		width: 100vw;
+		margin-left: calc(50% - 50vw);
+		background-color: var(--emerald);
+		color: #f5f0e8;
+		padding-block: 7rem;
+		padding-inline: 2rem;
+		box-sizing: border-box;
+	}
+
+	@media (min-width: 961px) {
+		.home-about {
+			padding-inline: 8rem;
+		}
+	}
+
+	.about-inner {
+		max-width: 1300px;
+		margin-inline: auto;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--space-4);
+		align-items: start;
+	}
+
+	@media (min-width: 961px) {
+		.about-inner {
+			grid-template-columns: 3fr 2fr; /* 60% text, 40% image */
+			gap: 5rem;
+			align-items: center;
+		}
+
+		.about-content {
+			grid-column: 1;
+			grid-row: 1;
+		}
+
+		.about-cta {
+			grid-column: 1;
+			grid-row: 2;
+			align-self: start;
+		}
+
+		.about-image {
+			grid-column: 2;
+			grid-row: 1 / -1;
+			justify-content: flex-end;
+			align-items: center;
+		}
+	}
+
+	.home-about .about-title {
+		color: #f5f0e8;
+	}
+
+	.about-content {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3);
+	}
+
+	.about-text {
+		font-family: 'Manrope', sans-serif;
+		font-size: 16px;
+		font-weight: 300;
+		line-height: 1.7;
+		margin: 0;
+		color: #f5f0e8;
+	}
+
+	.about-cta {
+		margin-top: 0;
+	}
+
+	.about-image {
+		display: flex;
+		justify-content: center;
+	}
+
+	.about-image-placeholder {
+		width: 100%;
+		max-width: 200px;
+		min-width: 120px;
+		height: 360px;
+		background-color: rgba(245, 240, 232, 0.2);
+		border-radius: var(--radius);
+	}
+
+	@media (min-width: 961px) {
+		.about-image-placeholder {
+			width: 280px;
+			max-width: 280px;
+			min-width: 280px;
+			height: 360px;
+		}
+	}
+
+	/* 5. QUOTE BAND – Stil 1: thin cursive „ in Gold, Off-White bg, full viewport width */
+	.home-quote-band {
+		width: 100vw;
+		margin-left: calc(50% - 50vw);
+		background-color: #f5f0e8;
+		padding-block: 7rem;
+		padding-inline: var(--page-padding-desktop);
+		box-sizing: border-box;
+	}
+
+	.quote-band-inner {
+		text-align: center;
+		max-width: 540px;
+		margin-inline: auto;
+	}
+
+	.quote-mark {
+		display: block;
+		font-family: Georgia, serif;
+		font-size: 5rem;
+		font-weight: 300;
+		line-height: 0.5;
+		color: var(--gold);
+		opacity: 0.6;
+		margin-bottom: 1.5rem;
+	}
+
+	.quote-text.quote-centered {
+		font-family: 'Manrope', sans-serif;
+		font-size: 26px;
+		font-weight: 300;
+		font-style: italic;
+		line-height: 1.55;
+		margin: 0;
+		color: var(--text);
+	}
+
+	/* 6. WARUM LESEN + MILLENNIAL WORKSHOP – two columns */
+	.home-two-col {
+		background-color: var(--bg);
+		padding-block: 7rem;
+	}
+
+	.two-col-inner {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--space-6);
+	}
+
+	.two-col-card {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3);
+		padding: var(--space-5);
+		border: 1px solid rgba(0, 0, 0, 0.08);
+		background-color: var(--bg);
+	}
+
+	.two-col-block {
+		width: 100%;
+		height: 8px;
+		border-radius: var(--radius);
+	}
+
+	.two-col-block--emerald {
+		background-color: var(--emerald);
+	}
+
+	.two-col-text {
+		font-family: 'Manrope', sans-serif;
+		font-size: 16px;
+		font-weight: 300;
+		line-height: 1.7;
+		margin: 0;
+		color: var(--muted);
+	}
+
+	/* 7. BLOG PREVIEW – centered heading, intro, button */
+	.home-blog {
+		background-color: var(--bg);
+		padding-block: 7rem;
+	}
+
+	.section-title--center {
+		text-align: center;
+	}
+
+	.blog-intro {
+		font-family: 'Manrope', sans-serif;
+		font-size: 16px;
+		font-weight: 300;
+		margin: 0 0 var(--space-5);
+		color: var(--muted);
+		max-width: 600px;
+	}
+
+	.blog-intro--center {
+		text-align: center;
+		margin-inline: auto;
+	}
+
+	.blog-cta--center {
+		text-align: center;
+	}
+
+	.blog-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--space-4);
+		margin-bottom: var(--space-5);
+	}
+
+	.blog-card {
+		display: flex;
+		flex-direction: column;
+		background-color: transparent;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		border-radius: var(--radius);
+		overflow: hidden;
+	}
+
+	.blog-card-image {
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		background-color: var(--muted);
+		opacity: 0.3;
+	}
+
+	.blog-card-content {
+		padding: var(--space-3);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-1);
+	}
+
+	.blog-card-title {
+		font-family: 'Manrope', sans-serif;
+		font-size: 1.125rem;
+		font-weight: 600;
+		margin: 0;
+		color: var(--text);
+	}
+
+	.blog-card-excerpt {
+		font-family: 'Manrope', sans-serif;
+		font-size: 14px;
+		font-weight: 300;
+		margin: 0;
+		color: var(--muted);
+	}
+
+	.blog-cta {
+		text-align: center;
+	}
+
+	/* 8. SOCIAL / KONTAKT – all centered */
+	.home-social {
+		background-color: var(--bg);
+		padding-block: 7rem;
+	}
+
+	.social-inner .section-title--center {
+		text-align: center;
+	}
+
+	.social-intro {
+		font-family: 'Manrope', sans-serif;
+		font-size: 16px;
+		font-weight: 300;
+		margin: 0 0 var(--space-5);
+		color: var(--muted);
+		text-align: center;
+		max-width: 600px;
+		margin-inline: auto;
+	}
+
+	.social-gallery {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: var(--space-2);
+		margin-bottom: var(--space-5);
+		max-width: 800px;
+		margin-inline: auto;
+	}
+
+	.social-gallery-item {
+		aspect-ratio: 1;
+		background-color: var(--muted);
+		opacity: 0.3;
+		border-radius: var(--radius);
+	}
+
+	.social-icons {
+		display: flex;
+		justify-content: center;
+		gap: var(--space-3);
+		margin-bottom: var(--space-5);
+	}
+
+	.social-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		color: var(--text);
+		transition: color 0.2s ease;
+	}
+
+	.social-icon:hover {
+		color: var(--emerald);
+	}
+
+	.social-cta {
+		text-align: center;
+	}
+
+	/* Responsive */
+	@media (max-width: 960px) {
+		.hero-title {
+			font-size: 48px;
+		}
+
+		.books-inner {
+			grid-template-columns: 1fr;
+			text-align: center;
+		}
+
+		.books-left {
+			max-width: none;
+			align-items: center;
+		}
+
+		.home-about {
+			padding-inline: 2rem;
+			padding-block: 4rem;
+		}
+
+		.home-about .about-cta .btn {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+		}
+
+		.home-quote-band {
+			padding-inline: 2rem;
+		}
+
+		.testimonials-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		.two-col-inner {
+			grid-template-columns: 1fr;
+		}
+
+		.blog-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.social-gallery {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 720px) {
+		section {
+			padding-block: 4rem;
+		}
+
+		.home-hero {
+			min-height: 80vh;
+		}
+
+		.hero-title {
+			font-size: 32px;
+		}
+
+		.home-about {
+			padding-inline: 1.5rem;
+			padding-block: 3rem;
+		}
+
+		.home-quote-band {
+			padding-inline: 1.5rem;
+		}
+
+		.quote-mark {
+			font-size: 3.5rem;
+		}
+
+		.quote-text.quote-centered {
+			font-size: 22px;
+		}
+
+		.testimonials-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

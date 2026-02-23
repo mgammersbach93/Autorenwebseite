@@ -1,23 +1,521 @@
+---
+const { title = 'Autorenwebseite' } = Astro.props;
+const pathname = Astro.url.pathname;
+const isActive = (path) => (path === '/' ? pathname === '/' : pathname.startsWith(path));
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="de">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
-	<body>
-		<slot />
+	<body class={pathname === '/' ? 'is-home' : ''}>
+		<div class="page-shell">
+			<header class="site-header">
+				<nav class="site-nav">
+					<div class="container nav-inner">
+						<div class="nav-spacer"></div>
+						<button
+							type="button"
+							class="nav-toggle-label"
+							aria-label="Menü öffnen oder schließen"
+							aria-expanded="false"
+							aria-controls="nav-links"
+						>
+							<span></span>
+							<span></span>
+							<span></span>
+						</button>
+						<ul class="nav-links" id="nav-links">
+							<li>
+								<a
+									href="/buecher"
+									class={`nav-link ${isActive('/buecher') ? 'nav-link--active' : ''}`}
+									>BÜCHER</a
+								>
+							</li>
+							<li>
+								<a
+									href="/ueber-mich"
+									class={`nav-link ${isActive('/ueber-mich') ? 'nav-link--active' : ''}`}
+									>ÜBER MICH</a
+								>
+							</li>
+							<li>
+								<a
+									href="/warum-lesen"
+									class={`nav-link ${isActive('/warum-lesen') ? 'nav-link--active' : ''}`}
+									>WARUM LESEN</a
+								>
+							</li>
+							<li>
+								<a
+									href="/millennial-workshop"
+									class={`nav-link ${isActive('/millennial-workshop') ? 'nav-link--active' : ''}`}
+									>MILLENNIAL WORKSHOP</a
+								>
+							</li>
+							<li>
+								<a
+									href="/blog"
+									class={`nav-link ${isActive('/blog') ? 'nav-link--active' : ''}`}
+									>BLOG</a
+								>
+							</li>
+							<li>
+								<a
+									href="/kontakt"
+									class={`nav-link ${isActive('/kontakt') ? 'nav-link--active' : ''}`}
+									>KONTAKT</a
+								>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</header>
+
+			<main class="page-main">
+				<div class="container">
+					<slot />
+				</div>
+			</main>
+
+			<footer class="site-footer">
+				<div class="container footer-inner">
+					<nav class="footer-nav">
+						<a href="/buecher" class="footer-link">BÜCHER</a>
+						<a href="/ueber-mich" class="footer-link">ÜBER MICH</a>
+						<a href="/warum-lesen" class="footer-link">WARUM LESEN</a>
+						<a href="/millennial-workshop" class="footer-link">MILLENNIAL WORKSHOP</a>
+						<a href="/blog" class="footer-link">BLOG</a>
+						<a href="/kontakt" class="footer-link">KONTAKT</a>
+					</nav>
+					<div class="footer-legal">
+						<a href="/impressum" class="footer-link">Impressum</a>
+						<span class="footer-separator">/</span>
+						<a href="/datenschutz" class="footer-link">Datenschutz</a>
+					</div>
+				</div>
+			</footer>
+		</div>
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+				const nav = document.querySelector('.site-nav');
+				const toggleBtn = document.querySelector('.nav-toggle-label');
+				const navLinks = document.querySelectorAll('.nav-link');
+
+				// Home page: scroll-based nav background
+				if (document.body.classList.contains('is-home') && nav) {
+					const onScroll = () => {
+						if (window.scrollY > 80) {
+							nav.classList.add('scrolled');
+						} else {
+							nav.classList.remove('scrolled');
+						}
+					};
+					onScroll();
+					window.addEventListener('scroll', onScroll, { passive: true });
+				}
+
+				// Mobile menu: toggle on button click, close on link click
+				if (toggleBtn && nav) {
+					toggleBtn.addEventListener('click', () => {
+						const open = nav.classList.toggle('nav-open');
+						toggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+					});
+
+					navLinks.forEach((link) => {
+						link.addEventListener('click', () => {
+							nav.classList.remove('nav-open');
+							toggleBtn.setAttribute('aria-expanded', 'false');
+						});
+					});
+				}
+			});
+		</script>
 	</body>
 </html>
 
-<style>
-	html,
+<style is:global>
+	:root {
+		--bg: #f5f0e8;
+		--text: #1c1c1c;
+		--muted: #888880;
+		--emerald: #1a3a30;
+		--gold: #b89a3e;
+		--radius: 0px;
+
+		/* 8px spacing grid */
+		--space-1: 0.5rem; /* 8px */
+		--space-2: 1rem; /* 16px */
+		--space-3: 1.5rem; /* 24px */
+		--space-4: 2rem; /* 32px */
+		--space-5: 2.5rem; /* 40px */
+		--space-6: 3rem; /* 48px */
+
+		--page-padding-desktop: 5rem; /* 80px */
+	}
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	html {
+		overflow-x: hidden;
+	}
+
 	body {
 		margin: 0;
+		padding: 0;
+		overflow-x: hidden;
+	}
+
+	body {
+		min-height: 100vh;
+		background-color: var(--bg);
+		color: var(--text);
+		font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+	}
+
+	img {
+		max-width: 100%;
+		display: block;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	button,
+	input,
+	textarea {
+		border-radius: var(--radius);
+		font-family: inherit;
+	}
+
+	.page-shell {
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.container {
+		max-width: 1300px;
+		margin-inline: auto;
+		padding-inline: var(--page-padding-desktop);
+	}
+
+	.page-main {
+		flex: 1;
+		padding-block: var(--space-5) var(--space-6);
+		padding-top: 72px; /* space for fixed header */
+	}
+
+	/* Navigation – fixed, full width, z-index 100 */
+
+	.site-header {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
 		width: 100%;
-		height: 100%;
+		z-index: 100;
+	}
+
+	.site-nav {
+		background-color: var(--bg);
+		border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+		transition: background-color 0.3s ease, border-color 0.3s ease;
+	}
+
+	/* Home: fully transparent nav (no bar), Off-White links until scrolled */
+	body.is-home .site-nav {
+		background: transparent !important;
+		border-bottom: none;
+	}
+
+	body.is-home .site-nav .nav-link {
+		color: #f5f0e8;
+		transition: color 0.3s ease;
+	}
+
+	body.is-home .site-nav .nav-link:hover,
+	body.is-home .site-nav .nav-link--active {
+		color: #f5f0e8;
+		opacity: 1;
+	}
+
+	body.is-home .site-nav .nav-link--active {
+		opacity: 0.9;
+	}
+
+	body.is-home .site-nav .nav-toggle-label span {
+		background-color: #f5f0e8;
+		transition: background-color 0.3s ease;
+	}
+
+	/* Home + scrolled: fully opaque Off-White background, dark links */
+	body.is-home .site-nav.scrolled {
+		background: #f5f0e8 !important;
+		opacity: 1;
+		border-bottom: 1px solid rgba(28, 28, 28, 0.08);
+	}
+
+	body.is-home .site-nav.scrolled .nav-link {
+		color: #1c1c1c;
+	}
+
+	body.is-home .site-nav.scrolled .nav-link:hover,
+	body.is-home .site-nav.scrolled .nav-link--active {
+		color: var(--emerald);
+		opacity: 1;
+	}
+
+	body.is-home .site-nav.scrolled .nav-toggle-label span {
+		background-color: #1c1c1c;
+	}
+
+	.nav-inner {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		gap: var(--space-3);
+		padding-block: 1.5rem;
+	}
+
+	.nav-spacer {
+		flex: 1;
+	}
+
+	.nav-links {
+		list-style: none;
+		display: flex;
+		gap: var(--space-3);
+		margin: 0;
+		padding: 0;
+	}
+
+	.nav-link {
+		font-size: 12px;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		color: var(--muted);
+		padding-block: 0.25rem;
+		white-space: nowrap;
+	}
+
+	.nav-link--active {
+		color: var(--emerald);
+	}
+
+	.nav-link:hover {
+		color: var(--emerald);
+	}
+
+	/* Mobile nav toggle – hamburger (visible only at 768px and below) */
+
+	.nav-toggle-label {
+		display: none;
+		cursor: pointer;
+		background: none;
+		border: none;
+		padding: 0.5rem;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		gap: 5px;
+	}
+
+	.nav-toggle-label span {
+		display: block;
+		width: 24px;
+		height: 2px;
+		background-color: var(--text);
+	}
+
+	body.is-home .site-nav .nav-toggle-label span {
+		background-color: #f5f0e8;
+	}
+
+	body.is-home .site-nav.scrolled .nav-toggle-label span {
+		background-color: #1c1c1c;
+	}
+
+	/* Footer – 100% viewport width, background edge to edge */
+	.site-footer {
+		width: 100%;
+		background-color: var(--text);
+		color: var(--bg);
+		border-top: 1px solid var(--gold);
+		box-sizing: border-box;
+	}
+
+	.footer-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-block: var(--space-3);
+		gap: var(--space-3);
+		max-width: 1300px;
+		margin-inline: auto;
+		padding-inline: var(--page-padding-desktop);
+	}
+
+	.footer-nav {
+		display: flex;
+		gap: var(--space-2);
+		justify-content: center;
+		flex: 1;
+	}
+
+	.footer-link {
+		font-size: 12px;
+		font-weight: 400;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--bg);
+	}
+
+	.footer-link:hover {
+		color: var(--gold);
+	}
+
+	.footer-legal {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		justify-content: flex-end;
+	}
+
+	.footer-separator {
+		opacity: 0.6;
+	}
+
+	/* Typography helpers */
+
+	.page-header {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+		max-width: 42rem;
+	}
+
+	.page-header h1 {
+		margin: 0;
+		font-size: clamp(2rem, 3vw, 2.6rem);
+		font-weight: 700;
+		letter-spacing: -0.03em;
+	}
+
+	.page-header p {
+		margin: 0;
+		color: var(--muted);
+		font-size: 0.95rem;
+		line-height: 1.6;
+	}
+
+	/* Responsive */
+
+	@media (max-width: 960px) {
+		.container {
+			padding-inline: 2rem;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.site-nav {
+			position: relative;
+		}
+
+		.nav-inner {
+			justify-content: space-between;
+		}
+
+		.nav-toggle-label {
+			display: flex;
+		}
+
+		.nav-links {
+			display: none;
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 100%;
+			width: 100%;
+			background-color: #f5f0e8;
+			border-bottom: 1px solid rgba(28, 28, 28, 0.08);
+			flex-direction: column;
+			align-items: center;
+			padding: 1rem 0 1.5rem;
+			margin: 0;
+			list-style: none;
+			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+		}
+
+		.site-nav.nav-open .nav-links {
+			display: flex;
+		}
+
+		.nav-links li {
+			margin: 0;
+			width: 100%;
+			text-align: center;
+		}
+
+		.nav-links .nav-link {
+			display: block;
+			padding: 1.5rem;
+			font-family: 'Manrope', sans-serif;
+			font-size: 12px;
+			font-weight: 600;
+			text-transform: uppercase;
+			letter-spacing: 0.12em;
+			color: #1c1c1c;
+		}
+
+		.nav-links .nav-link:hover,
+		.nav-links .nav-link--active {
+			color: var(--emerald);
+		}
+	}
+
+	@media (max-width: 720px) {
+		.container {
+			padding-inline: 1.5rem;
+		}
+
+		.footer-inner {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		.footer-nav {
+			justify-content: flex-start;
+			flex-wrap: wrap;
+		}
+
+		.footer-legal {
+			width: 100%;
+			justify-content: flex-start;
+		}
+
+		.page-main {
+			padding-block: var(--space-3) var(--space-4);
+		}
 	}
 </style>
