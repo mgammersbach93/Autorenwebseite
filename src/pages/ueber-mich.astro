@@ -32,47 +32,76 @@ const timelineEntries = [
 
 <Layout title="Über mich">
 
-	<!-- SECTION 1 - HERO (full-bleed image, transparent nav) -->
-	<section class="ueber-hero">
-		<div class="hero-bg">
-			<img
-				class="hero-bg-image"
-				src="/images/markus_gammersbach-autor.webp"
-				alt=""
-				fetchpriority="high"
-			/>
-			<div class="hero-overlay"></div>
-		</div>
-		<div class="hero-inner">
-			<h1 class="hero-title">Markus Gammersbach</h1>
+	<section class="hero">
+		<div class="hero__inner">
+
+			<!-- LEFT -->
+			<div class="hero__left">
+				<span class="eyebrow">Markus Gammersbach</span>
+				<h1 class="hero__name">Über mich</h1>
+				<div class="hero__divider"></div>
+				<p class="hero__intro">
+					Autor, Geschichtenerzähler und Millennial aus dem Rheinland.
+					Ich schreibe über das Leben zwischen Aufbruch und Ankommen –
+					ehrlich, direkt und nah dran an dem, was uns wirklich bewegt.
+				</p>
+			</div>
+
+			<!-- RIGHT -->
+			<div class="hero__right">
+				<div class="hero__right-shape"></div>
+				<img class="hero__right-photo" src="/images/markus-gammersbach-selfpublishing-autor.png" alt="Markus Gammersbach" />
+			</div>
+
 		</div>
 	</section>
 
 	<!-- SECTION: Timeline "Mein Weg zum Schreiben" -->
-	<section class="ueber-timeline">
+	<section id="zeitstrahl" class="ueber-timeline">
 		<div class="ueber-timeline-inner">
 			<h2 class="ueber-timeline-title">Mein Weg zum Schreiben</h2>
 			<div class="timeline-items">
 				<div class="timeline-line" aria-hidden="true"></div>
-				{timelineEntries.map((entry, i) => (
-					<div class={`timeline-item ${i % 2 === 0 ? 'timeline-item--left' : 'timeline-item--right'}`}>
+				{timelineEntries.map((entry, i) => {
+					const isLeft = i % 2 === 0;
+					const content = (
 						<div class="timeline-content">
 							<p class="timeline-year">{entry.year}</p>
 							<h3 class="timeline-headline">{entry.headline}</h3>
 							<p class="timeline-text">{entry.text}</p>
 						</div>
+					);
+					const dotWrap = (
 						<div class="timeline-dot-wrap">
 							<span class="timeline-dot" aria-hidden="true"></span>
 						</div>
-						<div class="timeline-content timeline-content--spacer" aria-hidden="true"></div>
-					</div>
-				))}
+					);
+					const spacer = <div class="timeline-content timeline-content--spacer" aria-hidden="true"></div>;
+					return (
+						<div class={`timeline-item ${isLeft ? 'timeline-item--left' : 'timeline-item--right'}`}>
+							{isLeft ? (
+								<>
+									{content}
+									{dotWrap}
+									{spacer}
+								</>
+							) : (
+								<>
+									{spacer}
+									{dotWrap}
+									{content}
+								</>
+							)}
+						</div>
+					);
+				})}
 			</div>
 		</div>
 	</section>
 
 	<!-- SECTION: 3-image gallery -->
 	<section class="ueber-gallery">
+		<div class="ueber-gallery-bar" aria-hidden="true"></div>
 		<div class="ueber-gallery-inner">
 			<div class="gallery-image-wrap">
 				<img src="/images/markus_gammersbach-why-not.webp" alt="" class="gallery-image" width="400" height="420" />
@@ -157,65 +186,151 @@ const timelineEntries = [
 </Layout>
 
 <style>
-	/* HERO – full bleed, same as Startseite */
-	.ueber-hero {
-		position: relative;
-		width: 100vw;
-		margin-left: calc(50% - 50vw);
-		min-height: 92vh;
+	/* ── HERO ── */
+	.hero {
+		background: var(--bg);
+		min-height: 100vh;
 		display: flex;
-		align-items: center;
-		justify-content: center;
-		box-sizing: border-box;
+		align-items: flex-start;
+		padding: 8rem 5rem 0;
+		position: relative;
+		overflow: visible;
 	}
 
-	.hero-bg {
-		position: absolute;
-		inset: 0;
-		z-index: 0;
-	}
-
-	.hero-bg-image {
-		position: absolute;
-		inset: 0;
+	.hero__inner {
+		max-width: 1300px;
 		width: 100%;
-		height: 100%;
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 6rem;
+		align-items: center;
+		overflow: visible;
+	}
+
+	.hero__left {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	.eyebrow {
+		font-size: 11px;
+		font-weight: 700;
+		letter-spacing: 0.28em;
+		text-transform: uppercase;
+		color: var(--gold);
+	}
+
+	.hero__name {
+		font-size: 64px;
+		font-weight: 700;
+		line-height: 1.0;
+		letter-spacing: -0.02em;
+		color: var(--text);
+	}
+
+	.hero__divider {
+		width: 48px;
+		height: 2px;
+		background: var(--gold);
+	}
+
+	.hero__intro {
+		font-size: 16px;
+		font-weight: 300;
+		line-height: 1.85;
+		color: var(--text);
+		max-width: 420px;
+	}
+
+	.btn-primary {
+		display: inline-block;
+		background: var(--emerald);
+		color: var(--bg);
+		padding: 0.85rem 2rem;
+		font-family: 'Manrope', sans-serif;
+		font-size: 11px;
+		font-weight: 700;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		text-decoration: none;
+		border: none;
+		cursor: pointer;
+		width: fit-content;
+		transition: background 0.2s;
+	}
+	.btn-primary:hover { background: #0f2219; }
+
+	.hero__right {
+		position: relative;
+		height: 520px;
+		align-self: flex-end;
+	}
+
+	.hero__right-shape {
+		position: absolute;
+		width: 460px;
+		height: 400px;
+		background: #1a3a30;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		border-radius: 0;
+	}
+
+	.hero__right-shape::before {
+		content: '';
+		position: absolute;
+		top: -12px;
+		left: calc(50% - 242px);
+		width: 28px;
+		height: 28px;
+		border-top: 2px solid #b89a3e;
+		border-left: 2px solid #b89a3e;
+		opacity: 0.7;
+	}
+
+	.hero__right-shape::after {
+		content: '';
+		position: absolute;
+		bottom: -12px;
+		right: calc(50% - 242px);
+		width: 28px;
+		height: 28px;
+		border-bottom: 2px solid #b89a3e;
+		border-right: 2px solid #b89a3e;
+		opacity: 0.7;
+	}
+
+	.hero__right-photo {
+		position: absolute;
+		width: 420px;
+		height: 580px;
 		object-fit: cover;
 		object-position: center top;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		display: block;
 	}
 
-	.hero-overlay {
-		position: absolute;
-		inset: 0;
-		background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.5) 100%);
-		z-index: 1;
-	}
-
-	.hero-inner {
-		position: relative;
-		z-index: 2;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		text-align: center;
-		padding-inline: 2rem;
-	}
-
-	.hero-title {
-		font-family: 'Manrope', sans-serif;
-		font-size: clamp(3rem, 8vw, 6rem);
-		font-weight: 700;
-		line-height: 1.05;
-		letter-spacing: -0.02em;
-		margin: 0;
-		color: #f5f0e8;
-	}
-
-	@media (max-width: 720px) {
-		.ueber-hero {
-			min-height: 80vh;
+	/* ── MOBILE ── */
+	@media (max-width: 768px) {
+		.hero {
+			padding: 7rem 1.5rem 4rem;
+			min-height: auto;
+			align-items: flex-start;
 		}
+		.hero__inner {
+			grid-template-columns: 1fr;
+			gap: 3rem;
+		}
+		.hero__left { order: 2; }
+		.hero__right { order: 1; height: 400px; }
+		.hero__name { font-size: 42px; }
+		.hero__right-shape { width: 260px; height: 320px; }
+		.hero__right-photo { width: 240px; height: 380px; }
 	}
 
 	/* Full-width Smaragd sections */
@@ -232,11 +347,25 @@ const timelineEntries = [
 
 	/* SECTION: 3-image gallery */
 	.ueber-gallery {
+		position: relative;
 		background-color: #f5f0e8;
 		padding-block: 5rem;
 	}
 
+	.ueber-gallery-bar {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: 100vw;
+		height: 60%;
+		background: #1a3a30;
+		z-index: 0;
+	}
+
 	.ueber-gallery-inner {
+		position: relative;
+		z-index: 1;
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 1rem;
@@ -400,7 +529,7 @@ const timelineEntries = [
 	.timeline-item--left .timeline-dot-wrap { grid-column: 2; }
 	.timeline-item--left .timeline-content--spacer { grid-column: 3; }
 
-	.timeline-item--right .timeline-content:first-child {
+	.timeline-item--right .timeline-content:not(.timeline-content--spacer) {
 		grid-column: 3;
 		text-align: left;
 		padding-left: 3rem;
@@ -413,7 +542,8 @@ const timelineEntries = [
 		display: flex;
 		align-items: flex-start;
 		justify-content: center;
-		padding-top: 0.35rem;
+		padding-top: 0;
+		align-self: start;
 	}
 
 	.timeline-dot {
@@ -621,13 +751,13 @@ const timelineEntries = [
 		border: none;
 	}
 
-	.btn-primary {
+	.ueber-kontakt .btn-primary {
 		background-color: var(--bg);
 		color: var(--emerald);
 		align-self: flex-start;
 	}
 
-	.btn-primary:hover {
+	.ueber-kontakt .btn-primary:hover {
 		background-color: #e8e2d8;
 	}
 
@@ -641,32 +771,33 @@ const timelineEntries = [
 		.antreibt-grid { grid-template-columns: 1fr; }
 		.ueber-timeline { padding-block: 3rem 4rem; }
 		.ueber-timeline-title { margin-bottom: 2rem; }
+	}
 
+	@media (max-width: 768px) {
 		.timeline-item {
-			grid-template-columns: 20px 1fr;
+			grid-template-columns: 16px 1fr;
+			gap: 0;
 		}
-
-		.timeline-item--left .timeline-content:first-child,
-		.timeline-item--right .timeline-content:first-child {
-			grid-column: 2;
-			text-align: left;
-			padding-right: 0;
-			padding-left: 1.5rem;
-		}
-
+		.timeline-dot-wrap,
 		.timeline-item--left .timeline-dot-wrap,
 		.timeline-item--right .timeline-dot-wrap {
 			grid-column: 1;
+			grid-row: 1;
+			padding-top: 0.2rem;
 		}
-
-		.timeline-item--left .timeline-content--spacer,
-		.timeline-item--right .timeline-content--spacer {
+		.timeline-item--left .timeline-content:first-child,
+		.timeline-item--right .timeline-content:not(.timeline-content--spacer) {
+			grid-column: 2;
+			grid-row: 1;
+			text-align: left;
+			padding-right: 0;
+			padding-left: 1rem;
+		}
+		.timeline-content--spacer {
 			display: none;
 		}
-
 		.timeline-line {
-			left: 10px;
-			transform: translateX(-50%);
+			left: 8px;
 		}
 	}
 </style>

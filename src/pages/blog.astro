@@ -3,9 +3,389 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Blog">
-	<section class="page-header">
-		<h1>Blog</h1>
-		<p>Hier entsteht dein Blog rund um Schreiben, Lesen und das Leben dazwischen.</p>
+	<!-- 1. HERO SECTION: full-width emerald, inner max 1300px -->
+	<section class="blog-hero">
+		<div class="blog-hero-inner">
+			<p class="blog-hero-eyebrow">Blog</p>
+			<h1 class="blog-hero-title">Gedanken.<br />Geschichten.<br />Hinter den Kulissen.</h1>
+			<p class="blog-hero-subtext">
+				Persönliche Essays über das Schreiben, das Lesen und die Fragen, die uns Millennials wirklich beschäftigen.
+			</p>
+			<a href="#alle" class="blog-hero-cta">Alle Artikel lesen</a>
+			<span class="blog-hero-quote" aria-hidden="true">"</span>
+		</div>
+	</section>
+
+	<!-- 2. CATEGORY FILTER BAR -->
+	<nav class="blog-filter" aria-label="Blog-Kategorien">
+		<div class="blog-filter-inner">
+			<a href="#alle" class="blog-tab filter-tag blog-tab--active" data-category="alle">Alle</a>
+			<a href="#schreiben" class="blog-tab filter-tag" data-category="schreiben">Schreiben</a>
+			<a href="#lesen" class="blog-tab filter-tag" data-category="lesen">Lesen</a>
+			<a href="#millennial-life" class="blog-tab filter-tag" data-category="millennial-life">Millennial Life</a>
+			<a href="#persoenlichkeitsentwicklung" class="blog-tab filter-tag" data-category="persoenlichkeitsentwicklung">Persönlichkeitsentwicklung</a>
+		</div>
+	</nav>
+
+	<!-- 3. FEATURED ARTICLE -->
+	<article class="blog-featured" data-tag="schreiben">
+		<div class="blog-featured-inner">
+			<div class="blog-featured-media">
+				<!-- placeholder -->
+			</div>
+			<div class="blog-featured-content">
+				<div class="blog-meta">
+					<span class="blog-meta-tag">Schreiben</span>
+					<span class="blog-meta-date">12. Februar 2025</span>
+				</div>
+				<h2 class="blog-featured-title">Warum ich meinen ersten Roman dreimal weggeschmissen habe</h2>
+				<p class="blog-featured-teaser">
+					Es gibt diesen Moment, in dem man merkt: Das hier ist nicht das Buch, das ich schreiben wollte. Was dann kommt, ist entweder das Ende oder der eigentliche Anfang.
+				</p>
+				<a href="#" class="blog-btn-ghost">Artikel lesen</a>
+			</div>
+		</div>
+	</article>
+
+	<!-- 4. ARTICLE GRID -->
+	<section class="blog-grid-section">
+		<div class="blog-grid-inner">
+			<article class="blog-card" data-tag="lesen">
+				<div class="blog-card-media"></div>
+				<div class="blog-meta">
+					<span class="blog-meta-tag">Lesen</span>
+					<span class="blog-meta-date">3. Jan 2025</span>
+				</div>
+				<h3 class="blog-card-title">5 Bücher, die mich als Autor verändert haben</h3>
+				<p class="blog-card-teaser">
+					Nicht die besten Bücher aller Zeiten – sondern die fünf, die in mir etwas verschoben haben.
+				</p>
+				<a href="#" class="blog-btn-ghost">Artikel lesen</a>
+			</article>
+			<article class="blog-card" data-tag="millennial-life">
+				<div class="blog-card-media"></div>
+				<div class="blog-meta">
+					<span class="blog-meta-tag">Millennial Life</span>
+					<span class="blog-meta-date">18. Dez 2024</span>
+				</div>
+				<h3 class="blog-card-title">Zwischen Köln und Düsseldorf: Moin & Alaaf</h3>
+				<p class="blog-card-teaser">
+					Aufgewachsen im Norden, zuhause im Rheinland. Über Identität, Dialekt und die Frage, wohin man eigentlich gehört.
+				</p>
+				<a href="#" class="blog-btn-ghost">Artikel lesen</a>
+			</article>
+			<article class="blog-card" data-tag="persoenlichkeitsentwicklung">
+				<div class="blog-card-media"></div>
+				<div class="blog-meta">
+					<span class="blog-meta-tag">Persönlichkeitsentwicklung</span>
+					<span class="blog-meta-date">5. Nov 2024</span>
+				</div>
+				<h3 class="blog-card-title">So entsteht ein Buchcover – mein Prozess</h3>
+				<p class="blog-card-teaser">
+					Von der ersten Idee bis zum fertigen Design: Was ich dabei gelernt habe und was ich beim nächsten Mal anders machen würde.
+				</p>
+				<a href="#" class="blog-btn-ghost">Artikel lesen</a>
+			</article>
+		</div>
 	</section>
 </Layout>
 
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		var tabs = document.querySelectorAll('.filter-tag');
+		var articles = document.querySelectorAll('[data-tag]');
+
+		tabs.forEach(function (tab) {
+			tab.addEventListener('click', function (e) {
+				e.preventDefault();
+				var category = tab.getAttribute('data-category');
+				if (!category) return;
+
+				// Update active tab
+				tabs.forEach(function (t) {
+					t.classList.remove('blog-tab--active');
+				});
+				tab.classList.add('blog-tab--active');
+
+				// Show/hide articles
+				articles.forEach(function (article) {
+					var tag = article.getAttribute('data-tag');
+					var show = category === 'alle' || tag === category;
+					article.style.display = show ? '' : 'none';
+				});
+			});
+		});
+	});
+</script>
+
+<style>
+	/* Break out of layout container for full-width sections */
+	:global(.page-main .container) {
+		max-width: none;
+		padding-inline: 0;
+	}
+
+	/* ----- 1. HERO ----- */
+	.blog-hero {
+		width: 100vw;
+		position: relative;
+		left: 50%;
+		right: 50%;
+		margin-left: -50vw;
+		margin-right: -50vw;
+		background-color: var(--emerald);
+	}
+
+	.blog-hero-inner {
+		max-width: 1300px;
+		margin-inline: auto;
+		padding: 6rem 5rem 5rem;
+		position: relative;
+	}
+
+	.blog-hero-eyebrow {
+		font-family: 'Manrope', system-ui, sans-serif;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.28em;
+		color: var(--gold);
+		margin: 0 0 1.5rem 0;
+	}
+
+	.blog-hero-eyebrow::before {
+		content: '';
+		display: inline-block;
+		width: 2rem;
+		height: 2px;
+		background-color: var(--gold);
+		vertical-align: middle;
+		margin-right: 1rem;
+	}
+
+	.blog-hero-title {
+		font-family: 'Manrope', system-ui, sans-serif;
+		font-weight: 700;
+		font-size: clamp(42px, 6vw, 72px);
+		line-height: 1.05;
+		letter-spacing: -0.02em;
+		color: #f5f0e8;
+		max-width: 760px;
+		margin: 0 0 1.5rem 0;
+	}
+
+	.blog-hero-subtext {
+		font-family: 'Manrope', system-ui, sans-serif;
+		font-weight: 300;
+		font-size: 17px;
+		line-height: 1.85;
+		color: rgba(245, 240, 232, 0.7);
+		max-width: 520px;
+		margin: 0 0 2rem 0;
+	}
+
+	.blog-hero-cta {
+		display: inline-block;
+		background-color: var(--gold);
+		color: var(--emerald);
+		padding: 0.85rem 2rem;
+		font-family: 'Manrope', system-ui, sans-serif;
+		font-weight: 700;
+		font-size: 11px;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		text-decoration: none;
+		transition: background-color 0.25s ease;
+	}
+
+	.blog-hero-cta:hover {
+		background-color: #c9a84c;
+	}
+
+	.blog-hero-quote {
+		position: absolute;
+		right: 5rem;
+		top: 50%;
+		transform: translateY(-50%);
+		font-family: Georgia, serif;
+		font-size: 28rem;
+		color: rgba(245, 240, 232, 0.04);
+		pointer-events: none;
+		line-height: 1;
+	}
+
+	/* ----- 2. FILTER BAR ----- */
+	.blog-filter {
+		width: 100vw;
+		position: relative;
+		left: 50%;
+		right: 50%;
+		margin-left: -50vw;
+		margin-right: -50vw;
+		background-color: var(--bg);
+		border-bottom: 1px solid rgba(28, 28, 28, 0.1);
+	}
+
+	.blog-filter-inner {
+		max-width: 1300px;
+		margin-inline: auto;
+		padding: 0 5rem;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0;
+	}
+
+	.blog-tab {
+		font-family: 'Manrope', system-ui, sans-serif;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.2em;
+		color: var(--muted);
+		padding: 1.1rem 1.5rem;
+		text-decoration: none;
+		border-bottom: 2px solid transparent;
+		transition: color 0.25s ease, border-color 0.25s ease;
+	}
+
+	.blog-tab:hover {
+		color: var(--text);
+	}
+
+	.blog-tab--active {
+		color: var(--emerald);
+		border-bottom-color: var(--gold);
+	}
+
+	/* ----- 3. FEATURED ----- */
+	.blog-featured {
+		max-width: 1300px;
+		margin-inline: auto;
+		padding: 4rem 5rem;
+		border-bottom: 1px solid rgba(28, 28, 28, 0.1);
+	}
+
+	.blog-featured-inner {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 4rem;
+		align-items: center;
+	}
+
+	.blog-featured-media {
+		aspect-ratio: 16 / 10;
+		background-color: var(--emerald);
+	}
+
+	.blog-meta {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-bottom: 1rem;
+		font-family: 'Manrope', system-ui, sans-serif;
+		font-size: 12px;
+	}
+
+	.blog-meta-tag {
+		color: var(--gold);
+		font-weight: 600;
+	}
+
+	.blog-meta-date {
+		color: var(--muted);
+		font-weight: 300;
+	}
+
+	.blog-featured-title {
+		font-family: 'Manrope', system-ui, sans-serif;
+		font-weight: 700;
+		font-size: 32px;
+		line-height: 1.1;
+		color: var(--text);
+		margin: 0 0 1rem 0;
+	}
+
+	.blog-featured-teaser {
+		font-family: 'Manrope', system-ui, sans-serif;
+		font-weight: 300;
+		font-size: 15px;
+		line-height: 1.85;
+		color: var(--muted);
+		margin: 0 0 1.5rem 0;
+	}
+
+	.blog-btn-ghost {
+		display: inline-block;
+		background-color: transparent;
+		color: var(--text);
+		border: 1px solid rgba(28, 28, 28, 0.2);
+		padding: 0.85rem 2rem;
+		font-family: 'Manrope', system-ui, sans-serif;
+		font-weight: 700;
+		font-size: 11px;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		text-decoration: none;
+		transition: border-color 0.25s ease;
+	}
+
+	.blog-btn-ghost:hover {
+		border-color: var(--text);
+	}
+
+	/* ----- 4. ARTICLE GRID ----- */
+	.blog-grid-section {
+		max-width: 1300px;
+		margin-inline: auto;
+		padding: 4rem 5rem 7rem;
+	}
+
+	.blog-grid-inner {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2.5rem;
+	}
+
+	.blog-card {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.blog-card-media {
+		aspect-ratio: 3 / 2;
+		background-color: var(--emerald);
+		margin-bottom: 1rem;
+		transition: transform 0.4s ease;
+	}
+
+	.blog-card:hover .blog-card-media {
+		transform: scale(1.03);
+	}
+
+	.blog-card .blog-meta {
+		margin-bottom: 0.75rem;
+	}
+
+	.blog-card-title {
+		font-family: 'Manrope', system-ui, sans-serif;
+		font-weight: 700;
+		font-size: 18px;
+		line-height: 1.25;
+		color: var(--text);
+		margin: 0 0 0.5rem 0;
+	}
+
+	.blog-card-teaser {
+		font-family: 'Manrope', system-ui, sans-serif;
+		font-weight: 300;
+		font-size: 14px;
+		line-height: 1.75;
+		color: var(--muted);
+		margin: 0;
+	}
+
+	.blog-card .blog-btn-ghost {
+		margin-top: 1rem;
+		align-self: flex-start;
+	}
+</style>

@@ -41,6 +41,13 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 						<ul class="nav-links" id="nav-links">
 							<li>
 								<a
+									href="/"
+									class={`nav-link ${isActive('/') ? 'nav-link--active' : ''}`}
+									>HOME</a
+								>
+							</li>
+							<li>
+								<a
 									href="/buecher"
 									class={`nav-link ${isActive('/buecher') ? 'nav-link--active' : ''}`}
 									>BÜCHER</a
@@ -82,6 +89,7 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 								>
 							</li>
 						</ul>
+						<div class="nav-spacer"></div>
 					</div>
 				</nav>
 			</header>
@@ -255,13 +263,13 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 	}
 
 	body.is-hero-page .site-nav .nav-link {
-		color: #f5f0e8;
+		color: #1c1c1c;
 		transition: color 0.3s ease;
 	}
 
 	body.is-hero-page .site-nav .nav-link:hover,
 	body.is-hero-page .site-nav .nav-link--active {
-		color: #f5f0e8;
+		color: #1c1c1c;
 		opacity: 1;
 	}
 
@@ -270,7 +278,7 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 	}
 
 	body.is-hero-page .site-nav .nav-toggle-label span {
-		background-color: #f5f0e8;
+		background-color: #1c1c1c;
 		transition: background-color 0.3s ease;
 	}
 
@@ -298,7 +306,7 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 	.nav-inner {
 		display: flex;
 		align-items: center;
-		justify-content: flex-end;
+		justify-content: center;
 		gap: var(--space-3);
 		padding-block: 1.5rem;
 	}
@@ -355,7 +363,7 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 	}
 
 	body.is-hero-page .site-nav .nav-toggle-label span {
-		background-color: #f5f0e8;
+		background-color: #1c1c1c;
 	}
 
 	body.is-hero-page .site-nav.scrolled .nav-toggle-label span {
@@ -467,6 +475,7 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 			border-bottom: 1px solid rgba(28, 28, 28, 0.08);
 			flex-direction: column;
 			align-items: center;
+			gap: 0;
 			padding: 1rem 0 1.5rem;
 			margin: 0;
 			list-style: none;
@@ -485,9 +494,11 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 
 		.nav-links .nav-link {
 			display: block;
-			padding: 1.5rem;
+			padding-top: 0.75rem;
+			padding-bottom: 0.75rem;
+			margin: 0;
 			font-family: 'Manrope', sans-serif;
-			font-size: 12px;
+			font-size: 14px;
 			font-weight: 600;
 			text-transform: uppercase;
 			letter-spacing: 0.12em;
