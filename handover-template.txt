@@ -1,0 +1,37 @@
+# Chat-Übergabe – Autorenwebsite Markus Gammersbach
+
+## Live-Links
+- **Lokal:** http://localhost:4321
+- **Live:** https://autorenwebseite.netlify.app
+
+## Aktueller Stand
+<!-- Was wurde zuletzt gebaut oder geändert? -->
+- [ ] Startseite: fertig
+- [ ] Über mich: in Arbeit
+- [ ] Meine Bücher: Platzhalter
+- [ ] Warum Lesen: Platzhalter
+- [ ] Millennial Workshop: Platzhalter
+- [ ] Blog: Platzhalter
+- [ ] Impressum / Datenschutz: Platzhalter
+
+Zuletzt gemacht: _______________
+
+## Offene Aufgabe
+<!-- Was soll in diesem Chat erledigt werden? -->
+
+
+## Bekannte Probleme
+<!-- Gibt es etwas das noch nicht funktioniert? -->
+
+
+## Relevanter Code (optional)
+<!-- Füge hier den betreffenden Code-Abschnitt ein falls hilfreich -->
+```astro
+
+```
+
+## Screenshots
+<!-- Füge hier einen Screenshot ein falls hilfreich -->
+
+## Sonstiges
+<!-- Besondere Hinweise für diesen Chat -->

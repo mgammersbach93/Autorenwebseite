@@ -2,6 +2,7 @@
 const { title = 'Autorenwebseite' } = Astro.props;
 const pathname = Astro.url.pathname;
 const isActive = (path) => (path === '/' ? pathname === '/' : pathname.startsWith(path));
+const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 ---
 
 <!doctype html>
@@ -20,7 +21,7 @@ const isActive = (path) => (path === '/' ? pathname === '/' : pathname.startsWit
 			rel="stylesheet"
 		/>
 	</head>
-	<body class={pathname === '/' ? 'is-home' : ''}>
+	<body class={`${pathname === '/' ? 'is-home' : ''} ${isHeroPage ? 'is-hero-page' : ''}`}>
 		<div class="page-shell">
 			<header class="site-header">
 				<nav class="site-nav">
@@ -115,8 +116,8 @@ const isActive = (path) => (path === '/' ? pathname === '/' : pathname.startsWit
 				const toggleBtn = document.querySelector('.nav-toggle-label');
 				const navLinks = document.querySelectorAll('.nav-link');
 
-				// Home page: scroll-based nav background
-				if (document.body.classList.contains('is-home') && nav) {
+				// Hero pages: scroll-based nav background
+				if (document.body.classList.contains('is-hero-page') && nav) {
 					const onScroll = () => {
 						if (window.scrollY > 80) {
 							nav.classList.add('scrolled');
@@ -225,6 +226,11 @@ const isActive = (path) => (path === '/' ? pathname === '/' : pathname.startsWit
 		padding-top: 72px; /* space for fixed header */
 	}
 
+	/* Hero pages: no top padding — hero sits flush under transparent nav */
+	body.is-hero-page .page-main {
+		padding-top: 0;
+	}
+
 	/* Navigation – fixed, full width, z-index 100 */
 
 	.site-header {
@@ -242,50 +248,50 @@ const isActive = (path) => (path === '/' ? pathname === '/' : pathname.startsWit
 		transition: background-color 0.3s ease, border-color 0.3s ease;
 	}
 
-	/* Home: fully transparent nav (no bar), Off-White links until scrolled */
-	body.is-home .site-nav {
+	/* Hero pages: fully transparent nav, Off-White links until scrolled */
+	body.is-hero-page .site-nav {
 		background: transparent !important;
 		border-bottom: none;
 	}
 
-	body.is-home .site-nav .nav-link {
+	body.is-hero-page .site-nav .nav-link {
 		color: #f5f0e8;
 		transition: color 0.3s ease;
 	}
 
-	body.is-home .site-nav .nav-link:hover,
-	body.is-home .site-nav .nav-link--active {
+	body.is-hero-page .site-nav .nav-link:hover,
+	body.is-hero-page .site-nav .nav-link--active {
 		color: #f5f0e8;
 		opacity: 1;
 	}
 
-	body.is-home .site-nav .nav-link--active {
+	body.is-hero-page .site-nav .nav-link--active {
 		opacity: 0.9;
 	}
 
-	body.is-home .site-nav .nav-toggle-label span {
+	body.is-hero-page .site-nav .nav-toggle-label span {
 		background-color: #f5f0e8;
 		transition: background-color 0.3s ease;
 	}
 
-	/* Home + scrolled: fully opaque Off-White background, dark links */
-	body.is-home .site-nav.scrolled {
+	/* Hero pages + scrolled: fully opaque Off-White background, dark links */
+	body.is-hero-page .site-nav.scrolled {
 		background: #f5f0e8 !important;
 		opacity: 1;
 		border-bottom: 1px solid rgba(28, 28, 28, 0.08);
 	}
 
-	body.is-home .site-nav.scrolled .nav-link {
+	body.is-hero-page .site-nav.scrolled .nav-link {
 		color: #1c1c1c;
 	}
 
-	body.is-home .site-nav.scrolled .nav-link:hover,
-	body.is-home .site-nav.scrolled .nav-link--active {
+	body.is-hero-page .site-nav.scrolled .nav-link:hover,
+	body.is-hero-page .site-nav.scrolled .nav-link--active {
 		color: var(--emerald);
 		opacity: 1;
 	}
 
-	body.is-home .site-nav.scrolled .nav-toggle-label span {
+	body.is-hero-page .site-nav.scrolled .nav-toggle-label span {
 		background-color: #1c1c1c;
 	}
 
@@ -348,11 +354,11 @@ const isActive = (path) => (path === '/' ? pathname === '/' : pathname.startsWit
 		background-color: var(--text);
 	}
 
-	body.is-home .site-nav .nav-toggle-label span {
+	body.is-hero-page .site-nav .nav-toggle-label span {
 		background-color: #f5f0e8;
 	}
 
-	body.is-home .site-nav.scrolled .nav-toggle-label span {
+	body.is-hero-page .site-nav.scrolled .nav-toggle-label span {
 		background-color: #1c1c1c;
 	}
 

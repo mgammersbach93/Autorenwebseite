@@ -1,14 +1,672 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const timelineEntries = [
+	{
+		year: '2019',
+		headline: 'Die beste Sinnkrise meines Lebens',
+		text: 'Eine Sinnkrise bringt mich zur Persönlichkeitsentwicklung – und verändert meinen Blick auf das Leben.',
+	},
+	{
+		year: '2019',
+		headline: 'Einstieg in die Persönlichkeitsentwicklung',
+		text: 'Mit Lars Amends „Why Not?" entdecke ich die Welt der Persönlichkeitsentwicklung. Die praktischen Tipps machen meinen Alltag von Tag zu Tag aufregender.',
+	},
+	{
+		year: '2020',
+		headline: '5 schnelle Fragen an Tommi Schmitt',
+		text: 'Ein Podcast-Moment zündet den Funken. Ich schreibe 300 Seiten – ohne zu wissen, wohin die Reise geht.',
+	},
+	{
+		year: '2021–22',
+		headline: 'Ich lerne das Schreibhandwerk',
+		text: 'Ratgeber, Podcasts, Videos – jede freie Minute gehört dem Schreiben.',
+	},
+	{
+		year: '2023',
+		headline: 'Mein erster Roman',
+		text: '„Sie wollten doch nur glücklich sein" erscheint – mein erstes veröffentlichtes Werk.',
+	},
+];
 ---
 
 <Layout title="Über mich">
-	<section class="page-header">
-		<h1>Über mich</h1>
-		<p>
-			Hier erzählst du deine Geschichte als Autorin oder Autor – Biografie, Hintergründe und das,
-			wofür deine Texte stehen.
-		</p>
+
+	<!-- SECTION 1 - HERO (full-bleed image, transparent nav) -->
+	<section class="ueber-hero">
+		<div class="hero-bg">
+			<img
+				class="hero-bg-image"
+				src="/images/markus_gammersbach-autor.webp"
+				alt=""
+				fetchpriority="high"
+			/>
+			<div class="hero-overlay"></div>
+		</div>
+		<div class="hero-inner">
+			<h1 class="hero-title">Markus Gammersbach</h1>
+		</div>
+	</section>
+
+	<!-- SECTION: Timeline "Mein Weg zum Schreiben" -->
+	<section class="ueber-timeline">
+		<div class="ueber-timeline-inner">
+			<h2 class="ueber-timeline-title">Mein Weg zum Schreiben</h2>
+			<div class="timeline-items">
+				<div class="timeline-line" aria-hidden="true"></div>
+				{timelineEntries.map((entry, i) => (
+					<div class={`timeline-item ${i % 2 === 0 ? 'timeline-item--left' : 'timeline-item--right'}`}>
+						<div class="timeline-content">
+							<p class="timeline-year">{entry.year}</p>
+							<h3 class="timeline-headline">{entry.headline}</h3>
+							<p class="timeline-text">{entry.text}</p>
+						</div>
+						<div class="timeline-dot-wrap">
+							<span class="timeline-dot" aria-hidden="true"></span>
+						</div>
+						<div class="timeline-content timeline-content--spacer" aria-hidden="true"></div>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- SECTION: 3-image gallery -->
+	<section class="ueber-gallery">
+		<div class="ueber-gallery-inner">
+			<div class="gallery-image-wrap">
+				<img src="/images/markus_gammersbach-why-not.webp" alt="" class="gallery-image" width="400" height="420" />
+			</div>
+			<div class="gallery-image-wrap">
+				<img src="/images/markus_gammersbach-roman-schreiben.webp" alt="" class="gallery-image" width="400" height="420" />
+			</div>
+			<div class="gallery-image-wrap">
+				<img src="/images/markus_gammersbach-schreiben.webp" alt="" class="gallery-image" width="400" height="420" />
+			</div>
+		</div>
+	</section>
+
+	<!-- SECTION: WAS MICH ANTREIBT (Off-White) -->
+	<section class="ueber-antreibt">
+		<div class="ueber-antreibt-inner">
+			<h2 class="ueber-section-title">Was mich antreibt</h2>
+			<div class="antreibt-grid">
+				<div class="antreibt-card">
+					<h3 class="antreibt-heading">Leidenschaft</h3>
+					<p>Das Schreiben ist für mich mehr als ein Hobby – es ist die Art, wie ich die Welt verarbeite und mit anderen teile.</p>
+				</div>
+				<div class="antreibt-card">
+					<h3 class="antreibt-heading">Motivation</h3>
+					<p>Die Frage „Was würde ich tun, wenn die Zeit begrenzt ist?" treibt mich an, keine Idee ungeschrieben zu lassen.</p>
+				</div>
+				<div class="antreibt-card">
+					<h3 class="antreibt-heading">Vision</h3>
+					<p>Ich möchte Geschichten erzählen, die Leserinnen und Leser berühren und zu mehr Bewusstsein im Alltag anregen.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- SECTION 5 - QUOTE (Off-White) -->
+	<section class="ueber-quote">
+		<div class="ueber-quote-inner">
+			<p class="quote-mark" aria-hidden="true">„</p>
+			<blockquote class="ueber-quote-text">
+				Ein erfüllendes Hobby gibt mir mehr als der Druck, mit meinen Büchern maximalen Profit generieren zu müssen.
+			</blockquote>
+		</div>
+	</section>
+
+	<!-- SECTION 6 - MOIN & ALAAF (Off-White) -->
+	<section class="ueber-moin">
+		<div class="ueber-moin-inner">
+			<h2 class="ueber-section-title">Moin & Alaaf</h2>
+			<p class="ueber-moin-sub">In Kölle jebore – in Hamburg zum Schreiben gekommen</p>
+			<div class="ueber-moin-text">
+				<p>In Köln geboren und mit dem Karneval groß geworden, lebe ich heute in Hamburg. Die Hansestadt hat mich zum Schreiben gebracht: die Ruhe am Wasser, die Weite der Elbe und die Kultur des Nordens haben den Raum geschaffen, in dem meine Geschichten entstehen. Köln bleibt Heimat – Hamburg ist der Ort, an dem ich Autor geworden bin.</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- SECTION 7 - KONTAKT (Smaragd, full width) -->
+	<section class="ueber-kontakt full-width emerald">
+		<div class="ueber-kontakt-inner">
+			<h2 class="ueber-kontakt-title">Kontakt</h2>
+			<p class="ueber-kontakt-email">E-Mail: <a href="mailto:kontakt@mgammersbach.de" class="ueber-kontakt-link">kontakt@mgammersbach.de</a></p>
+			<form class="ueber-form" name="ueber-kontakt" method="POST" data-netlify="true" netlify-honeypot="bot">
+				<input type="hidden" name="form-name" value="ueber-kontakt" />
+				<p class="ueber-form-hp" hidden>
+					<label>Nicht ausfüllen: <input name="bot" /></label>
+				</p>
+				<div class="ueber-form-row">
+					<label for="ueber-name" class="ueber-form-label">Name</label>
+					<input type="text" id="ueber-name" name="name" class="ueber-form-input" required autocomplete="name" />
+				</div>
+				<div class="ueber-form-row">
+					<label for="ueber-email" class="ueber-form-label">E-Mail</label>
+					<input type="email" id="ueber-email" name="email" class="ueber-form-input" required autocomplete="email" />
+				</div>
+				<div class="ueber-form-row">
+					<label for="ueber-nachricht" class="ueber-form-label">Nachricht</label>
+					<textarea id="ueber-nachricht" name="nachricht" class="ueber-form-textarea" rows="5" required></textarea>
+				</div>
+				<button type="submit" class="btn btn-primary ueber-form-submit">Absenden</button>
+			</form>
+		</div>
 	</section>
 </Layout>
 
+<style>
+	/* HERO – full bleed, same as Startseite */
+	.ueber-hero {
+		position: relative;
+		width: 100vw;
+		margin-left: calc(50% - 50vw);
+		min-height: 92vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-sizing: border-box;
+	}
+
+	.hero-bg {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+	}
+
+	.hero-bg-image {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center top;
+	}
+
+	.hero-overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.5) 100%);
+		z-index: 1;
+	}
+
+	.hero-inner {
+		position: relative;
+		z-index: 2;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		text-align: center;
+		padding-inline: 2rem;
+	}
+
+	.hero-title {
+		font-family: 'Manrope', sans-serif;
+		font-size: clamp(3rem, 8vw, 6rem);
+		font-weight: 700;
+		line-height: 1.05;
+		letter-spacing: -0.02em;
+		margin: 0;
+		color: #f5f0e8;
+	}
+
+	@media (max-width: 720px) {
+		.ueber-hero {
+			min-height: 80vh;
+		}
+	}
+
+	/* Full-width Smaragd sections */
+	.full-width {
+		width: 100vw;
+		margin-left: calc(50% - 50vw);
+		box-sizing: border-box;
+	}
+
+	.full-width.emerald {
+		background-color: var(--emerald);
+		color: var(--bg);
+	}
+
+	/* SECTION: 3-image gallery */
+	.ueber-gallery {
+		background-color: #f5f0e8;
+		padding-block: 5rem;
+	}
+
+	.ueber-gallery-inner {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1rem;
+	}
+
+	.gallery-image-wrap {
+		overflow: hidden;
+		height: 420px;
+	}
+
+	.gallery-image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: top;
+		transition: transform 0.4s ease;
+	}
+
+	.gallery-image-wrap:hover .gallery-image {
+		transform: scale(1.03);
+	}
+
+	@media (max-width: 720px) {
+		.ueber-gallery-inner {
+			grid-template-columns: 1fr;
+		}
+
+		.gallery-image-wrap {
+			height: 300px;
+		}
+	}
+
+	/* SECTION: Was mich antreibt */
+	.ueber-antreibt {
+		background-color: var(--bg);
+		padding-block: 5rem 6rem;
+	}
+
+	.ueber-antreibt-inner,
+	.ueber-moin-inner {
+		max-width: 1300px;
+		margin-inline: auto;
+		padding-inline: var(--page-padding-desktop);
+	}
+
+	@media (max-width: 960px) {
+		.ueber-antreibt-inner,
+		.ueber-moin-inner {
+			padding-inline: 2rem;
+		}
+	}
+
+	@media (max-width: 720px) {
+		.ueber-antreibt-inner,
+		.ueber-moin-inner {
+			padding-inline: 1.5rem;
+		}
+	}
+
+	.ueber-section-title {
+		font-family: 'Manrope', sans-serif;
+		font-size: clamp(1.6rem, 2.5vw, 2rem);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		margin: 0 0 var(--space-5);
+		color: var(--text);
+	}
+
+	.antreibt-grid {
+		display: grid;
+		gap: var(--space-5);
+	}
+
+	@media (min-width: 720px) {
+		.antreibt-grid {
+			grid-template-columns: repeat(3, 1fr);
+			gap: var(--space-6);
+		}
+	}
+
+	.antreibt-card {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+	}
+
+	.antreibt-heading {
+		font-family: 'Manrope', sans-serif;
+		font-size: 1.1rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		margin: 0;
+		color: var(--emerald);
+	}
+
+	.antreibt-card p {
+		font-family: 'Manrope', sans-serif;
+		font-size: 15px;
+		font-weight: 300;
+		line-height: 1.7;
+		margin: 0;
+		color: var(--muted);
+	}
+
+	/* SECTION: Timeline */
+	.ueber-timeline {
+		background-color: #f5f0e8;
+		padding-block: 5rem 6rem;
+	}
+
+	.ueber-timeline-inner {
+		position: relative;
+		max-width: 800px;
+		margin-inline: auto;
+		padding-inline: 2rem;
+	}
+
+	.ueber-timeline-title {
+		font-family: 'Manrope', sans-serif;
+		font-size: 28px;
+		font-weight: 700;
+		text-align: center;
+		margin: 0 0 3rem;
+		color: var(--text);
+	}
+
+	.timeline-items {
+		position: relative;
+	}
+
+	.timeline-line {
+		position: absolute;
+		left: 50%;
+		top: 0;
+		bottom: 0;
+		width: 1px;
+		background: rgba(28, 28, 28, 0.12);
+		transform: translateX(-50%);
+		pointer-events: none;
+	}
+
+	.timeline-item {
+		display: grid;
+		grid-template-columns: 1fr 20px 1fr;
+		gap: 0;
+		margin-bottom: 3rem;
+		align-items: start;
+	}
+
+	.timeline-item:last-child {
+		margin-bottom: 0;
+	}
+
+	.timeline-item--left .timeline-content:first-child {
+		grid-column: 1;
+		text-align: right;
+		padding-right: 3rem;
+	}
+
+	.timeline-item--left .timeline-dot-wrap { grid-column: 2; }
+	.timeline-item--left .timeline-content--spacer { grid-column: 3; }
+
+	.timeline-item--right .timeline-content:first-child {
+		grid-column: 3;
+		text-align: left;
+		padding-left: 3rem;
+	}
+
+	.timeline-item--right .timeline-dot-wrap { grid-column: 2; }
+	.timeline-item--right .timeline-content--spacer { grid-column: 1; }
+
+	.timeline-dot-wrap {
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		padding-top: 0.35rem;
+	}
+
+	.timeline-dot {
+		display: block;
+		width: 10px;
+		height: 10px;
+		background-color: var(--gold);
+		transform: rotate(45deg);
+		flex-shrink: 0;
+	}
+
+	.timeline-year {
+		font-family: 'Manrope', sans-serif;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.2em;
+		color: var(--gold);
+		margin: 0 0 0.3rem;
+	}
+
+	.timeline-headline {
+		font-family: 'Manrope', sans-serif;
+		font-size: 16px;
+		font-weight: 600;
+		color: var(--text);
+		margin: 0 0 0.5rem;
+	}
+
+	.timeline-text {
+		font-family: 'Manrope', sans-serif;
+		font-size: 15px;
+		font-weight: 300;
+		line-height: 1.65;
+		color: var(--text);
+		margin: 0;
+	}
+
+	/* SECTION: Quote */
+	.ueber-quote {
+		background-color: var(--bg);
+		padding-block: 4rem 5rem;
+	}
+
+	.ueber-quote-inner {
+		position: relative;
+		max-width: 42rem;
+		padding-inline: var(--page-padding-desktop);
+		margin-inline: auto;
+	}
+
+	.quote-mark {
+		font-family: Georgia, serif;
+		font-size: 5rem;
+		line-height: 1;
+		color: var(--gold);
+		opacity: 0.6;
+		margin: 0 0 -1rem 0;
+	}
+
+	.ueber-quote-text {
+		font-family: 'Manrope', sans-serif;
+		font-size: clamp(1.1rem, 2vw, 1.35rem);
+		font-weight: 400;
+		line-height: 1.6;
+		margin: 0;
+		color: var(--text);
+		font-style: normal;
+	}
+
+	/* SECTION: Moin & Alaaf */
+	.ueber-moin {
+		background-color: var(--bg);
+		padding-block: 5rem 6rem;
+	}
+
+	.ueber-moin-sub {
+		font-family: 'Manrope', sans-serif;
+		font-size: 1rem;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+		color: var(--muted);
+		margin: 0 0 var(--space-4);
+	}
+
+	.ueber-moin-text p {
+		font-family: 'Manrope', sans-serif;
+		font-size: 16px;
+		font-weight: 300;
+		line-height: 1.7;
+		margin: 0;
+		color: var(--text);
+		max-width: 50rem;
+	}
+
+	/* SECTION: Kontakt */
+	.ueber-kontakt {
+		padding-block: 5rem 6rem;
+	}
+
+	.ueber-kontakt-inner {
+		max-width: 1300px;
+		margin-inline: auto;
+		padding-inline: var(--page-padding-desktop);
+	}
+
+	@media (max-width: 960px) {
+		.ueber-kontakt-inner {
+			padding-inline: 2rem;
+		}
+	}
+
+	.ueber-kontakt-title {
+		font-family: 'Manrope', sans-serif;
+		font-size: clamp(1.6rem, 2.5vw, 2rem);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		margin: 0 0 var(--space-2);
+		color: var(--bg);
+	}
+
+	.ueber-kontakt-email {
+		font-family: 'Manrope', sans-serif;
+		font-size: 16px;
+		font-weight: 400;
+		margin: 0 0 var(--space-5);
+		color: var(--bg);
+		opacity: 0.95;
+	}
+
+	.ueber-kontakt-link {
+		color: var(--bg);
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
+	}
+
+	.ueber-kontakt-link:hover {
+		opacity: 0.9;
+	}
+
+	.ueber-form {
+		max-width: 32rem;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3);
+	}
+
+	.ueber-form-row {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.ueber-form-label {
+		font-family: 'Manrope', sans-serif;
+		font-size: 12px;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--bg);
+		opacity: 0.95;
+	}
+
+	.ueber-form-input,
+	.ueber-form-textarea {
+		padding: 0.85rem 1rem;
+		font-family: 'Manrope', sans-serif;
+		font-size: 16px;
+		background-color: var(--bg);
+		color: var(--text);
+		border: 2px solid rgba(245, 240, 232, 0.4);
+		border-radius: 0;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	.ueber-form-input:focus,
+	.ueber-form-textarea:focus {
+		outline: none;
+		border-color: var(--bg);
+	}
+
+	.ueber-form-textarea {
+		resize: vertical;
+		min-height: 120px;
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: auto;
+		padding: 0.85rem 2rem;
+		font-family: 'Manrope', sans-serif;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		border-radius: 0;
+		cursor: pointer;
+		transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+		text-decoration: none;
+		white-space: nowrap;
+		box-sizing: border-box;
+		border: none;
+	}
+
+	.btn-primary {
+		background-color: var(--bg);
+		color: var(--emerald);
+		align-self: flex-start;
+	}
+
+	.btn-primary:hover {
+		background-color: #e8e2d8;
+	}
+
+	/* Responsive */
+	@media (max-width: 720px) {
+		.ueber-gallery { padding-block: 3rem 4rem; }
+		.ueber-antreibt,
+		.ueber-moin { padding-block: 3rem 4rem; }
+		.ueber-quote { padding-block: 3rem 4rem; }
+		.ueber-kontakt { padding-block: 3rem 4rem; }
+		.antreibt-grid { grid-template-columns: 1fr; }
+		.ueber-timeline { padding-block: 3rem 4rem; }
+		.ueber-timeline-title { margin-bottom: 2rem; }
+
+		.timeline-item {
+			grid-template-columns: 20px 1fr;
+		}
+
+		.timeline-item--left .timeline-content:first-child,
+		.timeline-item--right .timeline-content:first-child {
+			grid-column: 2;
+			text-align: left;
+			padding-right: 0;
+			padding-left: 1.5rem;
+		}
+
+		.timeline-item--left .timeline-dot-wrap,
+		.timeline-item--right .timeline-dot-wrap {
+			grid-column: 1;
+		}
+
+		.timeline-item--left .timeline-content--spacer,
+		.timeline-item--right .timeline-content--spacer {
+			display: none;
+		}
+
+		.timeline-line {
+			left: 10px;
+			transform: translateX(-50%);
+		}
+	}
+</style>

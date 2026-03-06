@@ -1,0 +1,80 @@
+# Code-Konventionen – Autorenwebsite Markus Gammersbach
+
+## Design System
+
+### Farben (CSS-Variablen)
+```css
+--bg: #F5F0E8        /* Off-White – Haupthintergrund */
+--text: #1C1C1C      /* Dunkel – alle Fließtexte */
+--muted: #888880     /* Gedämpft – Nebentexte */
+--emerald: #1A3A30   /* Smaragd – Akzent 1 */
+--gold: #B89A3E      /* Gold – Akzent 2 */
+--gold-lt: #C9A84C   /* Gold hell – Hover */
+--radius: 0px        /* Kein border-radius */
+--max-width: 1300px
+--space-page: 5rem   /* Seitenrand Desktop */
+--space-section: 7rem /* Section padding oben/unten */
+```
+
+### Typografie
+- **Schrift:** Manrope (Google Fonts, weights 300/400/600/700)
+- **H1:** 700, 42–72px, line-height 1.05, letter-spacing -0.02em
+- **H2:** 700, 28px, line-height 1.1
+- **H3:** 700, 21px, line-height 1.2
+- **Body:** 300, 16px, line-height 1.85
+- **Labels/Eyebrow:** 700, 11px, UPPERCASE, letter-spacing 0.28em, Farbe Gold
+- **Nav-Links:** 600, 12px, UPPERCASE, letter-spacing 0.12em
+- **Kein Bold im Fließtext**
+
+### Buttons
+```css
+/* Primary */
+background: #1A3A30;
+color: #F5F0E8;
+padding: 0.85rem 2rem;
+font: Manrope 700, 11px, UPPERCASE, letter-spacing 0.16em;
+border: none;
+border-radius: 0;
+width: auto; /* nie full-width */
+
+/* Ghost (auf hellem Hintergrund) */
+background: transparent;
+color: #1C1C1C;
+border: 1px solid rgba(28,28,28,0.2);
+
+/* Ghost (auf dunklem Hintergrund) */
+color: #F5F0E8;
+border: 1px solid rgba(245,240,232,0.4);
+```
+
+## Layout-Regeln
+- Max-width: 1300px, zentriert
+- Seitenrand Desktop: min. 5rem
+- Smaragd-Sections: **immer 100vw** – kein max-width auf dem Hintergrund
+- 8px Spacing-Raster
+- Kein border-radius irgendwo
+
+## Seitenstruktur-Muster
+- Hell/Dunkel-Wechsel: Off-White als Basis, Smaragd max. 1–2x pro Seite
+- Gold nie als große Fläche, nur als Akzent
+- Nie Smaragd und Gold gleichwertig nebeneinander
+
+## Navigation
+- Layout.astro enthält Nav + Footer global
+- Nav: sticky, transparent über Hero, Off-White beim Scrollen (.scrolled-Klasse)
+- Mobile: Hamburger-Menü (3 Linien), Dropdown Off-White
+
+## Dateinamen & Ordner
+- Seiten: `src/pages/seitenname.astro` (Kleinbuchstaben, Bindestrich)
+- Bilder: `public/images/bildname.webp` (Kleinbuchstaben, Bindestrich)
+- Layouts: `src/layouts/Layout.astro`
+
+## Sprache
+- Cursor-Prompts auf **Englisch** (bessere KI-Ergebnisse)
+- Website-Inhalte auf **Deutsch**
+- Commit-Messages auf Englisch
+
+## Bildformate
+- Alle Bilder als **.webp** für Performance
+- Hero-Bilder: object-fit cover, object-position center
+- Galerien: height fix, object-fit cover, hover zoom (scale 1.03, transition 0.4s)

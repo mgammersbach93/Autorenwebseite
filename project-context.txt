@@ -1,0 +1,86 @@
+# Projektgedächtnis – Autorenwebsite Markus Gammersbach
+
+## Tech Stack
+- **Framework:** Astro v5.17.3
+- **Hosting:** Netlify (autorenwebseite.netlify.app)
+- **Versionskontrolle:** GitHub (github.com/mgammersbach93/Autorenwebseite)
+- **Editor:** Cursor (Pro)
+- **Node.js:** LTS
+- **Kein TypeScript** (bewusst deaktiviert beim Setup)
+
+## Projektordner
+```
+C:\Users\marku\Autorenwebseite
+├── public/
+│   └── images/
+│       ├── entdecke_deine_neuen_seiten.webp       # Hero Startseite
+│       ├── markus_gammersbach-why-not.webp         # Über mich Galerie
+│       ├── markus_gammersbach-roman-schreiben.webp # Über mich Galerie
+│       └── markus_gammersbach-schreiben.webp       # Über mich Galerie
+├── src/
+│   ├── layouts/
+│   │   └── Layout.astro       # Globales Layout mit Nav + Footer
+│   └── pages/
+│       ├── index.astro         # Startseite (fertig)
+│       ├── ueber-mich.astro    # Über mich (in Arbeit)
+│       ├── buecher.astro       # Meine Bücher (Platzhalter)
+│       ├── warum-lesen.astro   # Warum Lesen (Platzhalter)
+│       ├── millennial-workshop.astro  # Platzhalter
+│       ├── blog.astro          # Platzhalter
+│       ├── impressum.astro     # Platzhalter
+│       └── datenschutz.astro   # Platzhalter
+```
+
+## Setup & Zugänge
+- **GitHub User:** mgammersbach93
+- **Netlify:** Mit Google-Account angemeldet, verbunden mit GitHub
+- **Zoho Mail:** E-Mail kontakt@mgammersbach.de (in Einrichtung)
+- **Domain:** Testdomain noch offen, Produktivdomain bei Alfahosting (mgammersbach.de)
+- **INWX:** Account für zukünftige Domain-Verwaltung
+
+## Getroffene Entscheidungen
+- Kein CMS vorerst – wird nach Fertigstellung des Designs eingerichtet (Keystatic geplant)
+- Keine TypeScript-Nutzung
+- Kein border-radius irgendwo (eckiges Design)
+- Smaragd-Sections immer 100vw (kein max-width auf dem Hintergrund)
+- Navigation: transparent über Hero, Off-White sticky beim Scrollen
+- Hamburger-Menü auf Mobile
+- Testimonials: Auto-Slider (4s Interval) mit Fortschrittsbalken
+- Buchcover: nebeneinander auch auf Mobile (nie gestapelt)
+
+## Was bereits gebaut ist
+
+### Startseite (index.astro) – fertig
+1. Hero – Vollbild-Foto, zentrierter Text, H1 72px, zwei Buttons
+2. Bücher – Text links, zwei Buchcover rechts nebeneinander
+3. Leserstimmen – Auto-Slider, goldener Fortschrittsbalken, 5 Quotes
+4. Quote-Band – Smaragd, goldenes „-Zeichen (Georgia, 5rem, opacity 0.6)
+5. Über mich – Smaragd, 60/40 Text/Bild, Ghost-Button
+6. Warum Lesen + Millennial Workshop – zwei Spalten nebeneinander
+7. Blog Preview – 3 Karten, zentriert
+8. Social/Kontakt – zentriert, Icons, Button
+
+### Über mich (ueber-mich.astro) – in Arbeit
+- Zeitstrahl "Mein Weg zum Schreiben" (5 Einträge, alternierend links/rechts)
+- 3-Bilder-Galerie mit Hover-Zoom
+- Was mich antreibt (3 Spalten)
+- Moin & Alaaf
+- Kontaktformular
+- Hero noch zu bauen
+
+### Restliche Seiten – Platzhalter
+
+## Lokale Entwicklung
+```bash
+cd C:\Users\marku\Autorenwebseite
+npm run dev
+# → http://localhost:4321
+```
+
+## Deployment
+```bash
+git add .
+git commit -m "Beschreibung"
+git push
+# Netlify deployed automatisch
+```
