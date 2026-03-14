@@ -2,15 +2,620 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Warum lesen">
-	<div class="container">
-		<section class="page-header">
-		<h1>Warum lesen?</h1>
-		<p>
-			Diese Seite ist der Ort für deine Haltung zum Lesen – warum Geschichten wichtig sind und
-			was sie mit uns machen.
-		</p>
+<Layout title="Warum Lesen – Blättern statt Scrollen">
+
+	<!-- HERO -->
+	<section class="lesen-hero">
+		<div class="lesen-hero-inner">
+			<div class="lesen-hero-content">
+				<span class="eyebrow">Warum Lesen</span>
+				<h1 class="lesen-hero-title">Blättern statt<br>Scrollen</h1>
+				<p class="lesen-hero-text">
+					Warum wir viel häufiger zu einem Buch statt zum Handy greifen sollten.
+				</p>
+			</div>
+			<div class="lesen-hero-image">
+				<div class="lesen-hero-shape"></div>
+				<img 
+					src="/images/blaettern-statt-scrollen.png" 
+					alt="Person liest ein Buch" 
+					class="lesen-hero-photo"
+				/>
+			</div>
+		</div>
 	</section>
-	</div>
+
+	<!-- VERGLEICH: Handy vs. Buch -->
+	<section class="lesen-vergleich">
+		<div class="vergleich-inner">
+			<div class="vergleich-side">
+				<span class="vergleich-emoji">📱</span>
+				<span class="vergleich-label">⌀ Zeit pro Tag</span>
+				<span class="vergleich-value vergleich-value--muted">4-5 Std.</span>
+			</div>
+			<div class="vergleich-divider"></div>
+			<div class="vergleich-side">
+				<span class="vergleich-emoji">📖</span>
+				<span class="vergleich-label">⌀ Zeit pro Tag</span>
+				<span class="vergleich-value">17 Min.</span>
+			</div>
+		</div>
+	</section>
+
+	<!-- GESUNDHEIT -->
+	<section class="lesen-section">
+		<div class="lesen-section-inner">
+			<span class="eyebrow">Körper & Geist</span>
+			<h2 class="lesen-section-title">Lesen fördert die Gesundheit</h2>
+			<p class="lesen-section-intro">
+				Zahlreiche Studien belegen, dass das Lesen von Büchern positive Auswirkungen auf unser Wohlbefinden hat.
+			</p>
+
+			<div class="benefit-grid">
+				<div class="benefit-item">
+					<div class="benefit-icon">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+						</svg>
+					</div>
+					<div class="benefit-content">
+						<h3 class="benefit-title">Schlaf</h3>
+						<p class="benefit-text">Beruhigt den Geist und reguliert den Schlaf-Wach-Zyklus.</p>
+					</div>
+				</div>
+
+				<div class="benefit-item">
+					<div class="benefit-icon">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+						</svg>
+					</div>
+					<div class="benefit-content">
+						<h3 class="benefit-title">Detox</h3>
+						<p class="benefit-text">Weniger blaues Licht und toxische Inhalte auf Social Media.</p>
+					</div>
+				</div>
+
+				<div class="benefit-item">
+					<div class="benefit-icon">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+							<path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+						</svg>
+					</div>
+					<div class="benefit-content">
+						<h3 class="benefit-title">Entspannung</h3>
+						<p class="benefit-text">Reduziert Stress durch Ablenkung von belastenden Situationen und Emotionen.</p>
+					</div>
+				</div>
+
+				<div class="benefit-item">
+					<div class="benefit-icon">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<circle cx="12" cy="12" r="10"/>
+							<path d="M12 16v-4M12 8h.01"/>
+						</svg>
+					</div>
+					<div class="benefit-content">
+						<h3 class="benefit-title">Gehirn</h3>
+						<p class="benefit-text">Fördert die Denkfähigkeit, stärkt die Aufmerksamkeit, verbessert das Gedächtnis.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- WUSSTEST DU -->
+	<section class="lesen-wusstest">
+		<div class="wusstest-inner">
+			<p class="wusstest-text">
+				<strong>Wusstest du...?</strong><br>
+				...dass eine Studie der Yale University School of Public Health herausgefunden hat, dass Menschen, die regelmäßig lesen, bis zu zwei Jahre länger leben?
+			</p>
+		</div>
+	</section>
+
+	<!-- PERSÖNLICHKEIT -->
+	<section class="lesen-section">
+		<div class="lesen-section-inner">
+			<span class="eyebrow">Persönliche Entwicklung</span>
+			<h2 class="lesen-section-title">Lesen fördert die Persönlichkeit</h2>
+			<p class="lesen-section-intro">
+				Wer regelmäßig liest, erhält darüber hinaus neue Möglichkeiten, um sich als Mensch weiterzuentwickeln.
+			</p>
+
+			<div class="benefit-grid">
+				<div class="benefit-item">
+					<div class="benefit-icon">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+						</svg>
+					</div>
+					<div class="benefit-content">
+						<h3 class="benefit-title">Inspiration</h3>
+						<p class="benefit-text">Liefert inspirierende Inhalte und neue Motivation für Veränderung.</p>
+					</div>
+				</div>
+
+				<div class="benefit-item">
+					<div class="benefit-icon">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<circle cx="12" cy="12" r="10"/>
+							<polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+						</svg>
+					</div>
+					<div class="benefit-content">
+						<h3 class="benefit-title">Reflexion</h3>
+						<p class="benefit-text">Fördert das Verständnis der eigenen Werte, Gedanken und Gefühle.</p>
+					</div>
+				</div>
+
+				<div class="benefit-item">
+					<div class="benefit-icon">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+						</svg>
+					</div>
+					<div class="benefit-content">
+						<h3 class="benefit-title">Empathie</h3>
+						<p class="benefit-text">Stärkt soziale Fähigkeiten durch das Eintauchen in Emotionen der Charaktere.</p>
+					</div>
+				</div>
+
+				<div class="benefit-item">
+					<div class="benefit-icon">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M18 20V10M12 20V4M6 20v-6"/>
+						</svg>
+					</div>
+					<div class="benefit-content">
+						<h3 class="benefit-title">Wachstum</h3>
+						<p class="benefit-text">Ermöglicht, Wissen zu erweitern und sich persönlich zu entwickeln.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA -->
+	<section class="lesen-cta">
+		<div class="lesen-cta-inner">
+			<h2 class="lesen-cta-title">Worauf wartest du?</h2>
+			<p class="lesen-cta-text">
+				Hol dir noch heute deine Portion analoges Dopamin.<br>
+				Entdecke spannende Geschichten, nahbare Charaktere und hilfreiche Lektionen für dein persönliches Wachstum.
+			</p>
+			<a href="/buecher" class="btn btn-primary">Zu den Büchern</a>
+		</div>
+	</section>
+
 </Layout>
 
+<style>
+	/* ── HERO ── */
+	.lesen-hero {
+		background: var(--bg);
+		min-height: 80vh;
+		display: flex;
+		align-items: center;
+		padding: 8rem 5rem 5rem;
+	}
+
+	.lesen-hero-inner {
+		max-width: 1300px;
+		width: 100%;
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 4rem;
+		align-items: center;
+	}
+
+	.lesen-hero-content {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.eyebrow {
+		font-size: 11px;
+		font-weight: 700;
+		letter-spacing: 0.28em;
+		text-transform: uppercase;
+		color: var(--gold);
+	}
+
+	.lesen-hero-title {
+		font-family: 'Manrope', sans-serif;
+		font-size: 56px;
+		font-weight: 700;
+		line-height: 1.05;
+		letter-spacing: -0.02em;
+		color: var(--text);
+		margin: 0;
+	}
+
+	.lesen-hero-text {
+		font-family: 'Manrope', sans-serif;
+		font-size: 16px;
+		font-weight: 300;
+		line-height: 1.7;
+		color: var(--text);
+		max-width: 400px;
+		margin: 0;
+	}
+
+	.lesen-hero-image {
+		position: relative;
+		height: 480px;
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+	}
+
+	.lesen-hero-shape {
+		position: absolute;
+		width: 380px;
+		height: 340px;
+		background: var(--emerald);
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.lesen-hero-shape::before {
+		content: '';
+		position: absolute;
+		top: -12px;
+		left: -12px;
+		width: 28px;
+		height: 28px;
+		border-top: 2px solid var(--gold);
+		border-left: 2px solid var(--gold);
+		opacity: 0.7;
+	}
+
+	.lesen-hero-shape::after {
+		content: '';
+		position: absolute;
+		bottom: -12px;
+		right: -12px;
+		width: 28px;
+		height: 28px;
+		border-bottom: 2px solid var(--gold);
+		border-right: 2px solid var(--gold);
+		opacity: 0.7;
+	}
+
+	.lesen-hero-photo {
+		position: relative;
+		z-index: 1;
+		width: 360px;
+		height: 460px;
+		object-fit: cover;
+		object-position: center top;
+	}
+
+	/* ── VERGLEICH ── */
+	.lesen-vergleich {
+		background: var(--bg);
+		padding: 4rem 0;
+	}
+
+	.vergleich-inner {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 0 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 3rem;
+	}
+
+	.vergleich-side {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+		flex: 1;
+		max-width: 280px;
+	}
+
+	.vergleich-emoji {
+		font-size: 2rem;
+		line-height: 1;
+		margin-bottom: 0.5rem;
+	}
+
+	.vergleich-label {
+		font-family: 'Manrope', sans-serif;
+		font-size: 11px;
+		font-weight: 600;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--muted);
+	}
+
+	.vergleich-value {
+		font-family: 'Manrope', sans-serif;
+		font-size: 28px;
+		font-weight: 700;
+		color: var(--emerald);
+	}
+
+	.vergleich-value--muted {
+		color: var(--text);
+	}
+
+	.vergleich-divider {
+		width: 1px;
+		height: 100px;
+		background: var(--gold);
+	}
+
+	@media (max-width: 600px) {
+		.vergleich-inner {
+			gap: 2rem;
+		}
+
+		.vergleich-value {
+			font-size: 24px;
+		}
+
+		.vergleich-divider {
+			height: 80px;
+		}
+	}
+
+	/* ── WUSSTEST DU ── */
+	.lesen-wusstest {
+		background: var(--emerald);
+		padding: 4rem 0;
+		width: 100vw;
+		margin-left: calc(50% - 50vw);
+	}
+
+	.wusstest-inner {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 0 2rem;
+		text-align: center;
+	}
+
+	.wusstest-text {
+		font-family: 'Manrope', sans-serif;
+		font-size: 18px;
+		font-weight: 300;
+		line-height: 1.7;
+		color: var(--bg);
+		margin: 0;
+	}
+
+	.wusstest-text strong {
+		font-weight: 700;
+		font-size: 20px;
+	}
+
+	/* ── SECTIONS (GESUNDHEIT & PERSÖNLICHKEIT) ── */
+	.lesen-section {
+		background: var(--bg);
+		padding: 5rem 0;
+	}
+
+	.lesen-section-inner {
+		max-width: 1300px;
+		margin: 0 auto;
+		padding: 0 5rem;
+	}
+
+	.lesen-section-title {
+		font-family: 'Manrope', sans-serif;
+		font-size: 28px;
+		font-weight: 700;
+		color: var(--text);
+		margin: 0.75rem 0 1rem;
+		letter-spacing: -0.02em;
+	}
+
+	.lesen-section-intro {
+		font-family: 'Manrope', sans-serif;
+		font-size: 16px;
+		font-weight: 300;
+		line-height: 1.7;
+		color: var(--muted);
+		max-width: 600px;
+		margin: 0 0 3rem;
+	}
+
+	/* ── BENEFIT GRID (2x2 mit Icons) ── */
+	.benefit-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2.5rem 4rem;
+	}
+
+	.benefit-item {
+		display: flex;
+		gap: 1.25rem;
+		align-items: flex-start;
+	}
+
+	.benefit-icon {
+		flex-shrink: 0;
+		width: 44px;
+		height: 44px;
+		border: 1px solid var(--gold);
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--gold);
+	}
+
+	.benefit-icon svg {
+		width: 20px;
+		height: 20px;
+	}
+
+	.benefit-content {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+
+	.benefit-title {
+		font-family: 'Manrope', sans-serif;
+		font-size: 16px;
+		font-weight: 700;
+		color: var(--text);
+		margin: 0;
+	}
+
+	.benefit-text {
+		font-family: 'Manrope', sans-serif;
+		font-size: 15px;
+		font-weight: 300;
+		line-height: 1.65;
+		color: var(--muted);
+		margin: 0;
+	}
+
+	/* ── CTA ── */
+	.lesen-cta {
+		background: var(--bg);
+		padding: 5rem 0 6rem;
+		text-align: center;
+	}
+
+	.lesen-cta-inner {
+		max-width: 600px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+
+	.lesen-cta-title {
+		font-family: 'Manrope', sans-serif;
+		font-size: 28px;
+		font-weight: 700;
+		color: var(--text);
+		margin: 0 0 1rem;
+		letter-spacing: -0.02em;
+	}
+
+	.lesen-cta-text {
+		font-family: 'Manrope', sans-serif;
+		font-size: 16px;
+		font-weight: 300;
+		line-height: 1.7;
+		color: var(--muted);
+		margin: 0 0 2rem;
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.85rem 2rem;
+		font-family: 'Manrope', sans-serif;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		text-decoration: none;
+		cursor: pointer;
+		transition: background-color 0.2s ease;
+	}
+
+	.btn-primary {
+		background: var(--emerald);
+		color: var(--bg);
+		border: none;
+	}
+
+	.btn-primary:hover {
+		background: #0f2219;
+	}
+
+	/* ── RESPONSIVE ── */
+	@media (max-width: 960px) {
+		.lesen-hero {
+			padding: 7rem 2rem 4rem;
+		}
+
+		.lesen-hero-inner {
+			gap: 3rem;
+		}
+
+		.lesen-section-inner {
+			padding: 0 2rem;
+		}
+
+		.benefit-grid {
+			gap: 2rem 2.5rem;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.lesen-hero {
+			padding: 6rem 1.5rem 3rem;
+			min-height: auto;
+		}
+
+		.lesen-hero-inner {
+			grid-template-columns: 1fr;
+			gap: 2.5rem;
+		}
+
+		.lesen-hero-content {
+			order: 2;
+		}
+
+		.lesen-hero-image {
+			order: 1;
+			height: 380px;
+		}
+
+		.lesen-hero-title {
+			font-size: 42px;
+		}
+
+		.lesen-hero-shape {
+			width: 280px;
+			height: 260px;
+		}
+
+		.lesen-hero-photo {
+			width: 260px;
+			height: 360px;
+		}
+
+		.lesen-section {
+			padding: 3.5rem 0;
+		}
+
+		.lesen-section-inner {
+			padding: 0 1.5rem;
+		}
+
+		.benefit-grid {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+
+		.lesen-wusstest {
+			padding: 3rem 0;
+		}
+
+		.wusstest-text {
+			font-size: 16px;
+		}
+
+		.wusstest-text strong {
+			font-size: 18px;
+		}
+
+		.lesen-cta {
+			padding: 3.5rem 0 4rem;
+		}
+	}
+</style>

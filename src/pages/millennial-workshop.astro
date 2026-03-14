@@ -1,15 +1,681 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const lektionen = [
+	{
+		id: '01',
+		title: 'Mit 30 ist das Leben nicht vorbei',
+		text: 'Mit dem 30. Geburtstag schleichen sich gerne auch Zweifel und Zukunftsängste ein. Was, wenn ich meine Erwartungen ans Leben gar nicht erfüllen kann? Viele haben Sorge, dass die schönste Zeit des Lebens nun vorbei ist. Doch das kann man auch anders sehen: Mit etwas Glück bekommen wir noch einmal doppelt so viele Jahre voller Möglichkeiten geschenkt. Ist das nicht die viel schönere Sicht auf den 30. Geburtstag?',
+		tipsLabel: 'Schnelle Tipps gegen den 30er Blues:',
+		tips: [
+			{ title: 'Ziele definieren', text: 'Reflektiere und setze dir aufregende Ziele für deine Dreißiger.' },
+			{ title: 'Jeder geht sein Tempo', text: 'Fokussiere dich einzig und allein auf dich und auf deinen Weg.' },
+			{ title: 'Du bist nicht allein', text: 'Recherchiere nach Promis, die erst nach 30 erfolgreich geworden sind.' },
+		],
+	},
+	{
+		id: '02',
+		title: 'Nichts geht ohne Ausprobieren',
+		text: 'Alles im Leben haben wir irgendwann einmal zum ersten Mal gemacht. Jedes Hobby, jede Leidenschaft und jeden Beruf. Erst durch das Ausprobieren erfahren wir, ob uns eine Tätigkeit wirklich gefällt und ob wir dafür mehr Zeit und Energie aufwenden wollen. In der Persönlichkeitsentwicklung gilt das Ausprobieren daher als ein wichtiger Schlüssel zum Erfolg.',
+		tipsLabel: 'Schnelle Tipps zum Ausprobieren:',
+		tips: [
+			{ title: 'Das letzte Mal', text: 'Wann hast du das letzte Mal etwas zum ersten Mal ausprobiert?' },
+			{ title: 'Die Konsequenzen', text: 'Was hindert dich daran, ein neues Hobby oder einen neuen Job auszuprobieren?' },
+			{ title: 'Die Aussicht', text: 'Wie sähe dein Alltag aus, wenn du eine erfüllende Tätigkeit gefunden hättest?' },
+		],
+	},
+	{
+		id: '03',
+		title: 'Aktion kommt vor Motivation',
+		text: 'Wer auf den perfekten Moment wartet, wartet für immer – so steht es in vielen Kalendersprüchen. Oftmals entwickeln wir die Motivation für eine Aufgabe aber tatsächlich erst, wenn wir die Prokrastination besiegen und stattdessen direkt in die Aktion starten. Mit zunehmender Routine kommen dann auch die Fortschritte.',
+		tipsLabel: 'Schnelle Tipps gegen Prokrastination:',
+		tips: [
+			{ title: 'Kleine Schritte', text: 'Starte mit 1 km und steigere dich, statt direkt den Marathon laufen zu wollen.' },
+			{ title: 'Routinen etablieren', text: 'Plane feste Zeiten für die Aufgaben, die du erledigen möchtest (z.B. Dienstag ist Sporttag).' },
+			{ title: 'Belohnungen setzen', text: 'Belohne dich nach abgeschlossenen Aufgaben, um deine Motivation zu steigern.' },
+		],
+	},
+	{
+		id: '04',
+		title: 'Wir verlieren den Blick für den Moment',
+		text: 'Viele Momente erleben wir heute nur noch abwesend oder durch die Linse unseres Smartphones. Wir verpassen dadurch immer mehr Momente des Glücks, der Reflexion und des echten Zusammenseins. Der leuchtende Handybildschirm hat eine größere Anziehung als das Bedürfnis, einen schönen Moment mit all unseren Sinnen zu erleben.',
+		tipsLabel: 'Schnelle Tipps für mehr Präsenz:',
+		tips: [
+			{ title: 'Achtsamkeit', text: 'Gehe ohne Musik oder andere Ablenkungen spazieren und nimm deine Umwelt wahr.' },
+			{ title: 'Digital Detox', text: 'Lasse das Handy auch mal in der Tasche: Auf Konzerten, in der Bahn oder in Gesellschaft.' },
+			{ title: 'Analoge Erinnerung', text: 'Schaffe dir einen Ort, an dem du schöne Momente sammelst (z.B. ein Journal).' },
+		],
+	},
+	{
+		id: '05',
+		title: 'Selbstverwirklichung ist ein Privileg',
+		text: 'In unserer westlichen Welt stehen viele Menschen ganz oben in der Bedürfnispyramide. Viele von uns haben die Freiheit und die Sicherheit, ihrer eigenen Leidenschaft nachzugehen und sich selbst zu verwirklichen. Dabei sollten wir nicht vergessen, dass viele Menschen auf der Welt sehr weit von diesem Privileg entfernt sind.',
+		tipsLabel: 'Schnelle Tipps für mehr Dankbarkeit:',
+		tips: [
+			{ title: 'Dankbar sein', text: 'Erinnere dich regelmäßig daran, wie gut du es in vielen Dingen hast.' },
+			{ title: 'Im Austausch sein', text: 'Vernetze dich mit anderen und lerne ihre Lebensrealitäten kennen.' },
+			{ title: 'Ehrenamt ausüben', text: 'Erweitere deinen Horizont und unterstütze Hilfsbedürftige in deiner Nähe.' },
+		],
+	},
+	{
+		id: '06',
+		title: 'FOMO erschwert das Dating',
+		text: 'Die Fear Of Missing Out führt zu einer permanenten Unruhe und lässt Zweifel an eigenen Entscheidungen aufkommen. Das gilt insbesondere auch fürs Dating. Durch Apps und Social Media lauert überall die Angst, eine bessere Wahl zu verpassen. Statt in Vertrauen und echtem Interesse enden viele Bekanntschaften in Oberflächlichkeit.',
+		tipsLabel: 'Schnelle Tipps gegen FOMO im Dating:',
+		tips: [
+			{ title: 'Selbstreflexion', text: 'Was suchst du wirklich beim Dating? Kläre Prioritäten, um dich darauf zu konzentrieren.' },
+			{ title: 'App-Konsum begrenzen', text: 'Übermäßiges Scrollen kann FOMO verstärken. Konzentriere dich auf echte Begegnungen.' },
+			{ title: 'Qualität statt Quantität', text: 'Investiere Zeit und Energie in Begegnungen, die dir wirklich bedeutsam sind.' },
+		],
+	},
+	{
+		id: '07',
+		title: 'Quarterlife-Crisis ist keine Seltenheit',
+		text: 'Der Druck, beruflich erfolgreich zu sein, persönliche Beziehungen aufzubauen und sich selbst zu finden, kann in einer Welt voller Möglichkeiten zu Überforderung und Identitätskrisen führen. Soziale Medien verstärken dabei oft das Gefühl der eigenen Unzulänglichkeit. Aktuellen Studien zufolge durchläuft jeder zweite Mensch im Alter von 20 bis 30 eine Form der Quarterlife-Crisis.',
+		tipsLabel: 'Schnelle Tipps aus der Quarterlife-Crisis:',
+		tips: [
+			{ title: 'Gespräche suchen', text: 'Suche nach Menschen, denen es ähnlich geht, und sprich mit ihnen über deine Sorgen.' },
+			{ title: 'Social Media Pause', text: 'Trenne dich von der Scheinwelt und fokussiere dich auf das reale Leben.' },
+			{ title: 'Hier und Jetzt', text: 'Sei dankbar für das, was du bereits hast, statt immer mehr zu wollen.' },
+		],
+	},
+	{
+		id: '08',
+		title: 'Richtig vergleichen ist wichtig',
+		text: 'Vergleiche sind Fluch und Segen zugleich. Sie können uns inspirieren und zu Höchstleistungen motivieren – gleichzeitig sind sie der Nährboden für Selbstzweifel. Von uns kennen wir alle Schwächen und Hürden. Von anderen sehen wir meist nur das Ergebnis, nicht aber den steinigen Weg zum Erfolg. Achte deshalb darauf, dein Inneres nicht mit dem Äußeren von anderen zu vergleichen.',
+		tipsLabel: 'Schnelle Tipps für gesunde Vergleiche:',
+		tips: [
+			{ title: 'Transparente Vergleiche', text: 'Finde drei Punkte, in denen du besser bist als die Person, mit der du dich vergleichst.' },
+			{ title: 'Vorbilder wählen', text: 'Suche inspirierende Vorbilder, keine unerreichbaren Ideale.' },
+			{ title: 'Eigene Fortschritte messen', text: 'Vergleiche dich mit deinem früheren Ich, nicht mit anderen.' },
+		],
+	},
+	{
+		id: '09',
+		title: 'Social Media klaut uns das Leben',
+		text: 'Wusstest du, dass zwei Stunden Social-Media-Konsum täglich auf das Jahr gerechnet über 30 Tage ergeben? Man verbringt so gesehen einen von zwölf Monaten im Jahr damit, auf sein Handy zu schauen. Kein Wunder also, dass wir oftmals keine Zeit mehr für die wichtigen Dinge im Leben haben. Vielleicht ist es an der Zeit, den eigenen Social Media Konsum zu regulieren.',
+		tipsLabel: 'Schnelle Tipps für weniger Bildschirmzeit:',
+		tips: [
+			{ title: 'App-Timer einstellen', text: 'Timer durchbrechen den „Flow" beim Scrollen und erinnern ans Aufhören.' },
+			{ title: 'Personen entfolgen', text: 'Ein kleineres Netzwerk bedeutet weniger Beiträge (z.B. Storys).' },
+			{ title: 'Internet ausschalten', text: 'Erhöht die Konzentration in Phasen des produktiven Outputs.' },
+		],
+	},
+	{
+		id: '10',
+		title: 'Mentale Gesundheit braucht Training',
+		text: 'Während wir körperliche Beschwerden wie Fieber meist sofort ernst nehmen, werden mentale Probleme schnell übersehen. Der Umgang mit psychischen Leiden kann dafür umso komplizierter sein. Einmal kurz durchatmen reicht hier nur selten aus. Denn unsere Psyche ist wie ein Muskel, der regelmäßiges Training benötigt. Selbstfürsorge hilft dabei, aktiv die eigene mentale Gesundheit zu stärken.',
+		tipsLabel: 'Schnelle Tipps für deine mentale Gesundheit:',
+		tips: [
+			{ title: 'Sport', text: 'Integriere eine Aktivität, die dir Spaß macht (z.B. Tanzen oder Laufen) in deinen Alltag.' },
+			{ title: 'Meditation', text: 'Teste für fünf oder zehn Minuten eine geführte Meditation auf YouTube.' },
+			{ title: 'Journal', text: 'Sortiere deine Gedanken und Emotionen in einem Notizbuch.' },
+		],
+	},
+];
 ---
 
 <Layout title="Millennial Workshop">
-	<div class="container">
-		<section class="page-header">
-		<h1>Millennial Workshop</h1>
-		<p>
-			Platzhalter für dein Workshop-Angebot – Formate, Inhalte und wie man teilnehmen kann.
-		</p>
+	<!-- 1. HERO -->
+	<section class="mw-hero full-width">
+		<div class="mw-hero-inner">
+			<span class="mw-eyebrow mw-eyebrow--gold">Der Millennial Workshop</span>
+			<h1 class="mw-hero-title">10 Inspirationen für deinen Alltag</h1>
+			<p class="mw-hero-sub">
+				Obwohl die meisten Millennials in Deutschland privilegiert aufgewachsen sind, scheint es, als sei ein Großteil der Generation noch immer auf der Suche nach dem großen Glück. Der Millennial Workshop ist ein fiktiver Workshop aus meiner Romanreihe. Die wichtigsten Lektionen findest du hier zum Nachlesen.
+			</p>
+			<div class="mw-video-placeholder">Video folgt</div>
+		</div>
 	</section>
-	</div>
+
+	<!-- 2. LEKTIONEN -->
+	<section class="mw-lektionen full-width">
+		<div class="mw-lektionen-inner">
+			<div class="mw-tabs" role="tablist" aria-label="Lektionen">
+				{lektionen.map((lek, i) => (
+					<button
+						type="button"
+						class={`mw-tab panel-tab ${i === 0 ? 'mw-tab--active' : ''}`}
+						role="tab"
+						aria-selected={i === 0}
+						aria-controls={`panel-${lek.id}`}
+						id={`tab-${lek.id}`}
+						data-index={i}
+					>
+						{lek.id}
+					</button>
+				))}
+			</div>
+
+			<div class="mw-panels-wrap">
+				{lektionen.map((lek, i) => (
+					<div
+						id={`panel-${lek.id}`}
+						class={`mw-panel ${i === 0 ? 'mw-panel--active' : ''}`}
+						role="tabpanel"
+						aria-labelledby={`tab-${lek.id}`}
+						hidden={i !== 0}
+						data-index={i}
+					>
+						<div class="mw-panel-top">
+							<div class="mw-img-placeholder">Bild kommt noch</div>
+							<div class="mw-panel-text">
+								<span class="mw-eyebrow mw-eyebrow--gold">Lektion {lek.id}</span>
+								<h3 class="mw-panel-title">{lek.title}</h3>
+								<p class="mw-panel-para">{lek.text}</p>
+							</div>
+						</div>
+						<div class="mw-tips">
+							<span class="mw-tips-label">{lek.tipsLabel}</span>
+							<div class="mw-tips-grid">
+								{lek.tips.map((tip) => (
+									<div class="mw-tip">
+										<span class="mw-tip-title">
+											<span class="tip-dot" aria-hidden="true"></span>
+											{tip.title}
+										</span>
+										<p class="mw-tip-text">{tip.text}</p>
+									</div>
+								))}
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+
+			<nav class="mw-nav-bar" aria-label="Lektion wechseln">
+				<button type="button" class="mw-nav-prev" data-dir="prev" aria-label="Vorherige Lektion">
+					<span class="mw-nav-arrow" aria-hidden="true">←</span>
+					<span class="mw-nav-num">01</span>
+				</button>
+				<div class="mw-nav-spacer"></div>
+				<button type="button" class="mw-nav-next" data-dir="next" aria-label="Nächste Lektion">
+					<span class="mw-nav-num">02</span>
+					<span class="mw-nav-arrow" aria-hidden="true">→</span>
+				</button>
+			</nav>
+		</div>
+	</section>
+
+	<!-- 3. CTA -->
+	<section class="mw-cta full-width">
+		<div class="mw-cta-inner">
+			<span class="mw-eyebrow mw-eyebrow--gold">Die Bücher zum Workshop</span>
+			<h2 class="mw-cta-title">Entdecke die Romanreihe</h2>
+			<p class="mw-cta-sub">
+				Die Lektionen des Millennial Workshops stammen aus meiner Romanreihe. Tauche ein und erlebe die Geschichten, die dahinterstecken.
+			</p>
+			<a href="/buecher" class="mw-cta-btn">Zu den Büchern →</a>
+		</div>
+	</section>
 </Layout>
 
+<style>
+	/* Full-width breakout (same pattern as ueber-mich) */
+	.full-width {
+		width: 100vw;
+		margin-left: calc(50% - 50vw);
+		box-sizing: border-box;
+	}
+
+	/* ── HERO ── */
+	.mw-hero {
+		background-color: var(--emerald);
+		color: var(--bg);
+		padding: 7rem 5rem;
+	}
+
+	.mw-hero-inner {
+		max-width: var(--max-width, 1300px);
+		margin-inline: auto;
+	}
+
+	.mw-eyebrow {
+		display: block;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.28em;
+	}
+
+	.mw-eyebrow--gold {
+		color: var(--gold);
+	}
+
+	.mw-hero-title {
+		font-weight: 700;
+		font-size: 72px;
+		line-height: 1.05;
+		letter-spacing: -0.02em;
+		margin: 0 0 1.5rem;
+		color: var(--bg);
+	}
+
+	.mw-hero-sub {
+		font-weight: 300;
+		font-size: 18px;
+		line-height: 1.85;
+		max-width: 580px;
+		margin: 0 0 3rem;
+		color: rgba(245, 240, 232, 0.85);
+	}
+
+	.mw-video-placeholder {
+		background: rgba(255, 255, 255, 0.05);
+		height: 500px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--muted);
+		font-size: 16px;
+		font-weight: 300;
+	}
+
+	/* ── LEKTIONEN ── */
+	.mw-lektionen {
+		background-color: var(--bg);
+	}
+
+	.mw-lektionen-inner {
+		max-width: 1300px;
+		margin-inline: auto;
+		padding: 7rem 5rem;
+	}
+
+	.mw-tabs {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0;
+		border-bottom: 1px solid rgba(28, 28, 28, 0.12);
+		margin-bottom: 0;
+	}
+
+	.mw-tab {
+		font-family: inherit;
+		font-size: 11px;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		color: var(--muted);
+		background: none;
+		border: none;
+		border-bottom: 2px solid transparent;
+		padding: 1rem 1.25rem;
+		cursor: pointer;
+		margin-bottom: -1px;
+	}
+
+	.mw-tab:hover {
+		color: var(--text);
+	}
+
+	.mw-tab--active {
+		color: var(--emerald);
+		border-bottom-color: var(--gold);
+	}
+
+	/* Prev/Next bar – mobile only */
+	.mw-nav-bar {
+		display: none;
+	}
+
+	.mw-panel {
+		display: none;
+		padding-top: 2.5rem;
+	}
+
+	.mw-panel--active {
+		display: block;
+	}
+
+	.mw-panel-top {
+		display: grid;
+		grid-template-columns: 40fr 60fr;
+		gap: 0;
+		margin-bottom: 2.5rem;
+		min-height: 320px;
+	}
+
+	.mw-img-placeholder {
+		aspect-ratio: 16 / 9;
+		background: #c8c2b6;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 14px;
+		font-weight: 300;
+		color: var(--muted);
+	}
+
+	.mw-panel-text {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		padding: 2.5rem;
+		padding-top: 0.5rem;
+	}
+
+	.mw-panel-text .mw-eyebrow {
+		font-size: 11px;
+		font-weight: 700;
+		letter-spacing: 0.28em;
+		text-transform: uppercase;
+		color: var(--gold);
+		margin-bottom: 0.75rem;
+	}
+
+	.mw-panel-title {
+		font-size: 28px;
+		font-weight: 700;
+		line-height: 1.1;
+		margin: 0 0 1rem;
+		color: var(--text);
+	}
+
+	.mw-panel-para {
+		font-size: 16px;
+		font-weight: 300;
+		line-height: 1.85;
+		color: var(--text);
+		margin: 0;
+	}
+
+	.mw-tips-label {
+		display: block;
+		font-size: 16px;
+		font-weight: 700;
+		letter-spacing: 0.28em;
+		text-transform: uppercase;
+		color: var(--gold);
+		text-align: left;
+		margin-bottom: 1.25rem;
+	}
+
+	.mw-tips-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2rem;
+	}
+
+	.mw-tip {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.mw-tip-title {
+		font-size: 16px;
+		font-weight: 700;
+		color: var(--emerald);
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.tip-dot {
+		width: 7px;
+		height: 7px;
+		background: var(--gold);
+		transform: rotate(45deg);
+		display: inline-block;
+		flex-shrink: 0;
+		margin-right: 0.6rem;
+	}
+
+	.mw-tip-text {
+		font-size: 16px;
+		font-weight: 300;
+		line-height: 1.85;
+		color: var(--text);
+		margin: 0;
+	}
+
+	/* ── CTA ── */
+	.mw-cta {
+		background-color: var(--emerald);
+		color: var(--bg);
+		padding: 7rem 5rem;
+		text-align: center;
+	}
+
+	.mw-cta-inner {
+		max-width: 600px;
+		margin-inline: auto;
+	}
+
+	.mw-cta .mw-eyebrow {
+		margin-bottom: 1rem;
+	}
+
+	.mw-cta-title {
+		font-weight: 700;
+		font-size: 42px;
+		line-height: 1.2;
+		margin: 0 0 1rem;
+		color: var(--bg);
+	}
+
+	.mw-cta-sub {
+		font-weight: 300;
+		font-size: 16px;
+		line-height: 1.6;
+		max-width: 480px;
+		margin: 0 auto 2rem;
+		color: rgba(245, 240, 232, 0.85);
+	}
+
+	.mw-cta-btn {
+		display: inline-block;
+		background-color: var(--bg);
+		color: var(--emerald);
+		font-weight: 600;
+		font-size: 14px;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		padding: 1rem 2rem;
+		text-decoration: none;
+		border: none;
+		border-radius: 9999px;
+	}
+
+	.mw-cta-btn:hover {
+		opacity: 0.95;
+	}
+
+	/* Mobile */
+	@media (max-width: 768px) {
+		.mw-hero {
+			padding: 5rem 2rem;
+		}
+
+		.mw-hero-title {
+			font-size: clamp(2rem, 8vw, 42px);
+		}
+
+		.mw-lektionen-inner {
+			padding: 5rem 2rem;
+		}
+
+		.mw-tabs {
+			overflow-x: auto;
+			flex-wrap: nowrap;
+			-webkit-overflow-scrolling: touch;
+		}
+
+		.mw-tabs::-webkit-scrollbar {
+			display: none;
+		}
+
+		.mw-tabs {
+			scrollbar-width: none;
+		}
+
+		.mw-tab {
+			flex-shrink: 0;
+		}
+
+		.panel-tab {
+			padding: 0.75rem 0.6rem;
+			font-size: 11px;
+			font-weight: 600;
+			letter-spacing: 0.14em;
+		}
+
+		.mw-panel-top {
+			grid-template-columns: 1fr;
+		}
+
+		.mw-panel-text {
+			padding: 1.5rem 0;
+		}
+
+		.mw-tips-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.mw-nav-bar {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 100%;
+			padding: 1.5rem 0 0;
+			gap: 1rem;
+		}
+
+		.mw-nav-spacer {
+			flex: 1;
+			height: 1px;
+			background: rgba(28, 28, 28, 0.12);
+		}
+
+		.mw-nav-prev,
+		.mw-nav-next {
+			font-family: inherit;
+			font-size: 11px;
+			font-weight: 700;
+			text-transform: uppercase;
+			letter-spacing: 0.14em;
+			color: var(--muted);
+			background: none;
+			border: none;
+			padding: 0.5rem 0;
+			cursor: pointer;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.35rem;
+		}
+
+		.mw-nav-prev.mw-nav-hidden,
+		.mw-nav-next.mw-nav-hidden {
+			visibility: hidden;
+			pointer-events: none;
+		}
+
+		.mw-nav-arrow {
+			color: var(--gold);
+		}
+
+		.mw-cta {
+			padding: 5rem 2rem;
+		}
+
+		.mw-cta-title {
+			font-size: clamp(1.75rem, 5vw, 42px);
+		}
+	}
+
+	@media (min-width: 769px) {
+		.mw-nav-bar {
+			display: none !important;
+		}
+	}
+</style>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const tabs = document.querySelectorAll('.mw-tab');
+		const panels = document.querySelectorAll('.mw-panel');
+		const tabList = document.querySelector('.mw-tabs');
+		const panelContainer = document.querySelector('.mw-panels-wrap');
+		const navPrev = document.querySelector('.mw-nav-prev');
+		const navNext = document.querySelector('.mw-nav-next');
+		const navPrevNum = navPrev ? navPrev.querySelector('.mw-nav-num') : null;
+		const navNextNum = navNext ? navNext.querySelector('.mw-nav-num') : null;
+		const total = panels.length;
+		let currentIndex = 0;
+
+		function goToPanel(index) {
+			if (index < 0 || index >= total) return;
+			currentIndex = index;
+
+			tabs.forEach(function (t, i) {
+				t.classList.toggle('mw-tab--active', i === index);
+				t.setAttribute('aria-selected', i === index ? 'true' : 'false');
+			});
+			panels.forEach(function (p, i) {
+				p.classList.toggle('mw-panel--active', i === index);
+				p.hidden = i !== index;
+			});
+
+			if (tabList && tabs[index]) {
+				tabs[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+			}
+
+			if (navPrev && navNext && navPrevNum && navNextNum) {
+				if (index <= 0) {
+					navPrev.classList.add('mw-nav-hidden');
+				} else {
+					navPrev.classList.remove('mw-nav-hidden');
+					navPrevNum.textContent = tabs[index - 1].textContent.trim();
+				}
+				if (index >= total - 1) {
+					navNext.classList.add('mw-nav-hidden');
+				} else {
+					navNext.classList.remove('mw-nav-hidden');
+					navNextNum.textContent = tabs[index + 1].textContent.trim();
+				}
+			}
+		}
+
+		tabs.forEach(function (tab) {
+			tab.addEventListener('click', function () {
+				const index = tab.getAttribute('data-index');
+				if (index !== null) goToPanel(parseInt(index, 10));
+			});
+		});
+
+		if (navPrev) {
+			navPrev.addEventListener('click', function () {
+				goToPanel(currentIndex - 1);
+			});
+		}
+		if (navNext) {
+			navNext.addEventListener('click', function () {
+				goToPanel(currentIndex + 1);
+			});
+		}
+
+		if (panelContainer) {
+			let touchStartX = 0;
+			let touchStartY = 0;
+			panelContainer.addEventListener('touchstart', function (e) {
+				touchStartX = e.touches[0].clientX;
+				touchStartY = e.touches[0].clientY;
+			}, { passive: true });
+			panelContainer.addEventListener('touchend', function (e) {
+				var dx = e.changedTouches[0].clientX - touchStartX;
+				var dy = e.changedTouches[0].clientY - touchStartY;
+				if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+					if (dx < 0) {
+						goToPanel(currentIndex + 1);
+					} else {
+						goToPanel(currentIndex - 1);
+					}
+				}
+			}, { passive: true });
+		}
+
+		goToPanel(0);
+	});
+</script>

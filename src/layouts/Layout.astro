@@ -83,8 +83,8 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 							</li>
 							<li>
 								<a
-									href="/kontakt"
-									class={`nav-link ${isActive('/kontakt') ? 'nav-link--active' : ''}`}
+									href="/ueber-mich#kontakt"
+									class={`nav-link nav-link--cta ${isActive('/ueber-mich') ? 'nav-link--active' : ''}`}
 									>KONTAKT</a
 								>
 							</li>
@@ -184,6 +184,7 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 
 	html {
 		overflow-x: hidden;
+		scroll-behavior: smooth;
 	}
 
 	body {
@@ -318,6 +319,7 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 	.nav-links {
 		list-style: none;
 		display: flex;
+		align-items: center;
 		gap: var(--space-3);
 		margin: 0;
 		padding: 0;
@@ -331,6 +333,27 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 		color: var(--muted);
 		padding-block: 0.25rem;
 		white-space: nowrap;
+	}
+
+	.nav-link--cta {
+		background: transparent;
+		color: #1c1c1c;
+		border: 1px solid rgba(28, 28, 28, 0.3);
+		padding: 0.5rem 1.4rem;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		text-decoration: none;
+		border-radius: 9999px;
+		display: inline-block;
+		vertical-align: middle;
+		margin-left: 1.5rem;
+	}
+
+	.nav-link--cta:hover {
+		background: rgba(28, 28, 28, 0.05);
+		color: #1c1c1c;
 	}
 
 	.nav-link--active {

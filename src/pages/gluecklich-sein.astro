@@ -1,0 +1,794 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const characterImages = {
+	malte: '/images/gluecklich-sein-malte.png',
+	lea: '/images/gluecklich-sein-lea.png',
+	elias: '/images/gluecklich-sein-elias.png',
+	sofia: '/images/gluecklich-sein-sofia.png',
+};
+
+const characters = [
+	{
+		id: 'sofia',
+		name: 'Sofia',
+		role: 'Liebt die Karriere',
+		description:
+			'Sofia ist die jüngste Senior Sales Managerin bei einem führenden eCommerce-Anbieter. Dafür hat sie in den vergangenen Jahren hart gearbeitet – und auf vieles verzichtet.',
+	},
+	{
+		id: 'malte',
+		name: 'Malte',
+		role: 'Leitet den Workshop',
+		description:
+			'Malte liebt es, andere dabei zu unterstützen, glücklich und unbeschwerter zu werden. Aufgrund seiner Depression gelingt ihm das allerdings im eigenen Alltag immer seltener.',
+	},
+	{
+		id: 'lea',
+		name: 'Lea',
+		role: 'Sucht die große Liebe',
+		description:
+			'Lea möchte vor ihrem 30. Geburtstag unbedingt einen Partner finden. Bis jetzt stolpert sie von einem Online-Date ins nächste und verliert dabei so langsam ihren Optimismus.',
+	},
+	{
+		id: 'elias',
+		name: 'Elias',
+		role: 'Sucht einen erfüllenden Job',
+		description:
+			'Elias will endlich wieder Spaß am Arbeiten haben, weiß aber nicht, wonach er suchen soll. Aus Angst vor Veränderung verharrt er seit Jahren in seinem ungeliebten Bürojob.',
+	},
+];
+---
+
+<Layout title="Sie wollten doch nur glücklich sein">
+	<!-- 1. HERO (Off-White) -->
+	<section class="g-hero">
+		<div class="g-hero-inner">
+			<div class="g-hero-cover-wrap">
+				<img
+					src="/images/sie-wollten-doch-nur-gluecklich-sein.jpg"
+					alt="Buchcover: Sie wollten doch nur glücklich sein"
+					class="g-hero-cover"
+				/>
+			</div>
+			<div class="g-hero-content">
+				<h1 class="g-eyebrow">SIE WOLLTEN DOCH NUR GLÜCKLICH SEIN</h1>
+				<p class="g-hero-title">Was braucht es, um glücklich zu sein?</p>
+				<p class="g-hero-subline">
+					Die Geschichte über Millennials auf der Suche und ein verheerendes Hochwasser
+				</p>
+				<a href="#" class="btn btn-primary">Jetzt bestellen</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- 2. KLAPPENTEXT (Off-White) -->
+	<section class="g-klappentext">
+		<div class="g-klappentext-inner">
+			<span class="g-eyebrow">MILLENNIALS UNTER SICH</span>
+			<p class="g-body">
+				Elias sehnt sich nach einem erfüllenden Job, Lea möchte vor ihrem 30. Geburtstag unbedingt einen Partner finden, Malte belasten seine Depressionen in der Ehe und Sofia steht kurz vor der nächsten Beförderung.
+			</p>
+			<p class="g-body">
+				In einem Workshop für Millennials lernen sich die vier kennen. Gemeinsam sprechen sie über Herausforderungen ihrer Generation und den Umgang mit persönlichen Sinnkrisen.
+			</p>
+			<p class="g-body">
+				Der Kurs wird urplötzlich zur Nebensache, als das Rheinland im Hochwasser versinkt. Eine ganze Region steht unter Schock. Die Aufräumarbeiten in den betroffenen Gebieten entwickeln sich zu einer emotionalen Reise, die das Leben von Elias, Lea, Malte und Sofia für immer verändern wird.
+			</p>
+		</div>
+	</section>
+
+	<!-- 3. WORKSHOP (Emerald, full-width) -->
+	<section class="g-workshop full-bleed">
+		<div class="g-workshop-inner">
+			<h2 class="g-workshop-eyebrow">DER MILLENNIAL WORKSHOP</h2>
+			<p class="g-workshop-subtitle">Klicke auf einen Teilnehmer, um mehr zu erfahren</p>
+			<div class="g-characters">
+				{characters.map((c) => (
+					<button
+						type="button"
+						class="g-char-card"
+						data-char={c.id}
+						aria-pressed={c.id === 'malte'}
+						aria-label={`${c.name} – ${c.role}`}
+					>
+						<div class="g-char-card-visual">
+							<div class="g-char-card-center">
+								<div class="g-char-card-bg" aria-hidden="true"></div>
+								<img
+									src={characterImages[c.id]}
+									alt={c.name}
+									class="g-char-card-img"
+								/>
+							</div>
+						</div>
+						<span class="g-char-name">{c.name}</span>
+					</button>
+				))}
+			</div>
+			<div class="g-char-info">
+				<span class="g-eyebrow g-char-role-label">Leitet den Workshop</span>
+				<p class="g-char-desc">
+					Malte liebt es, andere dabei zu unterstützen, glücklich und unbeschwerter zu werden. Aufgrund seiner Depression gelingt ihm das allerdings im eigenen Alltag immer seltener.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- 4. VIDEO (Off-White) -->
+	<section class="g-video">
+		<div class="g-video-inner">
+			<h2 class="g-section-title">Buchtrailer</h2>
+			<div class="g-video-placeholder" aria-hidden="true">
+				<span class="g-play-icon" aria-hidden="true">▶</span>
+			</div>
+		</div>
+	</section>
+
+	<!-- 5. NETFLIX (Off-White) -->
+	<section class="g-netflix">
+		<div class="g-netflix-inner">
+			<h2 class="g-section-title g-section-title--center">Wie Netflix – Nur als Buch</h2>
+			<div class="g-netflix-grid">
+				<div class="g-netflix-col">
+					<h3 class="g-netflix-title">Kurze Kapitel</h3>
+					<p class="g-netflix-text">Schneller Einstieg und einfaches Lesen für geübte und ungeübte Leser*innen</p>
+				</div>
+				<div class="g-netflix-col">
+					<h3 class="g-netflix-title">Vier Perspektiven</h3>
+					<p class="g-netflix-text">Handlung, Gefühle und Emotionen der vier Hauptfiguren hautnah miterleben</p>
+				</div>
+				<div class="g-netflix-col">
+					<h3 class="g-netflix-title">Abwechslung</h3>
+					<p class="g-netflix-text">Perspektivwechsel garantiert Spannung und packende Unterhaltung</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- 6. CTA (Off-White) -->
+	<section class="g-cta">
+		<div class="g-cta-inner">
+			<div class="g-cta-cover-wrap">
+				<img
+					src="/images/sie-wollten-doch-nur-gluecklich-sein.png"
+					alt="Buchcover: Sie wollten doch nur glücklich sein"
+					class="g-cta-cover"
+				/>
+			</div>
+			<a href="#" class="btn btn-primary g-cta-btn">Jetzt bestellen</a>
+		</div>
+	</section>
+</Layout>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const container = document.querySelector('.g-characters');
+		const workshop = document.querySelector('.g-workshop');
+		const roleLabel = workshop?.querySelector('.g-char-role-label') ?? document.querySelector('.g-char-role-label');
+		const descEl = workshop?.querySelector('.g-char-desc') ?? document.querySelector('.g-char-desc');
+
+		if (!container) return;
+
+		let cards = Array.from(container.querySelectorAll('.g-char-card'));
+
+		const data = {
+			malte: {
+				role: 'Leitet den Workshop',
+				description:
+					'Malte liebt es, andere dabei zu unterstützen, glücklich und unbeschwerter zu werden. Aufgrund seiner Depression gelingt ihm das allerdings im eigenen Alltag immer seltener.',
+			},
+			lea: {
+				role: 'Sucht die große Liebe',
+				description:
+					'Lea möchte vor ihrem 30. Geburtstag unbedingt einen Partner finden. Bis jetzt stolpert sie von einem Online-Date ins nächste und verliert dabei so langsam ihren Optimismus.',
+			},
+			elias: {
+				role: 'Sucht einen erfüllenden Job',
+				description:
+					'Elias will endlich wieder Spaß am Arbeiten haben, weiß aber nicht, wonach er suchen soll. Aus Angst vor Veränderung verharrt er seit Jahren in seinem ungeliebten Bürojob.',
+			},
+			sofia: {
+				role: 'Liebt die Karriere',
+				description:
+					'Sofia ist die jüngste Senior Sales Managerin bei einem führenden eCommerce-Anbieter. Dafür hat sie in den vergangenen Jahren hart gearbeitet – und auf vieles verzichtet.',
+			},
+		};
+
+		function selectChar(id) {
+			console.log('selectChar called with:', id);
+
+			const charData = data[id];
+			console.log('Found character data:', charData);
+
+			const card = container.querySelector(`[data-char="${id}"]`);
+			console.log('Found card element:', card);
+
+			const infoSection = document.querySelector('.g-char-info');
+			console.log('Info section:', infoSection, 'roleLabel:', roleLabel, 'descEl:', descEl);
+
+			cards.forEach((btn) => {
+				const isSelected = btn.dataset.char === id;
+				btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+				btn.classList.toggle('is-active', isSelected);
+				btn.classList.toggle('is-centered', isSelected);
+			});
+
+			if (charData) {
+				if (roleLabel) roleLabel.textContent = charData.role;
+				if (descEl) descEl.textContent = charData.description;
+			}
+		}
+
+		const CENTERED_CARD_WIDTH_MOBILE = 300;
+
+		function centerCard(card, behavior = 'smooth') {
+			const containerWidth = container.offsetWidth;
+			const cardLeft = card.offsetLeft;
+			const isMobile = window.innerWidth <= 768;
+			const useExpandedWidth = isMobile && card.classList.contains('is-centered');
+			const cardWidth = useExpandedWidth ? CENTERED_CARD_WIDTH_MOBILE : card.offsetWidth;
+			// Center card in viewport: scrollLeft = card.offsetLeft - (container.offsetWidth / 2) + (card.offsetWidth / 2)
+			const scrollLeft = cardLeft - containerWidth / 2 + cardWidth / 2;
+			if (behavior === 'smooth') {
+				container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+			} else {
+				container.scrollLeft = scrollLeft;
+			}
+		}
+
+		function updateCenteredCard() {
+			const containerRect = container.getBoundingClientRect();
+			const containerCenter = containerRect.left + containerRect.width / 2;
+
+			let closestCard = null;
+			let closestDistance = Infinity;
+
+			cards.forEach((card) => {
+				const cardRect = card.getBoundingClientRect();
+				const cardCenter = cardRect.left + cardRect.width / 2;
+				const distance = Math.abs(containerCenter - cardCenter);
+
+				if (distance < closestDistance) {
+					closestDistance = distance;
+					closestCard = card;
+				}
+			});
+
+			if (closestCard) {
+				const id = closestCard.dataset.char;
+				if (id) {
+					selectChar(id);
+					if (window.innerWidth <= 768) {
+						requestAnimationFrame(() => centerCard(closestCard, 'auto'));
+					}
+				}
+			}
+		}
+
+		let ignoreScrollUntil = 0;
+		function updateCenteredCardWithGuard() {
+			if (Date.now() < ignoreScrollUntil) return;
+			updateCenteredCard();
+		}
+
+		container.addEventListener('scroll', () => {
+			window.requestAnimationFrame(updateCenteredCardWithGuard);
+		});
+
+		cards.forEach((card) => {
+			card.addEventListener('click', () => {
+				const id = card.getAttribute('data-char') || card.dataset.char;
+				console.log('Clicked:', id);
+				if (id) {
+					ignoreScrollUntil = Date.now() + 400;
+					selectChar(id);
+					if (window.innerWidth <= 768) {
+						centerCard(card, 'auto');
+					}
+				}
+			});
+		});
+
+		// Start with Malte; on mobile center him in the viewport
+		selectChar('malte');
+		if (window.innerWidth <= 768) {
+			const malteCard = cards.find((c) => c.dataset.char === 'malte');
+			if (malteCard) centerCard(malteCard, 'auto');
+		}
+	});
+</script>
+
+<style>
+	/* Shared */
+	.g-eyebrow {
+		display: block;
+		font-family: 'Manrope', sans-serif;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.28em;
+		color: var(--gold);
+		margin: 0 0 0.75rem 0;
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: auto;
+		padding: 0.85rem 2rem;
+		font-family: 'Manrope', sans-serif;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		border-radius: 9999px;
+		cursor: pointer;
+		transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+		text-decoration: none;
+		white-space: nowrap;
+		box-sizing: border-box;
+		border: none;
+	}
+
+	.btn-primary {
+		background-color: var(--emerald);
+		color: var(--bg);
+	}
+
+	.btn-primary:hover {
+		background-color: #243d35;
+	}
+
+	/* 1. HERO */
+	.g-hero {
+		background-color: var(--bg);
+		padding: 5rem 0;
+	}
+
+	.g-hero-inner {
+		max-width: 1100px;
+		margin-inline: auto;
+		display: grid;
+		grid-template-columns: 1fr 1.2fr;
+		gap: 3rem;
+		align-items: center;
+	}
+
+	.g-hero-cover-wrap {
+		max-width: 360px;
+		overflow: hidden;
+	}
+
+	.g-hero-cover {
+		width: 100%;
+		max-width: 360px;
+		aspect-ratio: 2 / 3;
+		object-fit: cover;
+		display: block;
+	}
+
+	.g-hero-content {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.g-hero-title {
+		font-family: 'Manrope', sans-serif;
+		font-size: 42px;
+		font-weight: 700;
+		line-height: 1.1;
+		letter-spacing: -0.02em;
+		color: var(--text);
+		margin: 0 0 1rem;
+	}
+
+	.g-hero-subline {
+		font-family: 'Manrope', sans-serif;
+		font-size: 16px;
+		font-weight: 300;
+		line-height: 1.6;
+		color: var(--text);
+		margin: 0 0 2rem;
+	}
+
+	@media (max-width: 768px) {
+		.g-hero-inner {
+			grid-template-columns: 1fr;
+			text-align: center;
+			align-items: center;
+		}
+		.g-hero-cover-wrap {
+			max-width: 220px;
+			margin-inline: auto;
+		}
+		.g-hero-content {
+			align-items: center;
+		}
+	}
+
+	/* 2. KLAPPENTEXT */
+	.g-klappentext {
+		background-color: var(--bg);
+		padding: 5rem 0;
+	}
+
+	.g-klappentext-inner {
+		max-width: 680px;
+		margin-inline: auto;
+	}
+
+	.g-body {
+		font-family: 'Manrope', sans-serif;
+		font-size: 16px;
+		font-weight: 300;
+		line-height: 1.85;
+		color: var(--text);
+		margin: 0 0 1.25rem;
+	}
+
+	.g-body:last-of-type {
+		margin-bottom: 0;
+	}
+
+	/* 3. WORKSHOP – off-white section; only character shapes + info box are emerald */
+	.g-workshop.full-bleed {
+		width: 100vw;
+		margin-left: calc(50% - 50vw);
+		box-sizing: border-box;
+		background-color: var(--bg);
+		color: var(--text);
+		padding: 5rem var(--page-padding-desktop);
+	}
+
+	.g-workshop-inner {
+		max-width: 1000px;
+		margin-inline: auto;
+	}
+
+	.g-workshop-eyebrow {
+		font-family: 'Manrope', sans-serif;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.28em;
+		color: var(--gold);
+		text-align: center;
+		margin: 0 0 0.5rem;
+	}
+
+	.g-workshop-subtitle {
+		font-family: 'Manrope', sans-serif;
+		font-size: 14px;
+		font-weight: 300;
+		color: var(--muted);
+		text-align: center;
+		margin: 0 0 0;
+	}
+
+	.g-characters {
+		display: grid;
+		grid-template-columns: repeat(4, 260px);
+		gap: 2.5rem;
+		justify-content: center;
+		margin-bottom: 2rem;
+		overflow: visible;
+	}
+
+	.g-char-card {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.75rem;
+		width: 260px;
+		min-width: 0;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+		opacity: 0.5;
+		transition: opacity 0.3s ease;
+		position: relative;
+		overflow: visible;
+	}
+
+	.g-char-card.is-active,
+	.g-char-card[aria-pressed='true'] {
+		opacity: 1;
+	}
+
+	.g-char-card-visual {
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
+		width: 260px;
+		height: 260px;
+		overflow: visible;
+	}
+
+	.g-char-card-center {
+		position: relative;
+		width: 260px;
+		height: 260px;
+		flex-shrink: 0;
+	}
+
+	.g-char-card-bg {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 200px;
+		background: #1a3a30;
+		border-radius: 40px 40px 0 0;
+		z-index: 0;
+	}
+
+	.g-char-card-img {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 260px;
+		object-fit: contain;
+		object-position: center bottom;
+		display: block;
+		z-index: 1;
+	}
+
+	.g-char-name {
+		font-family: 'Manrope', sans-serif;
+		font-size: 14px;
+		font-weight: 600;
+		color: var(--text);
+	}
+
+	.g-char-info {
+		background-color: var(--bg);
+		padding: 2rem;
+		min-height: 140px;
+		box-sizing: border-box;
+	}
+
+	.g-char-info .g-eyebrow {
+		margin-bottom: 0.5rem;
+		color: var(--gold);
+	}
+
+	.g-char-desc {
+		font-family: 'Manrope', sans-serif;
+		font-size: 16px;
+		font-weight: 300;
+		line-height: 1.7;
+		color: var(--text);
+		margin: 0;
+	}
+
+	@media (max-width: 768px) {
+		.g-workshop-inner {
+			overflow-x: visible;
+		}
+
+		.g-char-info {
+			padding: 0 2rem 2rem 2rem;
+		}
+
+		.g-characters {
+			display: flex;
+			align-items: flex-end;
+			overflow-x: auto;
+			scroll-snap-type: x mandatory;
+			scroll-behavior: smooth;
+			-webkit-overflow-scrolling: touch;
+			gap: 1rem;
+			scrollbar-width: none;
+			justify-content: flex-start;
+			/* Padding so first and last cards can scroll to viewport center (150px = half of 300px centered card) */
+			padding-left: calc(50vw - 150px);
+			padding-right: calc(50vw - 150px);
+			padding-bottom: 40px;
+			scroll-padding: 0 calc(50vw - 150px);
+			margin: 0 0 0;
+			width: 100vw;
+			margin-left: calc(50% - 50vw);
+			box-sizing: border-box;
+		}
+
+		.g-characters::-webkit-scrollbar {
+			display: none;
+		}
+
+		.g-char-card {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			flex: 0 0 200px;
+			width: 200px;
+			scroll-snap-align: center;
+			opacity: 1;
+			transition: opacity 0.3s ease, flex 0.35s ease, width 0.35s ease;
+			margin: 0;
+			overflow: visible;
+		}
+
+		.g-char-card.is-centered,
+		.g-char-card.is-active,
+		.g-char-card[aria-pressed='true'] {
+			opacity: 1;
+			z-index: 10;
+			flex: 0 0 300px;
+			width: 300px;
+		}
+
+		.g-char-card-visual {
+			width: 200px;
+			height: 280px;
+			overflow: visible;
+			transition: width 0.35s ease, height 0.35s ease;
+			flex-shrink: 0;
+		}
+
+		.g-char-card.is-centered .g-char-card-visual,
+		.g-char-card.is-active .g-char-card-visual,
+		.g-char-card[aria-pressed='true'] .g-char-card-visual {
+			width: 300px;
+			height: 420px;
+		}
+
+		.g-char-card-center {
+			width: 200px;
+			height: 280px;
+			overflow: visible;
+			transition: width 0.35s ease, height 0.35s ease;
+		}
+
+		.g-char-card.is-centered .g-char-card-center,
+		.g-char-card.is-active .g-char-card-center,
+		.g-char-card[aria-pressed='true'] .g-char-card-center {
+			width: 300px;
+			height: 420px;
+		}
+
+		.g-char-card-bg {
+			height: 140px;
+			transition: height 0.35s ease;
+		}
+
+		.g-char-card.is-centered .g-char-card-bg,
+		.g-char-card.is-active .g-char-card-bg,
+		.g-char-card[aria-pressed='true'] .g-char-card-bg {
+			height: 210px;
+		}
+
+		.g-char-card-img {
+			height: 280px;
+			transition: height 0.35s ease;
+		}
+
+		.g-char-card.is-centered .g-char-card-img,
+		.g-char-card.is-active .g-char-card-img,
+		.g-char-card[aria-pressed='true'] .g-char-card-img {
+			height: 420px;
+		}
+
+		.g-char-card.is-centered .g-char-name,
+		.g-char-card.is-active .g-char-name,
+		.g-char-card[aria-pressed='true'] .g-char-name {
+			font-size: 21px;
+		}
+	}
+
+	/* 4. VIDEO */
+	.g-video {
+		background-color: var(--bg);
+		padding: 5rem 0;
+	}
+
+	.g-video-inner {
+		max-width: 800px;
+		margin-inline: auto;
+	}
+
+	.g-section-title {
+		font-family: 'Manrope', sans-serif;
+		font-size: 21px;
+		font-weight: 700;
+		color: var(--text);
+		margin: 0 0 1.5rem;
+		text-align: center;
+	}
+
+	.g-video-placeholder {
+		aspect-ratio: 16 / 9;
+		background-color: var(--emerald);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.g-play-icon {
+		font-size: 3rem;
+		color: var(--bg);
+		opacity: 0.9;
+	}
+
+	/* 5. NETFLIX */
+	.g-netflix {
+		background-color: var(--bg);
+		padding: 5rem 0 3rem;
+	}
+
+	.g-netflix-inner {
+		max-width: 800px;
+		margin-inline: auto;
+	}
+
+	.g-section-title--center {
+		text-align: center;
+		margin-bottom: 2.5rem;
+	}
+
+	.g-netflix-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		gap: 2.5rem;
+	}
+
+	.g-netflix-col {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.g-netflix-title {
+		font-family: 'Manrope', sans-serif;
+		font-size: 14px;
+		font-weight: 700;
+		color: var(--text);
+		margin: 0;
+	}
+
+	.g-netflix-text {
+		font-family: 'Manrope', sans-serif;
+		font-size: 14px;
+		font-weight: 300;
+		color: var(--muted);
+		line-height: 1.5;
+		margin: 0;
+	}
+
+	@media (max-width: 768px) {
+		.g-netflix-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	/* 6. CTA */
+	.g-cta {
+		background-color: var(--bg);
+		padding: 3rem 0 5rem;
+	}
+
+	.g-cta-inner {
+		text-align: center;
+	}
+
+	.g-cta-cover-wrap {
+		display: flex;
+		justify-content: center;
+	}
+
+	.g-cta-cover {
+		width: 140px;
+		height: auto;
+		aspect-ratio: 2 / 3;
+		object-fit: cover;
+		display: block;
+	}
+
+	.g-cta-btn {
+		margin-top: 1.5rem;
+	}
+</style>
