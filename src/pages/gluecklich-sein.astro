@@ -62,7 +62,6 @@ const characters = [
 	<!-- 2. KLAPPENTEXT (Off-White) -->
 	<section class="g-klappentext">
 		<div class="g-klappentext-inner">
-			<h2>Wie wird man eigentlich glücklich?</h2>
 			<p class="g-body">
 				Elias sehnt sich nach einem erfüllenden Job, Lea möchte vor ihrem 30. Geburtstag unbedingt einen Partner finden, Malte belasten seine Depressionen in der Ehe und Sofia steht kurz vor der nächsten Beförderung.
 			</p>
@@ -545,7 +544,6 @@ const characters = [
 	}
 
 	/* Section H2s – default heading style (no eyebrow) */
-	.g-klappentext-inner h2,
 	.g-workshop-inner h2,
 	.g-video-inner h2,
 	.g-netflix-inner h2 {
@@ -728,7 +726,13 @@ const characters = [
 		line-height: 1.85;
 		color: var(--text);
 		text-align: center;
-		margin: 0 0 1.5rem 0;
+		margin: 0 0 -0.75rem 0;
+	}
+
+	@media (min-width: 1025px) {
+		.g-characters-row {
+			margin-top: -2.5rem;
+		}
 	}
 
 	.g-char-nav {
@@ -888,8 +892,8 @@ const characters = [
 			gap: 1rem;
 			scrollbar-width: none;
 			justify-content: flex-start;
-			margin: -10rem 0 1rem 0;
-			padding-top: 1.5rem;
+			margin: -13rem 0 1rem 0;
+			padding-top: 0;
 			padding-bottom: 1rem;
 			padding-left: calc(50vw - 180px);
 			padding-right: calc(50vw - 180px);
@@ -1128,6 +1132,11 @@ const characters = [
 		.g-mobile-slider {
 			display: block;
 			padding: 0 0 1rem;
+			margin-top: -3rem;
+		}
+
+		.g-workshop-subtitle {
+			margin-bottom: -1.25rem;
 		}
 
 		.g-mobile-slider-track {
