@@ -111,6 +111,47 @@ const characters = [
 					<span aria-hidden="true">›</span>
 				</button>
 			</div>
+
+			<!-- MOBILE SLIDER (shown only on mobile) -->
+			<div class="g-mobile-slider">
+				<div class="g-mobile-slider-track">
+					{characters.map((c, index) => (
+						<div
+							class:list={['g-mobile-card', { 'is-active': index === 0 }]}
+							data-char={c.id}
+							data-index={index}
+						>
+							<div class="g-mobile-card-visual">
+								<div class="g-mobile-card-bg" aria-hidden="true"></div>
+								<img src={characterImages[c.id]} alt={c.name} class="g-mobile-card-img" />
+							</div>
+							<span class="g-mobile-card-name">{c.name}</span>
+						</div>
+					))}
+				</div>
+				<div class="g-mobile-nav">
+					<button type="button" class="g-mobile-nav-btn g-mobile-prev" aria-label="Vorherige Person">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M15 18l-6-6 6-6"></path>
+						</svg>
+					</button>
+					<div class="g-mobile-dots">
+						{characters.map((c, index) => (
+							<div
+								class:list={['g-mobile-dot', { 'is-active': index === 0 }]}
+								data-index={index}
+							>
+							</div>
+						))}
+					</div>
+					<button type="button" class="g-mobile-nav-btn g-mobile-next" aria-label="Nächste Person">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M9 18l6-6-6-6"></path>
+						</svg>
+					</button>
+				</div>
+			</div>
+
 			<div class="g-char-info">
 				<span class="g-eyebrow g-char-role-label">Leitet den Workshop</span>
 				<p class="g-char-desc">
@@ -176,7 +217,8 @@ const characters = [
 		if (!container) return;
 
 		let cards = Array.from(container.querySelectorAll('.g-char-card'));
-		const isMobile = window.matchMedia('(max-width: 1024px)').matches;
+		const isNarrowMobile = window.matchMedia('(max-width: 768px)').matches;
+		const isTabletSlider = window.matchMedia('(max-width: 1024px)').matches && !isNarrowMobile;
 		let setWidth = null;
 		let setStart = null;
 
@@ -248,7 +290,7 @@ const characters = [
 		}
 
 		function navigateAdjacent(delta) {
-			if (window.innerWidth > 1024) return;
+			if (window.innerWidth > 1024 || window.innerWidth <= 768) return;
 			const allCards = Array.from(container.querySelectorAll('.g-char-card'));
 			const current = getClosestCardToViewportCenter();
 			if (!current || allCards.length === 0) return;
@@ -264,7 +306,7 @@ const characters = [
 		}
 
 		function updateCenteredCard() {
-			if (window.innerWidth > 1024) return;
+			if (window.innerWidth > 1024 || window.innerWidth <= 768) return;
 			const allCards = Array.from(container.querySelectorAll('.g-char-card'));
 			const containerRect = container.getBoundingClientRect();
 			const containerCenter = containerRect.left + containerRect.width / 2;
@@ -298,8 +340,11 @@ const characters = [
 			updateCenteredCard();
 		}
 
-		// Mobile only: clone cards for infinite loop
-		if (isMobile) {
+		function setupTabletClones() {
+			container.querySelectorAll('[data-clone="true"]').forEach((clone) => clone.remove());
+			cards = Array.from(container.querySelectorAll('.g-char-card'));
+			if (cards.length !== 4) return;
+
 			const clonesBefore = cards.map((card) => card.cloneNode(true));
 			const clonesAfter = cards.map((card) => card.cloneNode(true));
 
@@ -329,8 +374,14 @@ const characters = [
 			});
 		}
 
-		// Scroll: infinite loop jump (mobile only) then update centered card
+		// Tablet (769–1024px): clone cards for infinite scroll strip; narrow mobile uses .g-mobile-slider
+		if (isTabletSlider) {
+			setupTabletClones();
+		}
+
+		// Scroll: infinite loop jump (tablet strip only) then update centered card
 		container.addEventListener('scroll', () => {
+			if (window.innerWidth <= 768) return;
 			const hasClones = container.querySelectorAll('[data-clone="true"]').length > 0;
 			if (hasClones && setWidth != null && setStart != null) {
 				container.style.scrollBehavior = 'auto';
@@ -347,6 +398,7 @@ const characters = [
 
 		// Click: delegation (works for original and clone cards)
 		container.addEventListener('click', (e) => {
+			if (window.innerWidth <= 768) return;
 			const card = e.target.closest('.g-char-card');
 			if (!card) return;
 			const id = card.getAttribute('data-char') || card.dataset.char;
@@ -366,14 +418,116 @@ const characters = [
 		prevBtn?.addEventListener('click', () => navigateAdjacent(-1));
 		nextBtn?.addEventListener('click', () => navigateAdjacent(1));
 
-		// Resize: remove clones when switching to desktop
+		const mobileSlider = document.querySelector('.g-mobile-slider');
+
+		function bindMobileSlider() {
+			if (!mobileSlider || window.innerWidth > 768 || mobileSlider.dataset.gMobileBound === '1') return;
+			mobileSlider.dataset.gMobileBound = '1';
+
+			const mobileCards = Array.from(mobileSlider.querySelectorAll('.g-mobile-card'));
+			const mobileDots = Array.from(mobileSlider.querySelectorAll('.g-mobile-dot'));
+			const prevM = mobileSlider.querySelector('.g-mobile-prev');
+			const nextM = mobileSlider.querySelector('.g-mobile-next');
+
+			let currentIndex = 0;
+			const totalCards = mobileCards.length;
+
+			function setMobileActive(index) {
+				currentIndex = (index + totalCards) % totalCards;
+
+				const prevIdx = (currentIndex - 1 + totalCards) % totalCards;
+				const nextIdx = (currentIndex + 1) % totalCards;
+
+				mobileCards.forEach((card) => {
+					card.classList.remove('is-active');
+					card.style.display = 'none';
+				});
+
+				const prevCard = mobileCards[prevIdx];
+				const currentCard = mobileCards[currentIndex];
+				const nextCard = mobileCards[nextIdx];
+
+				prevCard.style.display = 'flex';
+				prevCard.style.order = '1';
+
+				currentCard.style.display = 'flex';
+				currentCard.style.order = '2';
+				currentCard.classList.add('is-active');
+
+				nextCard.style.display = 'flex';
+				nextCard.style.order = '3';
+
+				mobileDots.forEach((dot, i) => {
+					dot.classList.toggle('is-active', i === currentIndex);
+				});
+
+				const id = currentCard.dataset.char;
+				if (id && data[id]) {
+					if (roleLabel) roleLabel.textContent = data[id].role;
+					if (descEl) descEl.textContent = data[id].description;
+				}
+			}
+
+			prevM?.addEventListener('click', () => setMobileActive(currentIndex - 1));
+			nextM?.addEventListener('click', () => setMobileActive(currentIndex + 1));
+
+			mobileCards.forEach((card, idx) => {
+				card.addEventListener('click', () => {
+					if (!card.classList.contains('is-active')) {
+						setMobileActive(idx);
+					}
+				});
+			});
+
+			let touchStartX = 0;
+			const track = mobileSlider.querySelector('.g-mobile-slider-track');
+
+			track?.addEventListener(
+				'touchstart',
+				(e) => {
+					touchStartX = e.touches[0].clientX;
+				},
+				{ passive: true }
+			);
+
+			track?.addEventListener(
+				'touchend',
+				(e) => {
+					const touchEndX = e.changedTouches[0].clientX;
+					const diff = touchStartX - touchEndX;
+
+					if (Math.abs(diff) > 50) {
+						if (diff > 0) {
+							setMobileActive(currentIndex + 1);
+						} else {
+							setMobileActive(currentIndex - 1);
+						}
+					}
+				},
+				{ passive: true }
+			);
+
+			setMobileActive(0);
+		}
+
 		window.addEventListener('resize', () => {
-			const isNowMobile = window.matchMedia('(max-width: 1024px)').matches;
-			if (!isNowMobile) {
+			const w = window.innerWidth;
+			if (w > 1024 || w <= 768) {
 				container.querySelectorAll('[data-clone="true"]').forEach((clone) => clone.remove());
 				cards = Array.from(container.querySelectorAll('.g-char-card'));
+				setStart = null;
+				setWidth = null;
 			}
+			if (w > 768 && w <= 1024 && container.querySelectorAll('[data-clone="true"]').length === 0) {
+				setupTabletClones();
+			}
+			bindMobileSlider();
 		});
+
+		// ========================================
+		// MOBILE SLIDER LOGIC (Option 3)
+		// ========================================
+		bindMobileSlider();
 	});
 </script>
 
@@ -510,7 +664,7 @@ const characters = [
 
 	@media (max-width: 768px) {
 		.g-hero {
-			padding: 3rem 0 3rem;
+			padding: 5.5rem 0 3rem;
 		}
 
 		.g-hero-cover-wrap {
@@ -583,7 +737,7 @@ const characters = [
 
 	.g-characters {
 		display: grid;
-		grid-template-columns: repeat(4, 260px);
+		grid-template-columns: repeat(4, 280px);
 		gap: 2.5rem;
 		justify-content: center;
 		margin: 0 0 2rem 0;
@@ -596,7 +750,7 @@ const characters = [
 		flex-direction: column;
 		align-items: center;
 		gap: 0.75rem;
-		width: 260px;
+		width: 280px;
 		min-width: 0;
 		background: none;
 		border: none;
@@ -617,15 +771,15 @@ const characters = [
 		display: flex;
 		justify-content: center;
 		align-items: flex-end;
-		width: 260px;
-		height: 260px;
+		width: 280px;
+		height: 280px;
 		overflow: visible;
 	}
 
 	.g-char-card-center {
 		position: relative;
-		width: 260px;
-		height: 260px;
+		width: 280px;
+		height: 280px;
 		flex-shrink: 0;
 	}
 
@@ -634,7 +788,7 @@ const characters = [
 		bottom: 0;
 		left: 0;
 		width: 100%;
-		height: 200px;
+		height: 216px;
 		background: #1a3a30;
 		border-radius: 40px 40px 0 0;
 		z-index: 0;
@@ -645,7 +799,7 @@ const characters = [
 		bottom: 0;
 		left: 0;
 		width: 100%;
-		height: 260px;
+		height: 280px;
 		object-fit: contain;
 		object-position: center bottom;
 		display: block;
@@ -737,9 +891,9 @@ const characters = [
 			margin: -10rem 0 1rem 0;
 			padding-top: 1.5rem;
 			padding-bottom: 1rem;
-			padding-left: calc(50vw - 130px);
-			padding-right: calc(50vw - 130px);
-			scroll-padding: 0 calc(50vw - 130px);
+			padding-left: calc(50vw - 180px);
+			padding-right: calc(50vw - 180px);
+			scroll-padding: 0 calc(50vw - 180px);
 			flex: 1 1 auto;
 			min-width: 0;
 			width: auto;
@@ -755,8 +909,8 @@ const characters = [
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			flex: 0 0 220px;
-			width: 220px;
+			flex: 0 0 248px;
+			width: 248px;
 			scroll-snap-align: center;
 			opacity: 0.5;
 			transition: opacity 0.3s ease, flex 0.35s ease, width 0.35s ease;
@@ -769,13 +923,13 @@ const characters = [
 		.g-char-card[aria-pressed='true'] {
 			opacity: 1;
 			z-index: 10;
-			flex: 0 0 320px;
-			width: 320px;
+			flex: 0 0 360px;
+			width: 360px;
 		}
 
 		.g-char-card-visual {
-			width: 220px;
-			height: 308px;
+			width: 248px;
+			height: 348px;
 			overflow: visible;
 			transition: width 0.35s ease, height 0.35s ease;
 			flex-shrink: 0;
@@ -784,13 +938,13 @@ const characters = [
 		.g-char-card.is-centered .g-char-card-visual,
 		.g-char-card.is-active .g-char-card-visual,
 		.g-char-card[aria-pressed='true'] .g-char-card-visual {
-			width: 320px;
-			height: 448px;
+			width: 360px;
+			height: 504px;
 		}
 
 		.g-char-card-center {
-			width: 220px;
-			height: 308px;
+			width: 248px;
+			height: 348px;
 			overflow: visible;
 			transition: width 0.35s ease, height 0.35s ease;
 		}
@@ -798,30 +952,30 @@ const characters = [
 		.g-char-card.is-centered .g-char-card-center,
 		.g-char-card.is-active .g-char-card-center,
 		.g-char-card[aria-pressed='true'] .g-char-card-center {
-			width: 320px;
-			height: 448px;
+			width: 360px;
+			height: 504px;
 		}
 
 		.g-char-card-bg {
-			height: 154px;
+			height: 174px;
 			transition: height 0.35s ease;
 		}
 
 		.g-char-card.is-centered .g-char-card-bg,
 		.g-char-card.is-active .g-char-card-bg,
 		.g-char-card[aria-pressed='true'] .g-char-card-bg {
-			height: 224px;
+			height: 252px;
 		}
 
 		.g-char-card-img {
-			height: 308px;
+			height: 348px;
 			transition: height 0.35s ease;
 		}
 
 		.g-char-card.is-centered .g-char-card-img,
 		.g-char-card.is-active .g-char-card-img,
 		.g-char-card[aria-pressed='true'] .g-char-card-img {
-			height: 448px;
+			height: 504px;
 		}
 
 		.g-char-card.is-centered .g-char-name,
@@ -956,5 +1110,170 @@ const characters = [
 
 	.g-cta-btn {
 		margin-top: 1.5rem;
+	}
+
+	/* ========================================
+	   MOBILE CHARACTER SLIDER (Option 3)
+	   ======================================== */
+
+	.g-mobile-slider {
+		display: none;
+	}
+
+	@media (max-width: 768px) {
+		.g-characters-row {
+			display: none !important;
+		}
+
+		.g-mobile-slider {
+			display: block;
+			padding: 0 0 1rem;
+		}
+
+		.g-mobile-slider-track {
+			display: flex;
+			align-items: flex-end;
+			justify-content: center;
+			gap: 0;
+			padding: 0 0.5rem;
+			min-height: 330px;
+		}
+
+		.g-mobile-card {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			transition: all 0.35s ease;
+			cursor: pointer;
+		}
+
+		.g-mobile-card:not(.is-active) {
+			opacity: 0.5;
+			transform: scale(0.75);
+			margin: 0 -20px;
+			z-index: 1;
+		}
+
+		.g-mobile-card.is-active {
+			opacity: 1;
+			transform: scale(1);
+			z-index: 10;
+			margin: 0 8px;
+		}
+
+		.g-mobile-card-visual {
+			position: relative;
+			width: 200px;
+			height: 256px;
+			display: flex;
+			align-items: flex-end;
+			justify-content: center;
+		}
+
+		.g-mobile-card.is-active .g-mobile-card-visual {
+			width: 200px;
+			height: 256px;
+		}
+
+		.g-mobile-card:not(.is-active) .g-mobile-card-visual {
+			width: 135px;
+			height: 172px;
+		}
+
+		.g-mobile-card-bg {
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 85%;
+			height: 60%;
+			background: var(--emerald);
+			border-radius: 28px 28px 0 0;
+			z-index: 0;
+		}
+
+		.g-mobile-card-img {
+			position: relative;
+			z-index: 1;
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+			object-position: bottom center;
+		}
+
+		.g-mobile-card-name {
+			font-family: 'Manrope', sans-serif;
+			font-size: 12px;
+			font-weight: 600;
+			color: var(--text);
+			margin-top: 0.5rem;
+			transition: font-size 0.35s ease;
+		}
+
+		.g-mobile-card.is-active .g-mobile-card-name {
+			font-size: 18px;
+		}
+
+		.g-mobile-nav {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 1.5rem;
+			margin-top: 1.25rem;
+		}
+
+		.g-mobile-nav-btn {
+			width: 44px;
+			height: 44px;
+			border-radius: 50%;
+			border: 1px solid rgba(28, 28, 28, 0.2);
+			background: transparent;
+			color: var(--text);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			transition: background-color 0.2s ease, border-color 0.2s ease;
+			-webkit-tap-highlight-color: transparent;
+		}
+
+		.g-mobile-nav-btn:hover {
+			background: rgba(28, 28, 28, 0.05);
+		}
+
+		.g-mobile-nav-btn:active {
+			transform: scale(0.95);
+		}
+
+		.g-mobile-dots {
+			display: flex;
+			gap: 8px;
+		}
+
+		.g-mobile-dot {
+			width: 28px;
+			height: 3px;
+			background: rgba(28, 28, 28, 0.15);
+			transition: background-color 0.3s ease;
+		}
+
+		.g-mobile-dot.is-active {
+			background: var(--gold);
+		}
+
+		.g-char-info {
+			padding: 1.5rem 1.5rem 2rem;
+			text-align: center;
+		}
+
+		.g-char-info .g-eyebrow {
+			text-align: center;
+		}
+
+		.g-char-desc {
+			max-width: 100%;
+			text-align: center;
+			margin: 0 auto;
+		}
 	}
 </style>
