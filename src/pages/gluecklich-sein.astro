@@ -80,9 +80,6 @@ const characters = [
 			<h2>Der Millennial Workshop</h2>
 			<p class="g-workshop-subtitle">Klicke auf eine Person, um mehr zu erfahren</p>
 			<div class="g-characters-row">
-				<button type="button" class="g-char-nav g-char-nav-prev" aria-label="Vorherige Person">
-					<span aria-hidden="true">‹</span>
-				</button>
 				<div class="g-characters">
 					{characters.map((c) => (
 						<button
@@ -106,9 +103,6 @@ const characters = [
 						</button>
 					))}
 				</div>
-				<button type="button" class="g-char-nav g-char-nav-next" aria-label="Nächste Person">
-					<span aria-hidden="true">›</span>
-				</button>
 			</div>
 
 			<!-- MOBILE SLIDER (shown only on mobile) -->
@@ -163,7 +157,6 @@ const characters = [
 	<!-- 4. VIDEO (Off-White) -->
 	<section class="g-video">
 		<div class="g-video-inner">
-			<h2>Buchtrailer</h2>
 			<div class="g-video-placeholder" aria-hidden="true">
 				<span class="g-play-icon" aria-hidden="true">▶</span>
 			</div>
@@ -215,12 +208,6 @@ const characters = [
 
 		if (!container) return;
 
-		let cards = Array.from(container.querySelectorAll('.g-char-card'));
-		const isNarrowMobile = window.matchMedia('(max-width: 768px)').matches;
-		const isTabletSlider = window.matchMedia('(max-width: 1024px)').matches && !isNarrowMobile;
-		let setWidth = null;
-		let setStart = null;
-
 		const data = {
 			malte: {
 				role: 'Leitet den Workshop',
@@ -259,168 +246,22 @@ const characters = [
 			}
 		}
 
-		function centerCard(card, behavior = 'smooth') {
-			const containerWidth = container.offsetWidth;
-			const cardLeft = card.offsetLeft;
-			const cardWidth = card.offsetWidth;
-			const scrollLeft = cardLeft - containerWidth / 2 + cardWidth / 2;
-			if (behavior === 'smooth') {
-				container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
-			} else {
-				container.scrollLeft = scrollLeft;
-			}
-		}
-
-		function getClosestCardToViewportCenter() {
-			const allCards = Array.from(container.querySelectorAll('.g-char-card'));
-			const containerRect = container.getBoundingClientRect();
-			const cx = containerRect.left + containerRect.width / 2;
-			let best = null;
-			let bestDist = Infinity;
-			for (const card of allCards) {
-				const r = card.getBoundingClientRect();
-				const dist = Math.abs(r.left + r.width / 2 - cx);
-				if (dist < bestDist) {
-					bestDist = dist;
-					best = card;
-				}
-			}
-			return best;
-		}
-
-		function navigateAdjacent(delta) {
-			if (window.innerWidth > 1024 || window.innerWidth <= 768) return;
-			const allCards = Array.from(container.querySelectorAll('.g-char-card'));
-			const current = getClosestCardToViewportCenter();
-			if (!current || allCards.length === 0) return;
-			const idx = allCards.indexOf(current);
-			if (idx < 0) return;
-			const nextIdx = (idx + delta + allCards.length) % allCards.length;
-			const target = allCards[nextIdx];
-			const id = target?.dataset?.char;
-			if (!target || !id) return;
-			ignoreScrollUntil = Date.now() + 400;
-			selectChar(id);
-			centerCard(target, 'smooth');
-		}
-
-		function updateCenteredCard() {
-			if (window.innerWidth > 1024 || window.innerWidth <= 768) return;
-			const allCards = Array.from(container.querySelectorAll('.g-char-card'));
-			const containerRect = container.getBoundingClientRect();
-			const containerCenter = containerRect.left + containerRect.width / 2;
-
-			let closestCard = null;
-			let closestDistance = Infinity;
-
-			allCards.forEach((card) => {
-				const cardRect = card.getBoundingClientRect();
-				const cardCenter = cardRect.left + cardRect.width / 2;
-				const distance = Math.abs(containerCenter - cardCenter);
-
-				if (distance < closestDistance) {
-					closestDistance = distance;
-					closestCard = card;
-				}
-			});
-
-			if (closestCard) {
-				const id = closestCard.dataset.char;
-				if (id) {
-					selectChar(id);
-					requestAnimationFrame(() => centerCard(closestCard, 'auto'));
-				}
-			}
-		}
-
-		let ignoreScrollUntil = 0;
-		function updateCenteredCardWithGuard() {
-			if (Date.now() < ignoreScrollUntil) return;
-			updateCenteredCard();
-		}
-
-		function setupTabletClones() {
-			container.querySelectorAll('[data-clone="true"]').forEach((clone) => clone.remove());
-			cards = Array.from(container.querySelectorAll('.g-char-card'));
-			if (cards.length !== 4) return;
-
-			const clonesBefore = cards.map((card) => card.cloneNode(true));
-			const clonesAfter = cards.map((card) => card.cloneNode(true));
-
-			clonesBefore.reverse().forEach((clone) => {
-				clone.setAttribute('data-clone', 'true');
-				container.insertBefore(clone, container.firstChild);
-			});
-
-			clonesAfter.forEach((clone) => {
-				clone.setAttribute('data-clone', 'true');
-				container.appendChild(clone);
-			});
-
-			cards = Array.from(container.querySelectorAll('.g-char-card'));
-			requestAnimationFrame(() => {
-				requestAnimationFrame(() => {
-					if (cards.length >= 9) {
-						setStart = cards[4].offsetLeft;
-						setWidth = cards[8].offsetLeft - cards[4].offsetLeft;
-						container.style.scrollBehavior = 'auto';
-						container.scrollLeft = setStart;
-						container.style.scrollBehavior = '';
-						const middleMalte = cards[4];
-						if (middleMalte) centerCard(middleMalte, 'auto');
-					}
-				});
-			});
-		}
-
-		// Tablet (769–1024px): clone cards for infinite scroll strip; narrow mobile uses .g-mobile-slider
-		if (isTabletSlider) {
-			setupTabletClones();
-		}
-
-		// Scroll: infinite loop jump (tablet strip only) then update centered card
-		container.addEventListener('scroll', () => {
-			if (window.innerWidth <= 768) return;
-			const hasClones = container.querySelectorAll('[data-clone="true"]').length > 0;
-			if (hasClones && setWidth != null && setStart != null) {
-				container.style.scrollBehavior = 'auto';
-				if (container.scrollLeft >= setStart + setWidth) {
-					container.scrollLeft = container.scrollLeft - setWidth;
-				}
-				if (container.scrollLeft < setStart) {
-					container.scrollLeft = container.scrollLeft + setWidth;
-				}
-				container.style.scrollBehavior = '';
-			}
-			window.requestAnimationFrame(updateCenteredCardWithGuard);
-		});
-
-		// Click: delegation (works for original and clone cards)
+		// Desktop grid only (>1024px)
 		container.addEventListener('click', (e) => {
-			if (window.innerWidth <= 768) return;
+			if (window.innerWidth <= 1024) return;
 			const card = e.target.closest('.g-char-card');
 			if (!card) return;
 			const id = card.getAttribute('data-char') || card.dataset.char;
 			if (!id) return;
-			ignoreScrollUntil = Date.now() + 400;
 			selectChar(id);
-			if (window.innerWidth <= 1024) {
-				centerCard(card, 'smooth');
-			}
 		});
 
-		// Initial selection; mobile centering is done in rAF after cloning
 		selectChar('malte');
-
-		const prevBtn = document.querySelector('.g-char-nav-prev');
-		const nextBtn = document.querySelector('.g-char-nav-next');
-		prevBtn?.addEventListener('click', () => navigateAdjacent(-1));
-		nextBtn?.addEventListener('click', () => navigateAdjacent(1));
 
 		const mobileSlider = document.querySelector('.g-mobile-slider');
 
 		function bindMobileSlider() {
-			if (!mobileSlider || window.innerWidth > 768 || mobileSlider.dataset.gMobileBound === '1') return;
+			if (!mobileSlider || window.innerWidth > 1024 || mobileSlider.dataset.gMobileBound === '1') return;
 			mobileSlider.dataset.gMobileBound = '1';
 
 			const mobileCards = Array.from(mobileSlider.querySelectorAll('.g-mobile-card'));
@@ -510,22 +351,10 @@ const characters = [
 		}
 
 		window.addEventListener('resize', () => {
-			const w = window.innerWidth;
-			if (w > 1024 || w <= 768) {
-				container.querySelectorAll('[data-clone="true"]').forEach((clone) => clone.remove());
-				cards = Array.from(container.querySelectorAll('.g-char-card'));
-				setStart = null;
-				setWidth = null;
-			}
-			if (w > 768 && w <= 1024 && container.querySelectorAll('[data-clone="true"]').length === 0) {
-				setupTabletClones();
-			}
 			bindMobileSlider();
 		});
 
-		// ========================================
-		// MOBILE SLIDER LOGIC (Option 3)
-		// ========================================
+		// Mobile + tablet (≤1024px): Option 3 slider
 		bindMobileSlider();
 	});
 </script>
@@ -545,7 +374,6 @@ const characters = [
 
 	/* Section H2s – default heading style (no eyebrow) */
 	.g-workshop-inner h2,
-	.g-video-inner h2,
 	.g-netflix-inner h2 {
 		font-family: 'Manrope', sans-serif;
 		font-size: 28px;
@@ -555,10 +383,6 @@ const characters = [
 		text-transform: none;
 		text-align: center;
 		margin: 0 0 1rem 0;
-	}
-
-	.g-video-inner h2 {
-		margin-bottom: 1.5rem;
 	}
 
 	.g-netflix-inner h2 {
@@ -711,7 +535,7 @@ const characters = [
 		box-sizing: border-box;
 		background-color: var(--bg);
 		color: var(--text);
-		padding: 2rem var(--page-padding-desktop) 5rem;
+		padding: 2rem var(--page-padding-desktop) 2.5rem;
 	}
 
 	.g-workshop-inner {
@@ -730,13 +554,13 @@ const characters = [
 	}
 
 	@media (min-width: 1025px) {
-		.g-characters-row {
-			margin-top: -2.5rem;
+		.g-workshop-subtitle {
+			margin: 0 0 1.5rem 0;
 		}
-	}
 
-	.g-char-nav {
-		display: none;
+		.g-characters-row {
+			margin-top: 0;
+		}
 	}
 
 	.g-characters {
@@ -744,7 +568,7 @@ const characters = [
 		grid-template-columns: repeat(4, 280px);
 		gap: 2.5rem;
 		justify-content: center;
-		margin: 0 0 2rem 0;
+		margin: 0 0 0.75rem 0;
 		padding-top: 0;
 		overflow: visible;
 	}
@@ -819,8 +643,8 @@ const characters = [
 
 	.g-char-info {
 		background-color: var(--bg);
-		padding: 2rem 0;
-		min-height: 140px;
+		padding: 1rem 0 1.25rem;
+		min-height: 0;
 		box-sizing: border-box;
 	}
 
@@ -838,174 +662,10 @@ const characters = [
 		margin: 0;
 	}
 
-	@media (max-width: 1024px) {
-		.g-workshop-inner {
-			overflow-x: visible;
-		}
-
-		.g-char-info {
-			padding: 0 0 2rem 0;
-		}
-
-		.g-characters-row {
-			display: flex;
-			align-items: flex-end;
-			justify-content: center;
-			width: 100vw;
-			margin-left: calc(50% - 50vw);
-			gap: 0.35rem;
-			box-sizing: border-box;
-		}
-
-		.g-char-nav {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			flex-shrink: 0;
-			width: 2.75rem;
-			height: 2.75rem;
-			padding: 0;
-			margin: 0 0 1.15rem 0;
-			border: none;
-			background: var(--emerald);
-			color: var(--bg);
-			border-radius: 9999px;
-			font-size: 1.65rem;
-			line-height: 1;
-			cursor: pointer;
-			z-index: 15;
-			-webkit-tap-highlight-color: transparent;
-		}
-
-		.g-char-nav:focus-visible {
-			outline: 2px solid var(--gold);
-			outline-offset: 2px;
-		}
-
-		.g-characters {
-			display: flex;
-			align-items: flex-end;
-			overflow-x: auto;
-			scroll-snap-type: x mandatory;
-			scroll-behavior: smooth;
-			-webkit-overflow-scrolling: touch;
-			gap: 1rem;
-			scrollbar-width: none;
-			justify-content: flex-start;
-			margin: -13rem 0 1rem 0;
-			padding-top: 0;
-			padding-bottom: 1rem;
-			padding-left: calc(50vw - 180px);
-			padding-right: calc(50vw - 180px);
-			scroll-padding: 0 calc(50vw - 180px);
-			flex: 1 1 auto;
-			min-width: 0;
-			width: auto;
-			margin-left: 0;
-			box-sizing: border-box;
-		}
-
-		.g-characters::-webkit-scrollbar {
-			display: none;
-		}
-
-		.g-char-card {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			flex: 0 0 248px;
-			width: 248px;
-			scroll-snap-align: center;
-			opacity: 0.5;
-			transition: opacity 0.3s ease, flex 0.35s ease, width 0.35s ease;
-			margin: 0;
-			overflow: visible;
-		}
-
-		.g-char-card.is-centered,
-		.g-char-card.is-active,
-		.g-char-card[aria-pressed='true'] {
-			opacity: 1;
-			z-index: 10;
-			flex: 0 0 360px;
-			width: 360px;
-		}
-
-		.g-char-card-visual {
-			width: 248px;
-			height: 348px;
-			overflow: visible;
-			transition: width 0.35s ease, height 0.35s ease;
-			flex-shrink: 0;
-		}
-
-		.g-char-card.is-centered .g-char-card-visual,
-		.g-char-card.is-active .g-char-card-visual,
-		.g-char-card[aria-pressed='true'] .g-char-card-visual {
-			width: 360px;
-			height: 504px;
-		}
-
-		.g-char-card-center {
-			width: 248px;
-			height: 348px;
-			overflow: visible;
-			transition: width 0.35s ease, height 0.35s ease;
-		}
-
-		.g-char-card.is-centered .g-char-card-center,
-		.g-char-card.is-active .g-char-card-center,
-		.g-char-card[aria-pressed='true'] .g-char-card-center {
-			width: 360px;
-			height: 504px;
-		}
-
-		.g-char-card-bg {
-			height: 174px;
-			transition: height 0.35s ease;
-		}
-
-		.g-char-card.is-centered .g-char-card-bg,
-		.g-char-card.is-active .g-char-card-bg,
-		.g-char-card[aria-pressed='true'] .g-char-card-bg {
-			height: 252px;
-		}
-
-		.g-char-card-img {
-			height: 348px;
-			transition: height 0.35s ease;
-		}
-
-		.g-char-card.is-centered .g-char-card-img,
-		.g-char-card.is-active .g-char-card-img,
-		.g-char-card[aria-pressed='true'] .g-char-card-img {
-			height: 504px;
-		}
-
-		.g-char-card.is-centered .g-char-name,
-		.g-char-card.is-active .g-char-name,
-		.g-char-card[aria-pressed='true'] .g-char-name {
-			font-size: 21px;
-		}
-	}
-
-	@media (max-width: 768px) {
-		.g-char-info {
-			padding: 0 0 2rem 0;
-			max-width: 100%;
-		}
-
-		.g-char-desc {
-			max-width: 320px;
-			margin-inline: auto;
-			text-align: center;
-		}
-	}
-
 	/* 4. VIDEO */
 	.g-video {
 		background-color: var(--bg);
-		padding: 5rem 0;
+		padding: 2rem 0 3rem;
 	}
 
 	.g-video-inner {
@@ -1117,26 +777,31 @@ const characters = [
 	}
 
 	/* ========================================
-	   MOBILE CHARACTER SLIDER (Option 3)
+	   CHARACTER SLIDER — tablet + phone (Option 3)
+	   Desktop (>1024px) uses .g-characters-row grid
 	   ======================================== */
 
 	.g-mobile-slider {
 		display: none;
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: 1024px) {
+		.g-workshop-inner {
+			overflow-x: visible;
+		}
+
 		.g-characters-row {
 			display: none !important;
 		}
 
 		.g-mobile-slider {
 			display: block;
-			padding: 0 0 1rem;
-			margin-top: -3rem;
+			padding: 0 0 1.25rem;
+			margin-top: -1.25rem;
 		}
 
 		.g-workshop-subtitle {
-			margin-bottom: -1.25rem;
+			margin-bottom: -0.35rem;
 		}
 
 		.g-mobile-slider-track {
@@ -1144,8 +809,8 @@ const characters = [
 			align-items: flex-end;
 			justify-content: center;
 			gap: 0;
-			padding: 0 0.5rem;
-			min-height: 330px;
+			padding: 0 0.75rem;
+			min-height: 340px;
 		}
 
 		.g-mobile-card {
@@ -1271,7 +936,7 @@ const characters = [
 		}
 
 		.g-char-info {
-			padding: 1.5rem 0 2rem;
+			padding: 1rem 0 1.25rem;
 			text-align: center;
 		}
 
@@ -1283,6 +948,105 @@ const characters = [
 			max-width: 100%;
 			text-align: center;
 			margin: 0 auto;
+		}
+	}
+
+	/* Tablet: slightly larger figures, gentler overlap with subtitle */
+	@media (min-width: 769px) and (max-width: 1024px) {
+		.g-mobile-slider {
+			margin-top: -0.5rem;
+			padding-bottom: 1.5rem;
+		}
+
+		.g-workshop-subtitle {
+			margin-bottom: 0;
+		}
+
+		.g-mobile-slider-track {
+			min-height: 400px;
+			padding: 0 1rem;
+		}
+
+		.g-mobile-card:not(.is-active) {
+			margin: 0 -24px;
+		}
+
+		.g-mobile-card-visual,
+		.g-mobile-card.is-active .g-mobile-card-visual {
+			width: 240px;
+			height: 308px;
+		}
+
+		.g-mobile-card:not(.is-active) .g-mobile-card-visual {
+			width: 165px;
+			height: 212px;
+		}
+
+		.g-mobile-card.is-active .g-mobile-card-name {
+			font-size: 20px;
+		}
+
+		.g-mobile-nav-btn {
+			width: 48px;
+			height: 48px;
+		}
+
+		.g-mobile-nav-btn svg {
+			width: 20px;
+			height: 20px;
+		}
+	}
+
+	/* Phone: tighter vertical rhythm */
+	@media (max-width: 768px) {
+		.g-char-info {
+			padding: 0 0 1.25rem 0;
+			max-width: 100%;
+		}
+
+		.g-char-desc {
+			max-width: 320px;
+			margin-inline: auto;
+			text-align: center;
+		}
+
+		.g-mobile-slider {
+			padding: 0 0 1rem;
+			margin-top: -3rem;
+		}
+
+		.g-workshop-subtitle {
+			margin-bottom: -1.25rem;
+		}
+
+		.g-mobile-slider-track {
+			min-height: 330px;
+			padding: 0 0.5rem;
+		}
+
+		.g-mobile-card-visual,
+		.g-mobile-card.is-active .g-mobile-card-visual {
+			width: 200px;
+			height: 256px;
+		}
+
+		.g-mobile-card:not(.is-active) .g-mobile-card-visual {
+			width: 135px;
+			height: 172px;
+		}
+
+		.g-mobile-card.is-active .g-mobile-card-name {
+			font-size: 18px;
+		}
+
+		.g-mobile-nav-btn {
+			width: 44px;
+			height: 44px;
+		}
+
+		.g-mobile-nav-btn svg {
+			width: 18px;
+			height: 18px;
 		}
 	}
 </style>
