@@ -74,38 +74,21 @@ const characters = [
 		</div>
 	</section>
 
-	<!-- 3. WORKSHOP (Emerald, full-width) -->
+	<!-- 3. VIDEO (Off-White) -->
+	<section class="g-video">
+		<div class="g-video-inner">
+			<div class="g-video-placeholder" aria-hidden="true">
+				<span class="g-play-icon" aria-hidden="true">▶</span>
+			</div>
+		</div>
+	</section>
+
+	<!-- 4. WORKSHOP (Emerald, full-width) -->
 	<section class="g-workshop full-bleed">
 		<div class="g-workshop-inner">
 			<h2>Der Millennial Workshop</h2>
 			<p class="g-workshop-subtitle">Klicke auf eine Person, um mehr zu erfahren</p>
-			<div class="g-characters-row">
-				<div class="g-characters">
-					{characters.map((c) => (
-						<button
-							type="button"
-							class="g-char-card"
-							data-char={c.id}
-							aria-pressed={c.id === 'malte'}
-							aria-label={`${c.name} – ${c.role}`}
-						>
-							<div class="g-char-card-visual">
-								<div class="g-char-card-center">
-									<div class="g-char-card-bg" aria-hidden="true"></div>
-									<img
-										src={characterImages[c.id]}
-										alt={c.name}
-										class="g-char-card-img"
-									/>
-								</div>
-							</div>
-							<span class="g-char-name">{c.name}</span>
-						</button>
-					))}
-				</div>
-			</div>
 
-			<!-- MOBILE SLIDER (shown only on mobile) -->
 			<div class="g-mobile-slider">
 				<div class="g-mobile-slider-track">
 					{characters.map((c, index) => (
@@ -154,16 +137,20 @@ const characters = [
 		</div>
 	</section>
 
-	<!-- 4. VIDEO (Off-White) -->
-	<section class="g-video">
-		<div class="g-video-inner">
-			<div class="g-video-placeholder" aria-hidden="true">
-				<span class="g-play-icon" aria-hidden="true">▶</span>
+	<!-- 5. Buchmockup -->
+	<section class="g-cta g-cta--book">
+		<div class="g-cta-inner">
+			<div class="g-cta-cover-wrap">
+				<img
+					src="/images/sie-wollten-doch-nur-gluecklich-sein.png"
+					alt="Buchcover: Sie wollten doch nur glücklich sein"
+					class="g-cta-cover"
+				/>
 			</div>
 		</div>
 	</section>
 
-	<!-- 5. NETFLIX (Off-White) -->
+	<!-- 6. NETFLIX (Off-White) -->
 	<section class="g-netflix">
 		<div class="g-netflix-inner">
 			<h2>Wie Netflix – nur als Buch</h2>
@@ -184,16 +171,9 @@ const characters = [
 		</div>
 	</section>
 
-	<!-- CTA: cover + primary button -->
-	<section class="g-cta">
+	<!-- 7. Jetzt bestellen -->
+	<section class="g-cta g-cta--order">
 		<div class="g-cta-inner">
-			<div class="g-cta-cover-wrap">
-				<img
-					src="/images/sie-wollten-doch-nur-gluecklich-sein.png"
-					alt="Buchcover: Sie wollten doch nur glücklich sein"
-					class="g-cta-cover"
-				/>
-			</div>
 			<a href="https://www.amazon.de/wollten-doch-gl%C3%BCcklich-Generation-Millennials/dp/B0CKGWZ2WG/ref=tmm_pap_swatch_0" class="btn btn-primary g-cta-btn" target="_blank" rel="noopener noreferrer">Jetzt bestellen</a>
 		</div>
 	</section>
@@ -201,12 +181,9 @@ const characters = [
 
 <script>
 	document.addEventListener('DOMContentLoaded', () => {
-		const container = document.querySelector('.g-characters');
 		const workshop = document.querySelector('.g-workshop');
 		const roleLabel = workshop?.querySelector('.g-char-role-label') ?? document.querySelector('.g-char-role-label');
 		const descEl = workshop?.querySelector('.g-char-desc') ?? document.querySelector('.g-char-desc');
-
-		if (!container) return;
 
 		const data = {
 			malte: {
@@ -231,37 +208,11 @@ const characters = [
 			},
 		};
 
-		function selectChar(id) {
-			const allCards = Array.from(container.querySelectorAll('.g-char-card'));
-			allCards.forEach((btn) => {
-				const isSelected = btn.dataset.char === id;
-				btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
-				btn.classList.toggle('is-active', isSelected);
-				btn.classList.toggle('is-centered', isSelected);
-			});
-			const charData = data[id];
-			if (charData) {
-				if (roleLabel) roleLabel.textContent = charData.role;
-				if (descEl) descEl.textContent = charData.description;
-			}
-		}
-
-		// Desktop grid only (>1024px)
-		container.addEventListener('click', (e) => {
-			if (window.innerWidth <= 1024) return;
-			const card = e.target.closest('.g-char-card');
-			if (!card) return;
-			const id = card.getAttribute('data-char') || card.dataset.char;
-			if (!id) return;
-			selectChar(id);
-		});
-
-		selectChar('malte');
-
 		const mobileSlider = document.querySelector('.g-mobile-slider');
+		if (!mobileSlider) return;
 
-		function bindMobileSlider() {
-			if (!mobileSlider || window.innerWidth > 1024 || mobileSlider.dataset.gMobileBound === '1') return;
+		function bindCharacterSlider() {
+			if (mobileSlider.dataset.gMobileBound === '1') return;
 			mobileSlider.dataset.gMobileBound = '1';
 
 			const mobileCards = Array.from(mobileSlider.querySelectorAll('.g-mobile-card'));
@@ -350,12 +301,7 @@ const characters = [
 			setMobileActive(0);
 		}
 
-		window.addEventListener('resize', () => {
-			bindMobileSlider();
-		});
-
-		// Mobile + tablet (≤1024px): Option 3 slider
-		bindMobileSlider();
+		bindCharacterSlider();
 	});
 </script>
 
@@ -528,7 +474,7 @@ const characters = [
 		margin-bottom: 0;
 	}
 
-	/* 3. WORKSHOP – off-white section; only character shapes + info box are emerald */
+	/* 4. WORKSHOP – off-white section; only character shapes + info box are emerald */
 	.g-workshop.full-bleed {
 		width: 100vw;
 		margin-left: calc(50% - 50vw);
@@ -555,90 +501,8 @@ const characters = [
 
 	@media (min-width: 1025px) {
 		.g-workshop-subtitle {
-			margin: 0 0 1.5rem 0;
+			margin: 0 0 -2.25rem 0;
 		}
-
-		.g-characters-row {
-			margin-top: 0;
-		}
-	}
-
-	.g-characters {
-		display: grid;
-		grid-template-columns: repeat(4, 280px);
-		gap: 2.5rem;
-		justify-content: center;
-		margin: 0 0 0.75rem 0;
-		padding-top: 0;
-		overflow: visible;
-	}
-
-	.g-char-card {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 0.75rem;
-		width: 280px;
-		min-width: 0;
-		background: none;
-		border: none;
-		cursor: pointer;
-		padding: 0;
-		opacity: 0.5;
-		transition: opacity 0.3s ease;
-		position: relative;
-		overflow: visible;
-	}
-
-	.g-char-card.is-active,
-	.g-char-card[aria-pressed='true'] {
-		opacity: 1;
-	}
-
-	.g-char-card-visual {
-		display: flex;
-		justify-content: center;
-		align-items: flex-end;
-		width: 280px;
-		height: 280px;
-		overflow: visible;
-	}
-
-	.g-char-card-center {
-		position: relative;
-		width: 280px;
-		height: 280px;
-		flex-shrink: 0;
-	}
-
-	.g-char-card-bg {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		height: 216px;
-		background: #1a3a30;
-		border-radius: 40px 40px 0 0;
-		z-index: 0;
-	}
-
-	.g-char-card-img {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		height: 280px;
-		object-fit: contain;
-		object-position: center bottom;
-		display: block;
-		z-index: 1;
-	}
-
-	.g-char-name {
-		font-family: 'Manrope', sans-serif;
-		font-size: 14px;
-		font-weight: 600;
-		color: var(--text);
 	}
 
 	.g-char-info {
@@ -646,6 +510,9 @@ const characters = [
 		padding: 1rem 0 1.25rem;
 		min-height: 0;
 		box-sizing: border-box;
+		text-align: center;
+		max-width: 42rem;
+		margin-inline: auto;
 	}
 
 	.g-char-info .g-eyebrow {
@@ -662,7 +529,7 @@ const characters = [
 		margin: 0;
 	}
 
-	/* 4. VIDEO */
+	/* 3. VIDEO */
 	.g-video {
 		background-color: var(--bg);
 		padding: 2rem 0 3rem;
@@ -699,7 +566,7 @@ const characters = [
 	/* 5. NETFLIX */
 	.g-netflix {
 		background-color: var(--bg);
-		padding: 5rem 0 3rem;
+		padding: 3rem 0 3rem;
 	}
 
 	.g-netflix-inner {
@@ -749,10 +616,17 @@ const characters = [
 		}
 	}
 
-	/* 6. CTA */
+	/* Buchmockup (.g-cta--book), Netflix, Bestellen (.g-cta--order) */
 	.g-cta {
 		background-color: var(--bg);
-		padding: 3rem 0 5rem;
+	}
+
+	.g-cta--book {
+		padding: 3rem 0 2rem;
+	}
+
+	.g-cta--order {
+		padding: 2rem 0 5rem;
 	}
 
 	.g-cta-inner {
@@ -772,182 +646,209 @@ const characters = [
 		margin-inline: auto;
 	}
 
-	.g-cta-btn {
-		margin-top: 1.5rem;
+	.g-cta--order .g-cta-btn {
+		margin-top: 0;
 	}
 
 	/* ========================================
-	   CHARACTER SLIDER — tablet + phone (Option 3)
-	   Desktop (>1024px) uses .g-characters-row grid
+	   CHARACTER SLIDER (Option 3) — all viewports
 	   ======================================== */
 
-	.g-mobile-slider {
-		display: none;
+	.g-workshop-inner {
+		overflow-x: visible;
 	}
 
-	@media (max-width: 1024px) {
-		.g-workshop-inner {
-			overflow-x: visible;
-		}
+	.g-mobile-slider {
+		display: block;
+		padding: 0 0 1.25rem;
+		margin-top: -1.25rem;
+	}
 
-		.g-characters-row {
-			display: none !important;
-		}
+	.g-mobile-slider-track {
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		gap: 0;
+		padding: 0 0.75rem;
+		min-height: 340px;
+	}
 
+	.g-mobile-card {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		transition: all 0.35s ease;
+		cursor: pointer;
+	}
+
+	.g-mobile-card:not(.is-active) {
+		opacity: 0.5;
+		transform: scale(0.75);
+		margin: 0 -20px;
+		z-index: 1;
+	}
+
+	.g-mobile-card.is-active {
+		opacity: 1;
+		transform: scale(1);
+		z-index: 10;
+		margin: 0 8px;
+	}
+
+	.g-mobile-card-visual {
+		position: relative;
+		width: 200px;
+		height: 256px;
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+	}
+
+	.g-mobile-card.is-active .g-mobile-card-visual {
+		width: 200px;
+		height: 256px;
+	}
+
+	.g-mobile-card:not(.is-active) .g-mobile-card-visual {
+		width: 135px;
+		height: 172px;
+	}
+
+	.g-mobile-card-bg {
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 85%;
+		height: 60%;
+		background: var(--emerald);
+		border-radius: 28px 28px 0 0;
+		z-index: 0;
+	}
+
+	.g-mobile-card-img {
+		position: relative;
+		z-index: 1;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		object-position: bottom center;
+	}
+
+	.g-mobile-card-name {
+		font-family: 'Manrope', sans-serif;
+		font-size: 12px;
+		font-weight: 600;
+		color: var(--text);
+		margin-top: 0.5rem;
+		transition: font-size 0.35s ease;
+	}
+
+	.g-mobile-card.is-active .g-mobile-card-name {
+		font-size: 18px;
+	}
+
+	.g-mobile-nav {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1.5rem;
+		margin-top: 1.25rem;
+	}
+
+	.g-mobile-nav-btn {
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		border: 1px solid rgba(28, 28, 28, 0.2);
+		background: transparent;
+		color: var(--text);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		transition: background-color 0.2s ease, border-color 0.2s ease;
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	.g-mobile-nav-btn:hover {
+		background: rgba(28, 28, 28, 0.05);
+	}
+
+	.g-mobile-nav-btn:active {
+		transform: scale(0.95);
+	}
+
+	.g-mobile-dots {
+		display: flex;
+		gap: 8px;
+	}
+
+	.g-mobile-dot {
+		width: 28px;
+		height: 3px;
+		background: rgba(28, 28, 28, 0.15);
+		transition: background-color 0.3s ease;
+	}
+
+	.g-mobile-dot.is-active {
+		background: var(--gold);
+	}
+
+	.g-char-info .g-eyebrow {
+		text-align: center;
+	}
+
+	.g-char-desc {
+		max-width: 100%;
+		text-align: center;
+		margin: 0 auto;
+	}
+
+	/* Desktop: larger stage, aligned with former grid scale */
+	@media (min-width: 1025px) {
 		.g-mobile-slider {
-			display: block;
-			padding: 0 0 1.25rem;
-			margin-top: -1.25rem;
-		}
-
-		.g-workshop-subtitle {
-			margin-bottom: -0.35rem;
+			margin-top: -5.75rem;
+			padding: 0 0 2rem;
 		}
 
 		.g-mobile-slider-track {
-			display: flex;
-			align-items: flex-end;
-			justify-content: center;
-			gap: 0;
-			padding: 0 0.75rem;
-			min-height: 340px;
-		}
-
-		.g-mobile-card {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			transition: all 0.35s ease;
-			cursor: pointer;
+			min-height: 460px;
+			padding: 0 2rem;
 		}
 
 		.g-mobile-card:not(.is-active) {
-			opacity: 0.5;
-			transform: scale(0.75);
-			margin: 0 -20px;
-			z-index: 1;
+			margin: 0 -28px;
 		}
 
-		.g-mobile-card.is-active {
-			opacity: 1;
-			transform: scale(1);
-			z-index: 10;
-			margin: 0 8px;
-		}
-
-		.g-mobile-card-visual {
-			position: relative;
-			width: 200px;
-			height: 256px;
-			display: flex;
-			align-items: flex-end;
-			justify-content: center;
-		}
-
+		.g-mobile-card-visual,
 		.g-mobile-card.is-active .g-mobile-card-visual {
-			width: 200px;
-			height: 256px;
+			width: 280px;
+			height: 360px;
 		}
 
 		.g-mobile-card:not(.is-active) .g-mobile-card-visual {
-			width: 135px;
-			height: 172px;
-		}
-
-		.g-mobile-card-bg {
-			position: absolute;
-			bottom: 0;
-			left: 50%;
-			transform: translateX(-50%);
-			width: 85%;
-			height: 60%;
-			background: var(--emerald);
-			border-radius: 28px 28px 0 0;
-			z-index: 0;
-		}
-
-		.g-mobile-card-img {
-			position: relative;
-			z-index: 1;
-			width: 100%;
-			height: 100%;
-			object-fit: contain;
-			object-position: bottom center;
-		}
-
-		.g-mobile-card-name {
-			font-family: 'Manrope', sans-serif;
-			font-size: 12px;
-			font-weight: 600;
-			color: var(--text);
-			margin-top: 0.5rem;
-			transition: font-size 0.35s ease;
+			width: 190px;
+			height: 244px;
 		}
 
 		.g-mobile-card.is-active .g-mobile-card-name {
-			font-size: 18px;
+			font-size: 22px;
 		}
 
 		.g-mobile-nav {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			gap: 1.5rem;
-			margin-top: 1.25rem;
+			margin-top: 1.5rem;
+			gap: 2rem;
 		}
 
 		.g-mobile-nav-btn {
-			width: 44px;
-			height: 44px;
-			border-radius: 50%;
-			border: 1px solid rgba(28, 28, 28, 0.2);
-			background: transparent;
-			color: var(--text);
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			cursor: pointer;
-			transition: background-color 0.2s ease, border-color 0.2s ease;
-			-webkit-tap-highlight-color: transparent;
+			width: 52px;
+			height: 52px;
 		}
 
-		.g-mobile-nav-btn:hover {
-			background: rgba(28, 28, 28, 0.05);
-		}
-
-		.g-mobile-nav-btn:active {
-			transform: scale(0.95);
-		}
-
-		.g-mobile-dots {
-			display: flex;
-			gap: 8px;
-		}
-
-		.g-mobile-dot {
-			width: 28px;
-			height: 3px;
-			background: rgba(28, 28, 28, 0.15);
-			transition: background-color 0.3s ease;
-		}
-
-		.g-mobile-dot.is-active {
-			background: var(--gold);
-		}
-
-		.g-char-info {
-			padding: 1rem 0 1.25rem;
-			text-align: center;
-		}
-
-		.g-char-info .g-eyebrow {
-			text-align: center;
-		}
-
-		.g-char-desc {
-			max-width: 100%;
-			text-align: center;
-			margin: 0 auto;
+		.g-mobile-nav-btn svg {
+			width: 22px;
+			height: 22px;
 		}
 	}
 
@@ -999,14 +900,19 @@ const characters = [
 
 	/* Phone: tighter vertical rhythm */
 	@media (max-width: 768px) {
+		.g-workshop.full-bleed {
+			padding-left: 0.75rem;
+			padding-right: 0.75rem;
+		}
+
 		.g-char-info {
 			padding: 0 0 1.25rem 0;
 			max-width: 100%;
 		}
 
 		.g-char-desc {
-			max-width: 320px;
-			margin-inline: auto;
+			max-width: none;
+			margin-inline: 0;
 			text-align: center;
 		}
 
