@@ -62,7 +62,6 @@ const characters = [
 	<!-- 2. KLAPPENTEXT (Off-White) -->
 	<section class="g-klappentext">
 		<div class="g-klappentext-inner">
-			<h2>Manchmal braucht es Mut</h2>
 			<p class="g-body">
 				Elias sehnt sich nach einem erfüllenden Job, Lea möchte vor ihrem 30. Geburtstag unbedingt einen Partner finden, Malte belasten seine Depressionen in der Ehe und Sofia steht kurz vor der nächsten Beförderung.
 			</p>
@@ -75,34 +74,60 @@ const characters = [
 		</div>
 	</section>
 
-	<!-- 3. WORKSHOP (Emerald, full-width) -->
+	<!-- 3. VIDEO (Off-White) -->
+	<section class="g-video">
+		<div class="g-video-inner">
+			<div class="g-video-placeholder" aria-hidden="true">
+				<span class="g-play-icon" aria-hidden="true">▶</span>
+			</div>
+		</div>
+	</section>
+
+	<!-- 4. WORKSHOP (Emerald, full-width) -->
 	<section class="g-workshop full-bleed">
 		<div class="g-workshop-inner">
 			<h2>Der Millennial Workshop</h2>
 			<p class="g-workshop-subtitle">Klicke auf eine Person, um mehr zu erfahren</p>
-			<div class="g-characters">
-				{characters.map((c) => (
-					<button
-						type="button"
-						class="g-char-card"
-						data-char={c.id}
-						aria-pressed={c.id === 'malte'}
-						aria-label={`${c.name} – ${c.role}`}
-					>
-						<div class="g-char-card-visual">
-							<div class="g-char-card-center">
-								<div class="g-char-card-bg" aria-hidden="true"></div>
-								<img
-									src={characterImages[c.id]}
-									alt={c.name}
-									class="g-char-card-img"
-								/>
+
+			<div class="g-mobile-slider">
+				<div class="g-mobile-slider-track">
+					{characters.map((c, index) => (
+						<div
+							class:list={['g-mobile-card', { 'is-active': index === 0 }]}
+							data-char={c.id}
+							data-index={index}
+						>
+							<div class="g-mobile-card-visual">
+								<div class="g-mobile-card-bg" aria-hidden="true"></div>
+								<img src={characterImages[c.id]} alt={c.name} class="g-mobile-card-img" />
 							</div>
+							<span class="g-mobile-card-name">{c.name}</span>
 						</div>
-						<span class="g-char-name">{c.name}</span>
+					))}
+				</div>
+				<div class="g-mobile-nav">
+					<button type="button" class="g-mobile-nav-btn g-mobile-prev" aria-label="Vorherige Person">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M15 18l-6-6 6-6"></path>
+						</svg>
 					</button>
-				))}
+					<div class="g-mobile-dots">
+						{characters.map((c, index) => (
+							<div
+								class:list={['g-mobile-dot', { 'is-active': index === 0 }]}
+								data-index={index}
+							>
+							</div>
+						))}
+					</div>
+					<button type="button" class="g-mobile-nav-btn g-mobile-next" aria-label="Nächste Person">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M9 18l6-6-6-6"></path>
+						</svg>
+					</button>
+				</div>
 			</div>
+
 			<div class="g-char-info">
 				<span class="g-eyebrow g-char-role-label">Leitet den Workshop</span>
 				<p class="g-char-desc">
@@ -112,17 +137,20 @@ const characters = [
 		</div>
 	</section>
 
-	<!-- 4. VIDEO (Off-White) -->
-	<section class="g-video">
-		<div class="g-video-inner">
-			<h2>Buchtrailer</h2>
-			<div class="g-video-placeholder" aria-hidden="true">
-				<span class="g-play-icon" aria-hidden="true">▶</span>
+	<!-- 5. Buchmockup -->
+	<section class="g-cta g-cta--book">
+		<div class="g-cta-inner">
+			<div class="g-cta-cover-wrap">
+				<img
+					src="/images/sie-wollten-endlich-neues-wagen.png"
+					alt="Buchcover: Sie wollten endlich Neues wagen"
+					class="g-cta-cover"
+				/>
 			</div>
 		</div>
 	</section>
 
-	<!-- 5. NETFLIX (Off-White) -->
+	<!-- 6. NETFLIX (Off-White) -->
 	<section class="g-netflix">
 		<div class="g-netflix-inner">
 			<h2>Wie Netflix – nur als Buch</h2>
@@ -143,16 +171,9 @@ const characters = [
 		</div>
 	</section>
 
-	<!-- 6. CTA (Off-White) -->
-	<section class="g-cta">
+	<!-- 7. Jetzt bestellen -->
+	<section class="g-cta g-cta--order">
 		<div class="g-cta-inner">
-			<div class="g-cta-cover-wrap">
-				<img
-					src="/images/sie-wollten-endlich-neues-wagen.png"
-					alt="Buchcover: Sie wollten endlich Neues wagen"
-					class="g-cta-cover"
-				/>
-			</div>
 			<a href="#" class="btn btn-primary g-cta-btn" target="_blank" rel="noopener noreferrer">Jetzt bestellen</a>
 		</div>
 	</section>
@@ -160,17 +181,9 @@ const characters = [
 
 <script>
 	document.addEventListener('DOMContentLoaded', () => {
-		const container = document.querySelector('.g-characters');
 		const workshop = document.querySelector('.g-workshop');
 		const roleLabel = workshop?.querySelector('.g-char-role-label') ?? document.querySelector('.g-char-role-label');
 		const descEl = workshop?.querySelector('.g-char-desc') ?? document.querySelector('.g-char-desc');
-
-		if (!container) return;
-
-		let cards = Array.from(container.querySelectorAll('.g-char-card'));
-		const isMobile = window.matchMedia('(max-width: 1024px)').matches;
-		let setWidth = null;
-		let setStart = null;
 
 		const data = {
 			malte: {
@@ -195,170 +208,107 @@ const characters = [
 			},
 		};
 
-		function selectChar(id) {
-			const allCards = Array.from(container.querySelectorAll('.g-char-card'));
-			allCards.forEach((btn) => {
-				const isSelected = btn.dataset.char === id;
-				btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
-				btn.classList.toggle('is-active', isSelected);
-				btn.classList.toggle('is-centered', isSelected);
-			});
-			const charData = data[id];
-			if (charData) {
-				if (roleLabel) roleLabel.textContent = charData.role;
-				if (descEl) descEl.textContent = charData.description;
-			}
-		}
+		const mobileSlider = document.querySelector('.g-mobile-slider');
+		if (!mobileSlider) return;
 
-		function centerCard(card, behavior = 'smooth') {
-			const containerWidth = container.offsetWidth;
-			const cardLeft = card.offsetLeft;
-			const cardWidth = card.offsetWidth;
-			const scrollLeft = cardLeft - containerWidth / 2 + cardWidth / 2;
-			if (behavior === 'smooth') {
-				container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
-			} else {
-				container.scrollLeft = scrollLeft;
-			}
-		}
+		function bindCharacterSlider() {
+			if (mobileSlider.dataset.gMobileBound === '1') return;
+			mobileSlider.dataset.gMobileBound = '1';
 
-		function updateCenteredCard() {
-			if (window.innerWidth > 1024) return;
-			const allCards = Array.from(container.querySelectorAll('.g-char-card'));
-			const containerRect = container.getBoundingClientRect();
-			const containerCenter = containerRect.left + containerRect.width / 2;
+			const mobileCards = Array.from(mobileSlider.querySelectorAll('.g-mobile-card'));
+			const mobileDots = Array.from(mobileSlider.querySelectorAll('.g-mobile-dot'));
+			const prevM = mobileSlider.querySelector('.g-mobile-prev');
+			const nextM = mobileSlider.querySelector('.g-mobile-next');
 
-			let closestCard = null;
-			let closestDistance = Infinity;
+			let currentIndex = 0;
+			const totalCards = mobileCards.length;
 
-			allCards.forEach((card) => {
-				const cardRect = card.getBoundingClientRect();
-				const cardCenter = cardRect.left + cardRect.width / 2;
-				const distance = Math.abs(containerCenter - cardCenter);
+			function setMobileActive(index) {
+				currentIndex = (index + totalCards) % totalCards;
 
-				if (distance < closestDistance) {
-					closestDistance = distance;
-					closestCard = card;
-				}
-			});
+				const prevIdx = (currentIndex - 1 + totalCards) % totalCards;
+				const nextIdx = (currentIndex + 1) % totalCards;
 
-			if (closestCard) {
-				const id = closestCard.dataset.char;
-				if (id) {
-					selectChar(id);
-					requestAnimationFrame(() => centerCard(closestCard, 'auto'));
+				mobileCards.forEach((card) => {
+					card.classList.remove('is-active');
+					card.style.display = 'none';
+				});
+
+				const prevCard = mobileCards[prevIdx];
+				const currentCard = mobileCards[currentIndex];
+				const nextCard = mobileCards[nextIdx];
+
+				prevCard.style.display = 'flex';
+				prevCard.style.order = '1';
+
+				currentCard.style.display = 'flex';
+				currentCard.style.order = '2';
+				currentCard.classList.add('is-active');
+
+				nextCard.style.display = 'flex';
+				nextCard.style.order = '3';
+
+				mobileDots.forEach((dot, i) => {
+					dot.classList.toggle('is-active', i === currentIndex);
+				});
+
+				const id = currentCard.dataset.char;
+				if (id && data[id]) {
+					if (roleLabel) roleLabel.textContent = data[id].role;
+					if (descEl) descEl.textContent = data[id].description;
 				}
 			}
-		}
 
-		let ignoreScrollUntil = 0;
-		function updateCenteredCardWithGuard() {
-			if (Date.now() < ignoreScrollUntil) return;
-			updateCenteredCard();
-		}
+			prevM?.addEventListener('click', () => setMobileActive(currentIndex - 1));
+			nextM?.addEventListener('click', () => setMobileActive(currentIndex + 1));
 
-		// Mobile only: clone cards for infinite loop
-		if (isMobile) {
-			const clonesBefore = cards.map((card) => card.cloneNode(true));
-			const clonesAfter = cards.map((card) => card.cloneNode(true));
-
-			clonesBefore.reverse().forEach((clone) => {
-				clone.setAttribute('data-clone', 'true');
-				container.insertBefore(clone, container.firstChild);
-			});
-
-			clonesAfter.forEach((clone) => {
-				clone.setAttribute('data-clone', 'true');
-				container.appendChild(clone);
-			});
-
-			cards = Array.from(container.querySelectorAll('.g-char-card'));
-			requestAnimationFrame(() => {
-				requestAnimationFrame(() => {
-					if (cards.length >= 9) {
-						setStart = cards[4].offsetLeft;
-						setWidth = cards[8].offsetLeft - cards[4].offsetLeft;
-						container.style.scrollBehavior = 'auto';
-						container.scrollLeft = setStart;
-						container.style.scrollBehavior = '';
-						const middleMalte = cards[4];
-						if (middleMalte) centerCard(middleMalte, 'auto');
+			mobileCards.forEach((card, idx) => {
+				card.addEventListener('click', () => {
+					if (!card.classList.contains('is-active')) {
+						setMobileActive(idx);
 					}
 				});
 			});
+
+			let touchStartX = 0;
+			const track = mobileSlider.querySelector('.g-mobile-slider-track');
+
+			track?.addEventListener(
+				'touchstart',
+				(e) => {
+					touchStartX = e.touches[0].clientX;
+				},
+				{ passive: true }
+			);
+
+			track?.addEventListener(
+				'touchend',
+				(e) => {
+					const touchEndX = e.changedTouches[0].clientX;
+					const diff = touchStartX - touchEndX;
+
+					if (Math.abs(diff) > 50) {
+						if (diff > 0) {
+							setMobileActive(currentIndex + 1);
+						} else {
+							setMobileActive(currentIndex - 1);
+						}
+					}
+				},
+				{ passive: true }
+			);
+
+			setMobileActive(0);
 		}
 
-		// Scroll: infinite loop jump (mobile only) then update centered card
-		container.addEventListener('scroll', () => {
-			const hasClones = container.querySelectorAll('[data-clone="true"]').length > 0;
-			if (hasClones && setWidth != null && setStart != null) {
-				container.style.scrollBehavior = 'auto';
-				if (container.scrollLeft >= setStart + setWidth) {
-					container.scrollLeft = container.scrollLeft - setWidth;
-				}
-				if (container.scrollLeft < setStart) {
-					container.scrollLeft = container.scrollLeft + setWidth;
-				}
-				container.style.scrollBehavior = '';
-			}
-			window.requestAnimationFrame(updateCenteredCardWithGuard);
-		});
-
-		// Click: delegation (works for original and clone cards)
-		container.addEventListener('click', (e) => {
-			const card = e.target.closest('.g-char-card');
-			if (!card) return;
-			const id = card.getAttribute('data-char') || card.dataset.char;
-			if (!id) return;
-			ignoreScrollUntil = Date.now() + 400;
-			selectChar(id);
-			if (window.innerWidth <= 1024) {
-				centerCard(card, 'smooth');
-			}
-		});
-
-		// Initial selection; mobile centering is done in rAF after cloning
-		selectChar('malte');
-
-		// Resize: remove clones when switching to desktop
-		window.addEventListener('resize', () => {
-			const isNowMobile = window.matchMedia('(max-width: 1024px)').matches;
-			if (!isNowMobile) {
-				container.querySelectorAll('[data-clone="true"]').forEach((clone) => clone.remove());
-				cards = Array.from(container.querySelectorAll('.g-char-card'));
-			}
-		});
+		bindCharacterSlider();
 	});
 </script>
 
 <style>
-	/* Page-specific color overrides for "Neues Wagen" */
+	/* Neues Wagen – orange palette (#FBA922 / #C13A00) */
 	.g-hero .g-eyebrow {
 		color: #FBA922;
-	}
-
-	.g-char-info .g-eyebrow {
-		color: #C13A00;
-	}
-
-	.g-netflix h3 {
-		color: #FBA922;
-	}
-
-	.btn-primary {
-		background-color: #C13A00;
-	}
-
-	.btn-primary:hover {
-		background-color: #a32f00;
-	}
-
-	.g-char-card-bg {
-		background: #FBA922;
-	}
-
-	.g-video-placeholder {
-		background-color: #FBA922;
 	}
 
 	/* Shared */
@@ -369,14 +319,12 @@ const characters = [
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.28em;
-		color: #FBA922;
+		color: #C13A00;
 		margin: 0 0 0.75rem 0;
 	}
 
 	/* Section H2s – default heading style (no eyebrow) */
-	.g-klappentext-inner h2,
 	.g-workshop-inner h2,
-	.g-video-inner h2,
 	.g-netflix-inner h2 {
 		font-family: 'Manrope', sans-serif;
 		font-size: 28px;
@@ -386,10 +334,6 @@ const characters = [
 		text-transform: none;
 		text-align: center;
 		margin: 0 0 1rem 0;
-	}
-
-	.g-video-inner h2 {
-		margin-bottom: 1.5rem;
 	}
 
 	.g-netflix-inner h2 {
@@ -426,7 +370,7 @@ const characters = [
 	}
 
 	.btn-primary:hover {
-		background-color: #a32f00;
+		background-color: #a83200;
 	}
 
 	/* 1. HERO */
@@ -483,11 +427,31 @@ const characters = [
 			align-items: center;
 		}
 		.g-hero-cover-wrap {
-			max-width: 220px;
+			max-width: 200px;
 			margin-inline: auto;
 		}
 		.g-hero-content {
 			align-items: center;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.g-hero {
+			padding: 5.5rem 0 3rem;
+		}
+
+		.g-hero-cover-wrap {
+			max-width: 160px;
+		}
+
+		.g-hero-title {
+			font-size: 32px;
+			margin-bottom: 1.5rem;
+		}
+
+		.g-hero .g-eyebrow {
+			margin-bottom: 1rem;
+			font-size: 10px;
 		}
 	}
 
@@ -515,14 +479,14 @@ const characters = [
 		margin-bottom: 0;
 	}
 
-	/* 3. WORKSHOP – off-white section; only character shapes + info box are emerald */
+	/* 4. WORKSHOP – character slider + info */
 	.g-workshop.full-bleed {
 		width: 100vw;
 		margin-left: calc(50% - 50vw);
 		box-sizing: border-box;
 		background-color: var(--bg);
 		color: var(--text);
-		padding: 2rem var(--page-padding-desktop) 5rem;
+		padding: 2rem var(--page-padding-desktop) 2.5rem;
 	}
 
 	.g-workshop-inner {
@@ -537,92 +501,23 @@ const characters = [
 		line-height: 1.85;
 		color: var(--text);
 		text-align: center;
-		margin: 0 0 1.5rem 0;
+		margin: 0 0 -0.75rem 0;
 	}
 
-	.g-characters {
-		display: grid;
-		grid-template-columns: repeat(4, 260px);
-		gap: 2.5rem;
-		justify-content: center;
-		margin: 0 0 2rem 0;
-		padding-top: 0;
-		overflow: visible;
-	}
-
-	.g-char-card {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 0.75rem;
-		width: 260px;
-		min-width: 0;
-		background: none;
-		border: none;
-		cursor: pointer;
-		padding: 0;
-		opacity: 0.5;
-		transition: opacity 0.3s ease;
-		position: relative;
-		overflow: visible;
-	}
-
-	.g-char-card.is-active,
-	.g-char-card[aria-pressed='true'] {
-		opacity: 1;
-	}
-
-	.g-char-card-visual {
-		display: flex;
-		justify-content: center;
-		align-items: flex-end;
-		width: 260px;
-		height: 260px;
-		overflow: visible;
-	}
-
-	.g-char-card-center {
-		position: relative;
-		width: 260px;
-		height: 260px;
-		flex-shrink: 0;
-	}
-
-	.g-char-card-bg {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		height: 200px;
-		background: #FBA922;
-		border-radius: 40px 40px 0 0;
-		z-index: 0;
-	}
-
-	.g-char-card-img {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		height: 260px;
-		object-fit: contain;
-		object-position: center bottom;
-		display: block;
-		z-index: 1;
-	}
-
-	.g-char-name {
-		font-family: 'Manrope', sans-serif;
-		font-size: 14px;
-		font-weight: 600;
-		color: var(--text);
+	@media (min-width: 1025px) {
+		.g-workshop-subtitle {
+			margin: 0 0 -2.25rem 0;
+		}
 	}
 
 	.g-char-info {
 		background-color: var(--bg);
-		padding: 2rem;
-		min-height: 140px;
+		padding: 1rem 0 1.25rem;
+		min-height: 0;
 		box-sizing: border-box;
+		text-align: center;
+		max-width: 42rem;
+		margin-inline: auto;
 	}
 
 	.g-char-info .g-eyebrow {
@@ -639,124 +534,10 @@ const characters = [
 		margin: 0;
 	}
 
-	@media (max-width: 1024px) {
-		.g-workshop-inner {
-			overflow-x: visible;
-		}
-
-		.g-char-info {
-			padding: 0 2rem 2rem 2rem;
-		}
-
-		.g-characters {
-			display: flex;
-			align-items: flex-end;
-			overflow-x: auto;
-			scroll-snap-type: x mandatory;
-			scroll-behavior: smooth;
-			-webkit-overflow-scrolling: touch;
-			gap: 1rem;
-			scrollbar-width: none;
-			justify-content: flex-start;
-			margin: -10rem 0 1rem 0;
-			padding-top: 1.5rem;
-			padding-bottom: 1rem;
-			padding-left: calc(50vw - 190px);
-			padding-right: calc(50vw - 190px);
-			scroll-padding: 0 calc(50vw - 190px);
-			width: 100vw;
-			margin-left: calc(50% - 50vw);
-			box-sizing: border-box;
-		}
-
-		.g-characters::-webkit-scrollbar {
-			display: none;
-		}
-
-		.g-char-card {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			flex: 0 0 260px;
-			width: 260px;
-			scroll-snap-align: center;
-			opacity: 0.5;
-			transition: opacity 0.3s ease, flex 0.35s ease, width 0.35s ease;
-			margin: 0;
-			overflow: visible;
-		}
-
-		.g-char-card.is-centered,
-		.g-char-card.is-active,
-		.g-char-card[aria-pressed='true'] {
-			opacity: 1;
-			z-index: 10;
-			flex: 0 0 380px;
-			width: 380px;
-		}
-
-		.g-char-card-visual {
-			width: 260px;
-			height: 364px;
-			overflow: visible;
-			transition: width 0.35s ease, height 0.35s ease;
-			flex-shrink: 0;
-		}
-
-		.g-char-card.is-centered .g-char-card-visual,
-		.g-char-card.is-active .g-char-card-visual,
-		.g-char-card[aria-pressed='true'] .g-char-card-visual {
-			width: 380px;
-			height: 532px;
-		}
-
-		.g-char-card-center {
-			width: 260px;
-			height: 364px;
-			overflow: visible;
-			transition: width 0.35s ease, height 0.35s ease;
-		}
-
-		.g-char-card.is-centered .g-char-card-center,
-		.g-char-card.is-active .g-char-card-center,
-		.g-char-card[aria-pressed='true'] .g-char-card-center {
-			width: 380px;
-			height: 532px;
-		}
-
-		.g-char-card-bg {
-			height: 182px;
-			transition: height 0.35s ease;
-		}
-
-		.g-char-card.is-centered .g-char-card-bg,
-		.g-char-card.is-active .g-char-card-bg,
-		.g-char-card[aria-pressed='true'] .g-char-card-bg {
-			height: 266px;
-		}
-
-		.g-char-card-img {
-			height: 364px;
-			transition: height 0.35s ease;
-		}
-
-		.g-char-card.is-centered .g-char-card-img,
-		.g-char-card.is-active .g-char-card-img,
-		.g-char-card[aria-pressed='true'] .g-char-card-img {
-			height: 532px;
-		}
-
-		.g-char-card.is-centered .g-char-name,
-		.g-char-card.is-active .g-char-name,
-		.g-char-card[aria-pressed='true'] .g-char-name {
-			font-size: 21px;
-		}
-	}
-
-	/* 4. VIDEO */
+	/* 3. VIDEO */
 	.g-video {
 		background-color: var(--bg);
-		padding: 5rem 0;
+		padding: 2rem 0 3rem;
 	}
 
 	.g-video-inner {
@@ -790,7 +571,7 @@ const characters = [
 	/* 5. NETFLIX */
 	.g-netflix {
 		background-color: var(--bg);
-		padding: 5rem 0 3rem;
+		padding: 3rem 0 3rem;
 	}
 
 	.g-netflix-inner {
@@ -840,10 +621,17 @@ const characters = [
 		}
 	}
 
-	/* 6. CTA */
+	/* Buchmockup (.g-cta--book), Netflix, Bestellen (.g-cta--order) */
 	.g-cta {
 		background-color: var(--bg);
-		padding: 3rem 0 5rem;
+	}
+
+	.g-cta--book {
+		padding: 3rem 0 2rem;
+	}
+
+	.g-cta--order {
+		padding: 2rem 0 5rem;
 	}
 
 	.g-cta-inner {
@@ -863,7 +651,313 @@ const characters = [
 		margin-inline: auto;
 	}
 
-	.g-cta-btn {
-		margin-top: 1.5rem;
+	.g-cta--order .g-cta-btn {
+		margin-top: 0;
+	}
+
+	/* ========================================
+	   CHARACTER SLIDER (Option 3) — all viewports
+	   ======================================== */
+
+	.g-workshop-inner {
+		overflow-x: visible;
+	}
+
+	.g-mobile-slider {
+		display: block;
+		padding: 0 0 1.25rem;
+		margin-top: -1.25rem;
+	}
+
+	.g-mobile-slider-track {
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		gap: 0;
+		padding: 0 0.75rem;
+		min-height: 340px;
+	}
+
+	.g-mobile-card {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		transition: all 0.35s ease;
+		cursor: pointer;
+	}
+
+	.g-mobile-card:not(.is-active) {
+		opacity: 0.5;
+		transform: scale(0.75);
+		margin: 0 -20px;
+		z-index: 1;
+	}
+
+	.g-mobile-card.is-active {
+		opacity: 1;
+		transform: scale(1);
+		z-index: 10;
+		margin: 0 8px;
+	}
+
+	.g-mobile-card-visual {
+		position: relative;
+		width: 200px;
+		height: 256px;
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+	}
+
+	.g-mobile-card.is-active .g-mobile-card-visual {
+		width: 200px;
+		height: 256px;
+	}
+
+	.g-mobile-card:not(.is-active) .g-mobile-card-visual {
+		width: 135px;
+		height: 172px;
+	}
+
+	.g-mobile-card-bg {
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 85%;
+		height: 60%;
+		background: #FBA922;
+		border-radius: 28px 28px 0 0;
+		z-index: 0;
+	}
+
+	.g-mobile-card-img {
+		position: relative;
+		z-index: 1;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		object-position: bottom center;
+	}
+
+	.g-mobile-card-name {
+		font-family: 'Manrope', sans-serif;
+		font-size: 12px;
+		font-weight: 600;
+		color: var(--text);
+		margin-top: 0.5rem;
+		transition: font-size 0.35s ease;
+	}
+
+	.g-mobile-card.is-active .g-mobile-card-name {
+		font-size: 18px;
+	}
+
+	.g-mobile-nav {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1.5rem;
+		margin-top: 1.25rem;
+	}
+
+	.g-mobile-nav-btn {
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		border: 1px solid rgba(28, 28, 28, 0.2);
+		background: transparent;
+		color: var(--text);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		transition: background-color 0.2s ease, border-color 0.2s ease;
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	.g-mobile-nav-btn:hover {
+		background: rgba(28, 28, 28, 0.05);
+	}
+
+	.g-mobile-nav-btn:active {
+		transform: scale(0.95);
+	}
+
+	.g-mobile-dots {
+		display: flex;
+		gap: 8px;
+	}
+
+	.g-mobile-dot {
+		width: 28px;
+		height: 3px;
+		background: rgba(28, 28, 28, 0.15);
+		transition: background-color 0.3s ease;
+	}
+
+	.g-mobile-dot.is-active {
+		background: #C13A00;
+	}
+
+	.g-char-info .g-eyebrow {
+		text-align: center;
+	}
+
+	.g-char-desc {
+		max-width: 100%;
+		text-align: center;
+		margin: 0 auto;
+	}
+
+	/* Desktop: larger stage, aligned with former grid scale */
+	@media (min-width: 1025px) {
+		.g-mobile-slider {
+			margin-top: -5.75rem;
+			padding: 0 0 2rem;
+		}
+
+		.g-mobile-slider-track {
+			min-height: 460px;
+			padding: 0 2rem;
+		}
+
+		.g-mobile-card:not(.is-active) {
+			margin: 0 -28px;
+		}
+
+		.g-mobile-card-visual,
+		.g-mobile-card.is-active .g-mobile-card-visual {
+			width: 280px;
+			height: 360px;
+		}
+
+		.g-mobile-card:not(.is-active) .g-mobile-card-visual {
+			width: 190px;
+			height: 244px;
+		}
+
+		.g-mobile-card.is-active .g-mobile-card-name {
+			font-size: 22px;
+		}
+
+		.g-mobile-nav {
+			margin-top: 1.5rem;
+			gap: 2rem;
+		}
+
+		.g-mobile-nav-btn {
+			width: 52px;
+			height: 52px;
+		}
+
+		.g-mobile-nav-btn svg {
+			width: 22px;
+			height: 22px;
+		}
+	}
+
+	/* Tablet: slightly larger figures, gentler overlap with subtitle */
+	@media (min-width: 769px) and (max-width: 1024px) {
+		.g-mobile-slider {
+			margin-top: -0.5rem;
+			padding-bottom: 1.5rem;
+		}
+
+		.g-workshop-subtitle {
+			margin-bottom: 0;
+		}
+
+		.g-mobile-slider-track {
+			min-height: 400px;
+			padding: 0 1rem;
+		}
+
+		.g-mobile-card:not(.is-active) {
+			margin: 0 -24px;
+		}
+
+		.g-mobile-card-visual,
+		.g-mobile-card.is-active .g-mobile-card-visual {
+			width: 240px;
+			height: 308px;
+		}
+
+		.g-mobile-card:not(.is-active) .g-mobile-card-visual {
+			width: 165px;
+			height: 212px;
+		}
+
+		.g-mobile-card.is-active .g-mobile-card-name {
+			font-size: 20px;
+		}
+
+		.g-mobile-nav-btn {
+			width: 48px;
+			height: 48px;
+		}
+
+		.g-mobile-nav-btn svg {
+			width: 20px;
+			height: 20px;
+		}
+	}
+
+	/* Phone: tighter vertical rhythm */
+	@media (max-width: 768px) {
+		.g-workshop.full-bleed {
+			padding-left: 1.25rem;
+			padding-right: 1.25rem;
+		}
+
+		.g-char-info {
+			padding: 0 0 1.25rem 0;
+			max-width: 100%;
+		}
+
+		.g-char-desc {
+			max-width: none;
+			margin-inline: 0;
+			text-align: center;
+		}
+
+		.g-mobile-slider {
+			padding: 0 0 1rem;
+			margin-top: -3rem;
+		}
+
+		.g-workshop-subtitle {
+			margin-bottom: -1.25rem;
+		}
+
+		.g-mobile-slider-track {
+			min-height: 330px;
+			padding: 0 0.5rem;
+		}
+
+		.g-mobile-card-visual,
+		.g-mobile-card.is-active .g-mobile-card-visual {
+			width: 200px;
+			height: 256px;
+		}
+
+		.g-mobile-card:not(.is-active) .g-mobile-card-visual {
+			width: 135px;
+			height: 172px;
+		}
+
+		.g-mobile-card.is-active .g-mobile-card-name {
+			font-size: 18px;
+		}
+
+		.g-mobile-nav-btn {
+			width: 44px;
+			height: 44px;
+		}
+
+		.g-mobile-nav-btn svg {
+			width: 18px;
+			height: 18px;
+		}
 	}
 </style>
