@@ -1,0 +1,530 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+// Reading time
+const words = post.body.split(/\s+/).length;
+const readingTime = Math.ceil(words / 200);
+
+// Format date
+const pubDate = new Date(post.data.pubDate);
+const formattedDate = pubDate.toLocaleDateString('de-DE', {
+	day: 'numeric',
+	month: 'long',
+	year: 'numeric',
+});
+
+// Category label
+const categoryLabels: Record<string, string> = {
+	schreiben: 'Schreiben',
+	lesen: 'Lesen',
+	'millennial-life': 'Millennial Life',
+	persoenlichkeitsentwicklung: 'Persönlichkeitsentwicklung',
+};
+const categoryLabel = categoryLabels[post.data.category] ?? post.data.category;
+
+// Related posts (same category, exclude current)
+const allPosts = await getCollection('blog');
+const related = allPosts
+	.filter((p) => p.slug !== post.slug && p.data.category === post.data.category)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
+---
+
+<Layout title={post.data.seoTitle ?? post.data.title} description={post.data.seoDescription ?? post.data.description}>
+	<!-- POST HEADER: Headline + Meta -->
+	<header class="post-header">
+		<div class="post-header-inner">
+			<h1 class="post-title">{post.data.title}</h1>
+			<div class="post-meta">
+				<a href={`/blog#${post.data.category}`} class="post-meta-tag">{categoryLabel}</a>
+				<span class="post-meta-sep">·</span>
+				<time class="post-meta-date" datetime={pubDate.toISOString()}>{formattedDate}</time>
+				<span class="post-meta-sep">·</span>
+				<span class="post-meta-read">{readingTime} Min. Lesezeit</span>
+			</div>
+		</div>
+	</header>
+
+	<!-- IMAGE 16:9 -->
+	<div class="post-hero-image">
+		{post.data.image ? (
+			<img src={post.data.image} alt={post.data.imageAlt ?? ''} class="post-hero-img" />
+		) : (
+			<div class="post-hero-placeholder"></div>
+		)}
+	</div>
+
+	<!-- ARTICLE BODY -->
+	<article class="post-body">
+		<div class="post-body-inner prose">
+			<Content />
+		</div>
+	</article>
+
+	<!-- AUTHOR BOX -->
+	<aside class="post-author-box">
+		<div class="post-author-box-inner">
+			<div class="post-author-img">
+				<img src="/images/markus-gammersbach-selfpublishing-autor.png" alt="Markus Gammersbach" />
+			</div>
+			<div class="post-author-info">
+				<p class="post-author-label">Geschrieben von</p>
+				<p class="post-author-box-name">{post.data.author}</p>
+				<p class="post-author-bio">
+					Autor aus Hamburg. Schreibt über Persönlichkeitsentwicklung, das Leben als Millennial und die Fragen, die uns wirklich beschäftigen.
+				</p>
+				<a href="/ueber-mich" class="btn btn-ghost">Mehr über mich</a>
+			</div>
+		</div>
+	</aside>
+
+	<!-- RELATED POSTS -->
+	{related.length > 0 && (
+		<section class="post-related">
+			<div class="post-related-inner">
+				<h2 class="post-related-title">Weitere Artikel</h2>
+				<div class="post-related-grid">
+					{related.map((r) => {
+						const rDate = new Date(r.data.pubDate).toLocaleDateString('de-DE', {
+							day: 'numeric',
+							month: 'long',
+							year: 'numeric',
+						});
+						const rLabel = categoryLabels[r.data.category] ?? r.data.category;
+						const rWords = r.body.split(/\s+/).length;
+						const rReadTime = Math.ceil(rWords / 200);
+						return (
+							<a href={`/blog/${r.slug}`} class="related-card">
+								{r.data.image && (
+									<div class="related-card-media">
+										<img src={r.data.image} alt={r.data.imageAlt ?? ''} />
+									</div>
+								)}
+								{!r.data.image && <div class="related-card-media related-card-media--placeholder"></div>}
+								<div class="related-card-content">
+									<div class="post-meta">
+										<span class="post-meta-tag">{rLabel}</span>
+										<span class="post-meta-sep">·</span>
+										<span class="post-meta-date">{rDate}</span>
+										<span class="post-meta-sep">·</span>
+										<span class="post-meta-read">{rReadTime} Min.</span>
+									</div>
+									<h3 class="related-card-title">{r.data.title}</h3>
+									<p class="related-card-teaser">{r.data.description}</p>
+								</div>
+							</a>
+						);
+					})}
+				</div>
+			</div>
+		</section>
+	)}
+</Layout>
+
+<style>
+	/* POST HEADER: Headline then Meta */
+	.post-header {
+		width: 100%;
+		box-sizing: border-box;
+		padding-top: 4rem;
+		padding-bottom: 2.5rem;
+	}
+
+	.post-header-inner {
+		max-width: 750px;
+		margin-inline: auto;
+		padding-inline: 0;
+	}
+
+	.post-title {
+		font-family: 'Manrope', sans-serif;
+		font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+		font-weight: 700;
+		line-height: 1.12;
+		letter-spacing: -0.02em;
+		color: var(--text);
+		margin: 0 0 1.75rem;
+	}
+
+	.post-meta {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+		font-family: 'Manrope', sans-serif;
+		font-size: 12px;
+	}
+
+	.post-meta-tag {
+		color: var(--gold);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		text-decoration: none;
+	}
+
+	.post-meta-tag:hover {
+		color: var(--gold-lt);
+	}
+
+	.post-meta-sep {
+		color: var(--muted);
+		opacity: 0.4;
+	}
+
+	.post-meta-date,
+	.post-meta-read {
+		color: var(--muted);
+		font-weight: 300;
+	}
+
+	/* IMAGE 750×500 */
+	.post-hero-image {
+		max-width: 750px;
+		width: 100%;
+		aspect-ratio: 750 / 500;
+		margin-inline: auto;
+		background-color: var(--emerald);
+		overflow: hidden;
+		box-sizing: border-box;
+	}
+
+	.post-hero-img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+	}
+
+	.post-hero-placeholder {
+		width: 100%;
+		height: 100%;
+		background-color: var(--emerald);
+	}
+
+	/* ARTICLE BODY */
+	.post-body {
+		padding-block: 4rem 5rem;
+	}
+
+	.post-body-inner {
+		max-width: 680px;
+		margin-inline: auto;
+	}
+
+	/* Prose styles */
+	.prose :global(h2) {
+		font-family: 'Manrope', sans-serif;
+		font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		color: var(--text);
+		margin: 2.5rem 0 1rem;
+	}
+
+	.prose :global(h3) {
+		font-family: 'Manrope', sans-serif;
+		font-size: 1.2rem;
+		font-weight: 700;
+		color: var(--text);
+		margin: 2rem 0 0.75rem;
+	}
+
+	.prose :global(p) {
+		font-family: 'Manrope', sans-serif;
+		font-size: 17px;
+		font-weight: 300;
+		line-height: 1.85;
+		color: var(--text);
+		margin: 0 0 1.5rem;
+	}
+
+	.prose :global(strong) {
+		font-weight: 700;
+		color: var(--text);
+	}
+
+	.prose :global(ol),
+	.prose :global(ul) {
+		font-family: 'Manrope', sans-serif;
+		font-size: 17px;
+		font-weight: 300;
+		line-height: 1.85;
+		color: var(--text);
+		margin: 0 0 1.5rem;
+		padding-left: 1.5rem;
+	}
+
+	.prose :global(li) {
+		margin-bottom: 0.5rem;
+	}
+
+	.prose :global(blockquote) {
+		border-left: 3px solid var(--gold);
+		margin: 2rem 0;
+		padding: 0.5rem 0 0.5rem 1.5rem;
+		font-style: italic;
+		color: var(--muted);
+	}
+
+	.prose :global(a) {
+		color: var(--emerald);
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
+	}
+
+	/* AUTHOR BOX */
+	.post-author-box {
+		width: 100vw;
+		margin-left: calc(50% - 50vw);
+		background-color: #eee9e0;
+		padding-block: 3.5rem;
+		box-sizing: border-box;
+	}
+
+	.post-author-box-inner {
+		max-width: 680px;
+		margin-inline: auto;
+		padding-inline: var(--page-padding-desktop);
+		display: flex;
+		align-items: flex-start;
+		gap: 2rem;
+	}
+
+	.post-author-img {
+		flex-shrink: 0;
+		width: 140px;
+		height: 140px;
+		overflow: hidden;
+	}
+
+	.post-author-img img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		filter: grayscale(20%);
+		transition: filter 0.3s ease;
+	}
+
+	.post-author-img:hover img {
+		filter: grayscale(0%);
+	}
+
+	.post-author-info {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+
+	.post-author-label {
+		font-family: 'Manrope', sans-serif;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		color: var(--gold);
+		margin: 0;
+	}
+
+	.post-author-box-name {
+		font-family: 'Manrope', sans-serif;
+		font-size: 1.25rem;
+		font-weight: 700;
+		color: var(--text);
+		margin: 0;
+	}
+
+	.post-author-bio {
+		font-family: 'Manrope', sans-serif;
+		font-size: 15px;
+		font-weight: 300;
+		line-height: 1.75;
+		color: var(--muted);
+		margin: 0.25rem 0 1rem;
+		max-width: 440px;
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.85rem 2rem;
+		font-family: 'Manrope', sans-serif;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		border-radius: 0;
+		cursor: pointer;
+		transition: border-color 0.2s ease, color 0.2s ease;
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.btn-ghost {
+		background-color: transparent;
+		color: var(--text);
+		border: 1px solid rgba(28, 28, 28, 0.25);
+		flex-shrink: 0;
+	}
+
+	.btn-ghost:hover {
+		border-color: var(--text);
+	}
+
+	.post-author-box .btn-ghost {
+		padding-inline: 1.25rem;
+		align-self: flex-start;
+	}
+
+	/* RELATED POSTS */
+	.post-related {
+		padding-block: 5rem 6rem;
+	}
+
+	.post-related-inner {
+		max-width: 1300px;
+		margin-inline: auto;
+		padding-inline: var(--page-padding-desktop);
+	}
+
+	.post-related-title {
+		font-family: 'Manrope', sans-serif;
+		font-size: clamp(1.4rem, 2vw, 1.75rem);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		color: var(--text);
+		margin: 0 0 2.5rem;
+	}
+
+	.post-related-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2rem;
+	}
+
+	.related-card {
+		display: flex;
+		flex-direction: column;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.related-card-media {
+		aspect-ratio: 3 / 2;
+		overflow: hidden;
+		margin-bottom: 1rem;
+	}
+
+	.related-card-media img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.4s ease;
+	}
+
+	.related-card:hover .related-card-media img {
+		transform: scale(1.03);
+	}
+
+	.related-card-media--placeholder {
+		background-color: var(--emerald);
+		opacity: 0.3;
+	}
+
+	.related-card-content {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.related-card-title {
+		font-family: 'Manrope', sans-serif;
+		font-size: 1rem;
+		font-weight: 700;
+		color: var(--text);
+		margin: 0;
+		line-height: 1.3;
+	}
+
+	.related-card-teaser {
+		font-family: 'Manrope', sans-serif;
+		font-size: 14px;
+		font-weight: 300;
+		line-height: 1.7;
+		color: var(--muted);
+		margin: 0;
+	}
+
+	/* Responsive */
+	@media (max-width: 960px) {
+		.post-header-inner,
+		.post-body-inner,
+		.post-author-box-inner,
+		.post-related-inner {
+			padding-inline: 2rem;
+		}
+
+		.post-related-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	@media (max-width: 720px) {
+		.post-header {
+			padding-top: 4rem;
+			padding-bottom: 2.5rem;
+		}
+
+		.post-header-inner .post-title {
+			margin-bottom: 1.75rem;
+		}
+
+		.post-header-inner {
+			text-align: center;
+			padding-inline: 1.5rem;
+		}
+
+		.post-header-inner .post-meta {
+			justify-content: center;
+		}
+
+		.post-hero-image {
+			width: calc(100% - 3rem);
+			margin-inline: 1.5rem;
+		}
+
+		.post-body-inner,
+		.post-author-box-inner,
+		.post-related-inner {
+			padding-inline: 1.5rem;
+		}
+
+		.post-author-box-inner {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 1.5rem;
+		}
+
+		.post-author-img {
+			width: 110px;
+			height: 110px;
+		}
+
+		.post-related-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

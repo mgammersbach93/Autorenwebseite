@@ -37,20 +37,20 @@ import Layout from '../layouts/Layout.astro';
 				<div class="books-covers">
 					<div class="book-item">
 						<a href="/buecher" class="book-cover-link">
-							<div class="book-cover-placeholder"></div>
+							<img class="book-cover-img" src="/images/sie-wollten-doch-nur-gluecklich-sein.jpg" alt="Buchcover: Sie wollten doch nur glücklich sein" />
 						</a>
 						<div class="book-actions">
-							<a href="#" class="book-btn book-btn-primary">Kaufen</a>
-							<a href="#" class="book-btn book-btn-ghost">Details</a>
+							<a href="https://www.amazon.de/wollten-doch-gl%C3%BCcklich-Generation-Millennials/dp/B0CKGWZ2WG/ref=tmm_pap_swatch_0" class="book-btn book-btn-primary" target="_blank" rel="noopener noreferrer">Kaufen</a>
+							<a href="/gluecklich-sein/" class="book-btn book-btn-ghost">Details</a>
 						</div>
 					</div>
 					<div class="book-item">
 						<a href="/buecher" class="book-cover-link">
-							<div class="book-cover-placeholder"></div>
+							<img class="book-cover-img" src="/images/sie-wollten-endlich-neues-wagen.jpg" alt="Buchcover: Sie wollten endlich Neues wagen" />
 						</a>
 						<div class="book-actions">
-							<a href="#" class="book-btn book-btn-primary">Kaufen</a>
-							<a href="#" class="book-btn book-btn-ghost">Details</a>
+							<a href="/neues-wagen/" class="book-btn book-btn-primary">Kaufen</a>
+							<a href="/neues-wagen/" class="book-btn book-btn-ghost">Details</a>
 						</div>
 					</div>
 				</div>
@@ -77,7 +77,11 @@ import Layout from '../layouts/Layout.astro';
 	<section class="home-about">
 		<div class="about-inner">
 			<div class="about-image">
-				<div class="about-image-placeholder"></div>
+				<img
+					class="about-image-img"
+					src="/images/markus-gammersbach-selfpublishing-autor.png"
+					alt="Markus Gammersbach, Selfpublishing-Autor"
+				/>
 			</div>
 			<div class="about-content">
 				<h2 class="section-title about-title">Über mich</h2>
@@ -105,7 +109,7 @@ import Layout from '../layouts/Layout.astro';
 		<div class="quote-band-inner">
 			<span class="quote-mark" aria-hidden="true">„</span>
 			<blockquote class="quote-text quote-centered">
-				Manchmal reicht ein einziges Wort aus,<br />
+				Manchmal reicht ein einziges Wort,<br />
 				um einen neuen Impuls für den eigenen Alltag zu bekommen.
 			</blockquote>
 		</div>
@@ -124,7 +128,10 @@ import Layout from '../layouts/Layout.astro';
 					/>
 				</div>
 				<h2>Blättern statt Scrollen</h2>
-				<p>Warum wir mehr Bücher lesen sollten</p>
+				<p>
+					Lesen ist gesund. Das bestätigen zahlreiche Studien. Hier erfährst du, warum wir häufiger zum
+					Buch greifen sollten.
+				</p>
 				<a href="/warum-lesen" class="feature-button">Blättern</a>
 			</div>
 			<div class="feature-item">
@@ -137,7 +144,10 @@ import Layout from '../layouts/Layout.astro';
 					/>
 				</div>
 				<h2>Millennial Workshop</h2>
-				<p>Zehn inspirierende Lektionen für dein persönliches Wachstum.</p>
+				<p>
+					Wie führt man ein unbeschwertes Leben? Hier erhältst du zehn inspirierende Lektionen für dein
+					persönliches Wachstum.
+				</p>
 				<a href="/millennial-workshop" class="feature-button">Wachsen</a>
 			</div>
 		</div>
@@ -146,98 +156,47 @@ import Layout from '../layouts/Layout.astro';
 	<!-- 8. SOCIAL / KONTAKT -->
 	<section class="home-social">
 		<div class="container social-inner">
-			<h2 class="section-title section-title--center">Hier findest du mich</h2>
-			<p class="social-intro">
-				Werde Teil meiner Community. Ich freue mich, von dir zu hören!
-			</p>
+			<h2 class="section-title section-title--center">Folge mir auf Instagram</h2>
+		<div class="community-split">
 		<div class="gallery-section">
-			<div class="gallery-container">
-				<button class="gallery-arrow gallery-arrow-left" aria-label="Previous">
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-						<polyline points="15 18 9 12 15 6"></polyline>
-					</svg>
-				</button>
-
-				<div class="gallery-slider">
-					<div class="gallery-track">
-						<div class="gallery-slide">
-							<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-buecherregal.jpg" alt="Sie wollten doch nur glücklich sein" />
-						</div>
-						<div class="gallery-slide">
-							<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-weihnachtsgeschenk-02a.jpg" alt="Sie wollten doch nur glücklich sein" />
-						</div>
-						<div class="gallery-slide">
-							<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-weihnachtsgeschenk-03a.jpg" alt="Sie wollten doch nur glücklich sein" />
-						</div>
-						<div class="gallery-slide">
-							<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-balkon.jpg" alt="Sie wollten doch nur glücklich sein" />
-						</div>
-						<div class="gallery-slide">
-							<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-bett.jpg" alt="Sie wollten doch nur glücklich sein" />
-						</div>
-						<div class="gallery-slide">
-							<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-buchtipp.jpg" alt="Sie wollten doch nur glücklich sein" />
-						</div>
-						<div class="gallery-slide">
-							<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-flughafen.jpg" alt="Sie wollten doch nur glücklich sein" />
-						</div>
-						<div class="gallery-slide">
-							<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-pool.jpg" alt="Sie wollten doch nur glücklich sein" />
-						</div>
-						<div class="gallery-slide">
-							<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-sonnenschein.jpg" alt="Sie wollten doch nur glücklich sein" />
-						</div>
-						<div class="gallery-slide">
-							<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-strand.jpg" alt="Sie wollten doch nur glücklich sein" />
-						</div>
-						<div class="gallery-slide">
-							<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-therme.jpg" alt="Sie wollten doch nur glücklich sein" />
-						</div>
-						<div class="gallery-slide">
-							<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-weihnachten.jpg" alt="Sie wollten doch nur glücklich sein" />
-						</div>
-						<div class="gallery-slide">
-							<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-zug.jpg" alt="Sie wollten doch nur glücklich sein" />
-						</div>
-					</div>
+			<div class="gallery-grid">
+				<div class="gallery-item">
+					<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-buecherregal.jpg" alt="Leser mit Buch" />
 				</div>
-
-				<button class="gallery-arrow gallery-arrow-right" aria-label="Next">
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-						<polyline points="9 18 15 12 9 6"></polyline>
-					</svg>
-				</button>
+				<div class="gallery-item">
+					<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-weihnachtsgeschenk-02a.jpg" alt="Leser mit Buch" />
+				</div>
+				<div class="gallery-item">
+					<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-weihnachtsgeschenk-03a.jpg" alt="Leser mit Buch" />
+				</div>
+				<div class="gallery-item">
+					<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-balkon.jpg" alt="Leser mit Buch" />
+				</div>
 			</div>
 		</div>
-			<div class="social-icons">
-				<a href="#" class="social-icon" aria-label="Instagram">
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path
-							d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
-							fill="currentColor"
-						/>
-					</svg>
-				</a>
-				<a href="#" class="social-icon" aria-label="Facebook">
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path
-							d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
-							fill="currentColor"
-						/>
-					</svg>
-				</a>
-				<a href="#" class="social-icon" aria-label="YouTube">
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path
-							d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
-							fill="currentColor"
-						/>
-					</svg>
-				</a>
+		<div class="community-divider"></div>
+		<div class="insta-card">
+			<div class="insta-avatar">
+				<div class="insta-avatar-inner">
+					<img
+						src="/images/deine-neuen-seiten-instagram.png"
+						alt="Deine neuen Seiten"
+						class="insta-avatar-img"
+					/>
+				</div>
 			</div>
-			<div class="social-cta">
-				<a href="/ueber-mich#kontakt" class="social-contact-btn">Kontakt</a>
+			<div class="insta-info">
+				<p class="insta-handle">@deine.neuen.seiten</p>
+				<p class="insta-tagline">Inspiration für zwischendurch</p>
 			</div>
+			<a
+				href="https://www.instagram.com/deine.neuen.seiten/"
+				class="btn btn-ghost insta-btn"
+				target="_blank"
+				rel="noopener noreferrer"
+			>Folgen</a>
+		</div>
+		</div>
 		</div>
 	</section>
 </Layout>
@@ -297,13 +256,8 @@ import Layout from '../layouts/Layout.astro';
 				setActive(0);
 			}
 
-			// GALLERY SLIDER
-			const track = document.querySelector('.gallery-track');
-			const originalSlides = document.querySelectorAll('.gallery-slide');
-			const totalSlides = 13;
-			let currentIndex = 0;
-
-			// All image paths
+			// GALLERY AUTO-ROTATE (2×2 grid, all viewports)
+			const galleryItems = document.querySelectorAll('.gallery-item img');
 			const imageFiles = [
 				'/images/galerie/sie-wollten-doch-nur-gluecklich-sein-buecherregal.jpg',
 				'/images/galerie/sie-wollten-doch-nur-gluecklich-sein-weihnachtsgeschenk-02a.jpg',
@@ -317,45 +271,18 @@ import Layout from '../layouts/Layout.astro';
 				'/images/galerie/sie-wollten-doch-nur-gluecklich-sein-strand.jpg',
 				'/images/galerie/sie-wollten-doch-nur-gluecklich-sein-therme.jpg',
 				'/images/galerie/sie-wollten-doch-nur-gluecklich-sein-weihnachten.jpg',
-				'/images/galerie/sie-wollten-doch-nur-gluecklich-sein-zug.jpg'
+				'/images/galerie/sie-wollten-doch-nur-gluecklich-sein-zug.jpg',
 			];
+			const totalSlides = imageFiles.length;
+			const ROTATE_MS = 2500;
 
-			if (track && originalSlides.length) {
-				// Clone first 4 slides for infinite desktop loop
-				for (let i = 0; i < 4; i += 1) {
-					const clone = originalSlides[i].cloneNode(true);
-					track.appendChild(clone);
-				}
-
-				const allSlides = document.querySelectorAll('.gallery-slide');
-
-				function isMobile() {
-					return window.innerWidth <= 768;
-				}
-
-				// Desktop slide function
-				function desktopSlide() {
-					currentIndex += 1;
-					track.style.transition = 'transform 0.8s ease-in-out';
-					track.style.transform = `translateX(-${currentIndex * 25}%)`;
-
-					if (currentIndex >= totalSlides) {
-						setTimeout(() => {
-							track.style.transition = 'none';
-							currentIndex = 0;
-							track.style.transform = 'translateX(0)';
-						}, 800);
-					}
-				}
-
-				// Mobile variables
-				let mobileSlots = []; // The 4 img elements
-				let currentImagesInSlots = [0, 1, 2, 3]; // Track which image index is in each slot
-				const changeOrder = [0, 3, 1, 2]; // top-left, bottom-right, top-right, bottom-left
+			if (galleryItems.length === 4) {
+				const slots = Array.from(galleryItems);
+				let currentImagesInSlots = [0, 1, 2, 3];
+				const changeOrder = [0, 3, 1, 2];
 				let changeStep = 0;
 
 				function getNextAvailableImage() {
-					// Find an image that's not currently displayed in any slot
 					for (let i = 0; i < totalSlides; i += 1) {
 						const base = currentImagesInSlots[changeOrder[changeStep]];
 						const candidate = (base + 1 + i) % totalSlides;
@@ -363,113 +290,27 @@ import Layout from '../layouts/Layout.astro';
 							return candidate;
 						}
 					}
-					// Fallback: just use the next one
 					const base = currentImagesInSlots[changeOrder[changeStep]];
 					return (base + 4) % totalSlides;
 				}
 
-				function initMobile() {
-					track.style.transform = 'none';
-					track.style.transition = 'none';
+				function rotateOne() {
+					const slotIndex = changeOrder[changeStep];
+					const imgEl = slots[slotIndex];
+					if (!imgEl) return;
 
-					// Get the first 4 original slides' img elements
-					mobileSlots = [];
-					for (let i = 0; i < 4; i += 1) {
-						const img = originalSlides[i].querySelector('img');
-						if (img) {
-							img.src = imageFiles[i];
-							img.style.opacity = '1';
-							mobileSlots.push(img);
-						}
-					}
+					const nextIdx = getNextAvailableImage();
+					imgEl.style.opacity = '0';
 
-					currentImagesInSlots = [0, 1, 2, 3];
-					changeStep = 0;
-				}
-
-				function mobileFade() {
-					const slotIndex = changeOrder[changeStep]; // Which slot to change (0, 3, 1, or 2)
-					const imgElement = mobileSlots[slotIndex];
-
-					if (!imgElement) return;
-
-					const nextImageIdx = getNextAvailableImage();
-
-					// Fade out
-					imgElement.style.opacity = '0';
-
-					setTimeout(() => {
-						// Change image source
-						imgElement.src = imageFiles[nextImageIdx];
-						currentImagesInSlots[slotIndex] = nextImageIdx;
-
-						// Fade in
-						imgElement.style.opacity = '1';
-
-						// Move to next slot in the change order
+					window.setTimeout(() => {
+						imgEl.src = imageFiles[nextIdx];
+						currentImagesInSlots[slotIndex] = nextIdx;
+						imgEl.style.opacity = '1';
 						changeStep = (changeStep + 1) % 4;
 					}, 300);
 				}
 
-				// Arrow navigation (desktop only)
-				const leftArrow = document.querySelector('.gallery-arrow-left');
-				const rightArrow = document.querySelector('.gallery-arrow-right');
-
-				let interval;
-
-				function slideLeft() {
-					if (isMobile()) return;
-
-					currentIndex -= 1;
-					if (currentIndex < 0) {
-						track.style.transition = 'none';
-						currentIndex = totalSlides - 1;
-						track.style.transform = `translateX(-${currentIndex * 25}%)`;
-						// Force reflow
-						// eslint-disable-next-line no-unused-expressions
-						track.offsetHeight;
-						setTimeout(() => {
-							track.style.transition = 'transform 0.8s ease-in-out';
-						}, 10);
-					} else {
-						track.style.transition = 'transform 0.8s ease-in-out';
-						track.style.transform = `translateX(-${currentIndex * 25}%)`;
-					}
-
-					clearInterval(interval);
-					interval = setInterval(desktopSlide, 4000);
-				}
-
-				function slideRight() {
-					if (isMobile()) return;
-					desktopSlide();
-
-					clearInterval(interval);
-					interval = setInterval(desktopSlide, 4000);
-				}
-
-				if (leftArrow) leftArrow.addEventListener('click', slideLeft);
-				if (rightArrow) rightArrow.addEventListener('click', slideRight);
-
-				// Initialize and run
-				function startGallery() {
-					clearInterval(interval);
-
-					if (isMobile()) {
-						initMobile();
-						interval = setInterval(mobileFade, 2500);
-					} else {
-						currentIndex = 0;
-						track.style.transform = 'translateX(0)';
-						interval = setInterval(desktopSlide, 4000);
-					}
-				}
-
-				startGallery();
-
-				window.addEventListener('resize', () => {
-					startGallery();
-				});
+				window.setInterval(rotateOne, ROTATE_MS);
 			}
 		});
 	}
@@ -496,15 +337,15 @@ import Layout from '../layouts/Layout.astro';
 		box-sizing: border-box;
 	}
 
-	/* Primary: Smaragd filled */
+	/* Primary: accent filled */
 	.btn-primary {
-		background-color: #1a3a30;
+		background-color: var(--btn-primary);
 		color: #f5f0e8;
 		border: none;
 	}
 
 	.btn-primary:hover {
-		background-color: #243d35;
+		background-color: var(--btn-primary-hover);
 	}
 
 	/* Ghost on light background */
@@ -623,6 +464,7 @@ import Layout from '../layouts/Layout.astro';
 	.home-books {
 		background-color: var(--bg);
 		padding-block: 4rem 7rem;
+		overflow: visible;
 	}
 
 	#mehr-als-nur-geschichten {
@@ -670,11 +512,17 @@ import Layout from '../layouts/Layout.astro';
 		align-items: stretch;
 		width: fit-content;
 		margin-inline: auto;
+		overflow: visible;
 	}
 
 	.books-covers {
 		display: flex;
 		gap: 1.5rem;
+		overflow: visible;
+	}
+
+	.home-books .books-inner {
+		overflow: visible;
 	}
 
 	.book-item {
@@ -687,11 +535,11 @@ import Layout from '../layouts/Layout.astro';
 		display: block;
 	}
 
-	.book-cover-placeholder {
+	.book-cover-img {
 		width: 220px;
 		height: 330px;
-		background-color: var(--muted);
-		opacity: 0.35;
+		object-fit: cover;
+		display: block;
 	}
 
 	.book-actions {
@@ -720,13 +568,21 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.book-btn-primary {
-		background-color: #1a3a30;
+		background-color: var(--btn-primary);
 		color: #f5f0e8;
 		border: none;
 	}
 
 	.book-btn-primary:hover {
-		background-color: #2a4a40;
+		background-color: var(--btn-primary-hover);
+	}
+
+	.books-covers .book-item:last-child .book-btn-primary {
+		background-color: #C13A00;
+	}
+
+	.books-covers .book-item:last-child .book-btn-primary:hover {
+		background-color: #a83200;
 	}
 
 	.book-btn-ghost {
@@ -743,10 +599,21 @@ import Layout from '../layouts/Layout.astro';
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		border-left: 1px solid var(--gold);
 		padding-left: 2rem;
 		width: 320px;
 		flex-shrink: 0;
+		margin-top: -7rem;
+		position: relative;
+	}
+
+	.books-testimonials::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 7rem;
+		bottom: 0;
+		width: 1px;
+		background-color: var(--gold);
 	}
 
 	.books-testimonials-eyebrow {
@@ -843,7 +710,8 @@ import Layout from '../layouts/Layout.astro';
 		margin-left: calc(50% - 50vw);
 		background-color: var(--emerald);
 		color: #f5f0e8;
-		padding-block: 7rem;
+		padding-top: 2rem;
+		padding-bottom: 2rem;
 		box-sizing: border-box;
 	}
 
@@ -852,22 +720,31 @@ import Layout from '../layouts/Layout.astro';
 		margin-inline: auto;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		gap: 4rem;
+		gap: 2rem;
 		align-items: center;
 		padding-inline: 2rem;
+		position: relative;
 	}
 
-	.about-image-placeholder {
-		width: 100%;
-		height: 400px;
-		background-color: rgba(245, 240, 232, 0.2);
-		margin-left: -2rem;
+	.about-image {
+		display: contents;
+	}
+
+	.about-image-img {
+		width: auto;
+		height: 600px;
+		object-fit: contain;
+		display: block;
+		margin-left: 2rem;
+		margin-bottom: -2rem;
+		align-self: end;
 	}
 
 	.about-content {
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
+		padding-bottom: 0;
 	}
 
 	.about-title {
@@ -887,6 +764,22 @@ import Layout from '../layouts/Layout.astro';
 		margin-top: 1rem;
 	}
 
+	/* Tablet/medium: prevent book covers clipping (2-col still) */
+	@media (max-width: 1024px) and (min-width: 901px) {
+		.book-cover-img {
+			width: 180px;
+			height: 270px;
+		}
+
+		.books-layout {
+			gap: 2.5rem;
+		}
+
+		.books-testimonials {
+			width: 280px;
+		}
+	}
+
 	/* Mobile responsive */
 	@media (max-width: 900px) {
 		.hero-inner {
@@ -895,12 +788,12 @@ import Layout from '../layouts/Layout.astro';
 		}
 
 		.hero-content {
-			order: -1;
+			order: 1;
 			align-items: center;
 		}
 
 		.hero-image-wrapper {
-			order: 1;
+			order: -1;
 		}
 
 		.hero-title {
@@ -920,6 +813,7 @@ import Layout from '../layouts/Layout.astro';
 		.books-layout {
 			flex-direction: column;
 			align-items: center;
+			gap: 3rem;
 		}
 
 		.books-covers {
@@ -931,18 +825,38 @@ import Layout from '../layouts/Layout.astro';
 			padding-left: 0;
 			text-align: center;
 			width: 100%;
+			max-width: 320px;
+			margin-top: 0;
+		}
+
+		.books-testimonials::before {
+			display: none;
 		}
 
 		.testimonial-bars {
 			justify-content: center;
 		}
 
+		/* About section tablet */
 		.about-inner {
-			grid-template-columns: 1fr;
+			grid-template-columns: 1fr 1fr;
+			gap: 1.5rem;
+			align-items: end;
 		}
 
-		.about-image-placeholder {
+		.about-image-img {
+			height: 500px;
+			width: auto;
+			margin: 0;
+			margin-bottom: -2rem;
 			margin-left: 0;
+			align-self: end;
+			object-fit: contain;
+		}
+
+		.about-content {
+			align-items: flex-start;
+			padding-bottom: 2rem;
 		}
 	}
 
@@ -951,7 +865,7 @@ import Layout from '../layouts/Layout.astro';
 		width: 100vw;
 		margin-left: calc(50% - 50vw);
 		background-color: #f5f0e8;
-		padding-block: 5rem;
+		padding-block: 5rem 1.5rem;
 		padding-inline: var(--page-padding-desktop);
 		box-sizing: border-box;
 	}
@@ -965,12 +879,12 @@ import Layout from '../layouts/Layout.astro';
 	.quote-mark {
 		display: block;
 		font-family: Georgia, serif;
-		font-size: 5rem;
+		font-size: 8.75rem;
 		font-weight: 300;
 		line-height: 0.5;
 		color: var(--gold);
 		opacity: 0.6;
-		margin-bottom: 1.5rem;
+		margin-bottom: 2.75rem;
 	}
 
 	.quote-text.quote-centered {
@@ -985,7 +899,7 @@ import Layout from '../layouts/Layout.astro';
 
 	/* 6. FEATURES – Warum Lesen & Millennial Workshop */
 	.features-section {
-		padding: 3.5rem 0 5rem;
+		padding: 1.25rem 0 5rem;
 		max-width: 1300px;
 		margin: 0 auto;
 	}
@@ -1041,10 +955,12 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.feature-item p {
-		font-size: 14px;
+		font-size: 16px;
+		font-weight: 300;
 		color: #888880;
-		line-height: 1.65;
-		margin: 0 0 1.25rem;
+		line-height: 1.7;
+		margin: 0 auto 1.25rem;
+		max-width: 320px;
 	}
 
 	.feature-button {
@@ -1080,137 +996,127 @@ import Layout from '../layouts/Layout.astro';
 
 	.social-inner .section-title--center {
 		text-align: center;
+		margin-bottom: 1.5rem;
+		line-height: 1.2;
 	}
 
-	.social-intro {
-		font-family: 'Manrope', sans-serif;
-		font-size: 16px;
-		font-weight: 300;
-		margin: 0 0 var(--space-5);
-		color: var(--muted);
-		text-align: center;
-		max-width: 600px;
-		margin-inline: auto;
-	}
-
-	/* Gallery slider */
-	.gallery-section {
-		padding: 3rem 0;
-		overflow: hidden;
-	}
-
-	.gallery-container {
-		position: relative;
-		max-width: 1400px;
-		margin: 0 auto;
+	/* Community Split Layout */
+	.community-split {
 		display: flex;
 		align-items: center;
-		gap: 1rem;
-		padding: 0 2rem;
+		justify-content: center;
+		gap: 2.5rem;
 	}
 
-	.gallery-slider {
-		flex: 1;
-		overflow: hidden;
-		max-width: 1300px;
-		margin: 0 auto;
-		padding: 0 0;
+	.community-split .gallery-section {
+		flex-shrink: 0;
+		padding: 0;
 	}
 
-	.gallery-track {
-		display: flex;
-		transition: transform 0.8s ease-in-out;
+	.community-divider {
+		width: 1px;
+		height: 360px;
+		background-color: var(--gold);
+		opacity: 0.4;
+		flex-shrink: 0;
+		align-self: center;
 	}
 
-	.gallery-slide {
-		flex: 0 0 25%;
-		padding: 0 0.5rem;
-		box-sizing: border-box;
+	/* Gallery Grid */
+	.gallery-section {
+		padding: 0;
 	}
 
-	.gallery-slide img {
+	.gallery-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 8px;
+		width: 360px;
+	}
+
+	.gallery-item {
 		width: 100%;
 		aspect-ratio: 1 / 1;
+		overflow: hidden;
+	}
+
+	.gallery-item img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: opacity 0.3s ease-in-out;
+	}
+
+	/* Instagram Card */
+	.insta-card {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+		padding: 1rem 2rem;
+		flex-shrink: 0;
+	}
+
+	.insta-avatar {
+		width: 72px;
+		height: 72px;
+		border-radius: 50%;
+		background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+		padding: 3px;
+	}
+
+	.insta-avatar-inner {
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+		background: var(--emerald);
+		overflow: hidden;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.insta-avatar-img {
+		width: 100%;
+		height: 100%;
 		object-fit: cover;
 		display: block;
 	}
 
-	.gallery-arrow {
-		background: transparent;
-		border: 1px solid rgba(28, 28, 28, 0.25);
-		border-radius: 50%;
-		width: 48px;
-		height: 48px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		cursor: pointer;
-		color: #1c1c1c;
-		transition: all 0.2s ease;
-		flex-shrink: 0;
-	}
-
-	.gallery-arrow:hover {
-		background: rgba(28, 28, 28, 0.05);
-		border-color: rgba(28, 28, 28, 0.4);
-	}
-
-	.gallery-arrow:active {
-		transform: scale(0.95);
-	}
-
-	.social-icons {
-		display: flex;
-		justify-content: center;
-		gap: var(--space-3);
-		margin-bottom: var(--space-5);
-	}
-
-	.social-icon {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 40px;
-		height: 40px;
-		color: var(--text);
-		transition: color 0.2s ease;
-	}
-
-	.social-icon:hover {
-		color: var(--emerald);
-	}
-
-	.social-cta {
+	.insta-info {
 		text-align: center;
 	}
 
-	.social-contact-btn {
-		display: inline-block;
-		background: transparent;
-		color: #1c1c1c;
-		border: 1px solid rgba(28, 28, 28, 0.3);
-		padding: 0.6rem 1.4rem;
-		font-size: 11px;
+	.insta-handle {
+		font-family: 'Manrope', sans-serif;
+		font-size: 15px;
 		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.12em;
-		text-decoration: none;
-		border-radius: 9999px;
+		color: var(--text);
+		margin: 0;
 	}
 
-	.social-contact-btn:hover {
-		background: rgba(28, 28, 28, 0.05);
+	.insta-tagline {
+		font-family: 'Manrope', sans-serif;
+		font-size: 13px;
+		font-weight: 300;
+		color: var(--muted);
+		margin: 4px 0 0;
+	}
+
+	.insta-btn {
+		margin-top: 0.5rem;
 	}
 
 	/* Responsive */
 	@media (max-width: 960px) {
 		.home-about {
 			padding-inline: 2rem;
-			padding-block: 4rem;
+			padding-top: 2rem;
+			padding-bottom: 2rem;
 		}
 
-		.home-about .about-cta .btn {
-			width: 100%;
+		.home-about .about-cta {
 			display: flex;
 			justify-content: center;
 		}
@@ -1240,15 +1146,55 @@ import Layout from '../layouts/Layout.astro';
 
 		.home-about {
 			padding-inline: 1.5rem;
-			padding-block: 3rem;
+			padding-top: calc(2rem + 4.5rem);
+			/* Extra bottom padding so negative margin on the image can sit flush with outer green edge */
+			padding-bottom: calc(2rem + 1.5rem);
+			overflow: visible;
+		}
+
+		.about-inner {
+			grid-template-columns: 1fr;
+			gap: 0.5rem;
+			text-align: center;
+			align-items: center;
+		}
+
+		.about-content {
+			align-items: center;
+			order: -1;
+			padding-bottom: 0;
+		}
+
+		.about-image {
+			display: flex;
+			justify-content: center;
+			align-items: flex-end;
+			width: 100%;
+		}
+
+		.about-image-img {
+			height: 400px;
+			width: auto;
+			max-width: 100%;
+			margin: 0 auto;
+			margin-bottom: calc(-2rem - 1.5rem);
+			object-fit: contain;
+			object-position: bottom;
+			display: block;
 		}
 
 		.home-quote-band {
 			padding-inline: 1.5rem;
+			padding-block: 4rem 2.25rem;
+		}
+
+		.features-section {
+			padding-top: 1.25rem;
 		}
 
 		.quote-mark {
-			font-size: 3.5rem;
+			font-size: 6.25rem;
+			margin-bottom: 2.4rem;
 		}
 
 		.quote-text.quote-centered {
@@ -1259,13 +1205,27 @@ import Layout from '../layouts/Layout.astro';
 			flex-direction: column;
 			align-items: center;
 			padding: 0 2rem;
-			gap: 4rem;
+			gap: 2rem;
+		}
+
+		/* Books section: fully stacked, no overlap with testimonials */
+		.books-layout {
+			gap: 2.5rem;
+		}
+
+		.books-testimonials {
+			margin-top: 0;
+			padding-top: 0;
+		}
+
+		.books-testimonials::before {
+			display: none;
 		}
 
 		/* Book covers and buttons in "Mehr als nur Geschichten" */
-		.book-cover-placeholder {
-			width: 140px;
-			height: 210px;
+		.book-cover-img {
+			width: 170px;
+			height: 255px;
 		}
 
 		.books-covers {
@@ -1277,9 +1237,9 @@ import Layout from '../layouts/Layout.astro';
 		}
 
 		.book-actions .book-btn {
-			padding: 0.6rem 1.2rem;
-			font-size: 10px;
-			width: 120px;
+			padding: 0.75rem 1.5rem;
+			font-size: 11px;
+			width: 140px;
 		}
 
 		/* Smaller feature images on mobile */
@@ -1302,47 +1262,26 @@ import Layout from '../layouts/Layout.astro';
 			width: 300px;
 		}
 
-		/* Mobile gallery: 2x2 grid, always 4 visible */
-		.gallery-container {
-			padding: 0 1rem;
+		.gallery-grid {
+			width: 360px;
+			margin: 0 auto;
 		}
 
-		.gallery-arrow {
-			display: none;
+		.community-split {
+			flex-direction: column;
+			gap: 2rem;
 		}
 
-		.gallery-slider {
-			padding: 0;
-		}
-
-		.gallery-track {
-			display: grid;
-			grid-template-columns: repeat(2, 1fr);
-			gap: 0.5rem;
-			transition: none;
-			transform: none !important;
-		}
-
-		/* Hide all slides by default on mobile */
-		.gallery-slide {
-			display: none;
-			padding: 0;
-		}
-
-		/* Show only the first 4 slides on mobile */
-		.gallery-slide:nth-child(1),
-		.gallery-slide:nth-child(2),
-		.gallery-slide:nth-child(3),
-		.gallery-slide:nth-child(4) {
-			display: block;
-		}
-
-		.gallery-slide img {
+		.community-split .gallery-section {
 			width: 100%;
-			aspect-ratio: 1 / 1;
-			object-fit: cover;
-			transition: opacity 0.3s ease-in-out;
-			opacity: 1;
+			max-width: none;
+			display: flex;
+			justify-content: center;
+		}
+
+		.community-divider {
+			width: 60px;
+			height: 1px;
 		}
 	}
 </style>

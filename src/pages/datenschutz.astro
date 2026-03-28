@@ -1,16 +1,137 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const lorem =
+	'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.';
 ---
 
-<Layout title="Datenschutz">
-	<div class="container">
-		<section class="page-header">
-		<h1>Datenschutz</h1>
-		<p>
-			Platzhalter für deine Datenschutzerklärung. Hier erklärst du künftig, wie mit
-			personenbezogenen Daten auf der Seite umgegangen wird.
+<Layout
+	title="Datenschutz – Markus Gammersbach"
+	description="Datenschutzerklärung der Website von Markus Gammersbach"
+>
+	<div class="datenschutz-page">
+		<h1 class="datenschutz-title">Datenschutzerklärung</h1>
+		<p class="datenschutz-note">
+			Diese Seite wird derzeit aktualisiert. Die vollständige Datenschutzerklärung folgt in Kürze.
 		</p>
-	</section>
+
+		<section class="datenschutz-section" aria-labelledby="datenschutz-verantwortlicher">
+			<h2 id="datenschutz-verantwortlicher">Verantwortlicher</h2>
+			<p>{lorem}</p>
+			<p>{lorem}</p>
+			<p>{lorem}</p>
+		</section>
+
+		<section class="datenschutz-section" aria-labelledby="datenschutz-hosting">
+			<h2 id="datenschutz-hosting">Hosting</h2>
+			<p>{lorem}</p>
+			<p>{lorem}</p>
+			<p>{lorem}</p>
+		</section>
+
+		<section class="datenschutz-section" aria-labelledby="datenschutz-allgemein">
+			<h2 id="datenschutz-allgemein">Allgemeine Hinweise zur Datenverarbeitung</h2>
+			<p>{lorem}</p>
+			<p>{lorem}</p>
+			<p>{lorem}</p>
+		</section>
+
+		<section class="datenschutz-section" aria-labelledby="datenschutz-rechte">
+			<h2 id="datenschutz-rechte">Ihre Rechte</h2>
+			<p>{lorem}</p>
+			<p>{lorem}</p>
+			<p>{lorem}</p>
+		</section>
+
+		<section class="datenschutz-section" aria-labelledby="datenschutz-kontakt">
+			<h2 id="datenschutz-kontakt">Kontakt</h2>
+			<p>{lorem}</p>
+			<p>{lorem}</p>
+			<p>
+				{lorem}{' '}
+				<a href="/ueber-mich#kontakt">Zum Kontaktbereich</a>
+			</p>
+		</section>
 	</div>
 </Layout>
 
+<style>
+	.datenschutz-page {
+		--space-page: 5rem;
+		--space-section: 7rem;
+
+		max-width: 800px;
+		margin-inline: auto;
+		padding-inline: var(--space-page);
+		padding-block: var(--space-section);
+		background-color: var(--bg);
+	}
+
+	.datenschutz-title {
+		margin: 0;
+		font-weight: 700;
+		font-size: 42px;
+		line-height: 1.1;
+		letter-spacing: -0.03em;
+		color: var(--text);
+	}
+
+	.datenschutz-note {
+		margin: 0 0 3rem;
+		color: var(--muted);
+		font-size: 14px;
+		line-height: 1.6;
+	}
+
+	.datenschutz-section h2 {
+		margin: 3rem 0 0;
+		font-weight: 700;
+		font-size: 21px;
+		line-height: 1.3;
+		letter-spacing: -0.02em;
+		color: var(--text);
+	}
+
+	.datenschutz-section:first-of-type h2 {
+		margin-top: 0;
+	}
+
+	.datenschutz-section p {
+		margin: 0 0 1rem;
+		font-weight: 300;
+		font-size: 16px;
+		line-height: 1.85;
+		color: var(--text);
+	}
+
+	.datenschutz-section p:last-child {
+		margin-bottom: 0;
+	}
+
+	.datenschutz-page a {
+		color: var(--emerald);
+		text-decoration: none;
+	}
+
+	.datenschutz-page a:hover {
+		text-decoration: underline;
+	}
+
+	@media (min-width: 768px) {
+		.datenschutz-title {
+			font-size: 56px;
+		}
+	}
+
+	@media (max-width: 960px) {
+		.datenschutz-page {
+			padding-inline: 2rem;
+		}
+	}
+
+	@media (max-width: 720px) {
+		.datenschutz-page {
+			padding-inline: 1.5rem;
+		}
+	}
+</style>

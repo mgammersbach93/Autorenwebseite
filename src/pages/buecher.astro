@@ -3,22 +3,24 @@ import Layout from '../layouts/Layout.astro';
 
 const books = [
 	{
-		title: 'Buch 1',
-		subtitle: 'Untertitel oder Jahr',
+		title: 'Sie wollten doch nur glücklich sein',
+		subtitle: null,
 		description:
-			'Kurze Beschreibung des Buches – worum geht es, welchen Mehrwert bietet es dem Leser? Persönliche Entwicklung und Lesen gehen hier Hand in Hand.',
-		cover: null,
-		slug: '#',
-		cta: 'Mehr erfahren',
+			'Vier Millennials, vier Probleme und ein Workshop. Die Suche nach Glück trifft auf das Hochwasser im Rheinland.',
+		cover: '/images/sie-wollten-doch-nur-gluecklich-sein.jpg',
+		slug: '/gluecklich-sein/',
+		cta: 'Zu Teil 1',
+		buttonClass: 'btn-primary',
 	},
 	{
-		title: 'Buch 2',
-		subtitle: 'Untertitel oder Jahr',
+		title: 'Sie wollten endlich Neues wagen',
+		subtitle: null,
 		description:
-			'Eine weitere inspirierende Geschichte aus dem Alltag, die zu persönlichem Wachstum verhelfen kann. Hier kannst du den Klappentext ergänzen.',
-		cover: null,
-		slug: '#',
-		cta: 'Mehr erfahren',
+			'Neue Wege, neue Erfolge und neue Probleme. Die vier Millennials trauen sich heraus aus ihrer Komfortzone.',
+		cover: '/images/sie-wollten-endlich-neues-wagen.jpg',
+		slug: '/neues-wagen/',
+		cta: 'Zu Teil 2',
+		buttonClass: 'btn-orange',
 	},
 ];
 ---
@@ -29,8 +31,8 @@ const books = [
 		<div class="buecher-hero-inner">
 			<h1 class="buecher-hero-title">Meine Bücher</h1>
 			<p class="buecher-hero-intro">
-				Lesen und persönliche Entwicklung – das geht bei meinen Büchern Hand in Hand. Tauche ein in
-				inspirierende Geschichten aus dem Alltag, die dir zu persönlichem Wachstum verhelfen.
+				<span class="buecher-hero-intro-line">Geschichten, die dich weiterbringen.</span>{' '}
+				<span class="buecher-hero-intro-line">Hol dir neue Inspiration für deinen Alltag!</span>
 			</p>
 		</div>
 	</section>
@@ -52,7 +54,7 @@ const books = [
 							<h2 class="book-title">{book.title}</h2>
 							{book.subtitle && <p class="book-subtitle">{book.subtitle}</p>}
 							<p class="book-description">{book.description}</p>
-							<a href={book.slug} class="btn btn-primary book-cta">
+							<a href={book.slug} class={`btn ${book.buttonClass} book-cta`}>
 								{book.cta}
 							</a>
 						</div>
@@ -85,13 +87,23 @@ const books = [
 	}
 
 	.btn-primary {
-		background-color: var(--emerald);
+		background-color: var(--btn-primary);
 		color: var(--bg);
 		border: none;
 	}
 
 	.btn-primary:hover {
-		background-color: #243d35;
+		background-color: var(--btn-primary-hover);
+	}
+
+	.btn-orange {
+		background-color: #c13a00;
+		color: var(--bg);
+		border: none;
+	}
+
+	.btn-orange:hover {
+		background-color: #a83200;
 	}
 
 	/* Full viewport Smaragd header */
@@ -114,9 +126,9 @@ const books = [
 	}
 
 	.buecher-hero-inner {
-		max-width: 1300px;
-		margin-inline: auto;
 		max-width: 42rem;
+		margin-inline: auto;
+		text-align: center;
 	}
 
 	.buecher-hero-title {
@@ -126,6 +138,7 @@ const books = [
 		letter-spacing: -0.03em;
 		margin: 0 0 var(--space-3);
 		color: var(--bg);
+		text-align: center;
 	}
 
 	.buecher-hero-intro {
@@ -136,6 +149,17 @@ const books = [
 		margin: 0;
 		color: var(--bg);
 		opacity: 0.9;
+		text-align: center;
+	}
+
+	@media (max-width: 768px) {
+		.buecher-hero-intro-line {
+			display: block;
+		}
+
+		.buecher-hero-intro-line + .buecher-hero-intro-line {
+			margin-top: 0.35em;
+		}
 	}
 
 	/* Book list section */
@@ -210,6 +234,11 @@ const books = [
 		gap: var(--space-2);
 	}
 
+	.book-title,
+	.book-subtitle {
+		display: none;
+	}
+
 	.book-title {
 		font-family: 'Manrope', sans-serif;
 		font-size: clamp(1.35rem, 2vw, 1.6rem);
@@ -248,11 +277,19 @@ const books = [
 		.buecher-hero {
 			padding-inline: 2rem;
 		}
+
+		.book-grid {
+			gap: 6.5rem;
+		}
 	}
 
 	@media (max-width: 720px) {
 		.buecher-list {
 			padding-block: 3rem 4rem;
+		}
+
+		.book-grid {
+			gap: 9rem;
 		}
 
 		.book-card {

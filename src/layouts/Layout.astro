@@ -1,5 +1,5 @@
 ---
-const { title = 'Autorenwebseite' } = Astro.props;
+const { title = 'Autorenwebseite', description } = Astro.props;
 const pathname = Astro.url.pathname;
 const isActive = (path) => (path === '/' ? pathname === '/' : pathname.startsWith(path));
 const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
@@ -11,6 +11,7 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+		{description && <meta name="description" content={description} />}
 		<title>{title}</title>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
@@ -101,20 +102,39 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 			</main>
 
 			<footer class="site-footer">
-				<div class="container footer-inner">
-					<nav class="footer-nav">
-						<a href="/buecher" class="footer-link">BÜCHER</a>
-						<a href="/ueber-mich" class="footer-link">ÜBER MICH</a>
-						<a href="/warum-lesen" class="footer-link">WARUM LESEN</a>
-						<a href="/millennial-workshop" class="footer-link">MILLENNIAL WORKSHOP</a>
-						<a href="/blog" class="footer-link">BLOG</a>
-						<a href="/kontakt" class="footer-link">KONTAKT</a>
-					</nav>
+				<div class="footer-inner">
 					<div class="footer-legal">
 						<a href="/impressum" class="footer-link">Impressum</a>
-						<span class="footer-separator">/</span>
 						<a href="/datenschutz" class="footer-link">Datenschutz</a>
 					</div>
+					<p class="footer-copyright">© 2026 Markus Gammersbach</p>
+					<a
+						href="https://www.instagram.com/deine.neuen.seiten/"
+						target="_blank"
+						rel="noopener"
+						class="footer-social"
+						aria-label="Instagram"
+					>
+						<svg
+							width="20"
+							height="20"
+							viewBox="0 0 24 24"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+							aria-hidden="true"
+						>
+							<rect
+								x="2"
+								y="2"
+								width="20"
+								height="20"
+								rx="5"
+								stroke="currentColor"
+								stroke-width="1.5"></rect>
+							<circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"></circle>
+							<circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"></circle>
+						</svg>
+					</a>
 				</div>
 			</footer>
 		</div>
@@ -162,6 +182,8 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 		--text: #1c1c1c;
 		--muted: #888880;
 		--emerald: #1a3a30;
+		--btn-primary: #1a3a30;
+		--btn-primary-hover: #2a4a40;
 		--gold: #b89a3e;
 		--radius: 0px;
 
@@ -393,31 +415,26 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 		background-color: #1c1c1c;
 	}
 
-	/* Footer – 100% viewport width, background edge to edge */
+	/* Footer */
 	.site-footer {
 		width: 100%;
-		background-color: var(--text);
+		background-color: var(--emerald);
 		color: var(--bg);
 		border-top: 1px solid var(--gold);
-		box-sizing: border-box;
 	}
 
 	.footer-inner {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding-block: var(--space-3);
-		gap: var(--space-3);
+		padding: var(--space-3) var(--page-padding-desktop);
 		max-width: 1300px;
 		margin-inline: auto;
-		padding-inline: var(--page-padding-desktop);
 	}
 
-	.footer-nav {
+	.footer-legal {
 		display: flex;
-		gap: var(--space-2);
-		justify-content: center;
-		flex: 1;
+		gap: 1.5rem;
 	}
 
 	.footer-link {
@@ -426,21 +443,31 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
 		color: var(--bg);
+		opacity: 0.85;
+		transition: opacity 0.3s;
 	}
 
 	.footer-link:hover {
-		color: var(--gold);
+		opacity: 1;
 	}
 
-	.footer-legal {
+	.footer-copyright {
+		margin: 0;
+		font-size: 13px;
+		font-weight: 300;
+		opacity: 0.7;
+	}
+
+	.footer-social {
 		display: flex;
 		align-items: center;
-		gap: 0.75rem;
-		justify-content: flex-end;
+		color: var(--bg);
+		opacity: 0.7;
+		transition: opacity 0.3s;
 	}
 
-	.footer-separator {
-		opacity: 0.6;
+	.footer-social:hover {
+		opacity: 1;
 	}
 
 	/* Typography helpers */
@@ -541,17 +568,9 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 
 		.footer-inner {
 			flex-direction: column;
-			align-items: flex-start;
-		}
-
-		.footer-nav {
-			justify-content: flex-start;
-			flex-wrap: wrap;
-		}
-
-		.footer-legal {
-			width: 100%;
-			justify-content: flex-start;
+			align-items: center;
+			gap: 1rem;
+			padding: 2rem 1.5rem;
 		}
 
 		.page-main {

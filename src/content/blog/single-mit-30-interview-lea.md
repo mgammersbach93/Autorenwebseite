@@ -1,0 +1,61 @@
+---
+title: "Single mit 30 – Was ist denn so schlimm daran?"
+description: "Lea berichtet, warum sie kein Single mit 30 sein möchte und warum man im Online-Dating keine Liebe finden kann."
+pubDate: 2025-03-11
+category: "millennial-life"
+image: "/images/single-mit-30-interview-lea.webp"
+---
+
+Der 30. Geburtstag ist für viele junge Menschen ein wichtiger Meilenstein. Nicht selten wird er in einer Welt voller Vergleiche allerdings zu einer bedrohlichen Deadline. Gerade Singles sehen sich oftmals dem Druck ausgesetzt, rechtzeitig einen Partner oder eine Partnerin zu finden. In unserem Interview berichtet die achtundzwanzigjährige Lea, warum sie kein Single mit 30 sein möchte und warum man im Online-Dating keine Liebe finden kann.
+
+### Hallo Lea. In wenigen Tagen wirst du neunundzwanzig. Was macht das mit dir?
+
+Um ehrlich zu sein, löst das schon ein bisschen Panik aus. Gestern war ich noch als junge Studentin im Auslandssemester in Ecuador und habe mein Leben genossen. Auf einmal bin ich in der Arbeitswelt angekommen und stehe nur noch ein Jahr vor dem dreißigsten Geburtstag.
+
+### Hast du dich deshalb für den »Millennial Workshop« angemeldet hast?
+
+Ja, auf jeden Fall. Gerade als Single kommt man am Ende der Zwanziger schon ein wenig ins Grübeln. Ich finde es selbst etwas albern, dass ich mich von der Vorstellung ‚*Single mit 30*' in dieser Form verunsichern lasse. Aber ich kann es eben nicht einfach abstellen. Deshalb möchte ich mehr darüber erfahren, wie es anderen Millennials in ähnlichen Situationen geht und wie sie damit umgehen.
+
+### Wie genau gehst du mit der Situation um?
+
+Nicht sehr gut. (lacht)
+
+### Machst du dir diesen Druck selbst oder kommt der auch von außen?
+
+Für mich ist eine erfüllte Liebesbeziehung einer der wichtigsten Aspekte für tiefes Glück. Deshalb kommt der erste Impuls, denke ich, von mir selbst. Ich möchte einfach gerne einen Menschen an meiner Seite haben, mit dem ich alles teilen kann. Aber es stimmt schon auch, dass der Blick nach außen und die Vergleiche mit anderen das Ganze verstärken. Hinzu kommt, dass man als Single mit 30 in der Gesellschaft gelegentlich auch etwas schief angesehen wird.
+
+### Bist du damit schon in Berührung gekommen?
+
+Ja. Seit letztem Jahr bekomme ich regelmäßig Kommentare aus meinem Umfeld, dass es doch langsam mal Zeit wird, meinen Traummann zu finden. Ich würde lügen, wenn ich sagen würde, dass das meine Selbstzweifel in Bezug auf mein Singledasein nicht noch verstärken würde.
+
+### Wie machen sich diese Selbstzweifel bemerkbar?
+
+Wenn um einen herum alle glückliche Beziehungen führen, kommt schon irgendwann die Frage auf: Warum bin ich Single? Was stimmt nicht mit mir? Habe ich eine unüberwindbare Charakterschwäche? Bin ich vielleicht nicht attraktiv genug oder habe ich einfach nur zu hohe Ansprüche? Bis jetzt habe ich auf all diese Fragen noch eine Antwort gefunden.
+
+### Hattest du diese Selbstzweifel auch früher schon?
+
+Ich habe etwa die Hälfte meiner Zwanziger als Single verbracht und mir ging es nie schlecht damit. Meine letzte Beziehung habe ich vor etwas mehr als zwei Jahren beendet. Seitdem kommen mir diese Gedanken immer mal wieder. Der Hauptauslöser war aber wahrscheinlich die Verlobung meiner jüngeren Schwester. Seitdem ist die Sorge davor, als Single mit 30 zu enden, mein treuer Begleiter.
+
+### Was machst du, um das Szenario »Single mit 30« zu vermeiden?
+
+Ich bin Anfang 2020 nach Köln gezogen und direkt danach kam die Corona-Pandemie. Ein paar Monate nach dem ersten Lockdown habe ich mir aus Langeweile Dating-Apps heruntergeladen. Dabei ist es dann mehr oder weniger bis heute geblieben.
+
+### Glaubst du, man kann über Dating-Apps die große Liebe finden?
+
+Generell finde ich, dass Online-Dating in der Gesellschaft angekommen ist. Gerade während der Pandemie gab es ja im Grunde fast keine anderen Wege, um mit anderen Menschen in Kontakt zu treten. Viele meiner Freundinnen haben ihre Freunde in den vergangenen Jahren über Bumble, Tinder und Lovoo kennengelernt. Aber ich bin bis jetzt noch nicht so überzeugt davon.
+
+### Warum?
+
+Weil ich das Gefühl habe, dass im Endeffekt keiner so wirklich Lust auf diese Art des Datings hat. Zumindest nicht die Menschen, die ernste Absichten mitbringen. Zwar ist es die schnellste und unkomplizierteste Möglichkeit, um jemanden kennenzulernen. Aber dieser ganze Small Talk und das Abarbeiten des eigenen Lebenslaufs haben doch nichts mit echtem Dating zu tun. Ich habe mich mittlerweile sogar regelrecht anstecken lassen von der trägen Art, mit der mir manche Männer begegnet sind. Am Anfang habe ich noch sehr viel Persönliches von mir preisgegeben, viel über meine Absichten offenbart und meine Vorstellungen an eine Beziehung beschrieben. Aber das hat die meisten nur abgeschreckt.
+
+### Was braucht es deiner Meinung nach, um die große Liebe zu finden?
+
+Erst einmal echtes Commitment dafür, dass man sich auch wirklich kennenlernen möchte. Das hätte ich mir zumindest bei vielen meiner vergangenen Dates gewünscht. Ob man dadurch direkt seine große Liebe finden kann, steht auf einem ganz anderen Blatt. Aber in Dating-Apps hält sich doch jeder alle Möglichkeiten offen. Sobald es beim vierten oder fünften Date mit einer Person nicht mehr aufregend genug ist, wird sofort das nächste Match angeschrieben. So kann meiner Meinung nach ein vertrauensvolles Verhältnis entstehen.
+
+### Also wirst du dich in Zukunft aus den Apps herausziehen?
+
+Ich bin leider nicht sehr gut darin, fremde Menschen anzusprechen. Deshalb werde ich bis auf weiteres wahrscheinlich trotzdem weiter über Dating-Apps nach einem Partner suchen. Aber ich hoffe, dass ich im Millennial Workshop neue Anreize erhalten kann, wie ich nicht als Single mit 30 ende.
+
+### Vielleicht sitzt dein Traummann ja auch im Workshop.
+
+(lacht) Ich gehe ehrlicherweise nicht davon aus, dass im Workshop mein Traummann sitzen wird. Aber warten wir es einfach mal ab. Unabhängig davon wird es mir hoffentlich gut tun, ein wenig aus meiner Komfortzone zu rücken und mit anderen Millennials zu sprechen, denen es ähnlich geht. Ich freue mich auf jeden Fall darauf!

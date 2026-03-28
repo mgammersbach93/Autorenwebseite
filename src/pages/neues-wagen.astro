@@ -40,21 +40,21 @@ const characters = [
 ];
 ---
 
-<Layout title="Sie wollten doch nur glücklich sein">
+<Layout title="Sie wollten endlich Neues wagen">
 	<!-- 1. HERO (Off-White) -->
 	<section class="g-hero">
 		<div class="g-hero-inner">
 			<div class="g-hero-cover-wrap">
 				<img
-					src="/images/sie-wollten-doch-nur-gluecklich-sein.jpg"
-					alt="Buchcover: Sie wollten doch nur glücklich sein"
+					src="/images/sie-wollten-endlich-neues-wagen.jpg"
+					alt="Buchcover: Sie wollten endlich Neues wagen"
 					class="g-hero-cover"
 				/>
 			</div>
 			<div class="g-hero-content">
-				<h1 class="g-eyebrow">SIE WOLLTEN DOCH NUR GLÜCKLICH SEIN</h1>
-				<p class="g-hero-title">Eine Geschichte über Millennials auf der Suche</p>
-				<a href="https://www.amazon.de/wollten-doch-gl%C3%BCcklich-Generation-Millennials/dp/B0CKGWZ2WG/ref=tmm_pap_swatch_0" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Jetzt bestellen</a>
+				<h1 class="g-eyebrow">SIE WOLLTEN ENDLICH NEUES WAGEN</h1>
+				<p class="g-hero-title">Eine Geschichte über Millennials im Aufbruch</p>
+				<a href="#" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Jetzt bestellen</a>
 			</div>
 		</div>
 	</section>
@@ -62,7 +62,7 @@ const characters = [
 	<!-- 2. KLAPPENTEXT (Off-White) -->
 	<section class="g-klappentext">
 		<div class="g-klappentext-inner">
-			<h2>Wie wird man eigentlich glücklich?</h2>
+			<h2>Manchmal braucht es Mut</h2>
 			<p class="g-body">
 				Elias sehnt sich nach einem erfüllenden Job, Lea möchte vor ihrem 30. Geburtstag unbedingt einen Partner finden, Malte belasten seine Depressionen in der Ehe und Sofia steht kurz vor der nächsten Beförderung.
 			</p>
@@ -143,17 +143,17 @@ const characters = [
 		</div>
 	</section>
 
-	<!-- CTA: cover + primary button -->
+	<!-- 6. CTA (Off-White) -->
 	<section class="g-cta">
 		<div class="g-cta-inner">
 			<div class="g-cta-cover-wrap">
 				<img
-					src="/images/sie-wollten-doch-nur-gluecklich-sein.png"
-					alt="Buchcover: Sie wollten doch nur glücklich sein"
+					src="/images/sie-wollten-endlich-neues-wagen.png"
+					alt="Buchcover: Sie wollten endlich Neues wagen"
 					class="g-cta-cover"
 				/>
 			</div>
-			<a href="https://www.amazon.de/wollten-doch-gl%C3%BCcklich-Generation-Millennials/dp/B0CKGWZ2WG/ref=tmm_pap_swatch_0" class="btn btn-primary g-cta-btn" target="_blank" rel="noopener noreferrer">Jetzt bestellen</a>
+			<a href="#" class="btn btn-primary g-cta-btn" target="_blank" rel="noopener noreferrer">Jetzt bestellen</a>
 		</div>
 	</section>
 </Layout>
@@ -332,6 +332,35 @@ const characters = [
 </script>
 
 <style>
+	/* Page-specific color overrides for "Neues Wagen" */
+	.g-hero .g-eyebrow {
+		color: #FBA922;
+	}
+
+	.g-char-info .g-eyebrow {
+		color: #C13A00;
+	}
+
+	.g-netflix h3 {
+		color: #FBA922;
+	}
+
+	.btn-primary {
+		background-color: #C13A00;
+	}
+
+	.btn-primary:hover {
+		background-color: #a32f00;
+	}
+
+	.g-char-card-bg {
+		background: #FBA922;
+	}
+
+	.g-video-placeholder {
+		background-color: #FBA922;
+	}
+
 	/* Shared */
 	.g-eyebrow {
 		display: block;
@@ -340,7 +369,7 @@ const characters = [
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.28em;
-		color: var(--gold);
+		color: #FBA922;
 		margin: 0 0 0.75rem 0;
 	}
 
@@ -392,12 +421,12 @@ const characters = [
 	}
 
 	.btn-primary {
-		background-color: var(--btn-primary);
+		background-color: #C13A00;
 		color: var(--bg);
 	}
 
 	.btn-primary:hover {
-		background-color: var(--btn-primary-hover);
+		background-color: #a32f00;
 	}
 
 	/* 1. HERO */
@@ -565,7 +594,7 @@ const characters = [
 		left: 0;
 		width: 100%;
 		height: 200px;
-		background: #1a3a30;
+		background: #FBA922;
 		border-radius: 40px 40px 0 0;
 		z-index: 0;
 	}
@@ -598,7 +627,7 @@ const characters = [
 
 	.g-char-info .g-eyebrow {
 		margin-bottom: 0.5rem;
-		color: var(--gold);
+		color: #C13A00;
 	}
 
 	.g-char-desc {
@@ -746,7 +775,7 @@ const characters = [
 
 	.g-video-placeholder {
 		aspect-ratio: 16 / 9;
-		background-color: var(--emerald);
+		background-color: #FBA922;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -793,7 +822,7 @@ const characters = [
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		margin: 0;
-		color: var(--gold);
+		color: #FBA922;
 	}
 
 	.g-netflix-text {

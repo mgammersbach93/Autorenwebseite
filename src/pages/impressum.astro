@@ -1,16 +1,124 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const loremShort =
+	'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
 ---
 
-<Layout title="Impressum">
-	<div class="container">
-		<section class="page-header">
-		<h1>Impressum</h1>
-		<p>
-			Platzhalter für dein Impressum. Hier fügst du später alle rechtlich relevanten Angaben
-			zum Angebot ein.
-		</p>
-	</section>
+<Layout
+	title="Impressum – Markus Gammersbach"
+	description="Impressum und Kontaktdaten von Markus Gammersbach"
+>
+	<div class="impressum-page">
+		<h1 class="impressum-title">Impressum</h1>
+		<p class="impressum-note">Angaben gemäß § 5 TMG</p>
+
+		<section class="impressum-section" aria-labelledby="impressum-verantwortlich">
+			<h2 id="impressum-verantwortlich">Verantwortlich für den Inhalt</h2>
+			<p>Markus Gammersbach</p>
+			<p>[Straße Nr.]</p>
+			<p>[PLZ Ort]</p>
+			<p>Deutschland</p>
+		</section>
+
+		<section class="impressum-section" aria-labelledby="impressum-kontakt">
+			<h2 id="impressum-kontakt">Kontakt</h2>
+			<p>
+				E-Mail:{' '}
+				<a href="mailto:kontakt@mgammersbach.de">kontakt@mgammersbach.de</a>
+			</p>
+		</section>
+
+		<section class="impressum-section" aria-labelledby="impressum-haftung-inhalte">
+			<h2 id="impressum-haftung-inhalte">Haftung für Inhalte</h2>
+			<p>{loremShort}</p>
+		</section>
+
+		<section class="impressum-section" aria-labelledby="impressum-haftung-links">
+			<h2 id="impressum-haftung-links">Haftung für Links</h2>
+			<p>{loremShort}</p>
+		</section>
+
+		<section class="impressum-section" aria-labelledby="impressum-urheberrecht">
+			<h2 id="impressum-urheberrecht">Urheberrecht</h2>
+			<p>{loremShort}</p>
+		</section>
 	</div>
 </Layout>
 
+<style>
+	.impressum-page {
+		--space-page: 5rem;
+		--space-section: 7rem;
+
+		max-width: 800px;
+		margin-inline: auto;
+		padding-inline: var(--space-page);
+		padding-block: var(--space-section);
+		background-color: var(--bg);
+	}
+
+	.impressum-title {
+		margin: 0;
+		font-weight: 700;
+		font-size: 42px;
+		line-height: 1.1;
+		letter-spacing: -0.03em;
+		color: var(--text);
+	}
+
+	.impressum-note {
+		margin: 0 0 3rem;
+		color: var(--muted);
+		font-size: 14px;
+		line-height: 1.6;
+	}
+
+	.impressum-section h2 {
+		margin: 3rem 0 0;
+		font-weight: 700;
+		font-size: 21px;
+		line-height: 1.3;
+		letter-spacing: -0.02em;
+		color: var(--text);
+	}
+
+	.impressum-section p {
+		margin: 0 0 1rem;
+		font-weight: 300;
+		font-size: 16px;
+		line-height: 1.85;
+		color: var(--text);
+	}
+
+	.impressum-section p:last-child {
+		margin-bottom: 0;
+	}
+
+	.impressum-page a {
+		color: var(--emerald);
+		text-decoration: none;
+	}
+
+	.impressum-page a:hover {
+		text-decoration: underline;
+	}
+
+	@media (min-width: 768px) {
+		.impressum-title {
+			font-size: 56px;
+		}
+	}
+
+	@media (max-width: 960px) {
+		.impressum-page {
+			padding-inline: 2rem;
+		}
+	}
+
+	@media (max-width: 720px) {
+		.impressum-page {
+			padding-inline: 1.5rem;
+		}
+	}
+</style>
