@@ -80,28 +80,36 @@ const characters = [
 		<div class="g-workshop-inner">
 			<h2>Der Millennial Workshop</h2>
 			<p class="g-workshop-subtitle">Klicke auf eine Person, um mehr zu erfahren</p>
-			<div class="g-characters">
-				{characters.map((c) => (
-					<button
-						type="button"
-						class="g-char-card"
-						data-char={c.id}
-						aria-pressed={c.id === 'malte'}
-						aria-label={`${c.name} – ${c.role}`}
-					>
-						<div class="g-char-card-visual">
-							<div class="g-char-card-center">
-								<div class="g-char-card-bg" aria-hidden="true"></div>
-								<img
-									src={characterImages[c.id]}
-									alt={c.name}
-									class="g-char-card-img"
-								/>
+			<div class="g-characters-row">
+				<button type="button" class="g-char-nav g-char-nav-prev" aria-label="Vorherige Person">
+					<span aria-hidden="true">‹</span>
+				</button>
+				<div class="g-characters">
+					{characters.map((c) => (
+						<button
+							type="button"
+							class="g-char-card"
+							data-char={c.id}
+							aria-pressed={c.id === 'malte'}
+							aria-label={`${c.name} – ${c.role}`}
+						>
+							<div class="g-char-card-visual">
+								<div class="g-char-card-center">
+									<div class="g-char-card-bg" aria-hidden="true"></div>
+									<img
+										src={characterImages[c.id]}
+										alt={c.name}
+										class="g-char-card-img"
+									/>
+								</div>
 							</div>
-						</div>
-						<span class="g-char-name">{c.name}</span>
-					</button>
-				))}
+							<span class="g-char-name">{c.name}</span>
+						</button>
+					))}
+				</div>
+				<button type="button" class="g-char-nav g-char-nav-next" aria-label="Nächste Person">
+					<span aria-hidden="true">›</span>
+				</button>
 			</div>
 			<div class="g-char-info">
 				<span class="g-eyebrow g-char-role-label">Leitet den Workshop</span>
@@ -222,6 +230,39 @@ const characters = [
 			}
 		}
 
+		function getClosestCardToViewportCenter() {
+			const allCards = Array.from(container.querySelectorAll('.g-char-card'));
+			const containerRect = container.getBoundingClientRect();
+			const cx = containerRect.left + containerRect.width / 2;
+			let best = null;
+			let bestDist = Infinity;
+			for (const card of allCards) {
+				const r = card.getBoundingClientRect();
+				const dist = Math.abs(r.left + r.width / 2 - cx);
+				if (dist < bestDist) {
+					bestDist = dist;
+					best = card;
+				}
+			}
+			return best;
+		}
+
+		function navigateAdjacent(delta) {
+			if (window.innerWidth > 1024) return;
+			const allCards = Array.from(container.querySelectorAll('.g-char-card'));
+			const current = getClosestCardToViewportCenter();
+			if (!current || allCards.length === 0) return;
+			const idx = allCards.indexOf(current);
+			if (idx < 0) return;
+			const nextIdx = (idx + delta + allCards.length) % allCards.length;
+			const target = allCards[nextIdx];
+			const id = target?.dataset?.char;
+			if (!target || !id) return;
+			ignoreScrollUntil = Date.now() + 400;
+			selectChar(id);
+			centerCard(target, 'smooth');
+		}
+
 		function updateCenteredCard() {
 			if (window.innerWidth > 1024) return;
 			const allCards = Array.from(container.querySelectorAll('.g-char-card'));
@@ -319,6 +360,11 @@ const characters = [
 
 		// Initial selection; mobile centering is done in rAF after cloning
 		selectChar('malte');
+
+		const prevBtn = document.querySelector('.g-char-nav-prev');
+		const nextBtn = document.querySelector('.g-char-nav-next');
+		prevBtn?.addEventListener('click', () => navigateAdjacent(-1));
+		nextBtn?.addEventListener('click', () => navigateAdjacent(1));
 
 		// Resize: remove clones when switching to desktop
 		window.addEventListener('resize', () => {
@@ -531,6 +577,10 @@ const characters = [
 		margin: 0 0 1.5rem 0;
 	}
 
+	.g-char-nav {
+		display: none;
+	}
+
 	.g-characters {
 		display: grid;
 		grid-template-columns: repeat(4, 260px);
@@ -639,6 +689,41 @@ const characters = [
 			padding: 0 2rem 2rem 2rem;
 		}
 
+		.g-characters-row {
+			display: flex;
+			align-items: flex-end;
+			justify-content: center;
+			width: 100vw;
+			margin-left: calc(50% - 50vw);
+			gap: 0.35rem;
+			box-sizing: border-box;
+		}
+
+		.g-char-nav {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-shrink: 0;
+			width: 2.75rem;
+			height: 2.75rem;
+			padding: 0;
+			margin: 0 0 1.15rem 0;
+			border: none;
+			background: var(--emerald);
+			color: var(--bg);
+			border-radius: 9999px;
+			font-size: 1.65rem;
+			line-height: 1;
+			cursor: pointer;
+			z-index: 15;
+			-webkit-tap-highlight-color: transparent;
+		}
+
+		.g-char-nav:focus-visible {
+			outline: 2px solid var(--gold);
+			outline-offset: 2px;
+		}
+
 		.g-characters {
 			display: flex;
 			align-items: flex-end;
@@ -655,8 +740,10 @@ const characters = [
 			padding-left: calc(50vw - 130px);
 			padding-right: calc(50vw - 130px);
 			scroll-padding: 0 calc(50vw - 130px);
-			width: 100vw;
-			margin-left: calc(50% - 50vw);
+			flex: 1 1 auto;
+			min-width: 0;
+			width: auto;
+			margin-left: 0;
 			box-sizing: border-box;
 		}
 
