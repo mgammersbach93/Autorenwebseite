@@ -1139,22 +1139,60 @@ import Layout from '../layouts/Layout.astro';
 			padding-block: 4rem;
 		}
 
+		.home-hero {
+			min-height: auto;
+			padding-block: 5rem 3rem;
+		}
+
+		.hero-inner {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+			text-align: center;
+		}
+
+		.hero-content {
+			order: 2;
+			align-items: center;
+		}
+
+		.hero-image-wrapper {
+			order: 1;
+			justify-content: center;
+		}
+
+		.hero-image {
+			max-width: 220px;
+			height: auto;
+		}
+
+		.hero-image-block {
+			width: 200px;
+			height: 160px;
+			border-radius: 32px 32px 0 0;
+		}
+
 		.hero-title {
-			font-size: 48px;
+			font-size: 36px;
 			line-height: 1.05;
+		}
+
+		.hero-subtext {
+			font-size: 14px;
+			margin-top: 0.75rem;
+			margin-bottom: 1.25rem;
+			max-width: 280px;
 		}
 
 		.home-about {
 			padding-inline: 1.5rem;
-			padding-top: calc(2rem + 4.5rem);
-			/* Extra bottom padding so negative margin on the image can sit flush with outer green edge */
-			padding-bottom: calc(2rem + 1.5rem);
+			padding-top: 3rem;
+			padding-bottom: 0;
 			overflow: visible;
 		}
 
 		.about-inner {
 			grid-template-columns: 1fr;
-			gap: 0.5rem;
+			gap: 1.5rem;
 			text-align: center;
 			align-items: center;
 		}
@@ -1165,19 +1203,24 @@ import Layout from '../layouts/Layout.astro';
 			padding-bottom: 0;
 		}
 
+		.about-cta {
+			margin-bottom: 0;
+		}
+
 		.about-image {
 			display: flex;
 			justify-content: center;
 			align-items: flex-end;
 			width: 100%;
+			margin-top: 1rem;
 		}
 
 		.about-image-img {
-			height: 400px;
+			height: 420px;
 			width: auto;
 			max-width: 100%;
 			margin: 0 auto;
-			margin-bottom: calc(-2rem - 1.5rem);
+			margin-bottom: -2rem;
 			object-fit: contain;
 			object-position: bottom;
 			display: block;
@@ -1208,12 +1251,43 @@ import Layout from '../layouts/Layout.astro';
 			gap: 2rem;
 		}
 
-		/* Books section: fully stacked, no overlap with testimonials */
+		/* Books section: centered, covers side by side, responsive */
 		.books-layout {
+			flex-direction: column;
+			align-items: center;
 			gap: 2.5rem;
+			width: 100%;
+		}
+
+		.books-covers {
+			display: flex;
+			justify-content: center;
+			gap: 0.75rem;
+			width: 100%;
+			padding-inline: 1rem;
+			box-sizing: border-box;
+		}
+
+		.book-cover-img {
+			width: calc((100vw - 3rem) / 2);
+			max-width: 160px;
+			height: auto;
+			aspect-ratio: 2 / 3;
+		}
+
+		.book-actions .book-btn {
+			width: calc((100vw - 3rem) / 2);
+			max-width: 160px;
+			padding: 0.7rem 1rem;
+			font-size: 10px;
 		}
 
 		.books-testimonials {
+			width: 100%;
+			max-width: 320px;
+			padding-left: 0;
+			text-align: center;
+			align-items: center;
 			margin-top: 0;
 			padding-top: 0;
 		}
@@ -1222,24 +1296,8 @@ import Layout from '../layouts/Layout.astro';
 			display: none;
 		}
 
-		/* Book covers and buttons in "Mehr als nur Geschichten" */
-		.book-cover-img {
-			width: 170px;
-			height: 255px;
-		}
-
-		.books-covers {
-			gap: 1rem;
-		}
-
-		.book-actions {
-			gap: 0.4rem;
-		}
-
-		.book-actions .book-btn {
-			padding: 0.75rem 1.5rem;
-			font-size: 11px;
-			width: 140px;
+		.testimonial-bars {
+			justify-content: center;
 		}
 
 		/* Smaller feature images on mobile */
@@ -1282,6 +1340,34 @@ import Layout from '../layouts/Layout.astro';
 		.community-divider {
 			width: 60px;
 			height: 1px;
+		}
+	}
+
+	@media (max-width: 380px) {
+		.hero-title {
+			font-size: 32px;
+		}
+
+		.hero-image {
+			max-width: 180px;
+		}
+
+		.hero-image-block {
+			width: 160px;
+			height: 130px;
+			border-radius: 24px 24px 0 0;
+		}
+
+		.book-cover-img {
+			width: calc((100vw - 2.5rem) / 2);
+			max-width: 140px;
+		}
+
+		.book-actions .book-btn {
+			width: calc((100vw - 2.5rem) / 2);
+			max-width: 140px;
+			font-size: 9px;
+			padding: 0.65rem 0.75rem;
 		}
 	}
 </style>
