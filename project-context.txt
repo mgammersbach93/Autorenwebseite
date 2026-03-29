@@ -39,34 +39,52 @@ C:\Users\marku\Autorenwebseite
 - **INWX:** Account für zukünftige Domain-Verwaltung
 
 ## Getroffene Entscheidungen
+
+### Design-System (aktualisiert)
+- **Farben:** Off-White (#F5F0E8), Smaragd (#1A3A30), Gold (#B89A3E) – KEIN reines Weiß (#FFFFFF)
+- **Schrift:** Nur Manrope (kein Georgia/Serif)
+- **Border-Radius:** Differenziert (nicht mehr 0px überall):
+  - Buttons: 9999px (Pill-Form)
+  - Smaragd-Shapes: 40px 40px 0 0 (oben rund)
+  - Bilder/Karten: 20-24px
+- **Icons:** Stroke-only in Gold, keine grünen Icon-Boxen
+
+### Layout & Struktur
 - Kein CMS vorerst – wird nach Fertigstellung des Designs eingerichtet (Keystatic geplant)
-- Keine TypeScript-Nutzung
-- Kein border-radius irgendwo (eckiges Design)
 - Smaragd-Sections immer 100vw (kein max-width auf dem Hintergrund)
 - Navigation: transparent über Hero, Off-White sticky beim Scrollen
 - Hamburger-Menü auf Mobile
 - Testimonials: Auto-Slider (4s Interval) mit Fortschrittsbalken
 - Buchcover: nebeneinander auch auf Mobile (nie gestapelt)
+- Asymmetrische Layouts mit Bildern die "herausragen" für mehr Dynamik
 
 ## Was bereits gebaut ist
 
 ### Startseite (index.astro) – fertig
-1. Hero – Vollbild-Foto, zentrierter Text, H1 72px, zwei Buttons
+1. Hero – Vollbild-Foto, zentrierter Text, H1 72px, Pill-Button
 2. Bücher – Text links, zwei Buchcover rechts nebeneinander
 3. Leserstimmen – Auto-Slider, goldener Fortschrittsbalken, 5 Quotes
-4. Quote-Band – Smaragd, goldenes „-Zeichen (Georgia, 5rem, opacity 0.6)
+4. Quote-Band – Off-White, goldenes „-Zeichen
 5. Über mich – Smaragd, 60/40 Text/Bild, Ghost-Button
 6. Warum Lesen + Millennial Workshop – zwei Spalten nebeneinander
-7. Blog Preview – 3 Karten, zentriert
-8. Social/Kontakt – zentriert, Icons, Button
+7. Social/Kontakt – zentriert, Icons, Button
 
 ### Über mich (ueber-mich.astro) – in Arbeit
-- Zeitstrahl "Mein Weg zum Schreiben" (5 Einträge, alternierend links/rechts)
-- 3-Bilder-Galerie mit Hover-Zoom
-- Was mich antreibt (3 Spalten)
-- Moin & Alaaf
-- Kontaktformular
-- Hero noch zu bauen
+Geplante Sektionen (Reihenfolge):
+1. **Hero** – noch zu bauen
+2. **Zeitstrahl** – "Mein Weg zum Schreiben" (5 Einträge, alternierend links/rechts)
+3. **3-Bilder-Galerie** – mit Hover-Zoom
+4. **Meine Vision** – NEU, ersetzt altes Quote-Band
+   - Smaragd-Block mit 3 herausragenden Bildern (abgerundet, 20-24px)
+   - Desktop: 2 Bilder links, 1 Bild rechts, Text mittig
+   - Mobile: 1 Bild oben, 1 Bild unten (zentriert)
+   - Vision-Text: "Ich möchte meinen Beitrag dazu leisten, dass wir häufiger zum Buch statt zum Handy greifen. Mit Geschichten, die inspirieren und bei der persönlichen Entwicklung helfen."
+5. **Mein Schreibprozess** – NEU, ersetzt "Was mich antreibt"
+   - 6 Items in 2×3 Grid, linksbündig
+   - Gold-Icons (stroke-only, 40px), keine Boxen
+   - Items: Frühaufsteher, Plotter, Papyrus, Lo-Fi Beats, Nebenberuflich, Schreibkollektiv
+6. **Moin & Alaaf** – Verbundenheit zu Köln und Hamburg
+7. **Kontaktformular**
 
 ### Restliche Seiten – Platzhalter
 

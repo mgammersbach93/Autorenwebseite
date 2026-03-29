@@ -118,13 +118,24 @@ const lektionen = [
 <Layout title="Millennial Workshop">
 	<!-- 1. HERO -->
 	<section class="mw-hero full-width">
-		<div class="mw-hero-inner">
+		<div class="mw-hero-stack">
 			<span class="mw-eyebrow mw-eyebrow--gold">Der Millennial Workshop</span>
 			<h1 class="mw-hero-title">10 Inspirationen für deinen Alltag</h1>
-			<p class="mw-hero-sub">
-				Obwohl die meisten Millennials in Deutschland privilegiert aufgewachsen sind, scheint es, als sei ein Großteil der Generation noch immer auf der Suche nach dem großen Glück. Der Millennial Workshop ist ein fiktiver Workshop aus meiner Romanreihe. Die wichtigsten Lektionen findest du hier zum Nachlesen.
+			<p class="mw-hero-intro">
+				Obwohl die meisten Millennials in Deutschland privilegiert aufgewachsen sind, scheint es, als sei ein Großteil der Generation noch immer auf der Suche nach dem großen Glück. Unsicherheit, zu viele Möglichkeiten und die Angst, etwas zu verpassen bestimmen oftmals den Alltag.
 			</p>
-			<div class="mw-video-placeholder">Video folgt</div>
+			<div class="mw-hero-video-wrap">
+				<div class="mw-hero-video" role="img" aria-label="Video folgt">
+					<span class="mw-hero-play" aria-hidden="true">
+						<svg class="mw-hero-play-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="32" viewBox="0 0 24 28" fill="none" aria-hidden="true">
+							<path d="M24 14L0 28V0L24 14Z" fill="var(--emerald)"></path>
+						</svg>
+					</span>
+				</div>
+			</div>
+			<p class="mw-hero-desc">
+				Der Millennial Workshop ist ein fiktiver Workshop aus meiner Romanreihe. Er richtet sich mit inspirierenden Lektionen an Menschen, die in einer Sinnkrise stecken oder persönlich wachsen wollen. Die wichtigsten Lektionen findest du hier zum Nachlesen:
+			</p>
 		</div>
 	</section>
 
@@ -200,6 +211,11 @@ const lektionen = [
 	<!-- 3. CTA -->
 	<section class="mw-cta full-width">
 		<div class="mw-cta-inner">
+			<img
+				class="mw-cta-img"
+				src="/images/millennial-workshop-romanreihe.png"
+				alt="Romanreihe zum Millennial Workshop"
+			/>
 			<span class="mw-eyebrow mw-eyebrow--gold">Die Bücher zum Workshop</span>
 			<h2 class="mw-cta-title">Entdecke die Romanreihe</h2>
 			<p class="mw-cta-sub">
@@ -220,14 +236,18 @@ const lektionen = [
 
 	/* ── HERO ── */
 	.mw-hero {
-		background-color: var(--emerald);
-		color: var(--bg);
-		padding: 7rem 5rem;
+		background-color: var(--bg);
+		padding: 7rem 5rem 5rem;
 	}
 
-	.mw-hero-inner {
-		max-width: var(--max-width, 1300px);
+	.mw-hero-stack {
+		max-width: 900px;
 		margin-inline: auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: 1.75rem;
 	}
 
 	.mw-eyebrow {
@@ -244,31 +264,59 @@ const lektionen = [
 
 	.mw-hero-title {
 		font-weight: 700;
-		font-size: 72px;
-		line-height: 1.05;
+		font-size: clamp(2.25rem, 6vw, 48px);
+		line-height: 1.1;
 		letter-spacing: -0.02em;
-		margin: 0 0 1.5rem;
-		color: var(--bg);
+		margin: 0;
+		color: var(--text);
 	}
 
-	.mw-hero-sub {
+	.mw-hero-intro {
 		font-weight: 300;
 		font-size: 18px;
 		line-height: 1.85;
-		max-width: 580px;
-		margin: 0 0 3rem;
-		color: rgba(245, 240, 232, 0.85);
+		max-width: 640px;
+		margin: 0;
+		color: var(--muted);
 	}
 
-	.mw-video-placeholder {
-		background: rgba(255, 255, 255, 0.05);
-		height: 500px;
+	.mw-hero-desc {
+		font-weight: 300;
+		font-size: 18px;
+		line-height: 1.85;
+		max-width: 640px;
+		margin: 0;
+		color: var(--muted);
+	}
+
+	.mw-hero-video-wrap {
+		width: 100%;
+		max-width: 760px;
+		margin: 0.75rem 0;
+	}
+
+	.mw-hero-video {
+		background-color: var(--emerald);
+		aspect-ratio: 16 / 9;
+		width: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		color: var(--muted);
-		font-size: 16px;
-		font-weight: 300;
+	}
+
+	.mw-hero-play {
+		width: 80px;
+		height: 80px;
+		background-color: var(--bg);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+	}
+
+	.mw-hero-play-icon {
+		display: block;
+		margin-left: 4px;
 	}
 
 	/* ── LEKTIONEN ── */
@@ -279,7 +327,7 @@ const lektionen = [
 	.mw-lektionen-inner {
 		max-width: 1300px;
 		margin-inline: auto;
-		padding: 7rem 5rem;
+		padding: 7rem 5rem 3rem;
 	}
 
 	.mw-tabs {
@@ -373,10 +421,10 @@ const lektionen = [
 	}
 
 	.mw-panel-para {
-		font-size: 16px;
+		font-size: 18px;
 		font-weight: 300;
 		line-height: 1.85;
-		color: var(--text);
+		color: var(--muted);
 		margin: 0;
 	}
 
@@ -406,7 +454,7 @@ const lektionen = [
 	.mw-tip-title {
 		font-size: 16px;
 		font-weight: 700;
-		color: var(--emerald);
+		color: var(--text);
 		display: flex;
 		flex-direction: row;
 		align-items: center;
@@ -424,24 +472,32 @@ const lektionen = [
 	}
 
 	.mw-tip-text {
-		font-size: 16px;
+		font-size: 18px;
 		font-weight: 300;
 		line-height: 1.85;
-		color: var(--text);
+		color: var(--muted);
 		margin: 0;
 	}
 
 	/* ── CTA ── */
 	.mw-cta {
-		background-color: var(--emerald);
-		color: var(--bg);
-		padding: 7rem 5rem;
+		background-color: var(--bg);
+		color: var(--text);
+		padding: 3rem 5rem 7rem;
 		text-align: center;
 	}
 
 	.mw-cta-inner {
 		max-width: 600px;
 		margin-inline: auto;
+	}
+
+	.mw-cta-img {
+		display: block;
+		width: 100%;
+		max-width: 340px;
+		height: auto;
+		margin: 0 auto 1.75rem;
 	}
 
 	.mw-cta .mw-eyebrow {
@@ -453,7 +509,7 @@ const lektionen = [
 		font-size: 42px;
 		line-height: 1.2;
 		margin: 0 0 1rem;
-		color: var(--bg);
+		color: var(--text);
 	}
 
 	.mw-cta-sub {
@@ -462,13 +518,13 @@ const lektionen = [
 		line-height: 1.6;
 		max-width: 480px;
 		margin: 0 auto 2rem;
-		color: rgba(245, 240, 232, 0.85);
+		color: var(--muted);
 	}
 
 	.mw-cta-btn {
 		display: inline-block;
-		background-color: var(--bg);
-		color: var(--emerald);
+		background-color: var(--emerald);
+		color: var(--bg);
 		font-weight: 600;
 		font-size: 14px;
 		text-transform: uppercase;
@@ -483,6 +539,44 @@ const lektionen = [
 		opacity: 0.95;
 	}
 
+	/* Lektionen: tablet + mobile — all lessons stacked, scroll page (no tab bar) */
+	@media (max-width: 1024px) {
+		.mw-tabs {
+			display: none !important;
+		}
+
+		.mw-nav-bar {
+			display: none !important;
+		}
+
+		.mw-panels-wrap {
+			display: flex;
+			flex-direction: column;
+			gap: 0;
+		}
+
+		.mw-panel:not(:first-child) {
+			border-top: 1px solid rgba(28, 28, 28, 0.12);
+			/* margin-top = space above line; padding-top = space below — keep equal to center the divider */
+			margin-top: 4.5rem;
+			padding-top: 4.5rem !important;
+		}
+
+		.mw-panel,
+		.mw-panel[hidden],
+		.mw-panel.mw-panel--active {
+			display: block !important;
+		}
+
+		.mw-panel:first-child {
+			padding-top: 0 !important;
+		}
+
+		.mw-panel-top {
+			min-height: 0;
+		}
+	}
+
 	/* Mobile */
 	@media (max-width: 768px) {
 		.mw-hero {
@@ -490,94 +584,69 @@ const lektionen = [
 		}
 
 		.mw-hero-title {
-			font-size: clamp(2rem, 8vw, 42px);
+			font-size: clamp(1.75rem, 8vw, 36px);
+		}
+
+		.mw-hero-video-wrap {
+			max-width: 100%;
+		}
+
+		.mw-hero-intro,
+		.mw-hero-desc {
+			max-width: 100%;
 		}
 
 		.mw-lektionen-inner {
-			padding: 5rem 2rem;
+			padding: 5rem 2rem 2.5rem;
 		}
 
-		.mw-tabs {
-			overflow-x: auto;
-			flex-wrap: nowrap;
-			-webkit-overflow-scrolling: touch;
-		}
-
-		.mw-tabs::-webkit-scrollbar {
-			display: none;
-		}
-
-		.mw-tabs {
-			scrollbar-width: none;
-		}
-
-		.mw-tab {
-			flex-shrink: 0;
-		}
-
-		.panel-tab {
-			padding: 0.75rem 0.6rem;
-			font-size: 11px;
-			font-weight: 600;
-			letter-spacing: 0.14em;
+		.mw-panel:not(:first-child) {
+			margin-top: 5rem;
+			padding-top: 5rem !important;
 		}
 
 		.mw-panel-top {
-			grid-template-columns: 1fr;
+			display: flex;
+			flex-direction: column;
+			gap: 0;
+			min-height: 0;
+			margin-bottom: 2.5rem;
 		}
 
 		.mw-panel-text {
-			padding: 1.5rem 0;
+			display: contents;
+			padding: 0;
+		}
+
+		.mw-panel-text .mw-eyebrow {
+			order: 1;
+			margin-bottom: 0.35rem;
+			margin-top: 0;
+		}
+
+		.mw-panel-title {
+			order: 2;
+			margin-top: 0;
+			margin-bottom: 1rem;
+		}
+
+		.mw-img-placeholder {
+			order: 3;
+			margin-top: 1rem;
+			margin-bottom: 1rem;
+		}
+
+		.mw-panel-para {
+			order: 4;
+			margin-top: 0;
 		}
 
 		.mw-tips-grid {
 			grid-template-columns: 1fr;
 		}
 
-		.mw-nav-bar {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			width: 100%;
-			padding: 1.5rem 0 0;
-			gap: 1rem;
-		}
-
-		.mw-nav-spacer {
-			flex: 1;
-			height: 1px;
-			background: rgba(28, 28, 28, 0.12);
-		}
-
-		.mw-nav-prev,
-		.mw-nav-next {
-			font-family: inherit;
-			font-size: 11px;
-			font-weight: 700;
-			text-transform: uppercase;
-			letter-spacing: 0.14em;
-			color: var(--muted);
-			background: none;
-			border: none;
-			padding: 0.5rem 0;
-			cursor: pointer;
-			display: inline-flex;
-			align-items: center;
-			gap: 0.35rem;
-		}
-
-		.mw-nav-prev.mw-nav-hidden,
-		.mw-nav-next.mw-nav-hidden {
-			visibility: hidden;
-			pointer-events: none;
-		}
-
-		.mw-nav-arrow {
-			color: var(--gold);
-		}
-
 		.mw-cta {
-			padding: 5rem 2rem;
+			padding: 2.5rem 2rem 7.5rem;
 		}
 
 		.mw-cta-title {
@@ -585,11 +654,6 @@ const lektionen = [
 		}
 	}
 
-	@media (min-width: 769px) {
-		.mw-nav-bar {
-			display: none !important;
-		}
-	}
 </style>
 
 <script>
@@ -604,8 +668,14 @@ const lektionen = [
 		const navNextNum = navNext ? navNext.querySelector('.mw-nav-num') : null;
 		const total = panels.length;
 		let currentIndex = 0;
+		const mqStacked = window.matchMedia('(max-width: 1024px)');
+
+		function isStacked() {
+			return mqStacked.matches;
+		}
 
 		function goToPanel(index) {
+			if (isStacked()) return;
 			if (index < 0 || index >= total) return;
 			currentIndex = index;
 
@@ -638,8 +708,19 @@ const lektionen = [
 			}
 		}
 
+		function applyLayout() {
+			if (isStacked()) {
+				panels.forEach(function (p) {
+					p.hidden = false;
+				});
+			} else {
+				goToPanel(currentIndex);
+			}
+		}
+
 		tabs.forEach(function (tab) {
 			tab.addEventListener('click', function () {
+				if (isStacked()) return;
 				const index = tab.getAttribute('data-index');
 				if (index !== null) goToPanel(parseInt(index, 10));
 			});
@@ -647,11 +728,13 @@ const lektionen = [
 
 		if (navPrev) {
 			navPrev.addEventListener('click', function () {
+				if (isStacked()) return;
 				goToPanel(currentIndex - 1);
 			});
 		}
 		if (navNext) {
 			navNext.addEventListener('click', function () {
+				if (isStacked()) return;
 				goToPanel(currentIndex + 1);
 			});
 		}
@@ -664,6 +747,7 @@ const lektionen = [
 				touchStartY = e.touches[0].clientY;
 			}, { passive: true });
 			panelContainer.addEventListener('touchend', function (e) {
+				if (isStacked()) return;
 				var dx = e.changedTouches[0].clientX - touchStartX;
 				var dy = e.changedTouches[0].clientY - touchStartY;
 				if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
@@ -676,6 +760,12 @@ const lektionen = [
 			}, { passive: true });
 		}
 
-		goToPanel(0);
+		if (typeof mqStacked.addEventListener === 'function') {
+			mqStacked.addEventListener('change', applyLayout);
+		} else {
+			mqStacked.addListener(applyLayout);
+		}
+
+		applyLayout();
 	});
 </script>
