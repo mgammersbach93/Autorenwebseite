@@ -41,7 +41,7 @@ C:\Users\marku\Autorenwebseite
 ## Getroffene Entscheidungen
 
 ### Design-System (aktualisiert)
-- **Farben:** Off-White (#F5F0E8), Smaragd (#1A3A30), Gold (#B89A3E) – KEIN reines Weiß (#FFFFFF)
+- **Farben:** Off-White (#F5F0E8), Smaragd (#234F42), Gold (#B89A3E) – KEIN reines Weiß (#FFFFFF)
 - **Schrift:** Nur Manrope (kein Georgia/Serif)
 - **Border-Radius:** Differenziert (nicht mehr 0px überall):
   - Buttons: 9999px (Pill-Form)

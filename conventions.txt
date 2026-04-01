@@ -7,7 +7,7 @@
 --bg: #F5F0E8        /* Off-White – Haupthintergrund (EINZIGER heller Hintergrund, kein reines Weiß) */
 --text: #1C1C1C      /* Dunkel – alle Fließtexte */
 --muted: #888880     /* Gedämpft – Nebentexte, Beschreibungen */
---emerald: #1A3A30   /* Smaragd – Akzent 1, Sections, Buttons */
+--emerald: #234F42   /* Smaragd – Akzent 1, Sections, Buttons */
 --gold: #B89A3E      /* Gold – Akzent 2, Eyebrows, Icons, Rahmen */
 --gold-lt: #C9A84C   /* Gold hell – Hover-States */
 --max-width: 1300px
@@ -45,7 +45,7 @@ border-radius: 8px;
 ### Buttons
 ```css
 /* Primary */
-background: #1A3A30;
+background: #234F42;
 color: #F5F0E8;
 padding: 0.85rem 2rem;
 font: Manrope 700, 11px, UPPERCASE, letter-spacing 0.16em;

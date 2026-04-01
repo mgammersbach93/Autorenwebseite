@@ -28,7 +28,7 @@ Entwicklungsprozess – von der Idee bis zum fertigen Prompt.
 --bg: #F5F0E8      Off-White – Haupthintergrund
 --text: #1C1C1C    Dunkel – Texte
 --muted: #888880   Gedämpft – Nebentexte  
---emerald: #1A3A30 Smaragd – Akzent 1
+--emerald: #234F42 Smaragd – Akzent 1
 --gold: #B89A3E    Gold – Akzent 2
 --radius: 0px      Kein border-radius
 --max-width: 1300px
