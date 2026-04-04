@@ -209,7 +209,7 @@ import Layout from '../layouts/Layout.astro';
 		background: var(--bg);
 		min-height: 100vh;
 		display: flex;
-		align-items: flex-start;
+		align-items: center;
 		padding: 8rem 5rem 0;
 		position: relative;
 		overflow: visible;
@@ -269,14 +269,18 @@ import Layout from '../layouts/Layout.astro';
 	.hero__right {
 		position: relative;
 		height: 520px;
-		align-self: flex-end;
+		align-self: center;
+		width: 100%;
+		max-width: 520px;
+		margin-inline: auto;
 	}
 
 	.hero__right-shape {
 		position: absolute;
-		width: 520px;
-		height: 400px;
-		background: #234f42;
+		width: min(520px, 100%);
+		height: auto;
+		aspect-ratio: 520 / 400;
+		background: var(--emerald);
 		bottom: 0;
 		left: 50%;
 		transform: translateX(-50%);
@@ -569,12 +573,16 @@ import Layout from '../layouts/Layout.astro';
 		}
 	}
 
-	/* Hero stacked + centered like Home (index) from tablet down */
-	@media (max-width: 900px) {
+	/*
+		Stack hero at ≤1200px so tablet / square landscape (e.g. iPad) avoids cramped 2-col.
+		Extra bottom padding for this layout lives only in the block below — not on wide desktop
+		(see min-width: 1201px), otherwise min-width:769px was forcing 8.5rem under the hero here.
+	*/
+	@media (max-width: 1200px) {
 		.hero {
 			align-items: center;
 			min-height: auto;
-			padding: 7rem 2rem 3rem;
+			padding: 6rem 2rem 2.5rem;
 		}
 
 		.hero__inner {
@@ -624,11 +632,19 @@ import Layout from '../layouts/Layout.astro';
 			max-height: none;
 			object-fit: contain;
 			object-position: bottom center;
+			border-radius: 12px;
 		}
 
 		.hero__name {
 			font-size: 64px;
 			line-height: 1.05;
+		}
+	}
+
+	@media (max-width: 1200px) and (max-height: 820px) {
+		.hero {
+			padding-top: 5.25rem;
+			padding-bottom: 2rem;
 		}
 	}
 
@@ -698,9 +714,16 @@ import Layout from '../layouts/Layout.astro';
 		}
 	}
 
+	/* Drop 100vh hero on viewports that use the 2-column layout */
 	@media (min-width: 769px) {
 		.hero {
 			min-height: auto;
+		}
+	}
+
+	/* Wide desktop only: breathing room under 2-col hero (not on stacked tablet) */
+	@media (min-width: 1201px) {
+		.hero {
 			padding-bottom: 8.5rem;
 		}
 	}
