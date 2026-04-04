@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://autorenwebseite.netlify.app/sitemap-index.xml
+Sitemap: https://mgammersbach.de/sitemap-index.xml
