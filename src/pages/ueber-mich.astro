@@ -5,27 +5,37 @@ const timelineEntries = [
 	{
 		year: '2019',
 		headline: 'Die beste Sinnkrise meines Lebens',
-		text: 'Eine Sinnkrise bringt mich zur Persönlichkeitsentwicklung – und verändert meinen Blick auf das Leben.',
+		text: 'Im Sommer 2019 mache ich mir viele Gedanken: Was will ich eigentlich im Leben? Bin ich noch auf dem richtigen Weg? Nutze ich meine Zeit sinnvoll?',
 	},
 	{
 		year: '2019',
-		headline: 'Einstieg in die Persönlichkeitsentwicklung',
-		text: 'Mit Lars Amends „Why Not?" entdecke ich die Welt der Persönlichkeitsentwicklung. Die praktischen Tipps machen meinen Alltag von Tag zu Tag aufregender.',
+		headline: 'Ein Buch, das alles verändert',
+		text: 'Mit Lars Amends „Why Not?" entdecke ich die Welt der Persönlichkeitsentwicklung. Von nun an probiere ich zahlreiche Ansätze aus, stoße Veränderungen an und lasse meine Sinnkrise damit schnell hinter mir.',
 	},
 	{
-		year: '2020',
-		headline: '5 schnelle Fragen an Tommi Schmitt',
-		text: 'Ein Podcast-Moment zündet den Funken. Ich schreibe 300 Seiten – ohne zu wissen, wohin die Reise geht.',
+		year: '2019–20',
+		headline: 'Eine schnelle Frage an Tommi Schmitt',
+		text: 'Nach einer Folge „Gemischtes Hack" habe ich plötzlich den Drang, meine eigenen Erfahrungen mit der Persönlichkeitsentwicklung aufzuschreiben.',
 	},
 	{
-		year: '2021–22',
-		headline: 'Ich lerne das Schreibhandwerk',
-		text: 'Ratgeber, Podcasts, Videos – jede freie Minute gehört dem Schreiben.',
+		year: '2020–21',
+		headline: 'Mein erstes Buchprojekt',
+		text: 'Zur selben Zeit bin ich auf der Suche nach einem Ventil für meine Kreativität. Aus den losen Ideen wird ein Ratgeber für Millennials.',
+	},
+	{
+		year: '2021–23',
+		headline: 'Deep Dive ins Schreibhandwerk',
+		text: 'Über ein Jahr lang nutze ich jede freie Minute, um mir das Schreibhandwerk beizubringen. Mein Ziel: Ich möchte einen eigenen Roman schreiben.',
 	},
 	{
 		year: '2023',
 		headline: 'Mein erster Roman',
-		text: '„Sie wollten doch nur glücklich sein" erscheint – mein erstes veröffentlichtes Werk.',
+		text: 'Nach eineinhalb Jahren Arbeit erscheint „Sie wollten doch nur glücklich sein" im Self-Publishing bei Amazon.',
+	},
+	{
+		year: '2023–heute',
+		headline: 'Schreiben als fester Teil meines Lebens',
+		text: 'Schreiben ist ein wichtiger Bestandteil meiner Freizeit und ich versuche, so viel Zeit wie möglich damit zu verbringen.',
 	},
 ];
 ---
@@ -41,9 +51,7 @@ const timelineEntries = [
 				<h1 class="hero__name">Über mich</h1>
 				<div class="hero__divider"></div>
 				<p class="hero__intro">
-					Autor, Geschichtenerzähler und Millennial aus dem Rheinland.
-					Ich schreibe über das Leben zwischen Aufbruch und Ankommen –
-					ehrlich, direkt und nah dran an dem, was uns wirklich bewegt.
+					Self-Publishing-Autor und Millennial aus Köln. Ich schreibe Romane über Persönlichkeitsentwicklung.
 				</p>
 			</div>
 
@@ -191,11 +199,27 @@ const timelineEntries = [
 			</div>
 			<div class="ueber-moin-images">
 				<div class="moin-image-wrap">
-					<div class="moin-image-placeholder"></div>
+					<div class="moin-image-frame">
+						<img
+							class="moin-image-img"
+							src="/images/markus-gammersbach-hamburg.jpg"
+							alt="Markus Gammersbach in Hamburg"
+							loading="lazy"
+							decoding="async"
+						/>
+					</div>
 					<p class="moin-image-label">Hamburg</p>
 				</div>
 				<div class="moin-image-wrap">
-					<div class="moin-image-placeholder"></div>
+					<div class="moin-image-frame">
+						<img
+							class="moin-image-img"
+							src="/images/markus-gammersbach-koeln.jpg"
+							alt="Markus Gammersbach in Köln"
+							loading="lazy"
+							decoding="async"
+						/>
+					</div>
 					<p class="moin-image-label">Köln</p>
 				</div>
 			</div>
@@ -789,11 +813,20 @@ const timelineEntries = [
 		gap: 0.75rem;
 	}
 
-	.moin-image-placeholder {
+	.moin-image-frame {
 		width: 180px;
-		height: 240px;
-		background-color: rgba(35, 79, 66, 0.15);
-		border: 1px dashed var(--emerald);
+		aspect-ratio: 4 / 5;
+		background-color: rgba(35, 79, 66, 0.08);
+		border-radius: 12px;
+		overflow: hidden;
+	}
+
+	.moin-image-img {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		object-position: center;
+		display: block;
 	}
 
 	.moin-image-label {
@@ -815,11 +848,15 @@ const timelineEntries = [
 
 		.ueber-moin-images {
 			order: 1;
+			width: 100%;
 		}
 
-		.moin-image-placeholder {
-			width: 150px;
-			height: 200px;
+		.moin-image-wrap {
+			width: min(220px, calc((100% - 1.5rem) / 2));
+		}
+
+		.moin-image-frame {
+			width: 100%;
 		}
 	}
 
@@ -830,11 +867,6 @@ const timelineEntries = [
 
 		.ueber-moin-inner {
 			padding-inline: 1.5rem;
-		}
-
-		.moin-image-placeholder {
-			width: 130px;
-			height: 170px;
 		}
 	}
 
@@ -1025,7 +1057,7 @@ const timelineEntries = [
 
 		.ueber-vision-statement {
 			font-family: 'Manrope', sans-serif;
-			font-size: 28px;
+			font-size: 22px;
 			font-weight: 700;
 			line-height: 1.45;
 			color: var(--vision-cream);
@@ -1036,11 +1068,11 @@ const timelineEntries = [
 
 		.ueber-vision-support {
 			font-family: 'Manrope', sans-serif;
-			font-size: 28px;
+			font-size: 22px;
 			font-weight: 700;
 			line-height: 1.45;
 			color: var(--vision-cream);
-			margin: 1.25rem auto 0;
+			margin: 2.25rem auto 0;
 			max-width: 100%;
 			text-align: center;
 		}

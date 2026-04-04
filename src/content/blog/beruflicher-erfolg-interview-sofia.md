@@ -1,8 +1,10 @@
 ---
-title: "Beruflicher Erfolg: Das braucht es für die steile Karriere"
-description: "Mit dreißig Jahren ist Sofia bereits erfolgreiche Senior Sales Managerin. Im Interview erklärt sie, wie sie ihren bisherigen beruflichen Erfolg erreicht hat."
+title: "Interview mit Sofia: Wie wichtig ist eine steile Karriere?"
+seoTitle: "Beruflicher Erfolg: Das braucht es für die steile Karriere"
+description: "Mit dreißig Jahren ist Sofia bereits erfolgreiche Senior Sales Managerin. So hat sie ihren bisherigen beruflichen Erfolg erreicht."
+seoDescription: "Mit dreißig Jahren ist Sofia bereits erfolgreiche Senior Sales Managerin. So hat sie ihren bisherigen beruflichen Erfolg erreicht."
 pubDate: 2025-03-13
-category: "millennial-life"
+category: "millennials"
 image: "/images/beruflicher-erfolg-interview-sofia.webp"
 ---
 

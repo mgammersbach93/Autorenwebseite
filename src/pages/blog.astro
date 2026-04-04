@@ -1,75 +1,67 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import BlogPostCard from '../components/BlogPostCard.astro';
+import { categoryLabel, formatPostDate } from '../lib/blog-categories';
 
 const allPosts = await getCollection('blog');
 const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const featured = posts[0];
 const rest = posts.slice(1);
-
-const categoryLabels: Record<string, string> = {
-	schreiben: 'Schreiben',
-	lesen: 'Lesen',
-	'millennial-life': 'Millennial Life',
-	persoenlichkeitsentwicklung: 'Persönlichkeitsentwicklung',
-};
-
-function formatDate(date: Date) {
-	return new Date(date).toLocaleDateString('de-DE', {
-		day: 'numeric',
-		month: 'long',
-		year: 'numeric',
-	});
-}
-
-function readingTime(body: string) {
-	return Math.ceil(body.split(/\s+/).length / 200);
-}
 ---
 
 <Layout title="Blog">
-	<!-- 1. HERO -->
+	<!-- 1. HERO SECTION: full-width emerald, inner max 1300px -->
 	<section class="blog-hero">
 		<div class="blog-hero-inner">
 			<p class="blog-hero-eyebrow">Blog</p>
-			<h1 class="blog-hero-title">Gedanken.<br />Geschichten.<br />Hinter den Kulissen.</h1>
+			<h1 class="blog-hero-title">Alltagsimpulse</h1>
 			<p class="blog-hero-subtext">
-				Persönliche Essays über das Schreiben, das Lesen und die Fragen, die uns Millennials wirklich beschäftigen.
-			</p>
+				Geschichten über das Schreiben, die Millennials und Persönlichkeitsentwicklung.</p>
 			<a href="#alle-artikel" class="blog-hero-cta">Alle Artikel lesen</a>
 			<span class="blog-hero-quote" aria-hidden="true">"</span>
 		</div>
 	</section>
 
-	<!-- 2. CATEGORY FILTER BAR -->
-	<nav class="blog-filter" aria-label="Blog-Kategorien">
+	<!-- 2. CATEGORY FILTER BAR (same page; hero stays fixed) -->
+	<nav id="blog-kategorien" class="blog-filter" aria-label="Blog-Kategorien">
 		<div class="blog-filter-inner">
-			<button class="blog-tab blog-tab--active" data-category="alle">Alle</button>
-			<button class="blog-tab" data-category="schreiben">Schreiben</button>
-			<button class="blog-tab" data-category="lesen">Lesen</button>
-			<button class="blog-tab" data-category="millennial-life">Millennial Life</button>
-			<button class="blog-tab" data-category="persoenlichkeitsentwicklung">Persönlichkeitsentwicklung</button>
+			<div class="blog-filter-tabs">
+				<a href="#alle" class="blog-tab filter-tag blog-tab--active" data-category="alle">Alle</a>
+				<a href="#schreiben" class="blog-tab filter-tag" data-category="schreiben">SCHREIBEN</a>
+				<a href="#lesen" class="blog-tab filter-tag" data-category="lesen">LESEN</a>
+				<a href="#wachsen" class="blog-tab filter-tag" data-category="wachsen">WACHSEN</a>
+				<a href="#millennials" class="blog-tab filter-tag" data-category="millennials">MILLENNIALS</a>
+			</div>
+			<div class="blog-filter-select-wrap">
+				<label for="blog-category-select" class="blog-category-select-label">Kategorie</label>
+				<select id="blog-category-select" class="blog-category-select" aria-label="Kategorie wählen">
+					<option value="alle">Alle</option>
+					<option value="schreiben">SCHREIBEN</option>
+					<option value="lesen">LESEN</option>
+					<option value="wachsen">WACHSEN</option>
+					<option value="millennials">MILLENNIALS</option>
+				</select>
+			</div>
 		</div>
 	</nav>
 
-	<!-- 3. FEATURED ARTICLE -->
+	<!-- 3. FEATURED ARTICLE (anchor: first article in the list) -->
 	{featured && (
-		<article class="blog-featured" data-category={featured.data.category} id="alle-artikel">
+		<article class="blog-featured" id="alle-artikel" data-tag={featured.data.category}>
 			<div class="blog-featured-inner">
-				<a href={`/blog/${featured.slug}`} class="blog-featured-media">
-					{featured.data.image
-						? <img src={featured.data.image} alt={featured.data.imageAlt ?? ''} class="blog-featured-img" />
-						: <div class="blog-featured-placeholder"></div>
-					}
-				</a>
+				<div class="blog-featured-media">
+					{featured.data.image ? (
+						<img src={featured.data.image} alt={featured.data.imageAlt ?? ''} class="blog-featured-img" />
+					) : (
+						<div class="blog-featured-placeholder"></div>
+					)}
+				</div>
 				<div class="blog-featured-content">
 					<div class="blog-meta">
-						<span class="blog-meta-tag">{categoryLabels[featured.data.category]}</span>
-						<span class="blog-meta-sep">·</span>
-						<time class="blog-meta-date">{formatDate(featured.data.pubDate)}</time>
-						<span class="blog-meta-sep">·</span>
-						<span class="blog-meta-read">{readingTime(featured.body)} Min. Lesezeit</span>
+						<a href={`/blog#${featured.data.category}`} class="blog-meta-tag">{categoryLabel(featured.data.category)}</a>
+						<span class="blog-meta-date">{formatPostDate(featured.data.pubDate)}</span>
 					</div>
 					<h2 class="blog-featured-title">{featured.data.title}</h2>
 					<p class="blog-featured-teaser">{featured.data.description}</p>
@@ -81,72 +73,127 @@ function readingTime(body: string) {
 
 	<!-- 4. ARTICLE GRID -->
 	<section class="blog-grid-section">
-		<div class="blog-grid-inner" id="blog-grid">
-			{rest.map((post) => (
-				<article class="blog-card" data-category={post.data.category}>
-					<a href={`/blog/${post.slug}`} class="blog-card-media-link">
-						{post.data.image
-							? <img src={post.data.image} alt={post.data.imageAlt ?? ''} class="blog-card-img" />
-							: <div class="blog-card-media-placeholder"></div>
-						}
-					</a>
-					<div class="blog-meta">
-						<span class="blog-meta-tag">{categoryLabels[post.data.category]}</span>
-						<span class="blog-meta-sep">·</span>
-						<time class="blog-meta-date">{formatDate(post.data.pubDate)}</time>
-						<span class="blog-meta-sep">·</span>
-						<span class="blog-meta-read">{readingTime(post.body)} Min. Lesezeit</span>
-					</div>
-					<h3 class="blog-card-title">
-						<a href={`/blog/${post.slug}`}>{post.data.title}</a>
-					</h3>
-					<p class="blog-card-teaser">{post.data.description}</p>
-					<a href={`/blog/${post.slug}`} class="blog-btn-ghost">Artikel lesen</a>
-				</article>
-			))}
-
-			<!-- Empty state -->
-			{rest.length === 0 && (
-				<p class="blog-empty">Weitere Artikel folgen bald.</p>
-			)}
+		<div class="blog-grid-inner">
+			{rest.map((post) => <BlogPostCard post={post} />)}
 		</div>
 	</section>
 </Layout>
 
 <script>
-	document.addEventListener('DOMContentLoaded', () => {
-		const tabs = document.querySelectorAll<HTMLButtonElement>('.blog-tab');
-		const featured = document.querySelector<HTMLElement>('.blog-featured');
-		const cards = document.querySelectorAll<HTMLElement>('.blog-card');
+	document.addEventListener('DOMContentLoaded', function () {
+		var tabs = document.querySelectorAll('.filter-tag');
+		var categorySelect = document.getElementById('blog-category-select');
 
-		tabs.forEach((tab) => {
-			tab.addEventListener('click', () => {
-				const category = tab.dataset.category;
-				if (!category) return;
+		/** Legacy slug + bookmarks / old links */
+		function normalizeCategorySlug(slug) {
+			if (!slug) return '';
+			if (slug === 'millennial-life') return 'millennials';
+			return slug;
+		}
 
-				tabs.forEach((t) => t.classList.remove('blog-tab--active'));
-				tab.classList.add('blog-tab--active');
+		function categoryFromHash() {
+			var h = window.location.hash.slice(1);
+			h = normalizeCategorySlug(h);
+			if (!h || h === 'alle' || h === 'alle-artikel') return 'alle';
+			if (h === 'schreiben' || h === 'lesen' || h === 'wachsen' || h === 'millennials') {
+				return h;
+			}
+			return 'alle';
+		}
 
-				// Filter featured
-				if (featured) {
-					const show = category === 'alle' || featured.dataset.category === category;
-					featured.style.display = show ? '' : 'none';
+		function setActiveTab(category) {
+			category = normalizeCategorySlug(category);
+			tabs.forEach(function (t) {
+				t.classList.remove('blog-tab--active');
+				if (t.getAttribute('data-category') === category) {
+					t.classList.add('blog-tab--active');
 				}
+			});
+		}
 
-				// Filter grid cards
-				cards.forEach((card) => {
-					const show = category === 'alle' || card.dataset.category === category;
-					card.style.display = show ? '' : 'none';
+		function syncCategorySelect(category) {
+			if (!categorySelect) return;
+			category = normalizeCategorySlug(category);
+			if (category === 'alle' || category === 'schreiben' || category === 'lesen' || category === 'wachsen' || category === 'millennials') {
+				categorySelect.value = category;
+			}
+		}
+
+		function applyFilter(category) {
+			category = normalizeCategorySlug(category);
+			var els = document.querySelectorAll('article[data-tag]');
+			els.forEach(function (article) {
+				var tag = normalizeCategorySlug(article.getAttribute('data-tag'));
+				var show = category === 'alle' || tag === category;
+				article.style.display = show ? '' : 'none';
+			});
+		}
+
+		function scrollBelowHero() {
+			var el = document.getElementById('blog-kategorien');
+			if (!el) return;
+			requestAnimationFrame(function () {
+				requestAnimationFrame(function () {
+					el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 				});
 			});
+		}
+
+		function runFromHash() {
+			var category = categoryFromHash();
+			setActiveTab(category);
+			syncCategorySelect(category);
+			applyFilter(category);
+			if (category !== 'alle') {
+				scrollBelowHero();
+			}
+		}
+
+		function setHashForCategory(category) {
+			if (category === 'alle') {
+				window.location.hash = 'alle';
+			} else {
+				window.location.hash = category;
+			}
+		}
+
+		tabs.forEach(function (tab) {
+			tab.addEventListener('click', function (e) {
+				e.preventDefault();
+				var category = normalizeCategorySlug(tab.getAttribute('data-category'));
+				if (!category) return;
+				setHashForCategory(category);
+				setActiveTab(category);
+				syncCategorySelect(category);
+				applyFilter(category);
+			});
 		});
+
+		if (categorySelect) {
+			categorySelect.addEventListener('change', function () {
+				setHashForCategory(categorySelect.value);
+			});
+		}
+
+		window.addEventListener('hashchange', runFromHash);
+		runFromHash();
 	});
 </script>
 
 <style>
+	/* Break out of layout container for full-width sections */
 	:global(.page-main .container) {
 		max-width: none;
 		padding-inline: 0;
+	}
+
+	/* Anchor scroll from article links: land below fixed header */
+	:global(#blog-kategorien) {
+		scroll-margin-top: 5.5rem;
+	}
+
+	:global(#alle-artikel) {
+		scroll-margin-top: 5.5rem;
 	}
 
 	/* ----- 1. HERO ----- */
@@ -154,7 +201,9 @@ function readingTime(body: string) {
 		width: 100vw;
 		position: relative;
 		left: 50%;
+		right: 50%;
 		margin-left: -50vw;
+		margin-right: -50vw;
 		background-color: var(--emerald);
 	}
 
@@ -166,16 +215,13 @@ function readingTime(body: string) {
 	}
 
 	.blog-hero-eyebrow {
-		font-family: 'Manrope', sans-serif;
+		font-family: 'Manrope', system-ui, sans-serif;
 		font-size: 11px;
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.28em;
 		color: var(--gold);
-		margin: 0 0 1.5rem;
-		display: flex;
-		align-items: center;
-		gap: 1rem;
+		margin: 0 0 1.5rem 0;
 	}
 
 	.blog-hero-eyebrow::before {
@@ -184,45 +230,49 @@ function readingTime(body: string) {
 		width: 2rem;
 		height: 2px;
 		background-color: var(--gold);
+		vertical-align: middle;
+		margin-right: 1rem;
 	}
 
 	.blog-hero-title {
-		font-family: 'Manrope', sans-serif;
+		font-family: 'Manrope', system-ui, sans-serif;
 		font-weight: 700;
 		font-size: clamp(42px, 6vw, 72px);
 		line-height: 1.05;
 		letter-spacing: -0.02em;
 		color: #f5f0e8;
 		max-width: 760px;
-		margin: 0 0 1.5rem;
+		margin: 0 0 1.5rem 0;
 	}
 
 	.blog-hero-subtext {
-		font-family: 'Manrope', sans-serif;
+		font-family: 'Manrope', system-ui, sans-serif;
 		font-weight: 300;
 		font-size: 17px;
 		line-height: 1.85;
 		color: rgba(245, 240, 232, 0.7);
 		max-width: 520px;
-		margin: 0 0 2rem;
+		margin: 0 0 2rem 0;
 	}
 
 	.blog-hero-cta {
 		display: inline-block;
-		background-color: var(--gold);
-		color: var(--emerald);
+		background: transparent;
+		color: var(--bg);
+		border: 1px solid rgba(245, 240, 232, 0.4);
 		padding: 0.85rem 2rem;
-		font-family: 'Manrope', sans-serif;
+		font-family: 'Manrope', system-ui, sans-serif;
 		font-weight: 700;
 		font-size: 11px;
 		text-transform: uppercase;
 		letter-spacing: 0.16em;
 		text-decoration: none;
-		transition: background-color 0.25s ease;
+		border-radius: 9999px;
+		transition: border-color 0.25s ease, color 0.25s ease;
 	}
 
 	.blog-hero-cta:hover {
-		background-color: #c9a84c;
+		border-color: rgba(245, 240, 232, 0.75);
 	}
 
 	.blog-hero-quote {
@@ -242,7 +292,9 @@ function readingTime(body: string) {
 		width: 100vw;
 		position: relative;
 		left: 50%;
+		right: 50%;
 		margin-left: -50vw;
+		margin-right: -50vw;
 		background-color: var(--bg);
 		border-bottom: 1px solid rgba(28, 28, 28, 0.1);
 	}
@@ -254,24 +306,65 @@ function readingTime(body: string) {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0;
+		align-items: center;
+	}
+
+	.blog-filter-tabs {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0;
+	}
+
+	.blog-filter-select-wrap {
+		display: none;
+		width: 100%;
+		box-sizing: border-box;
+		position: relative;
+	}
+
+	.blog-category-select-label {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	.blog-category-select {
+		width: 100%;
+		box-sizing: border-box;
+		font-family: 'Manrope', system-ui, sans-serif;
+		font-size: 14px;
+		font-weight: 600;
+		color: var(--text);
+		background-color: var(--bg);
+		border: 1px solid rgba(28, 28, 28, 0.2);
+		border-radius: 0;
+		padding: 0.85rem 1rem;
+		cursor: pointer;
+		appearance: auto;
 	}
 
 	.blog-tab {
-		font-family: 'Manrope', sans-serif;
+		font-family: 'Manrope', system-ui, sans-serif;
 		font-size: 11px;
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.2em;
 		color: var(--muted);
 		padding: 1.1rem 1.5rem;
-		background: none;
-		border: none;
+		text-decoration: none;
 		border-bottom: 2px solid transparent;
-		cursor: pointer;
 		transition: color 0.25s ease, border-color 0.25s ease;
 	}
 
-	.blog-tab:hover { color: var(--text); }
+	.blog-tab:hover {
+		color: var(--text);
+	}
 
 	.blog-tab--active {
 		color: var(--emerald);
@@ -295,69 +388,55 @@ function readingTime(body: string) {
 
 	.blog-featured-media {
 		aspect-ratio: 16 / 10;
-		display: block;
-		overflow: hidden;
-	}
-
-	.blog-featured-img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		transition: transform 0.4s ease;
-	}
-
-	.blog-featured-media:hover .blog-featured-img {
-		transform: scale(1.03);
-	}
-
-	.blog-featured-placeholder {
-		width: 100%;
-		height: 100%;
 		background-color: var(--emerald);
-		opacity: 0.4;
+		overflow: hidden;
+		border-radius: 0.75rem;
 	}
 
 	.blog-meta {
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
-		flex-wrap: wrap;
+		gap: 0.75rem;
 		margin-bottom: 1rem;
-		font-family: 'Manrope', sans-serif;
+		font-family: 'Manrope', system-ui, sans-serif;
 		font-size: 12px;
 	}
 
 	.blog-meta-tag {
-		color: var(--gold);
+		font-family: 'Manrope', system-ui, sans-serif;
+		font-size: 11px;
 		font-weight: 700;
 		text-transform: uppercase;
-		letter-spacing: 0.1em;
+		letter-spacing: 0.16em;
+		color: var(--gold);
+		text-decoration: none;
 	}
 
-	.blog-meta-sep { color: rgba(28, 28, 28, 0.25); }
+	.blog-featured .blog-meta .blog-meta-tag:hover {
+		opacity: 0.85;
+	}
 
-	.blog-meta-date,
-	.blog-meta-read {
+	.blog-meta-date {
 		color: var(--muted);
 		font-weight: 300;
 	}
 
 	.blog-featured-title {
-		font-family: 'Manrope', sans-serif;
+		font-family: 'Manrope', system-ui, sans-serif;
 		font-weight: 700;
-		font-size: clamp(1.5rem, 2.5vw, 2rem);
+		font-size: 32px;
 		line-height: 1.1;
 		color: var(--text);
-		margin: 0 0 1rem;
+		margin: 0 0 1rem 0;
 	}
 
 	.blog-featured-teaser {
-		font-family: 'Manrope', sans-serif;
+		font-family: 'Manrope', system-ui, sans-serif;
 		font-weight: 300;
-		font-size: 15px;
-		line-height: 1.85;
+		font-size: 16px;
+		line-height: 1.7;
 		color: var(--muted);
-		margin: 0 0 1.5rem;
+		margin: 0 0 1.5rem 0;
 	}
 
 	.blog-btn-ghost {
@@ -366,18 +445,21 @@ function readingTime(body: string) {
 		color: var(--text);
 		border: 1px solid rgba(28, 28, 28, 0.2);
 		padding: 0.85rem 2rem;
-		font-family: 'Manrope', sans-serif;
+		font-family: 'Manrope', system-ui, sans-serif;
 		font-weight: 700;
 		font-size: 11px;
 		text-transform: uppercase;
 		letter-spacing: 0.16em;
 		text-decoration: none;
 		transition: border-color 0.25s ease;
+		border-radius: 9999px;
 	}
 
-	.blog-btn-ghost:hover { border-color: var(--text); }
+	.blog-btn-ghost:hover {
+		border-color: var(--text);
+	}
 
-	/* ----- 4. GRID ----- */
+	/* ----- 4. ARTICLE GRID (layout; cards styled in BlogPostCard) ----- */
 	.blog-grid-section {
 		max-width: 1300px;
 		margin-inline: auto;
@@ -387,99 +469,49 @@ function readingTime(body: string) {
 	.blog-grid-inner {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		gap: 2.5rem;
+		column-gap: 2.5rem;
+		row-gap: 4rem;
 	}
 
-	.blog-card {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.blog-card-media-link {
-		display: block;
-		aspect-ratio: 3 / 2;
-		overflow: hidden;
-		margin-bottom: 1rem;
-	}
-
-	.blog-card-img {
+	.blog-featured-img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		transition: transform 0.4s ease;
+		display: block;
 	}
 
-	.blog-card-media-link:hover .blog-card-img {
-		transform: scale(1.03);
-	}
-
-	.blog-card-media-placeholder {
+	.blog-featured-placeholder {
 		width: 100%;
 		height: 100%;
 		background-color: var(--emerald);
-		opacity: 0.3;
 	}
 
-	.blog-card-title {
-		font-family: 'Manrope', sans-serif;
-		font-weight: 700;
-		font-size: 18px;
-		line-height: 1.25;
-		color: var(--text);
-		margin: 0 0 0.5rem;
-	}
-
-	.blog-card-title a {
-		text-decoration: none;
-		color: inherit;
-	}
-
-	.blog-card-title a:hover {
-		color: var(--emerald);
-	}
-
-	.blog-card-teaser {
-		font-family: 'Manrope', sans-serif;
-		font-weight: 300;
-		font-size: 14px;
-		line-height: 1.75;
-		color: var(--muted);
-		margin: 0 0 1rem;
-		flex: 1;
-	}
-
-	.blog-empty {
-		font-family: 'Manrope', sans-serif;
-		font-size: 15px;
-		color: var(--muted);
-		grid-column: 1 / -1;
-	}
-
-	/* Responsive */
-	@media (max-width: 960px) {
-		.blog-hero-inner,
-		.blog-filter-inner,
-		.blog-featured,
-		.blog-grid-section {
-			padding-inline: 2rem;
-		}
-
+	/* Tablet + narrow desktop: featured image above text (not side-by-side) */
+	@media (max-width: 1024px) {
 		.blog-featured-inner {
 			grid-template-columns: 1fr;
-			gap: 2rem;
-		}
-
-		.blog-grid-inner {
-			grid-template-columns: repeat(2, 1fr);
+			gap: 2.5rem;
 		}
 	}
 
 	@media (max-width: 720px) {
-		.blog-hero-inner { padding: 3rem 1.5rem 2.5rem; }
-		.blog-filter-inner { padding-inline: 1.5rem; }
-		.blog-featured { padding-inline: 1.5rem; }
-		.blog-grid-section { padding: 3rem 1.5rem 5rem; }
-		.blog-grid-inner { grid-template-columns: 1fr; }
-		.blog-hero-quote { display: none; }
+		.blog-filter-inner {
+			padding: 1rem 1.5rem 1.25rem;
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		.blog-filter-tabs {
+			display: none;
+		}
+
+		.blog-filter-select-wrap {
+			display: block;
+		}
+
+		.blog-grid-inner {
+			grid-template-columns: 1fr;
+			gap: 5rem;
+		}
 	}
 </style>

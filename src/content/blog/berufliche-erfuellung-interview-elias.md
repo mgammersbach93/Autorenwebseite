@@ -1,8 +1,10 @@
 ---
-title: "Berufliche Erfüllung finden: Braucht es das überhaupt?"
-description: "Elias aus Köln hat eine klare Meinung: Nach Jahren in der beruflichen Bedeutungslosigkeit will er endlich eine Tätigkeit ausüben, die ihm Sinn und Spaß bereitet."
+title: "Interview mit Elias: Braucht es berufliche Erfüllung überhaupt?"
+seoTitle: "Berufliche Erfüllung finden: Braucht es das überhaupt?"
+description: "Elias will nach Jahren in der beruflichen Bedeutungslosigkeit endlich eine Job, den er mag. Aber wie findet man sowas?"
 pubDate: 2025-03-12
-category: "millennial-life"
+seoDescription: "Elias will endlich einen Job, der ihm Spaß macht. Aber wie findet man den?"
+category: "millennials"
 image: "/images/berufliche-erfuellung-interview-elias.webp"
 ---
 

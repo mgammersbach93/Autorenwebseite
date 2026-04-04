@@ -845,13 +845,14 @@ import Layout from '../layouts/Layout.astro';
 		}
 
 		.about-image-img {
-			height: 500px;
+			max-height: 500px;
 			width: auto;
+			max-width: 100%;
+			height: auto;
 			margin: 0;
-			margin-bottom: -2rem;
 			margin-left: 0;
 			align-self: end;
-			object-fit: contain;
+			display: block;
 		}
 
 		.about-content {
@@ -1113,7 +1114,7 @@ import Layout from '../layouts/Layout.astro';
 		.home-about {
 			padding-inline: 2rem;
 			padding-top: 2rem;
-			padding-bottom: 2rem;
+			padding-bottom: 0;
 		}
 
 		.home-about .about-cta {
@@ -1185,7 +1186,7 @@ import Layout from '../layouts/Layout.astro';
 		.home-about {
 			padding-inline: 1.5rem;
 			padding-top: calc(2rem + 4.5rem);
-			padding-bottom: 2rem;
+			padding-bottom: 0;
 			overflow: visible;
 		}
 
@@ -1211,15 +1212,15 @@ import Layout from '../layouts/Layout.astro';
 			justify-content: center;
 			align-items: flex-end;
 			width: 100%;
+			line-height: 0;
 		}
 
 		.about-image-img {
-			height: 450px;
+			max-height: 450px;
 			width: auto;
 			max-width: 100%;
+			height: auto;
 			margin: 0 auto;
-			object-fit: contain;
-			object-position: bottom;
 			display: block;
 		}
 

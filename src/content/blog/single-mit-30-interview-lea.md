@@ -1,8 +1,10 @@
 ---
-title: "Single mit 30 – Was ist denn so schlimm daran?"
+title: "Interview mit Lea: Ist es so schlimm, mit 30 Single zu sein?"
+seoTitle: "Single mit 30 – Was ist denn so schlimm daran?"
 description: "Lea berichtet, warum sie kein Single mit 30 sein möchte und warum man im Online-Dating keine Liebe finden kann."
+seoDescription: "Lea berichtet, warum sie kein Single mit 30 sein möchte und warum man im Online-Dating keine Liebe finden kann"
 pubDate: 2025-03-11
-category: "millennial-life"
+category: "millennials"
 image: "/images/single-mit-30-interview-lea.webp"
 ---
 

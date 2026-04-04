@@ -4,7 +4,7 @@ seoTitle: "Mentale Gesundheit: Tabu oder Alltag?"
 description: "Ein offenes Gespräch über mentale Gesundheit, Selbstfürsorge und den Umgang mit schwierigen Phasen."
 seoDescription: "Malte spricht offen über Depression, Sinnkrisen und seinen Millennial Workshop."
 pubDate: 2025-03-14
-category: "millennial-life"
+category: "millennials"
 image: "/images/mentale-gesundheit-interview-malte.webp"
 ---
 
@@ -15,7 +15,9 @@ Umgang mit persönlichen Sinnkrisen und mentale Gesundheit. Im Interview
 berichtet er über seinen Alltag mit der Depression und seine Bemühungen,
 das Thema aus der Tabuzone zu holen.
 
+
 ------------------------------------------------------------------------
+
 
 ## Mit dem »Millennial Workshop« hast du dir laut eigener Aussage einen langjährigen Wunsch erfüllt. Wie kam es zu der Entscheidung?
 

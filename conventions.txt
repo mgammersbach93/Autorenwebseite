@@ -13,6 +13,8 @@
 --max-width: 1300px
 --space-page: 5rem   /* Seitenrand Desktop */
 --space-section: 7rem /* Section padding oben/unten */
+--radius: 9999px     /* Buttons: Pill-Shape (border-radius: 9999px) */
+                     /* Alle anderen Elemente: weiterhin eckig (0px) */
 ```
 
 **Wichtig:** Kein reines Weiß (#FFFFFF) verwenden – immer Off-White (#F5F0E8) für helle Flächen.

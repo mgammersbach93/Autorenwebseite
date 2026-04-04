@@ -1,8 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const loremShort =
-	'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
 ---
 
 <Layout
@@ -16,8 +13,9 @@ const loremShort =
 		<section class="impressum-section" aria-labelledby="impressum-verantwortlich">
 			<h2 id="impressum-verantwortlich">Verantwortlich für den Inhalt</h2>
 			<p>Markus Gammersbach</p>
-			<p>[Straße Nr.]</p>
-			<p>[PLZ Ort]</p>
+			<p>c/o Fakriro GmbH / Impressumsservice</p>
+			<p>Bodenfeldstr. 9</p>
+			<p>91438 Bad Windsheim</p>
 			<p>Deutschland</p>
 		</section>
 
@@ -25,23 +23,12 @@ const loremShort =
 			<h2 id="impressum-kontakt">Kontakt</h2>
 			<p>
 				E-Mail:{' '}
-				<a href="mailto:kontakt@mgammersbach.de">kontakt@mgammersbach.de</a>
+				kontakt[at]mgammersbach.de"
 			</p>
-		</section>
-
-		<section class="impressum-section" aria-labelledby="impressum-haftung-inhalte">
-			<h2 id="impressum-haftung-inhalte">Haftung für Inhalte</h2>
-			<p>{loremShort}</p>
-		</section>
-
-		<section class="impressum-section" aria-labelledby="impressum-haftung-links">
-			<h2 id="impressum-haftung-links">Haftung für Links</h2>
-			<p>{loremShort}</p>
-		</section>
-
-		<section class="impressum-section" aria-labelledby="impressum-urheberrecht">
-			<h2 id="impressum-urheberrecht">Urheberrecht</h2>
-			<p>{loremShort}</p>
+			<p>
+				Web:{' '}
+				<a href="https://www.mgammersbach.de">www.mgammersbach.de</a>
+			</p>
 		</section>
 	</div>
 </Layout>

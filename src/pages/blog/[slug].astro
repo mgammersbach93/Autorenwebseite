@@ -27,10 +27,10 @@ const formattedDate = pubDate.toLocaleDateString('de-DE', {
 
 // Category label
 const categoryLabels: Record<string, string> = {
-	schreiben: 'Schreiben',
-	lesen: 'Lesen',
-	'millennial-life': 'Millennial Life',
-	persoenlichkeitsentwicklung: 'Persönlichkeitsentwicklung',
+	schreiben: 'SCHREIBEN',
+	lesen: 'LESEN',
+	wachsen: 'WACHSEN',
+	millennials: 'MILLENNIALS',
 };
 const categoryLabel = categoryLabels[post.data.category] ?? post.data.category;
 
@@ -77,15 +77,15 @@ const related = allPosts
 	<aside class="post-author-box">
 		<div class="post-author-box-inner">
 			<div class="post-author-img">
-				<img src="/images/markus-gammersbach-selfpublishing-autor.png" alt="Markus Gammersbach" />
+				<img src="/images/markus-gammersbach-autor.png" alt="Markus Gammersbach" />
 			</div>
 			<div class="post-author-info">
 				<p class="post-author-label">Geschrieben von</p>
 				<p class="post-author-box-name">{post.data.author}</p>
 				<p class="post-author-bio">
-					Autor aus Hamburg. Schreibt über Persönlichkeitsentwicklung, das Leben als Millennial und die Fragen, die uns wirklich beschäftigen.
+					Self-Publishing Autor aus Köln. Er schreibt über das Schreiben, Persönlichkeitsentwicklung und das Leben der Millennials.
 				</p>
-				<a href="/ueber-mich" class="btn btn-ghost">Mehr über mich</a>
+				<a href="/ueber-mich" class="btn btn-ghost">Mehr über Markus</a>
 			</div>
 		</div>
 	</aside>
@@ -198,6 +198,7 @@ const related = allPosts
 		margin-inline: auto;
 		background-color: var(--emerald);
 		overflow: hidden;
+		border-radius: 0.75rem;
 		box-sizing: border-box;
 	}
 
@@ -247,8 +248,13 @@ const related = allPosts
 		font-size: 17px;
 		font-weight: 300;
 		line-height: 1.85;
-		color: var(--text);
+		color: var(--muted);
 		margin: 0 0 1.5rem;
+	}
+
+	/* Lead / introduction: same colour as article headlines */
+	.prose > :global(p:first-of-type) {
+		color: var(--text);
 	}
 
 	.prose :global(strong) {
@@ -262,7 +268,7 @@ const related = allPosts
 		font-size: 17px;
 		font-weight: 300;
 		line-height: 1.85;
-		color: var(--text);
+		color: var(--muted);
 		margin: 0 0 1.5rem;
 		padding-left: 1.5rem;
 	}
@@ -279,10 +285,23 @@ const related = allPosts
 		color: var(--muted);
 	}
 
+	.prose :global(hr) {
+		border: 0;
+		border-top: 1px solid rgba(28, 28, 28, 0.12);
+		margin: 4.75rem 0;
+	}
+
 	.prose :global(a) {
 		color: var(--emerald);
 		text-decoration: underline;
 		text-underline-offset: 0.2em;
+	}
+
+	.prose :global(img) {
+		display: block;
+		max-width: 100%;
+		height: auto;
+		border-radius: 0.75rem;
 	}
 
 	/* AUTHOR BOX */
@@ -308,12 +327,14 @@ const related = allPosts
 		width: 140px;
 		height: 140px;
 		overflow: hidden;
+		border-radius: 50%;
 	}
 
 	.post-author-img img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		border-radius: 50%;
 		filter: grayscale(20%);
 		transition: filter 0.3s ease;
 	}
@@ -366,7 +387,7 @@ const related = allPosts
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.16em;
-		border-radius: 0;
+		border-radius: 9999px;
 		cursor: pointer;
 		transition: border-color 0.2s ease, color 0.2s ease;
 		text-decoration: none;
@@ -425,6 +446,7 @@ const related = allPosts
 	.related-card-media {
 		aspect-ratio: 3 / 2;
 		overflow: hidden;
+		border-radius: 0.75rem;
 		margin-bottom: 1rem;
 	}
 
@@ -461,7 +483,7 @@ const related = allPosts
 
 	.related-card-teaser {
 		font-family: 'Manrope', sans-serif;
-		font-size: 14px;
+		font-size: 16px;
 		font-weight: 300;
 		line-height: 1.7;
 		color: var(--muted);
@@ -484,7 +506,7 @@ const related = allPosts
 
 	@media (max-width: 720px) {
 		.post-header {
-			padding-top: 4rem;
+			padding-top: 5.5rem;
 			padding-bottom: 2.5rem;
 		}
 
@@ -514,8 +536,21 @@ const related = allPosts
 
 		.post-author-box-inner {
 			flex-direction: column;
-			align-items: flex-start;
+			align-items: center;
 			gap: 1.5rem;
+		}
+
+		.post-author-info {
+			text-align: center;
+			align-items: center;
+		}
+
+		.post-author-bio {
+			margin-inline: auto;
+		}
+
+		.post-author-box .btn-ghost {
+			align-self: center;
 		}
 
 		.post-author-img {
