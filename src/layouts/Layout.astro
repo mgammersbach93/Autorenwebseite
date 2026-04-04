@@ -20,7 +20,10 @@ const ogImageUrl = new URL(normalizedImagePath, siteOrigin).href;
 
 const pathname = Astro.url.pathname;
 const isActive = (path) => (path === '/' ? pathname === '/' : pathname.startsWith(path));
-const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
+const isHeroPage =
+	pathname === '/' ||
+	pathname.startsWith('/ueber-mich') ||
+	pathname.startsWith('/warum-lesen');
 ---
 
 <!doctype html>
@@ -351,7 +354,7 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 
 	body.is-hero-page .site-nav.scrolled .nav-link:hover,
 	body.is-hero-page .site-nav.scrolled .nav-link--active {
-		color: var(--emerald);
+		color: var(--text);
 		opacity: 1;
 	}
 
@@ -385,7 +388,7 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 0.12em;
-		color: var(--muted);
+		color: var(--text);
 		padding-block: 0.25rem;
 		white-space: nowrap;
 	}
@@ -412,11 +415,25 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 	}
 
 	.nav-link--active {
-		color: var(--emerald);
+		color: var(--text);
+		position: relative;
+	}
+	.nav-link--active::after {
+		content: '';
+		position: absolute;
+		bottom: -4px;
+		left: 0;
+		right: 0;
+		height: 1.5px;
+		background: var(--text);
+	}
+
+	.nav-link--active[href='/']::after {
+		display: none;
 	}
 
 	.nav-link:hover {
-		color: var(--emerald);
+		color: var(--text);
 	}
 
 	/* Mobile nav toggle – hamburger (visible only at 768px and below) */
@@ -590,7 +607,11 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 
 		.nav-links .nav-link:hover,
 		.nav-links .nav-link--active {
-			color: var(--emerald);
+			color: var(--text);
+		}
+
+		.nav-links .nav-link--active::after {
+			display: none;
 		}
 	}
 

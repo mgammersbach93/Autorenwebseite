@@ -717,7 +717,7 @@ const lektionen = [
 			return mqStacked.matches;
 		}
 
-		function goToPanel(index) {
+		function goToPanel(index, scrollTabIntoView) {
 			if (isStacked()) return;
 			if (index < 0 || index >= total) return;
 			currentIndex = index;
@@ -731,7 +731,8 @@ const lektionen = [
 				p.hidden = i !== index;
 			});
 
-			if (tabList && tabs[index]) {
+			/* Only scroll the tab bar on user action — not on load/resize (would jump past the hero). */
+			if (scrollTabIntoView && tabList && tabs[index]) {
 				tabs[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 			}
 
@@ -765,20 +766,20 @@ const lektionen = [
 			tab.addEventListener('click', function () {
 				if (isStacked()) return;
 				const index = tab.getAttribute('data-index');
-				if (index !== null) goToPanel(parseInt(index, 10));
+				if (index !== null) goToPanel(parseInt(index, 10), true);
 			});
 		});
 
 		if (navPrev) {
 			navPrev.addEventListener('click', function () {
 				if (isStacked()) return;
-				goToPanel(currentIndex - 1);
+				goToPanel(currentIndex - 1, true);
 			});
 		}
 		if (navNext) {
 			navNext.addEventListener('click', function () {
 				if (isStacked()) return;
-				goToPanel(currentIndex + 1);
+				goToPanel(currentIndex + 1, true);
 			});
 		}
 
@@ -795,9 +796,9 @@ const lektionen = [
 				var dy = e.changedTouches[0].clientY - touchStartY;
 				if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
 					if (dx < 0) {
-						goToPanel(currentIndex + 1);
+						goToPanel(currentIndex + 1, true);
 					} else {
-						goToPanel(currentIndex - 1);
+						goToPanel(currentIndex - 1, true);
 					}
 				}
 			}, { passive: true });

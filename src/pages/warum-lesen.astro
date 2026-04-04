@@ -8,22 +8,23 @@ import Layout from '../layouts/Layout.astro';
 	image="/images/blaettern-statt-scrollen.png"
 >
 
-	<!-- HERO -->
-	<section class="lesen-hero">
-		<div class="lesen-hero-inner">
-			<div class="lesen-hero-content">
+	<!-- HERO (same structure as Über mich) -->
+	<section class="hero">
+		<div class="hero__inner">
+			<div class="hero__left">
 				<span class="eyebrow">Warum Lesen</span>
-				<h1 class="lesen-hero-title">Blättern statt<br>Scrollen</h1>
-				<p class="lesen-hero-text">
+				<h1 class="hero__name">Blättern statt<br>Scrollen</h1>
+				<div class="hero__divider"></div>
+				<p class="hero__intro">
 					Warum wir viel häufiger zu einem Buch statt zum Handy greifen sollten.
 				</p>
 			</div>
-			<div class="lesen-hero-image">
-				<div class="lesen-hero-shape"></div>
-				<img 
-					src="/images/blaettern-statt-scrollen.png" 
-					alt="Person liest ein Buch" 
-					class="lesen-hero-photo"
+			<div class="hero__right">
+				<div class="hero__right-shape"></div>
+				<img
+					class="hero__right-photo"
+					src="/images/blaettern-statt-scrollen.png"
+					alt="Person liest ein Buch"
 				/>
 			</div>
 		</div>
@@ -189,6 +190,13 @@ import Layout from '../layouts/Layout.astro';
 				Hol dir noch heute deine Portion analoges Dopamin.<br>
 				Entdecke spannende Geschichten, nahbare Charaktere und hilfreiche Lektionen für dein persönliches Wachstum.
 			</p>
+			<img
+				class="lesen-cta-image"
+				src="/images/millennial-workshop-romanreihe.png"
+				alt="Romanreihe zum Millennial Workshop"
+				loading="lazy"
+				decoding="async"
+			/>
 			<a href="/buecher" class="btn btn-primary">Zu den Büchern</a>
 		</div>
 	</section>
@@ -196,29 +204,32 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <style>
-	/* ── HERO ── */
-	.lesen-hero {
+	/* ── HERO (aligned with Über mich) ── */
+	.hero {
 		background: var(--bg);
-		min-height: 80vh;
+		min-height: 100vh;
 		display: flex;
-		align-items: center;
-		padding: 8rem 5rem 5rem;
+		align-items: flex-start;
+		padding: 8rem 5rem 0;
+		position: relative;
+		overflow: visible;
 	}
 
-	.lesen-hero-inner {
+	.hero__inner {
 		max-width: 1300px;
 		width: 100%;
 		margin: 0 auto;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		gap: 4rem;
+		gap: 6rem;
 		align-items: center;
+		overflow: visible;
 	}
 
-	.lesen-hero-content {
+	.hero__left {
 		display: flex;
 		flex-direction: column;
-		gap: 1.5rem;
+		gap: 2rem;
 	}
 
 	.eyebrow {
@@ -229,75 +240,61 @@ import Layout from '../layouts/Layout.astro';
 		color: var(--gold);
 	}
 
-	.lesen-hero-title {
+	.hero__name {
 		font-family: 'Manrope', sans-serif;
-		font-size: 56px;
+		font-size: 64px;
 		font-weight: 700;
-		line-height: 1.05;
+		line-height: 1;
 		letter-spacing: -0.02em;
 		color: var(--text);
 		margin: 0;
 	}
 
-	.lesen-hero-text {
+	.hero__divider {
+		width: 48px;
+		height: 2px;
+		background: var(--gold);
+	}
+
+	.hero__intro {
 		font-family: 'Manrope', sans-serif;
 		font-size: 16px;
 		font-weight: 300;
 		line-height: 1.7;
-		color: var(--text);
-		max-width: 400px;
+		color: var(--muted);
+		max-width: 420px;
 		margin: 0;
 	}
 
-	.lesen-hero-image {
+	.hero__right {
 		position: relative;
-		height: 480px;
-		display: flex;
-		align-items: flex-end;
-		justify-content: center;
+		height: 520px;
+		align-self: flex-end;
 	}
 
-	.lesen-hero-shape {
+	.hero__right-shape {
 		position: absolute;
-		width: 380px;
-		height: 340px;
-		background: var(--emerald);
+		width: 520px;
+		height: 400px;
+		background: #234f42;
 		bottom: 0;
 		left: 50%;
 		transform: translateX(-50%);
+		border-radius: 60px 60px 0 0;
 	}
 
-	.lesen-hero-shape::before {
-		content: '';
+	.hero__right-photo {
 		position: absolute;
-		top: -12px;
-		left: -12px;
-		width: 28px;
-		height: 28px;
-		border-top: 2px solid var(--gold);
-		border-left: 2px solid var(--gold);
-		opacity: 0.7;
-	}
-
-	.lesen-hero-shape::after {
-		content: '';
-		position: absolute;
-		bottom: -12px;
-		right: -12px;
-		width: 28px;
-		height: 28px;
-		border-bottom: 2px solid var(--gold);
-		border-right: 2px solid var(--gold);
-		opacity: 0.7;
-	}
-
-	.lesen-hero-photo {
-		position: relative;
-		z-index: 1;
-		width: 360px;
-		height: 460px;
-		object-fit: cover;
-		object-position: center top;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		display: block;
+		width: auto;
+		height: auto;
+		max-height: 580px;
+		max-width: min(100%, 520px);
+		object-fit: contain;
+		object-position: bottom center;
 	}
 
 	/* ── VERGLEICH ── */
@@ -512,7 +509,16 @@ import Layout from '../layouts/Layout.astro';
 		font-weight: 300;
 		line-height: 1.7;
 		color: var(--muted);
-		margin: 0 0 2rem;
+		margin: 0;
+	}
+
+	.lesen-cta-image {
+		display: block;
+		width: 100%;
+		max-width: 340px;
+		height: auto;
+		margin: 0 auto;
+		border-radius: 16px;
 	}
 
 	.btn {
@@ -528,6 +534,7 @@ import Layout from '../layouts/Layout.astro';
 		text-decoration: none;
 		cursor: pointer;
 		transition: background-color 0.2s ease;
+		border-radius: 9999px;
 	}
 
 	.btn-primary {
@@ -542,16 +549,19 @@ import Layout from '../layouts/Layout.astro';
 
 	/* ── RESPONSIVE ── */
 	@media (max-width: 960px) {
-		.lesen-hero {
-			padding: 7rem 2rem 4rem;
-		}
-
-		.lesen-hero-inner {
-			gap: 3rem;
+		.hero {
+			padding: 8rem 2rem 0;
 		}
 
 		.lesen-section-inner {
-			padding: 0 2rem;
+			padding: 0 1.25rem;
+		}
+
+		.vergleich-inner,
+		.wusstest-inner,
+		.lesen-cta-inner {
+			padding-left: 1.25rem;
+			padding-right: 1.25rem;
 		}
 
 		.benefit-grid {
@@ -560,37 +570,40 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	@media (max-width: 768px) {
-		.lesen-hero {
-			padding: 6rem 1.5rem 3rem;
+		.hero {
+			padding: 7rem 1rem 4rem;
 			min-height: auto;
+			align-items: flex-start;
 		}
 
-		.lesen-hero-inner {
+		.hero__inner {
 			grid-template-columns: 1fr;
-			gap: 2.5rem;
+			gap: 3rem;
 		}
 
-		.lesen-hero-content {
+		.hero__left {
 			order: 2;
 		}
 
-		.lesen-hero-image {
+		.hero__right {
 			order: 1;
-			height: 380px;
+			height: 400px;
 		}
 
-		.lesen-hero-title {
+		.hero__name {
 			font-size: 42px;
 		}
 
-		.lesen-hero-shape {
+		.hero__right-shape {
 			width: 280px;
-			height: 260px;
+			height: 320px;
 		}
 
-		.lesen-hero-photo {
-			width: 260px;
-			height: 360px;
+		.hero__right-photo {
+			max-height: 380px;
+			max-width: min(100%, 300px);
+			width: auto;
+			height: auto;
 		}
 
 		.lesen-section {
@@ -598,7 +611,19 @@ import Layout from '../layouts/Layout.astro';
 		}
 
 		.lesen-section-inner {
-			padding: 0 1.5rem;
+			padding: 0 1rem;
+		}
+
+		.vergleich-inner {
+			padding: 0 1rem;
+		}
+
+		.wusstest-inner {
+			padding: 0 1rem;
+		}
+
+		.lesen-cta-inner {
+			padding: 0 1rem;
 		}
 
 		.benefit-grid {
@@ -620,6 +645,13 @@ import Layout from '../layouts/Layout.astro';
 
 		.lesen-cta {
 			padding: 3.5rem 0 4rem;
+		}
+	}
+
+	@media (min-width: 769px) {
+		.hero {
+			min-height: auto;
+			padding-bottom: 8.5rem;
 		}
 	}
 </style>
