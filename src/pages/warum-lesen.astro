@@ -574,11 +574,10 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	/*
-		Stack hero at ≤1200px so tablet / square landscape (e.g. iPad) avoids cramped 2-col.
-		Extra bottom padding for this layout lives only in the block below — not on wide desktop
-		(see min-width: 1201px), otherwise min-width:769px was forcing 8.5rem under the hero here.
+		Stack hero at ≤1368px: iPad Pro 12.9" landscape is ~1366px wide, so a 1200px breakpoint
+		never fired and the cramped two-column layout stayed. Matches Home hero proportions.
 	*/
-	@media (max-width: 1200px) {
+	@media (max-width: 1368px) {
 		.hero {
 			align-items: center;
 			min-height: auto;
@@ -606,6 +605,8 @@ import Layout from '../layouts/Layout.astro';
 			justify-content: flex-end;
 			height: auto;
 			width: 100%;
+			max-width: none;
+			margin-inline: 0;
 			align-self: center;
 		}
 
@@ -613,10 +614,13 @@ import Layout from '../layouts/Layout.astro';
 			margin-inline: auto;
 		}
 
+		/* Same proportions as Home .hero-image-block at mobile (index 768px) */
 		.hero__right-shape {
-			width: 280px;
-			height: 280px;
-			border-radius: 40px 40px 0 0;
+			position: absolute;
+			width: 325px;
+			height: 255px;
+			aspect-ratio: unset;
+			border-radius: 36px 36px 0 0;
 			background: var(--emerald);
 		}
 
@@ -632,16 +636,15 @@ import Layout from '../layouts/Layout.astro';
 			max-height: none;
 			object-fit: contain;
 			object-position: bottom center;
-			border-radius: 12px;
 		}
 
 		.hero__name {
-			font-size: 64px;
+			font-size: clamp(2.25rem, 5vw + 0.75rem, 3.5rem);
 			line-height: 1.05;
 		}
 	}
 
-	@media (max-width: 1200px) and (max-height: 820px) {
+	@media (max-width: 1368px) and (max-height: 820px) {
 		.hero {
 			padding-top: 5.25rem;
 			padding-bottom: 2rem;
@@ -664,12 +667,6 @@ import Layout from '../layouts/Layout.astro';
 
 		.hero__intro {
 			max-width: 280px;
-		}
-
-		.hero__right-shape {
-			width: 325px;
-			height: 255px;
-			border-radius: 36px 36px 0 0;
 		}
 
 		.lesen-section {
@@ -714,6 +711,22 @@ import Layout from '../layouts/Layout.astro';
 		}
 	}
 
+	@media (max-width: 380px) {
+		.hero__name {
+			font-size: 32px;
+		}
+
+		.hero__right-photo {
+			max-width: 280px;
+		}
+
+		.hero__right-shape {
+			width: 255px;
+			height: 200px;
+			border-radius: 32px 32px 0 0;
+		}
+	}
+
 	/* Drop 100vh hero on viewports that use the 2-column layout */
 	@media (min-width: 769px) {
 		.hero {
@@ -722,7 +735,7 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	/* Wide desktop only: breathing room under 2-col hero (not on stacked tablet) */
-	@media (min-width: 1201px) {
+	@media (min-width: 1369px) {
 		.hero {
 			padding-bottom: 8.5rem;
 		}
