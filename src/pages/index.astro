@@ -2,7 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Home">
+<Layout
+	title="Markus Gammersbach | Autor für Millennials & Persönlichkeitsentwicklung"
+	description="Entdecke Romane, die dich zum Nachdenken bringen. Markus Gammersbach schreibt über die Herausforderungen der Millennials und persönliches Wachstum."
+	image="/images/entdecke-deine-neuen-seiten-markus-gammersbach.png"
+>
 	<!-- 1. HERO -->
 	<section class="home-hero">
 		<div class="container hero-inner">
@@ -710,8 +714,8 @@ import Layout from '../layouts/Layout.astro';
 		margin-left: calc(50% - 50vw);
 		background-color: var(--emerald);
 		color: #f5f0e8;
-		padding-top: 2rem;
-		padding-bottom: 2rem;
+		padding-top: 1.25rem;
+		padding-bottom: 1.25rem;
 		box-sizing: border-box;
 	}
 
@@ -732,11 +736,12 @@ import Layout from '../layouts/Layout.astro';
 
 	.about-image-img {
 		width: auto;
-		height: 600px;
+		height: 620px;
 		object-fit: contain;
+		object-position: 50% 92%;
 		display: block;
 		margin-left: 2rem;
-		margin-bottom: -2rem;
+		margin-bottom: -1.25rem;
 		align-self: end;
 	}
 
@@ -745,6 +750,7 @@ import Layout from '../layouts/Layout.astro';
 		flex-direction: column;
 		gap: 1rem;
 		padding-bottom: 0;
+		align-self: center;
 	}
 
 	.about-title {
@@ -845,7 +851,7 @@ import Layout from '../layouts/Layout.astro';
 		}
 
 		.about-image-img {
-			max-height: 500px;
+			max-height: 600px;
 			width: auto;
 			max-width: 100%;
 			height: auto;
@@ -1216,7 +1222,7 @@ import Layout from '../layouts/Layout.astro';
 		}
 
 		.about-image-img {
-			max-height: 450px;
+			max-height: 530px;
 			width: auto;
 			max-width: 100%;
 			height: auto;

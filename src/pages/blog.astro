@@ -11,7 +11,10 @@ const featured = posts[0];
 const rest = posts.slice(1);
 ---
 
-<Layout title="Blog">
+<Layout
+	title="Blog | Markus Gammersbach"
+	description="Gedanken über das Schreiben, Persönlichkeitsentwicklung und das Leben als Millennial."
+>
 	<!-- 1. HERO SECTION: full-width emerald, inner max 1300px -->
 	<section class="blog-hero">
 		<div class="blog-hero-inner">
@@ -507,6 +510,11 @@ const rest = posts.slice(1);
 
 		.blog-filter-select-wrap {
 			display: block;
+		}
+
+		.blog-featured,
+		.blog-grid-section {
+			padding-inline: 1rem;
 		}
 
 		.blog-grid-inner {

@@ -42,7 +42,11 @@ const related = allPosts
 	.slice(0, 3);
 ---
 
-<Layout title={post.data.seoTitle ?? post.data.title} description={post.data.seoDescription ?? post.data.description}>
+<Layout
+	title={post.data.seoTitle ?? post.data.title}
+	description={post.data.seoDescription ?? post.data.description}
+	image={post.data.image}
+>
 	<!-- POST HEADER: Headline + Meta -->
 	<header class="post-header">
 		<div class="post-header-inner">
@@ -516,7 +520,7 @@ const related = allPosts
 
 		.post-header-inner {
 			text-align: center;
-			padding-inline: 1.5rem;
+			padding-inline: 1rem;
 		}
 
 		.post-header-inner .post-meta {
@@ -524,14 +528,14 @@ const related = allPosts
 		}
 
 		.post-hero-image {
-			width: calc(100% - 3rem);
-			margin-inline: 1.5rem;
+			width: calc(100% - 2rem);
+			margin-inline: 1rem;
 		}
 
 		.post-body-inner,
 		.post-author-box-inner,
 		.post-related-inner {
-			padding-inline: 1.5rem;
+			padding-inline: 1rem;
 		}
 
 		.post-author-box-inner {

@@ -1,5 +1,23 @@
 ---
-const { title = 'Autorenwebseite', description } = Astro.props;
+interface Props {
+	title: string;
+	description: string;
+	image?: string;
+	canonical?: string;
+}
+
+const SITE_NAME = 'Markus Gammersbach';
+const OG_LOCALE = 'de_DE';
+
+const { title, description, image, canonical } = Astro.props;
+const siteOrigin = Astro.site?.origin ?? 'https://autorenwebseite.netlify.app';
+
+const canonicalHref = canonical ?? new URL(Astro.url.pathname, siteOrigin).href;
+
+const imagePath = image ?? '/images/og-default.webp';
+const normalizedImagePath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+const ogImageUrl = new URL(normalizedImagePath, siteOrigin).href;
+
 const pathname = Astro.url.pathname;
 const isActive = (path) => (path === '/' ? pathname === '/' : pathname.startsWith(path));
 const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
@@ -11,9 +29,23 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		{description && <meta name="description" content={description} />}
 		<title>{title}</title>
-		<link rel="canonical" href="https://mgammersbach.de" />
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalHref} />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalHref} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:locale" content={OG_LOCALE} />
+		<meta property="og:site_name" content={SITE_NAME} />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={canonicalHref} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageUrl} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -574,8 +606,10 @@ const isHeroPage = pathname === '/' || pathname.startsWith('/ueber-mich');
 			padding: 2rem 1.5rem;
 		}
 
+		/* Keep top offset for fixed header — padding-block alone overwrote 72px and clipped titles under the nav */
 		.page-main {
-			padding-block: var(--space-3) var(--space-4);
+			padding-top: 72px;
+			padding-bottom: var(--space-4);
 		}
 	}
 </style>
