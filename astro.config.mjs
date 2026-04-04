@@ -4,6 +4,6 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://autorenwebseite.netlify.app',
+	site: 'https://mgammersbach.de',
 	integrations: [sitemap()],
 });
