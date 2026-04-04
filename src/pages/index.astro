@@ -797,11 +797,14 @@ import Layout from '../layouts/Layout.astro';
 			grid-template-columns: 1fr;
 			gap: 1.5rem;
 			text-align: center;
+			justify-items: center;
 		}
 
 		.hero-content {
 			order: 1;
 			align-items: center;
+			width: 100%;
+			max-width: 100%;
 		}
 
 		.hero-image-wrapper {
@@ -809,6 +812,8 @@ import Layout from '../layouts/Layout.astro';
 			align-items: flex-end;
 			justify-content: center;
 			line-height: 0;
+			width: 100%;
+			max-width: 100%;
 		}
 
 		.hero-title {
@@ -823,9 +828,10 @@ import Layout from '../layouts/Layout.astro';
 
 		.hero-image {
 			display: block;
+			width: 100%;
 			max-width: 400px;
-			width: auto;
 			height: auto;
+			margin-inline: auto;
 		}
 
 		.books-layout {
@@ -1167,21 +1173,31 @@ import Layout from '../layouts/Layout.astro';
 			grid-template-columns: 1fr;
 			gap: 1.5rem;
 			text-align: center;
+			justify-items: center;
 		}
 
 		.hero-content {
 			order: 2;
 			align-items: center;
+			width: 100%;
+			max-width: 100%;
 		}
 
 		.hero-image-wrapper {
 			order: 1;
 			justify-content: center;
+			align-items: flex-end;
+			line-height: 0;
+			width: 100%;
+			max-width: 100%;
 		}
 
 		.hero-image {
+			width: 100%;
 			max-width: 360px;
 			height: auto;
+			margin-inline: auto;
+			display: block;
 		}
 
 		.hero-image-block {
