@@ -1,1 +1,8 @@
-https://autorenwebseite.netlify.app/* https://mgammersbach.de/:splat 301!
+# Old WordPress URLs
+/berufliche-erfuellung-finden/ /blog/berufliche-erfuellung-interview-elias/ 301
+/single-mit-30/ /blog/single-mit-30-interview-lea/ 301
+/mentale-gesundheit/ /blog/mentale-gesundheit-interview-malte/ 301
+/beruflicher-erfolg/ /blog/beruflicher-erfolg-interview-sofia/ 301
+
+# Fix underscore URL
+/blog/mentale_gesundheit_interview_malte/ /blog/mentale-gesundheit-interview-malte/ 301
