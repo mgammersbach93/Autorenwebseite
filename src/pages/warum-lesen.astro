@@ -569,41 +569,91 @@ import Layout from '../layouts/Layout.astro';
 		}
 	}
 
-	@media (max-width: 768px) {
+	/* Hero stacked + centered like Home (index) from tablet down */
+	@media (max-width: 900px) {
 		.hero {
-			padding: 7rem 1rem 4rem;
+			align-items: center;
 			min-height: auto;
-			align-items: flex-start;
+			padding: 7rem 2rem 3rem;
 		}
 
 		.hero__inner {
 			grid-template-columns: 1fr;
-			gap: 3rem;
+			gap: 1.5rem;
+			text-align: center;
+			align-items: center;
 		}
 
 		.hero__left {
+			align-items: center;
 			order: 2;
+			gap: 1.25rem;
 		}
 
 		.hero__right {
 			order: 1;
-			height: 400px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: flex-end;
+			height: auto;
+			width: 100%;
+			align-self: center;
 		}
 
-		.hero__name {
-			font-size: 42px;
+		.hero__divider {
+			margin-inline: auto;
 		}
 
 		.hero__right-shape {
 			width: 280px;
-			height: 320px;
+			height: 280px;
+			border-radius: 40px 40px 0 0;
+			background: var(--emerald);
 		}
 
 		.hero__right-photo {
-			max-height: 380px;
-			max-width: min(100%, 300px);
-			width: auto;
+			position: relative;
+			z-index: 2;
+			left: auto;
+			bottom: auto;
+			transform: none;
+			width: 100%;
+			max-width: 360px;
 			height: auto;
+			max-height: none;
+			object-fit: contain;
+			object-position: bottom center;
+		}
+
+		.hero__name {
+			font-size: 64px;
+			line-height: 1.05;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.hero {
+			padding: 5rem 1rem 3rem;
+		}
+
+		.hero__left {
+			gap: 1rem;
+		}
+
+		.hero__name {
+			font-size: 36px;
+			line-height: 1.05;
+		}
+
+		.hero__intro {
+			max-width: 280px;
+		}
+
+		.hero__right-shape {
+			width: 325px;
+			height: 255px;
+			border-radius: 36px 36px 0 0;
 		}
 
 		.lesen-section {
