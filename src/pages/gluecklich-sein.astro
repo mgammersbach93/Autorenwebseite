@@ -482,9 +482,16 @@ const characters = [
 		.g-hero-cover-wrap {
 			max-width: 200px;
 			margin-inline: auto;
+			overflow: visible;
 		}
 		.g-hero-content {
 			align-items: center;
+		}
+
+		.g-hero-cover {
+			aspect-ratio: auto;
+			height: auto;
+			object-fit: contain;
 		}
 	}
 
@@ -688,6 +695,15 @@ const characters = [
 		height: auto;
 		display: block;
 		margin-inline: auto;
+	}
+
+	@media (max-width: 768px) {
+		.g-cta-cover {
+			width: 100%;
+			height: auto;
+			max-width: min(320px, 90vw);
+			object-fit: contain;
+		}
 	}
 
 	.g-cta--order .g-cta-btn {

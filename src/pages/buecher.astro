@@ -65,7 +65,13 @@ const books: {
 					<article class="book-card">
 						<a href={book.slug} class="book-cover-wrap">
 							{book.cover ? (
-								<Image src={book.cover} alt="" class="book-cover-img" width={900} />
+								<Image
+									src={book.cover}
+									alt=""
+									class="book-cover-img"
+									width={900}
+									style="width: 100%; height: auto;"
+								/>
 							) : (
 								<div class="book-cover-placeholder" aria-hidden="true"></div>
 							)}
@@ -300,6 +306,12 @@ const books: {
 
 		.book-grid {
 			gap: 6.5rem;
+		}
+
+		.book-cover-img {
+			aspect-ratio: auto;
+			height: auto;
+			object-fit: contain;
 		}
 	}
 
