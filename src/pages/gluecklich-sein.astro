@@ -1,11 +1,26 @@
 ---
+import type { ImageMetadata } from 'astro';
+import { Image, getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import heroBookCover from '../images/sie-wollten-doch-nur-gluecklich-sein.jpg';
+import ctaBookMockup from '../images/sie-wollten-doch-nur-gluecklich-sein.png';
+import charMalte from '../images/gluecklich-sein-malte.png';
+import charLea from '../images/gluecklich-sein-lea.png';
+import charElias from '../images/gluecklich-sein-elias.png';
+import charSofia from '../images/gluecklich-sein-sofia.png';
 
-const characterImages = {
-	malte: '/images/gluecklich-sein-malte.png',
-	lea: '/images/gluecklich-sein-lea.png',
-	elias: '/images/gluecklich-sein-elias.png',
-	sofia: '/images/gluecklich-sein-sofia.png',
+/** YouTube-Video-ID aus der Embed-URL (z. B. youtube.com/watch?v=…) – vor Livegang eintragen */
+const youtubeVideoId = 'VIDEO_ID';
+
+const siteOrigin = Astro.site?.origin ?? 'https://mgammersbach.de';
+const gluecklichOg = await getImage({ src: heroBookCover, width: 1200 });
+const ogImageUrl = new URL(gluecklichOg.src, siteOrigin).href;
+
+const characterImages: Record<string, ImageMetadata> = {
+	malte: charMalte,
+	lea: charLea,
+	elias: charElias,
+	sofia: charSofia,
 };
 
 const characters = [
@@ -43,16 +58,17 @@ const characters = [
 <Layout
 	title="Sie wollten doch nur glücklich sein - Roman & Ratgeber"
 	description="Eine Geschichte über Millennials auf der Suche und ein Hochwasser, das alles verändert."
-	image="/images/sie-wollten-doch-nur-gluecklich-sein.jpg"
+	image={ogImageUrl}
 >
 	<!-- 1. HERO (Off-White) -->
 	<section class="g-hero">
 		<div class="g-hero-inner">
 			<div class="g-hero-cover-wrap">
-				<img
-					src="/images/sie-wollten-doch-nur-gluecklich-sein.jpg"
+				<Image
+					src={heroBookCover}
 					alt="Buchcover: Sie wollten doch nur glücklich sein"
 					class="g-hero-cover"
+					width={900}
 				/>
 			</div>
 			<div class="g-hero-content">
@@ -81,8 +97,45 @@ const characters = [
 	<!-- 3. VIDEO (Off-White) -->
 	<section class="g-video">
 		<div class="g-video-inner">
-			<div class="g-video-placeholder" aria-hidden="true">
-				<span class="g-play-icon" aria-hidden="true">▶</span>
+			<div class="youtube-consent-wrapper">
+				<iframe
+					data-category="media"
+					data-service="youtube"
+					data-src={`https://www.youtube-nocookie.com/embed/${youtubeVideoId}`}
+					data-autoscale
+					frameborder="0"
+					allowfullscreen></iframe>
+				<div class="youtube-placeholder" data-placeholder data-category="media" data-service="youtube">
+					<div class="youtube-placeholder__inner">
+						<svg
+							width="40"
+							height="40"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="#B89A3E"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+							<line x1="7" y1="2" x2="7" y2="22"></line>
+							<line x1="17" y1="2" x2="17" y2="22"></line>
+							<line x1="2" y1="12" x2="22" y2="12"></line>
+							<line x1="2" y1="7" x2="7" y2="7"></line>
+							<line x1="2" y1="17" x2="7" y2="17"></line>
+							<line x1="17" y1="17" x2="22" y2="17"></line>
+							<line x1="17" y1="7" x2="22" y2="7"></line>
+						</svg>
+						<p class="youtube-placeholder__text">
+							Dieses Video wird von YouTube bereitgestellt. Mit dem Laden werden Daten an YouTube übertragen.
+						</p>
+						<button
+							type="button"
+							class="youtube-placeholder__btn"
+							onclick="CookieConsent.showPreferences()">Cookie-Einstellungen öffnen</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -103,7 +156,7 @@ const characters = [
 						>
 							<div class="g-mobile-card-visual">
 								<div class="g-mobile-card-bg" aria-hidden="true"></div>
-								<img src={characterImages[c.id]} alt={c.name} class="g-mobile-card-img" />
+								<Image src={characterImages[c.id]} alt={c.name} class="g-mobile-card-img" width={400} />
 							</div>
 							<span class="g-mobile-card-name">{c.name}</span>
 						</div>
@@ -145,10 +198,11 @@ const characters = [
 	<section class="g-cta g-cta--book">
 		<div class="g-cta-inner">
 			<div class="g-cta-cover-wrap">
-				<img
-					src="/images/sie-wollten-doch-nur-gluecklich-sein.png"
+				<Image
+					src={ctaBookMockup}
 					alt="Buchcover: Sie wollten doch nur glücklich sein"
 					class="g-cta-cover"
+					width={900}
 				/>
 			</div>
 		</div>
@@ -551,20 +605,6 @@ const characters = [
 		color: var(--text);
 		margin: 0 0 1.5rem;
 		text-align: center;
-	}
-
-	.g-video-placeholder {
-		aspect-ratio: 16 / 9;
-		background-color: var(--emerald);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.g-play-icon {
-		font-size: 3rem;
-		color: var(--bg);
-		opacity: 0.9;
 	}
 
 	/* 5. NETFLIX */

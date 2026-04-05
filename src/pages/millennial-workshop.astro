@@ -1,10 +1,32 @@
 ---
+import type { ImageMetadata } from 'astro';
+import { Image, getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import mwHeroOg from '../images/millennial-workshop.png';
+import mwHeroKurs from '../images/millennial-workshop-kurs.png';
+import mwCtaRomanreihe from '../images/millennial-workshop-romanreihe.png';
+
+const workshopPanelGlob = import.meta.glob<{ default: ImageMetadata }>(
+	'../images/millennial_workshop_*.webp',
+	{ eager: true },
+);
+
+function workshopPanelImage(lessonId: string): ImageMetadata {
+	const n = parseInt(lessonId, 10);
+	const hit = Object.entries(workshopPanelGlob).find(([path]) => path.includes(`millennial_workshop_${n}_`));
+	if (!hit) {
+		throw new Error(`Millennial Workshop: missing image for lesson ${lessonId}`);
+	}
+	return hit[1].default;
+}
+
+const siteOrigin = Astro.site?.origin ?? 'https://mgammersbach.de';
+const mwOg = await getImage({ src: mwHeroOg, width: 1200 });
+const ogImageUrl = new URL(mwOg.src, siteOrigin).href;
 
 const lektionen = [
 	{
 		id: '01',
-		image: 'millennial_workshop_1_dreißig.webp',
 		title: 'Mit 30 ist das Leben nicht vorbei',
 		text: 'Mit dem 30. Geburtstag schleichen sich gerne auch Zweifel und Zukunftsängste ein. Was, wenn ich meine Erwartungen ans Leben gar nicht erfüllen kann? Viele haben Sorge, dass die schönste Zeit des Lebens nun vorbei ist. Doch das kann man auch anders sehen: Mit etwas Glück bekommen wir noch einmal doppelt so viele Jahre voller Möglichkeiten geschenkt. Ist das nicht die viel schönere Sicht auf den 30. Geburtstag?',
 		tipsLabel: 'Tipps gegen den 30er Blues:',
@@ -16,7 +38,6 @@ const lektionen = [
 	},
 	{
 		id: '02',
-		image: 'millennial_workshop_2_ausprobieren.webp',
 		title: 'Nichts geht ohne Ausprobieren',
 		text: 'Alles im Leben haben wir irgendwann einmal zum ersten Mal gemacht. Jedes Hobby, jede Leidenschaft und jeden Beruf. Erst durch das Ausprobieren erfahren wir, ob uns eine Tätigkeit wirklich gefällt und ob wir dafür mehr Zeit und Energie aufwenden wollen. In der Persönlichkeitsentwicklung gilt das Ausprobieren daher als ein wichtiger Schlüssel zum Erfolg.',
 		tipsLabel: '3 Fragen zum Ausprobieren:',
@@ -28,7 +49,6 @@ const lektionen = [
 	},
 	{
 		id: '03',
-		image: 'millennial_workshop_3_motivation.webp',
 		title: 'Aktion kommt vor Motivation',
 		text: 'Wer auf den perfekten Moment wartet, wartet für immer – so steht es in vielen Kalendersprüchen. Oftmals entwickeln wir die Motivation für eine Aufgabe aber tatsächlich erst, wenn wir die Prokrastination besiegen und stattdessen direkt in die Aktion starten. Mit zunehmender Routine kommen dann auch die Fortschritte.',
 		tipsLabel: 'Tipps gegen Prokrastination:',
@@ -40,7 +60,6 @@ const lektionen = [
 	},
 	{
 		id: '04',
-		image: 'millennial_workshop_4_moment.webp',
 		title: 'Wir verlieren den Blick für den Moment',
 		text: 'Viele Momente erleben wir heute nur noch abwesend oder durch die Linse unseres Smartphones. Wir verpassen dadurch immer mehr Momente des Glücks, der Reflexion und des echten Zusammenseins. Der leuchtende Handybildschirm hat eine größere Anziehung als das Bedürfnis, einen schönen Moment mit all unseren Sinnen zu erleben.',
 		tipsLabel: 'Tipps für mehr Präsenz:',
@@ -52,7 +71,6 @@ const lektionen = [
 	},
 	{
 		id: '05',
-		image: 'millennial_workshop_5_selbstverwirklichung.webp',
 		title: 'Selbstverwirklichung ist ein Privileg',
 		text: 'In unserer westlichen Welt stehen viele Menschen ganz oben in der Bedürfnispyramide. Viele von uns haben die Freiheit und die Sicherheit, ihrer eigenen Leidenschaft nachzugehen und sich selbst zu verwirklichen. Dabei sollten wir nicht vergessen, dass viele Menschen auf der Welt sehr weit von diesem Privileg entfernt sind.',
 		tipsLabel: 'Tipps für mehr Dankbarkeit:',
@@ -64,7 +82,6 @@ const lektionen = [
 	},
 	{
 		id: '06',
-		image: 'millennial_workshop_6_fomo_im_dating.webp',
 		title: 'FOMO erschwert das Dating',
 		text: 'Die Fear Of Missing Out führt zu einer permanenten Unruhe und lässt Zweifel an eigenen Entscheidungen aufkommen. Das gilt insbesondere auch fürs Dating. Durch Apps und Social Media lauert überall die Angst, eine bessere Wahl zu verpassen. Statt in Vertrauen und echtem Interesse enden viele Bekanntschaften in Oberflächlichkeit.',
 		tipsLabel: 'Tipps gegen FOMO im Dating:',
@@ -76,7 +93,6 @@ const lektionen = [
 	},
 	{
 		id: '07',
-		image: 'millennial_workshop_7_quarterlife_crisis.webp',
 		title: 'Quarterlife-Crisis ist keine Seltenheit',
 		text: 'Der Druck, beruflich erfolgreich zu sein, persönliche Beziehungen aufzubauen und sich selbst zu finden, kann in einer Welt voller Möglichkeiten zu Überforderung und Identitätskrisen führen. Soziale Medien verstärken dabei oft das Gefühl der eigenen Unzulänglichkeit. Aktuellen Studien zufolge durchläuft jeder zweite Mensch im Alter von 20 bis 30 eine Form der Quarterlife-Crisis.',
 		tipsLabel: 'Tipps gegen die Quarterlife-Crisis:',
@@ -88,7 +104,6 @@ const lektionen = [
 	},
 	{
 		id: '08',
-		image: 'millennial_workshop_8_richtig_vergleichen.webp',
 		title: 'Richtig vergleichen ist wichtig',
 		text: 'Vergleiche sind Fluch und Segen zugleich. Sie können uns inspirieren und zu Höchstleistungen motivieren – gleichzeitig sind sie der Nährboden für Selbstzweifel. Von uns kennen wir alle Schwächen und Hürden. Von anderen sehen wir meist nur das Ergebnis, nicht aber den steinigen Weg zum Erfolg. Achte deshalb darauf, dein Inneres nicht mit dem Äußeren von anderen zu vergleichen.',
 		tipsLabel: 'Tipps für gesunde Vergleiche:',
@@ -100,7 +115,6 @@ const lektionen = [
 	},
 	{
 		id: '09',
-		image: 'millennial_workshop_9_social_media.webp',
 		title: 'Social Media klaut uns das Leben',
 		text: 'Wusstest du, dass zwei Stunden Social-Media-Konsum täglich auf das Jahr gerechnet über 30 Tage ergeben? Man verbringt so gesehen einen von zwölf Monaten im Jahr damit, auf sein Handy zu schauen. Kein Wunder also, dass wir oftmals keine Zeit mehr für die wichtigen Dinge im Leben haben. Vielleicht ist es an der Zeit, den eigenen Social Media Konsum zu regulieren.',
 		tipsLabel: 'Tipps für weniger Bildschirmzeit:',
@@ -112,7 +126,6 @@ const lektionen = [
 	},
 	{
 		id: '10',
-		image: 'millennial_workshop_10_mentale_gesundheit.webp',
 		title: 'Mentale Gesundheit braucht Training',
 		text: 'Während wir körperliche Beschwerden wie Fieber meist sofort ernst nehmen, werden mentale Probleme schnell übersehen. Der Umgang mit psychischen Leiden kann dafür umso komplizierter sein. Einmal kurz durchatmen reicht hier nur selten aus. Denn unsere Psyche ist wie ein Muskel, der regelmäßiges Training benötigt. Selbstfürsorge hilft dabei, aktiv die eigene mentale Gesundheit zu stärken.',
 		tipsLabel: 'Tipps für deine mentale Gesundheit:',
@@ -128,15 +141,15 @@ const lektionen = [
 <Layout
 	title="Millennial Workshop - Lektionen für persönliches Wachstum"
 	description="Vor welchen Herausforderungen stehen die Millennials? Wie lassen sich persönliche Sinnkrisen überwinden? Der Millennial Workshop klärt auf!"
-	image="/images/millennial-workshop.png"
+	image={ogImageUrl}
 >
 	<!-- 1. HERO -->
 	<section class="mw-hero full-width">
 		<div class="mw-hero-stack">
 			<div class="mw-hero-video-wrap">
-				<img
+				<Image
 					class="mw-hero-kurs-img"
-					src="/images/millennial-workshop-kurs.png"
+					src={mwHeroKurs}
 					alt="Millennial Workshop Kurs"
 					loading="lazy"
 				/>
@@ -185,9 +198,9 @@ const lektionen = [
 					>
 						<div class="mw-panel-top">
 							<div class="mw-img-placeholder">
-								<img
+								<Image
 									class="mw-panel-img"
-									src={`/images/${lek.image}`}
+									src={workshopPanelImage(lek.id)}
 									alt={`Illustration: ${lek.title}`}
 									loading="lazy"
 								/>
@@ -233,9 +246,9 @@ const lektionen = [
 	<!-- 3. CTA -->
 	<section class="mw-cta full-width">
 		<div class="mw-cta-inner">
-			<img
+			<Image
 				class="mw-cta-img"
-				src="/images/millennial-workshop-romanreihe.png"
+				src={mwCtaRomanreihe}
 				alt="Romanreihe zum Millennial Workshop"
 			/>
 			<span class="mw-eyebrow mw-eyebrow--gold">Die Bücher zum Workshop</span>

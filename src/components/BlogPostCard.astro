@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { categoryLabel, formatPostDate } from '../lib/blog-categories';
+import { resolveSrcImageUrl } from '../lib/resolve-src-image';
 
 interface Props {
 	post: CollectionEntry<'blog'>;
@@ -13,7 +14,13 @@ const { post } = Astro.props;
 	<div class="blog-card-media">
 		{
 			post.data.image ? (
-				<img src={post.data.image} alt={post.data.imageAlt ?? ''} class="blog-card-img" />
+				<img
+					src={resolveSrcImageUrl(post.data.image) ?? post.data.image}
+					alt={post.data.imageAlt ?? ''}
+					class="blog-card-img"
+					loading="lazy"
+					decoding="async"
+				/>
 			) : (
 				<div class="blog-card-placeholder"></div>
 			)

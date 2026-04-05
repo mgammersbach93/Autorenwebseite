@@ -1,11 +1,18 @@
 ---
+import { Image, getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import heroLesen from '../images/blaettern-statt-scrollen.png';
+import ctaRomanreihe from '../images/millennial-workshop-romanreihe.png';
+
+const siteOrigin = Astro.site?.origin ?? 'https://mgammersbach.de';
+const lesenOg = await getImage({ src: heroLesen, width: 1200 });
+const ogImageUrl = new URL(lesenOg.src, siteOrigin).href;
 ---
 
 <Layout
 	title="Blättern statt scrollen - Warum wir mehr lesen sollten"
 	description="Setze auf analoges statt digitales Dopamin. Hier erfährst du, warum Lesen die persönliche Entwicklung fördert."
-	image="/images/blaettern-statt-scrollen.png"
+	image={ogImageUrl}
 >
 
 	<!-- HERO (same structure as Über mich) -->
@@ -21,9 +28,9 @@ import Layout from '../layouts/Layout.astro';
 			</div>
 			<div class="hero__right">
 				<div class="hero__right-shape"></div>
-				<img
+				<Image
 					class="hero__right-photo"
-					src="/images/blaettern-statt-scrollen.png"
+					src={heroLesen}
 					alt="Person liest ein Buch"
 				/>
 			</div>
@@ -190,9 +197,9 @@ import Layout from '../layouts/Layout.astro';
 				Hol dir noch heute deine Portion analoges Dopamin.<br>
 				Entdecke spannende Geschichten, nahbare Charaktere und hilfreiche Lektionen für dein persönliches Wachstum.
 			</p>
-			<img
+			<Image
 				class="lesen-cta-image"
-				src="/images/millennial-workshop-romanreihe.png"
+				src={ctaRomanreihe}
 				alt="Romanreihe zum Millennial Workshop"
 				loading="lazy"
 				decoding="async"

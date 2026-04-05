@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import BlogPostCard from '../components/BlogPostCard.astro';
 import { categoryLabel, formatPostDate } from '../lib/blog-categories';
+import { resolveSrcImageUrl } from '../lib/resolve-src-image';
 
 const allPosts = await getCollection('blog');
 const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
@@ -56,7 +57,13 @@ const rest = posts.slice(1);
 			<div class="blog-featured-inner">
 				<div class="blog-featured-media">
 					{featured.data.image ? (
-						<img src={featured.data.image} alt={featured.data.imageAlt ?? ''} class="blog-featured-img" />
+						<img
+							src={resolveSrcImageUrl(featured.data.image) ?? featured.data.image}
+							alt={featured.data.imageAlt ?? ''}
+							class="blog-featured-img"
+							loading="lazy"
+							decoding="async"
+						/>
 					) : (
 						<div class="blog-featured-placeholder"></div>
 					)}

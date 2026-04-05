@@ -1,11 +1,84 @@
 ---
+import { Image, getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import heroImage from '../images/entdecke-deine-neuen-seiten-markus-gammersbach.png';
+import bookCoverGluecklich from '../images/sie-wollten-doch-nur-gluecklich-sein.jpg';
+import bookCoverNeuesWagen from '../images/sie-wollten-endlich-neues-wagen.jpg';
+import aboutAuthorPhoto from '../images/markus-gammersbach-selfpublishing-autor.png';
+import featureBlaettern from '../images/blaettern-statt-scrollen.png';
+import featureMillennialWorkshop from '../images/millennial-workshop.png';
+import instaAvatar from '../images/deine-neuen-seiten-instagram.png';
+import galerieBuecherregal from '../images/galerie/sie-wollten-doch-nur-gluecklich-sein-buecherregal.jpg';
+import galerieWeihnacht02a from '../images/galerie/sie-wollten-doch-nur-gluecklich-sein-weihnachtsgeschenk-02a.jpg';
+import galerieWeihnacht03a from '../images/galerie/sie-wollten-doch-nur-gluecklich-sein-weihnachtsgeschenk-03a.jpg';
+import galerieBalkon from '../images/galerie/sie-wollten-doch-nur-gluecklich-sein-balkon.jpg';
+import galerieBett from '../images/galerie/sie-wollten-doch-nur-gluecklich-sein-bett.jpg';
+import galerieBuchtipp from '../images/galerie/sie-wollten-doch-nur-gluecklich-sein-buchtipp.jpg';
+import galerieFlughafen from '../images/galerie/sie-wollten-doch-nur-gluecklich-sein-flughafen.jpg';
+import galeriePool from '../images/galerie/sie-wollten-doch-nur-gluecklich-sein-pool.jpg';
+import galerieSonnenschein from '../images/galerie/sie-wollten-doch-nur-gluecklich-sein-sonnenschein.jpg';
+import galerieStrand from '../images/galerie/sie-wollten-doch-nur-gluecklich-sein-strand.jpg';
+import galerieTherme from '../images/galerie/sie-wollten-doch-nur-gluecklich-sein-therme.jpg';
+import galerieWeihnachten from '../images/galerie/sie-wollten-doch-nur-gluecklich-sein-weihnachten.jpg';
+import galerieZug from '../images/galerie/sie-wollten-doch-nur-gluecklich-sein-zug.jpg';
+
+const siteOrigin = Astro.site?.origin ?? 'https://mgammersbach.de';
+const heroOg = await getImage({ src: heroImage, width: 1200 });
+const ogImageUrl = new URL(heroOg.src, siteOrigin).href;
+
+function galleryAltFromBasename(base: string): string {
+	const parts = base.split('-').map((p) => (p.toLowerCase() === 'gluecklich' ? 'glücklich' : p.toLowerCase()));
+	if (parts.length === 0) return base;
+	const cap = (w: string) => w.charAt(0).toUpperCase() + w.slice(1);
+	parts[0] = cap(parts[0]);
+	const li = parts.length - 1;
+	if (/^\d+a?$/i.test(parts[li]) && li >= 1) {
+		parts[li - 1] = cap(parts[li - 1]);
+	} else {
+		parts[li] = cap(parts[li]);
+	}
+	return parts.join(' ');
+}
+
+const galleryBasenames = [
+	'sie-wollten-doch-nur-gluecklich-sein-buecherregal',
+	'sie-wollten-doch-nur-gluecklich-sein-weihnachtsgeschenk-02a',
+	'sie-wollten-doch-nur-gluecklich-sein-weihnachtsgeschenk-03a',
+	'sie-wollten-doch-nur-gluecklich-sein-balkon',
+	'sie-wollten-doch-nur-gluecklich-sein-bett',
+	'sie-wollten-doch-nur-gluecklich-sein-buchtipp',
+	'sie-wollten-doch-nur-gluecklich-sein-flughafen',
+	'sie-wollten-doch-nur-gluecklich-sein-pool',
+	'sie-wollten-doch-nur-gluecklich-sein-sonnenschein',
+	'sie-wollten-doch-nur-gluecklich-sein-strand',
+	'sie-wollten-doch-nur-gluecklich-sein-therme',
+	'sie-wollten-doch-nur-gluecklich-sein-weihnachten',
+	'sie-wollten-doch-nur-gluecklich-sein-zug',
+] as const;
+
+const galleryRotatorAlts = galleryBasenames.map((b) => galleryAltFromBasename(b));
+
+const galleryRotatorUrls = [
+	galerieBuecherregal.src,
+	galerieWeihnacht02a.src,
+	galerieWeihnacht03a.src,
+	galerieBalkon.src,
+	galerieBett.src,
+	galerieBuchtipp.src,
+	galerieFlughafen.src,
+	galeriePool.src,
+	galerieSonnenschein.src,
+	galerieStrand.src,
+	galerieTherme.src,
+	galerieWeihnachten.src,
+	galerieZug.src,
+];
 ---
 
 <Layout
 	title="Markus Gammersbach | Autor für Millennials & Persönlichkeitsentwicklung"
 	description="Entdecke Romane, die dich zum Nachdenken bringen. Markus Gammersbach schreibt über die Herausforderungen der Millennials und persönliches Wachstum."
-	image="/images/entdecke-deine-neuen-seiten-markus-gammersbach.png"
+	image={ogImageUrl}
 >
 	<!-- 1. HERO -->
 	<section class="home-hero">
@@ -17,10 +90,11 @@ import Layout from '../layouts/Layout.astro';
 			</div>
 			<div class="hero-image-wrapper">
 				<div class="hero-image-block"></div>
-				<img
-					src="/images/entdecke-deine-neuen-seiten-markus-gammersbach.png"
+				<Image
+					src={heroImage}
 					alt="Markus Gammersbach mit Buch"
 					class="hero-image"
+					width={1600}
 					loading="eager"
 					fetchpriority="high"
 				/>
@@ -41,7 +115,12 @@ import Layout from '../layouts/Layout.astro';
 				<div class="books-covers">
 					<div class="book-item">
 						<a href="/buecher" class="book-cover-link">
-							<img class="book-cover-img" src="/images/sie-wollten-doch-nur-gluecklich-sein.jpg" alt="Buchcover: Sie wollten doch nur glücklich sein" />
+							<Image
+								class="book-cover-img"
+								src={bookCoverGluecklich}
+								alt="Buchcover: Sie wollten doch nur glücklich sein"
+								width={900}
+							/>
 						</a>
 						<div class="book-actions">
 							<a href="https://www.amazon.de/wollten-doch-gl%C3%BCcklich-Generation-Millennials/dp/B0CKGWZ2WG/ref=tmm_pap_swatch_0" class="book-btn book-btn-primary" target="_blank" rel="noopener noreferrer">Kaufen</a>
@@ -50,7 +129,12 @@ import Layout from '../layouts/Layout.astro';
 					</div>
 					<div class="book-item">
 						<a href="/buecher" class="book-cover-link">
-							<img class="book-cover-img" src="/images/sie-wollten-endlich-neues-wagen.jpg" alt="Buchcover: Sie wollten endlich Neues wagen" />
+							<Image
+								class="book-cover-img"
+								src={bookCoverNeuesWagen}
+								alt="Buchcover: Sie wollten endlich Neues wagen"
+								width={900}
+							/>
 						</a>
 						<div class="book-actions">
 							<a href="/neues-wagen/" class="book-btn book-btn-primary">Kaufen</a>
@@ -81,10 +165,11 @@ import Layout from '../layouts/Layout.astro';
 	<section class="home-about">
 		<div class="about-inner">
 			<div class="about-image">
-				<img
+				<Image
 					class="about-image-img"
-					src="/images/markus-gammersbach-selfpublishing-autor.png"
+					src={aboutAuthorPhoto}
 					alt="Markus Gammersbach, Selfpublishing-Autor"
+					width={800}
 				/>
 			</div>
 			<div class="about-content">
@@ -125,10 +210,11 @@ import Layout from '../layouts/Layout.astro';
 			<div class="feature-item">
 				<div class="feature-image-container">
 					<div class="feature-shape"></div>
-					<img
-						src="/images/blaettern-statt-scrollen.png"
+					<Image
+						src={featureBlaettern}
 						alt="Blättern statt Scrollen"
 						class="feature-image"
+						width={800}
 					/>
 				</div>
 				<h2>Blättern statt Scrollen</h2>
@@ -141,10 +227,11 @@ import Layout from '../layouts/Layout.astro';
 			<div class="feature-item">
 				<div class="feature-image-container">
 					<div class="feature-shape"></div>
-					<img
-						src="/images/millennial-workshop.png"
+					<Image
+						src={featureMillennialWorkshop}
 						alt="Millennial Workshop"
 						class="feature-image"
+						width={800}
 					/>
 				</div>
 				<h2>Millennial Workshop</h2>
@@ -165,16 +252,16 @@ import Layout from '../layouts/Layout.astro';
 		<div class="gallery-section">
 			<div class="gallery-grid">
 				<div class="gallery-item">
-					<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-buecherregal.jpg" alt="Leser mit Buch" />
+					<Image src={galerieBuecherregal} alt={galleryRotatorAlts[0]} />
 				</div>
 				<div class="gallery-item">
-					<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-weihnachtsgeschenk-02a.jpg" alt="Leser mit Buch" />
+					<Image src={galerieWeihnacht02a} alt={galleryRotatorAlts[1]} />
 				</div>
 				<div class="gallery-item">
-					<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-weihnachtsgeschenk-03a.jpg" alt="Leser mit Buch" />
+					<Image src={galerieWeihnacht03a} alt={galleryRotatorAlts[2]} />
 				</div>
 				<div class="gallery-item">
-					<img src="/images/galerie/sie-wollten-doch-nur-gluecklich-sein-balkon.jpg" alt="Leser mit Buch" />
+					<Image src={galerieBalkon} alt={galleryRotatorAlts[3]} />
 				</div>
 			</div>
 		</div>
@@ -182,10 +269,11 @@ import Layout from '../layouts/Layout.astro';
 		<div class="insta-card">
 			<div class="insta-avatar">
 				<div class="insta-avatar-inner">
-					<img
-						src="/images/deine-neuen-seiten-instagram.png"
+					<Image
+						src={instaAvatar}
 						alt="Deine neuen Seiten"
 						class="insta-avatar-img"
+						width={600}
 					/>
 				</div>
 			</div>
@@ -205,7 +293,7 @@ import Layout from '../layouts/Layout.astro';
 	</section>
 </Layout>
 
-<script>
+<script define:vars={{ galleryRotatorUrls, galleryRotatorAlts }}>
 	if (typeof window !== 'undefined') {
 		window.addEventListener('DOMContentLoaded', () => {
 			const TESTIMONIALS = [
@@ -262,21 +350,7 @@ import Layout from '../layouts/Layout.astro';
 
 			// GALLERY AUTO-ROTATE (2×2 grid, all viewports)
 			const galleryItems = document.querySelectorAll('.gallery-item img');
-			const imageFiles = [
-				'/images/galerie/sie-wollten-doch-nur-gluecklich-sein-buecherregal.jpg',
-				'/images/galerie/sie-wollten-doch-nur-gluecklich-sein-weihnachtsgeschenk-02a.jpg',
-				'/images/galerie/sie-wollten-doch-nur-gluecklich-sein-weihnachtsgeschenk-03a.jpg',
-				'/images/galerie/sie-wollten-doch-nur-gluecklich-sein-balkon.jpg',
-				'/images/galerie/sie-wollten-doch-nur-gluecklich-sein-bett.jpg',
-				'/images/galerie/sie-wollten-doch-nur-gluecklich-sein-buchtipp.jpg',
-				'/images/galerie/sie-wollten-doch-nur-gluecklich-sein-flughafen.jpg',
-				'/images/galerie/sie-wollten-doch-nur-gluecklich-sein-pool.jpg',
-				'/images/galerie/sie-wollten-doch-nur-gluecklich-sein-sonnenschein.jpg',
-				'/images/galerie/sie-wollten-doch-nur-gluecklich-sein-strand.jpg',
-				'/images/galerie/sie-wollten-doch-nur-gluecklich-sein-therme.jpg',
-				'/images/galerie/sie-wollten-doch-nur-gluecklich-sein-weihnachten.jpg',
-				'/images/galerie/sie-wollten-doch-nur-gluecklich-sein-zug.jpg',
-			];
+			const imageFiles = galleryRotatorUrls;
 			const totalSlides = imageFiles.length;
 			const ROTATE_MS = 2500;
 
@@ -308,6 +382,7 @@ import Layout from '../layouts/Layout.astro';
 
 					window.setTimeout(() => {
 						imgEl.src = imageFiles[nextIdx];
+						imgEl.alt = galleryRotatorAlts[nextIdx];
 						currentImagesInSlots[slotIndex] = nextIdx;
 						imgEl.style.opacity = '1';
 						changeStep = (changeStep + 1) % 4;

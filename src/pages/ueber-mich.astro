@@ -1,5 +1,15 @@
 ---
+import { Image, getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import heroAuthorPhoto from '../images/markus-gammersbach-selfpublishing-autor.png';
+import visionSchreiben from '../images/markus-gammersbach-roman-schreiben.JPG';
+import visionLesen from '../images/markus-gammersbach-lesen.JPG';
+import moinHamburg from '../images/markus-gammersbach-hamburg.jpg';
+import moinKoeln from '../images/markus-gammersbach-koeln.jpg';
+
+const siteOrigin = Astro.site?.origin ?? 'https://mgammersbach.de';
+const ueberOg = await getImage({ src: heroAuthorPhoto, width: 1200 });
+const ogImageUrl = new URL(ueberOg.src, siteOrigin).href;
 
 const timelineEntries = [
 	{
@@ -43,7 +53,7 @@ const timelineEntries = [
 <Layout
 	title="Markus Gammersbach | Self-Publishing-Autor"
 	description="Mein Name ist Markus Gammersbach. Du suchst nach inspirierenden Romanen, die dich weiterbringen? Dann bist du hier genau richtig!"
-	image="/images/markus-gammersbach-selfpublishing-autor.png"
+	image={ogImageUrl}
 >
 
 	<section class="hero">
@@ -62,7 +72,7 @@ const timelineEntries = [
 			<!-- RIGHT -->
 			<div class="hero__right">
 				<div class="hero__right-shape"></div>
-				<img class="hero__right-photo" src="/images/markus-gammersbach-selfpublishing-autor.png" alt="Markus Gammersbach" />
+				<Image class="hero__right-photo" src={heroAuthorPhoto} alt="Markus Gammersbach" width={800} />
 			</div>
 
 		</div>
@@ -115,10 +125,11 @@ const timelineEntries = [
 	<section class="ueber-vision" aria-labelledby="ueber-vision-eyebrow">
 		<div class="ueber-vision-inner">
 			<div class="ueber-vision-placeholder ueber-vision-placeholder--tr">
-				<img
+				<Image
 					class="ueber-vision-placeholder-img"
-					src="/images/markus-gammersbach-roman-schreiben.JPG"
+					src={visionSchreiben}
 					alt="Markus Gammersbach beim Schreiben eines Romans am Laptop"
+					width={800}
 					loading="lazy"
 					decoding="async"
 				/>
@@ -133,10 +144,11 @@ const timelineEntries = [
 				</p>
 			</div>
 			<div class="ueber-vision-placeholder ueber-vision-placeholder--bl">
-				<img
+				<Image
 					class="ueber-vision-placeholder-img"
-					src="/images/markus-gammersbach-lesen.JPG"
+					src={visionLesen}
 					alt="Markus Gammersbach beim Lesen"
+					width={800}
 					loading="lazy"
 					decoding="async"
 				/>
@@ -204,10 +216,11 @@ const timelineEntries = [
 			<div class="ueber-moin-images">
 				<div class="moin-image-wrap">
 					<div class="moin-image-frame">
-						<img
+						<Image
 							class="moin-image-img"
-							src="/images/markus-gammersbach-hamburg.jpg"
+							src={moinHamburg}
 							alt="Markus Gammersbach in Hamburg"
+							width={800}
 							loading="lazy"
 							decoding="async"
 						/>
@@ -216,10 +229,11 @@ const timelineEntries = [
 				</div>
 				<div class="moin-image-wrap">
 					<div class="moin-image-frame">
-						<img
+						<Image
 							class="moin-image-img"
-							src="/images/markus-gammersbach-koeln.jpg"
+							src={moinKoeln}
 							alt="Markus Gammersbach in Köln"
+							width={800}
 							loading="lazy"
 							decoding="async"
 						/>

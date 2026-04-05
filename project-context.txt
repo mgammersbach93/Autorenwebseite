@@ -2,10 +2,11 @@
 
 ## Tech Stack
 - **Framework:** Astro v5.17.3
-- **Hosting:** Netlify (autorenwebseite.netlify.app)
+- **Hosting:** Netlify (mgammersbach.de)
 - **Versionskontrolle:** GitHub (github.com/mgammersbach93/Autorenwebseite)
 - **Editor:** Cursor (Pro)
 - **Node.js:** LTS
+- **Betriebssystem:** Windows (PowerShell) – kein && in Terminal-Befehlen, mehrzeilig oder mit Semikolon
 - **Kein TypeScript** (bewusst deaktiviert beim Setup)
 
 ## Projektordner
@@ -13,90 +14,121 @@
 C:\Users\marku\Autorenwebseite
 ├── public/
 │   └── images/
-│       ├── entdecke_deine_neuen_seiten.webp       # Hero Startseite
-│       ├── markus_gammersbach-why-not.webp         # Über mich Galerie
-│       ├── markus_gammersbach-roman-schreiben.webp # Über mich Galerie
-│       └── markus_gammersbach-schreiben.webp       # Über mich Galerie
 ├── src/
+│   ├── content/
+│   │   ├── config.ts              # Content Collection Schema (title, description, pubDate, category, image, seoTitle, seoDescription)
+│   │   └── blog/                  # Blog-Posts (Markdown)
 │   ├── layouts/
-│   │   └── Layout.astro       # Globales Layout mit Nav + Footer
+│   │   └── Layout.astro           # Globales Layout mit Nav + Footer
+│   ├── lib/
+│   │   └── blog-categories.ts     # Kategorien: schreiben, lesen, wachsen, millennials
 │   └── pages/
-│       ├── index.astro         # Startseite (fertig)
-│       ├── ueber-mich.astro    # Über mich (in Arbeit)
-│       ├── buecher.astro       # Meine Bücher (Platzhalter)
-│       ├── warum-lesen.astro   # Warum Lesen (Platzhalter)
-│       ├── millennial-workshop.astro  # Platzhalter
-│       ├── blog.astro          # Platzhalter
-│       ├── impressum.astro     # Platzhalter
-│       └── datenschutz.astro   # Platzhalter
+│       ├── index.astro            # Startseite (fertig)
+│       ├── ueber-mich.astro       # Über mich (fertig)
+│       ├── buecher.astro          # Meine Bücher (fertig)
+│       ├── gluecklich-sein.astro  # Buchdetail Band 1 (fertig)
+│       ├── neues-wagen.astro      # Buchdetail Band 2 (fertig)
+│       ├── warum-lesen.astro      # Warum Lesen (Platzhalter)
+│       ├── millennial-workshop.astro  # Millennial Workshop (in Arbeit)
+│       ├── blog.astro             # Blog-Übersicht (fertig)
+│       ├── blog/[slug].astro      # Blog-Einzelseite (fertig)
+│       ├── impressum.astro        # Impressum (fertig)
+│       └── datenschutz.astro      # Datenschutz (fertig)
 ```
 
 ## Setup & Zugänge
 - **GitHub User:** mgammersbach93
 - **Netlify:** Mit Google-Account angemeldet, verbunden mit GitHub
-- **Zoho Mail:** E-Mail kontakt@mgammersbach.de (in Einrichtung)
-- **Domain:** Testdomain noch offen, Produktivdomain bei Alfahosting (mgammersbach.de)
-- **INWX:** Account für zukünftige Domain-Verwaltung
+- **Netlify Forms:** Aktiviert (Formular "ueber-kontakt" registriert, E-Mail-Benachrichtigung aktiv)
+- **Zoho Mail:** kontakt@mgammersbach.de (eingerichtet, funktioniert)
+- **Domain:** mgammersbach.de (Produktivdomain, DNS bei INWX, zeigt auf Netlify)
+- **INWX:** DNS-Verwaltung (Nameserver auf INWX, A/CNAME für Netlify, MX für Zoho)
+- **SSL:** Aktiv über Netlify
+- **Redirect:** autorenwebseite.netlify.app → mgammersbach.de
 
 ## Getroffene Entscheidungen
 
-### Design-System (aktualisiert)
+### Design-System
 - **Farben:** Off-White (#F5F0E8), Smaragd (#234F42), Gold (#B89A3E) – KEIN reines Weiß (#FFFFFF)
 - **Schrift:** Nur Manrope (kein Georgia/Serif)
-- **Border-Radius:** Differenziert (nicht mehr 0px überall):
+- **Border-Radius:** Differenziert:
   - Buttons: 9999px (Pill-Form)
-  - Smaragd-Shapes: 40px 40px 0 0 (oben rund)
+  - Smaragd-Shapes: 40px 40px 0 0 (oben rund, unten eckig)
   - Bilder/Karten: 20-24px
+  - Erfolgs-Icons: 50% (Kreis)
 - **Icons:** Stroke-only in Gold, keine grünen Icon-Boxen
 
 ### Layout & Struktur
-- Kein CMS vorerst – wird nach Fertigstellung des Designs eingerichtet (Keystatic geplant)
-- Smaragd-Sections immer 100vw (kein max-width auf dem Hintergrund)
+- Kein CMS vorerst – später Keystatic geplant
+- Smaragd-Sections immer 100vw
 - Navigation: transparent über Hero, Off-White sticky beim Scrollen
-- Hamburger-Menü auf Mobile
+- Hamburger-Menü auf Mobile, aktive Seite mit schwarzem Unterstrich
 - Testimonials: Auto-Slider (4s Interval) mit Fortschrittsbalken
 - Buchcover: nebeneinander auch auf Mobile (nie gestapelt)
-- Asymmetrische Layouts mit Bildern die "herausragen" für mehr Dynamik
+- Asymmetrische Layouts mit herausragenden Bildern
+- Kontaktformular: Netlify Forms + Honeypot + DSGVO-Checkbox + Inline-Bestätigung (kein Seitensprung)
+- Terminal-Befehle immer für Windows/PowerShell (kein &&, mehrzeilig oder mit Semikolon)
+
+### Seitenspezifische Farben
+- **gluecklich-sein.astro:** Standard Smaragd + Gold
+- **neues-wagen.astro:** Orange-Palette – Gold wird zu #C13A00, Smaragd-Akzente zu #FBA922
 
 ## Was bereits gebaut ist
 
 ### Startseite (index.astro) – fertig
-1. Hero – Vollbild-Foto, zentrierter Text, H1 72px, Pill-Button
-2. Bücher – Text links, zwei Buchcover rechts nebeneinander
+1. Hero – Vollbild-Foto mit Smaragd-Shape (oben abgerundet), H1, Subtext, Pill-Button
+2. Bücher – Text links, zwei Buchcover rechts nebeneinander, orangener Button für Band 2
 3. Leserstimmen – Auto-Slider, goldener Fortschrittsbalken, 5 Quotes
 4. Quote-Band – Off-White, goldenes „-Zeichen
 5. Über mich – Smaragd, 60/40 Text/Bild, Ghost-Button
 6. Warum Lesen + Millennial Workshop – zwei Spalten nebeneinander
-7. Social/Kontakt – zentriert, Icons, Button
+7. Blog Preview – 3 Karten, zentriert
+8. Social/Kontakt – zentriert, Instagram-Icon, Button
 
-### Über mich (ueber-mich.astro) – in Arbeit
-Geplante Sektionen (Reihenfolge):
-1. **Hero** – noch zu bauen
-2. **Zeitstrahl** – "Mein Weg zum Schreiben" (5 Einträge, alternierend links/rechts)
-3. **3-Bilder-Galerie** – mit Hover-Zoom
-4. **Meine Vision** – NEU, ersetzt altes Quote-Band
-   - Smaragd-Block mit 3 herausragenden Bildern (abgerundet, 20-24px)
-   - Desktop: 2 Bilder links, 1 Bild rechts, Text mittig
-   - Mobile: 1 Bild oben, 1 Bild unten (zentriert)
-   - Vision-Text: "Ich möchte meinen Beitrag dazu leisten, dass wir häufiger zum Buch statt zum Handy greifen. Mit Geschichten, die inspirieren und bei der persönlichen Entwicklung helfen."
-5. **Mein Schreibprozess** – NEU, ersetzt "Was mich antreibt"
-   - 6 Items in 2×3 Grid, linksbündig
-   - Gold-Icons (stroke-only, 40px), keine Boxen
-   - Items: Frühaufsteher, Plotter, Papyrus, Lo-Fi Beats, Nebenberuflich, Schreibkollektiv
-6. **Moin & Alaaf** – Verbundenheit zu Köln und Hamburg
-7. **Kontaktformular**
+### Über mich (ueber-mich.astro) – fertig
+1. Hero – Foto mit Smaragd-Shape (oben abgerundet), Eyebrow, Titel, Intro
+2. Zeitstrahl "Mein Weg zum Schreiben" (7 Einträge, alternierend links/rechts, goldene Raute)
+3. Meine Vision – Smaragd-Section, zwei Bilder (oben/unten), zentrierter Text
+4. So schreibe ich – 6 Items mit Gold-Icons (Frühaufsteher, Plotter, Papyrus, Lo-Fi Beats, Nebenberuflich, Schreibkollektiv)
+5. Moin & Alaaf – Text links, zwei Bilder rechts (Hamburg + Köln)
+6. Kontakt – Smaragd, Netlify Forms + Honeypot + DSGVO-Checkbox + Inline-Bestätigung
 
-### Restliche Seiten – Platzhalter
+### Meine Bücher (buecher.astro) – fertig
+- Hero mit zentriertem Titel
+- Zwei Bücher mit Cover, Beschreibung, Buttons (Band 1 Smaragd, Band 2 Orange)
+
+### Buchdetailseiten – fertig
+- **gluecklich-sein.astro:** Hero, Klappentext, Charakter-Slider (Malte, Lea, Elias, Sofia), Video, Netflix-Vergleich, CTA
+- **neues-wagen.astro:** Gleiche Struktur, Orange-Farbschema
+
+### Blog – fertig
+- Übersichtsseite mit Kategorie-Filter (Schreiben, Lesen, Wachsen, Millennials)
+- Einzelseite mit Split-Hero (Text links, Bild rechts)
+- Content Collection mit SEO-Feldern (seoTitle, seoDescription)
+
+### Millennial Workshop (millennial-workshop.astro) – in Arbeit
+- Hero mit zentriertem Layout, Video-Platzhalter
+- 10 Lektionen als Tabs
+
+### Impressum & Datenschutz – fertig
+- Schlichte Textseiten (Off-White, max-width 800px)
+- Datenschutz: Netlify-Hosting, Google Fonts, Kontaktformular, Instagram dokumentiert
+
+### Warum Lesen – Platzhalter
+
+### Footer – fertig
+- Schwarzer Hintergrund (var(--text)), goldener Border oben
+- Impressum + Datenschutz Links, Copyright, Instagram-Icon
 
 ## Lokale Entwicklung
-```bash
+```
 cd C:\Users\marku\Autorenwebseite
 npm run dev
 # → http://localhost:4321
 ```
 
 ## Deployment
-```bash
+```
 git add .
 git commit -m "Beschreibung"
 git push

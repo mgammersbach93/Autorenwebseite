@@ -1,4 +1,7 @@
 ---
+import { getImage } from 'astro:assets';
+import defaultOgImage from '../images/markus-gammersbach-selfpublishing-autor.png';
+
 interface Props {
 	title: string;
 	description: string;
@@ -10,13 +13,17 @@ const SITE_NAME = 'Markus Gammersbach';
 const OG_LOCALE = 'de_DE';
 
 const { title, description, image, canonical } = Astro.props;
-const siteOrigin = Astro.site?.origin ?? 'https://autorenwebseite.netlify.app';
+const siteOrigin = Astro.site?.origin ?? 'https://mgammersbach.de';
 
 const canonicalHref = canonical ?? new URL(Astro.url.pathname, siteOrigin).href;
 
-const imagePath = image ?? '/images/og-default.webp';
-const normalizedImagePath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
-const ogImageUrl = new URL(normalizedImagePath, siteOrigin).href;
+let ogImageUrl: string;
+if (image) {
+	ogImageUrl = image;
+} else {
+	const og = await getImage({ src: defaultOgImage, width: 1200 });
+	ogImageUrl = new URL(og.src, siteOrigin).href;
+}
 
 const pathname = Astro.url.pathname;
 const isActive = (path) => (path === '/' ? pathname === '/' : pathname.startsWith(path));
@@ -51,12 +58,6 @@ const isHeroPage =
 		<meta name="twitter:image" content={ogImageUrl} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&display=swap"
-			rel="stylesheet"
-		/>
 	</head>
 	<body class={`${pathname === '/' ? 'is-home' : ''} ${isHeroPage ? 'is-hero-page' : ''}`}>
 		<div class="page-shell">
@@ -142,6 +143,10 @@ const isHeroPage =
 					<div class="footer-legal">
 						<a href="/impressum" class="footer-link">Impressum</a>
 						<a href="/datenschutz" class="footer-link">Datenschutz</a>
+						<a
+							href="#"
+							class="footer-link"
+							onclick="event.preventDefault(); CookieConsent.showPreferences();">Cookie-Einstellungen</a>
 					</div>
 					<p class="footer-copyright">© 2026 Markus Gammersbach</p>
 					<a
@@ -174,6 +179,10 @@ const isHeroPage =
 				</div>
 			</footer>
 		</div>
+		<script>
+			import '../scripts/cookieconsent-config.js';
+			import '../styles/cookieconsent-overrides.css';
+		</script>
 		<script>
 			document.addEventListener('DOMContentLoaded', () => {
 				const nav = document.querySelector('.site-nav');
@@ -213,6 +222,38 @@ const isHeroPage =
 </html>
 
 <style is:global>
+	@font-face {
+		font-family: 'Manrope';
+		font-style: normal;
+		font-weight: 300;
+		font-display: swap;
+		src: url('/fonts/manrope-v20-latin-300.woff2') format('woff2');
+	}
+
+	@font-face {
+		font-family: 'Manrope';
+		font-style: normal;
+		font-weight: 400;
+		font-display: swap;
+		src: url('/fonts/manrope-v20-latin-regular.woff2') format('woff2');
+	}
+
+	@font-face {
+		font-family: 'Manrope';
+		font-style: normal;
+		font-weight: 600;
+		font-display: swap;
+		src: url('/fonts/manrope-v20-latin-600.woff2') format('woff2');
+	}
+
+	@font-face {
+		font-family: 'Manrope';
+		font-style: normal;
+		font-weight: 700;
+		font-display: swap;
+		src: url('/fonts/manrope-v20-latin-700.woff2') format('woff2');
+	}
+
 	:root {
 		--bg: #f5f0e8;
 		--text: #1c1c1c;
@@ -613,6 +654,61 @@ const isHeroPage =
 		.nav-links .nav-link--active::after {
 			display: none;
 		}
+	}
+
+	.youtube-consent-wrapper {
+		position: relative;
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		background: rgba(28, 28, 28, 0.03);
+	}
+
+	.youtube-consent-wrapper iframe {
+		width: 100%;
+		height: 100%;
+		border: none;
+	}
+
+	.youtube-placeholder {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba(28, 28, 28, 0.03);
+	}
+
+	.youtube-placeholder__inner {
+		text-align: center;
+		padding: 2rem;
+		max-width: 400px;
+	}
+
+	.youtube-placeholder__text {
+		font-family: 'Manrope', sans-serif;
+		font-weight: 300;
+		font-size: 14px;
+		line-height: 1.85;
+		color: #888880;
+		margin: 1rem 0;
+	}
+
+	.youtube-placeholder__btn {
+		background: transparent;
+		color: #1c1c1c;
+		border: 1px solid rgba(28, 28, 28, 0.2);
+		padding: 0.7rem 1.6rem;
+		font-family: 'Manrope', sans-serif;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		border-radius: 9999px;
+		cursor: pointer;
+	}
+
+	.youtube-placeholder__btn:hover {
+		background: rgba(28, 28, 28, 0.05);
 	}
 
 	@media (max-width: 720px) {

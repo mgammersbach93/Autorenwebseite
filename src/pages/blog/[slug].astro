@@ -1,6 +1,9 @@
 ---
-import { getCollection, getEntry } from 'astro:content';
+import { Image, getImage } from 'astro:assets';
+import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { resolveSrcImageMeta, resolveSrcImageUrl } from '../../lib/resolve-src-image';
+import authorPortrait from '../../images/markus-gammersbach-autor.png';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -40,12 +43,20 @@ const related = allPosts
 	.filter((p) => p.slug !== post.slug && p.data.category === post.data.category)
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 3);
+
+const siteOrigin = Astro.site?.origin ?? 'https://mgammersbach.de';
+let ogImageUrl: string | undefined;
+const postHeroMeta = resolveSrcImageMeta(post.data.image);
+if (postHeroMeta) {
+	const og = await getImage({ src: postHeroMeta, width: 1200 });
+	ogImageUrl = new URL(og.src, siteOrigin).href;
+}
 ---
 
 <Layout
 	title={post.data.seoTitle ?? post.data.title}
 	description={post.data.seoDescription ?? post.data.description}
-	image={post.data.image}
+	image={ogImageUrl}
 >
 	<!-- POST HEADER: Headline + Meta -->
 	<header class="post-header">
@@ -64,7 +75,13 @@ const related = allPosts
 	<!-- IMAGE 16:9 -->
 	<div class="post-hero-image">
 		{post.data.image ? (
-			<img src={post.data.image} alt={post.data.imageAlt ?? ''} class="post-hero-img" />
+			<img
+				src={resolveSrcImageUrl(post.data.image) ?? post.data.image}
+				alt={post.data.imageAlt ?? ''}
+				class="post-hero-img"
+				loading="lazy"
+				decoding="async"
+			/>
 		) : (
 			<div class="post-hero-placeholder"></div>
 		)}
@@ -81,7 +98,7 @@ const related = allPosts
 	<aside class="post-author-box">
 		<div class="post-author-box-inner">
 			<div class="post-author-img">
-				<img src="/images/markus-gammersbach-autor.png" alt="Markus Gammersbach" />
+				<Image src={authorPortrait} alt="Markus Gammersbach" />
 			</div>
 			<div class="post-author-info">
 				<p class="post-author-label">Geschrieben von</p>
@@ -113,7 +130,12 @@ const related = allPosts
 							<a href={`/blog/${r.slug}`} class="related-card">
 								{r.data.image && (
 									<div class="related-card-media">
-										<img src={r.data.image} alt={r.data.imageAlt ?? ''} />
+										<img
+											src={resolveSrcImageUrl(r.data.image) ?? r.data.image}
+											alt={r.data.imageAlt ?? ''}
+											loading="lazy"
+											decoding="async"
+										/>
 									</div>
 								)}
 								{!r.data.image && <div class="related-card-media related-card-media--placeholder"></div>}

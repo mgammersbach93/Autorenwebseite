@@ -1,13 +1,29 @@
 ---
+import type { ImageMetadata } from 'astro';
+import { Image, getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import coverGluecklich from '../images/sie-wollten-doch-nur-gluecklich-sein.jpg';
+import coverNeuesWagen from '../images/sie-wollten-endlich-neues-wagen.jpg';
 
-const books = [
+const siteOrigin = Astro.site?.origin ?? 'https://mgammersbach.de';
+const buecherOg = await getImage({ src: coverGluecklich, width: 1200 });
+const ogImageUrl = new URL(buecherOg.src, siteOrigin).href;
+
+const books: {
+	title: string;
+	subtitle: string | null;
+	description: string;
+	cover: ImageMetadata;
+	slug: string;
+	cta: string;
+	buttonClass: string;
+}[] = [
 	{
 		title: 'Sie wollten doch nur glücklich sein',
 		subtitle: null,
 		description:
 			'Vier Millennials, vier Probleme und ein Workshop. Die Suche nach Glück trifft auf das Hochwasser im Rheinland.',
-		cover: '/images/sie-wollten-doch-nur-gluecklich-sein.jpg',
+		cover: coverGluecklich,
 		slug: '/gluecklich-sein/',
 		cta: 'Zu Teil 1',
 		buttonClass: 'btn-primary',
@@ -17,7 +33,7 @@ const books = [
 		subtitle: null,
 		description:
 			'Neue Wege, neue Erfolge und neue Probleme. Die vier Millennials trauen sich heraus aus ihrer Komfortzone.',
-		cover: '/images/sie-wollten-endlich-neues-wagen.jpg',
+		cover: coverNeuesWagen,
 		slug: '/neues-wagen/',
 		cta: 'Zu Teil 2',
 		buttonClass: 'btn-orange',
@@ -28,7 +44,7 @@ const books = [
 <Layout
 	title="Bücher von Markus Gammersbach | Romane für Millennials"
 	description="Entdecke die Romanreihe von Markus Gammersbach. Geschichten über Millennials, persönliches Wachstum und den Mut, Neues zu wagen."
-	image="/images/sie-wollten-doch-nur-gluecklich-sein.jpg"
+	image={ogImageUrl}
 >
 	<!-- Full viewport Smaragd header -->
 	<section class="buecher-hero">
@@ -49,7 +65,7 @@ const books = [
 					<article class="book-card">
 						<a href={book.slug} class="book-cover-wrap">
 							{book.cover ? (
-								<img src={book.cover} alt="" class="book-cover-img" />
+								<Image src={book.cover} alt="" class="book-cover-img" width={900} />
 							) : (
 								<div class="book-cover-placeholder" aria-hidden="true"></div>
 							)}
