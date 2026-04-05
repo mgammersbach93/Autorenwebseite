@@ -252,8 +252,19 @@ const timelineEntries = [
 					<label for="ueber-nachricht" class="ueber-form-label">Nachricht</label>
 					<textarea id="ueber-nachricht" name="nachricht" class="ueber-form-textarea" rows="5" required></textarea>
 				</div>
+				<label class="ueber-form-consent">
+					<input type="checkbox" name="datenschutz" required />
+					<span>Ich habe die <a href="/datenschutz" target="_blank">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu.</span>
+				</label>
 				<button type="submit" class="btn btn-primary ueber-form-submit">Absenden</button>
 			</form>
+			<div class="ueber-form-success" id="form-success" style="display:none;">
+				<div class="ueber-form-success-icon">
+					<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#B89A3E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+				</div>
+				<h3 class="ueber-form-success-title">Vielen Dank!</h3>
+				<p class="ueber-form-success-text">Deine Nachricht ist angekommen. Ich melde mich so schnell wie möglich.</p>
+			</div>
 		</div>
 	</section>
 </Layout>
@@ -1086,6 +1097,76 @@ const timelineEntries = [
 		min-height: 120px;
 	}
 
+	.ueber-form-consent {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.75rem;
+		font-family: 'Manrope', sans-serif;
+		font-size: 14px;
+		font-weight: 300;
+		line-height: 1.6;
+		color: var(--bg);
+		cursor: pointer;
+	}
+
+	.ueber-form-consent input[type="checkbox"] {
+		margin-top: 0.25rem;
+		flex-shrink: 0;
+		width: 18px;
+		height: 18px;
+		accent-color: var(--gold);
+		cursor: pointer;
+	}
+
+	.ueber-form-consent a {
+		color: var(--gold);
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	.ueber-form-consent a:hover {
+		color: var(--gold-lt);
+	}
+
+	.ueber-form-success {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		min-height: 280px;
+		max-width: 32rem;
+	}
+
+	.ueber-form-success-icon {
+		width: 64px;
+		height: 64px;
+		border: 2px solid var(--gold);
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 1.5rem;
+	}
+
+	.ueber-form-success-title {
+		font-family: 'Manrope', sans-serif;
+		font-size: clamp(1.4rem, 2vw, 1.75rem);
+		font-weight: 700;
+		color: var(--bg);
+		margin: 0 0 0.75rem;
+	}
+
+	.ueber-form-success-text {
+		font-family: 'Manrope', sans-serif;
+		font-size: 16px;
+		font-weight: 300;
+		line-height: 1.7;
+		color: var(--bg);
+		opacity: 0.9;
+		margin: 0;
+	}
+
 	.btn {
 		display: inline-flex;
 		align-items: center;
@@ -1242,3 +1323,33 @@ const timelineEntries = [
 		}
 	}
 </style>
+
+<script>
+	const form = document.querySelector('.ueber-form');
+	const success = document.getElementById('form-success');
+	if (form && success) {
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const btn = form.querySelector('.ueber-form-submit');
+			btn.textContent = 'Wird gesendet...';
+			btn.disabled = true;
+			try {
+				const res = await fetch('/', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+					body: new URLSearchParams(new FormData(form)).toString()
+				});
+				if (res.ok) {
+					form.style.display = 'none';
+					success.style.display = 'flex';
+				} else {
+					btn.textContent = 'Fehler – bitte erneut versuchen';
+					btn.disabled = false;
+				}
+			} catch {
+				btn.textContent = 'Fehler – bitte erneut versuchen';
+				btn.disabled = false;
+			}
+		});
+	}
+</script>
