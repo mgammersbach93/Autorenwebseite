@@ -65,13 +65,7 @@ const books: {
 					<article class="book-card">
 						<a href={book.slug} class="book-cover-wrap">
 							{book.cover ? (
-								<Image
-									src={book.cover}
-									alt=""
-									class="book-cover-img"
-									width={900}
-									style="width: 100%; height: auto;"
-								/>
+								<Image src={book.cover} alt="" class="book-cover-img" width={900} />
 							) : (
 								<div class="book-cover-placeholder" aria-hidden="true"></div>
 							)}
@@ -215,6 +209,7 @@ const books: {
 		gap: var(--space-4);
 		grid-template-columns: 1fr;
 		align-items: start;
+		min-width: 0;
 	}
 
 	@media (min-width: 720px) {
@@ -235,22 +230,29 @@ const books: {
 		text-decoration: none;
 		color: inherit;
 		transition: opacity 0.2s ease;
+		min-width: 0;
 	}
 
 	.book-cover-wrap:hover {
 		opacity: 0.9;
 	}
 
-	.book-cover-placeholder,
-	.book-cover-img {
+	.book-cover-wrap picture {
+		display: block;
+		width: 100%;
+	}
+
+	.book-cover-placeholder {
 		width: 100%;
 		aspect-ratio: 2 / 3;
 		background-color: var(--muted);
 		opacity: 0.35;
-		object-fit: cover;
 	}
 
 	.book-cover-img {
+		width: 100%;
+		height: auto;
+		display: block;
 		opacity: 1;
 	}
 
@@ -306,12 +308,6 @@ const books: {
 
 		.book-grid {
 			gap: 6.5rem;
-		}
-
-		.book-cover-img {
-			aspect-ratio: auto;
-			height: auto;
-			object-fit: contain;
 		}
 	}
 

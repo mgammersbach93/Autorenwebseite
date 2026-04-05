@@ -451,11 +451,15 @@ const characters = [
 		overflow: hidden;
 	}
 
-	.g-hero-cover {
+	.g-hero-cover-wrap picture {
+		display: block;
 		width: 100%;
 		max-width: 360px;
-		aspect-ratio: 2 / 3;
-		object-fit: cover;
+	}
+
+	.g-hero-cover {
+		width: 100%;
+		height: auto;
 		display: block;
 	}
 
@@ -487,16 +491,9 @@ const characters = [
 		.g-hero-cover-wrap {
 			max-width: 200px;
 			margin-inline: auto;
-			overflow: visible;
 		}
 		.g-hero-content {
 			align-items: center;
-		}
-
-		.g-hero-cover {
-			aspect-ratio: auto;
-			height: auto;
-			object-fit: contain;
 		}
 	}
 
@@ -506,6 +503,11 @@ const characters = [
 		}
 
 		.g-hero-cover-wrap {
+			max-width: 160px;
+			overflow: visible;
+		}
+
+		.g-hero-cover-wrap picture {
 			max-width: 160px;
 		}
 
@@ -694,21 +696,19 @@ const characters = [
 		justify-content: center;
 	}
 
-	.g-cta-cover {
-		width: min(320px, 78vw);
-		max-width: 100%;
-		height: auto;
+	.g-cta-cover-wrap picture {
 		display: block;
+		width: min(320px, 78vw);
+		max-width: 320px;
 		margin-inline: auto;
 	}
 
-	@media (max-width: 768px) {
-		.g-cta-cover {
-			width: 100%;
-			height: auto;
-			max-width: min(320px, 90vw);
-			object-fit: contain;
-		}
+	.g-cta-cover {
+		width: 100%;
+		height: auto;
+		display: block;
+		max-width: 320px;
+		margin-inline: auto;
 	}
 
 	.g-cta--order .g-cta-btn {
