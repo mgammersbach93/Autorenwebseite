@@ -1,11 +1,12 @@
 ---
 import { Image, getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import ogImageSrc from '../images/Feature_warum-lesen.png';
 import heroLesen from '../images/blaettern-statt-scrollen.png';
 import ctaRomanreihe from '../images/millennial-workshop-romanreihe.png';
 
 const siteOrigin = Astro.site?.origin ?? 'https://mgammersbach.de';
-const lesenOg = await getImage({ src: heroLesen, width: 1200 });
+const lesenOg = await getImage({ src: ogImageSrc, width: 1200 });
 const ogImageUrl = new URL(lesenOg.src, siteOrigin).href;
 ---
 

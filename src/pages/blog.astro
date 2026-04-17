@@ -1,20 +1,26 @@
 ---
+import { getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import BlogPostCard from '../components/BlogPostCard.astro';
 import { categoryLabel, formatPostDate } from '../lib/blog-categories';
 import { resolveSrcImageUrl } from '../lib/resolve-src-image';
+import ogImageSrc from '../images/Feature_blog.png';
 
 const allPosts = await getCollection('blog');
 const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const featured = posts[0];
 const rest = posts.slice(1);
+const siteOrigin = Astro.site?.origin ?? 'https://mgammersbach.de';
+const blogOg = await getImage({ src: ogImageSrc, width: 1200 });
+const ogImageUrl = new URL(blogOg.src, siteOrigin).href;
 ---
 
 <Layout
 	title="Blog | Markus Gammersbach"
 	description="Gedanken über das Schreiben, Persönlichkeitsentwicklung und das Leben als Millennial."
+	image={ogImageUrl}
 >
 	<!-- 1. HERO SECTION: full-width emerald, inner max 1300px -->
 	<section class="blog-hero">

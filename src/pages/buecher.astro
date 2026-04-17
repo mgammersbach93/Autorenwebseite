@@ -2,11 +2,12 @@
 import type { ImageMetadata } from 'astro';
 import { Image, getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import ogImageSrc from '../images/Feature_buecher.png';
 import coverGluecklich from '../images/sie-wollten-doch-nur-gluecklich-sein.jpg';
 import coverNeuesWagen from '../images/sie-wollten-endlich-neues-wagen.jpg';
 
 const siteOrigin = Astro.site?.origin ?? 'https://mgammersbach.de';
-const buecherOg = await getImage({ src: coverGluecklich, width: 1200 });
+const buecherOg = await getImage({ src: ogImageSrc, width: 1200 });
 const ogImageUrl = new URL(buecherOg.src, siteOrigin).href;
 
 const books: {

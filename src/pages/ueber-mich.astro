@@ -1,6 +1,7 @@
 ---
 import { Image, getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import ogImageSrc from '../images/Feature_ueber-mich.png';
 import heroAuthorPhoto from '../images/markus-gammersbach-selfpublishing-autor.png';
 import visionSchreiben from '../images/markus-gammersbach-roman-schreiben.JPG';
 import visionLesen from '../images/markus-gammersbach-lesen.JPG';
@@ -8,7 +9,7 @@ import moinHamburg from '../images/markus-gammersbach-hamburg.jpg';
 import moinKoeln from '../images/markus-gammersbach-koeln.jpg';
 
 const siteOrigin = Astro.site?.origin ?? 'https://mgammersbach.de';
-const ueberOg = await getImage({ src: heroAuthorPhoto, width: 1200 });
+const ueberOg = await getImage({ src: ogImageSrc, width: 1200 });
 const ogImageUrl = new URL(ueberOg.src, siteOrigin).href;
 
 const timelineEntries = [

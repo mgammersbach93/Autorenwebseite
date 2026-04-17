@@ -1,6 +1,7 @@
 ---
 import { Image, getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import ogImageSrc from '../images/Feature_deine-neuen-seiten.png';
 import heroImage from '../images/entdecke-deine-neuen-seiten-markus-gammersbach.png';
 import bookCoverGluecklich from '../images/sie-wollten-doch-nur-gluecklich-sein.jpg';
 import bookCoverNeuesWagen from '../images/sie-wollten-endlich-neues-wagen.jpg';
@@ -23,7 +24,7 @@ import galerieWeihnachten from '../images/galerie/sie-wollten-doch-nur-gluecklic
 import galerieZug from '../images/galerie/sie-wollten-doch-nur-gluecklich-sein-zug.jpg';
 
 const siteOrigin = Astro.site?.origin ?? 'https://mgammersbach.de';
-const heroOg = await getImage({ src: heroImage, width: 1200 });
+const heroOg = await getImage({ src: ogImageSrc, width: 1200 });
 const ogImageUrl = new URL(heroOg.src, siteOrigin).href;
 
 function galleryAltFromBasename(base: string): string {
