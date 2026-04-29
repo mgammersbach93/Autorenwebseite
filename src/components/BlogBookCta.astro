@@ -1,0 +1,74 @@
+---
+import { Image } from 'astro:assets';
+import ctaImage from '../images/millennial-workshop-romanreihe.png';
+---
+
+<div class="blog-book-cta">
+  <h2 class="blog-book-cta__title">Die Romanreihe zum Millennial Workshop</h2>
+  <div class="blog-book-cta__image">
+    <Image src={ctaImage} alt="Die Romanreihe zum Millennial Workshop – Glücklich sein und Neues wagen" />
+  </div>
+  <a href="/buecher" class="blog-book-cta__button">Jetzt bestellen</a>
+</div>
+
+<style>
+.blog-book-cta {
+  text-align: center;
+  padding: 3rem 2rem;
+  margin: 2.5rem 0;
+  border-top: 1px solid rgba(28, 28, 28, 0.1);
+  border-bottom: 1px solid rgba(28, 28, 28, 0.1);
+}
+
+.blog-book-cta__title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text);
+  margin: 0 0 1.5rem;
+}
+
+.blog-book-cta__image {
+  margin: 0 auto 1.5rem;
+  max-width: 340px;
+}
+
+.blog-book-cta__image img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
+
+.blog-book-cta__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  background-color: var(--btn-primary);
+  color: #f5f0e8;
+  padding: 0.85rem 2rem;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.blog-book-cta__button:hover {
+  background-color: var(--btn-primary-hover);
+}
+
+@media (max-width: 768px) {
+  .blog-book-cta {
+    padding: 2.5rem 1.5rem;
+  }
+}
+</style>

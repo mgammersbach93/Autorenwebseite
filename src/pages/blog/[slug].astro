@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { resolveSrcImageMeta, resolveSrcImageUrl } from '../../lib/resolve-src-image';
 import authorPortrait from '../../images/markus-gammersbach-autor.png';
+import BlogBookCta from '../../components/BlogBookCta.astro';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -61,7 +62,7 @@ if (postHeroMeta) {
 	<!-- POST HEADER: Headline + Meta -->
 	<header class="post-header">
 		<div class="post-header-inner">
-			<h1 class="post-title">{post.data.title}</h1>
+			<h2 class="post-title">{post.data.title}</h2>
 			<div class="post-meta">
 				<a href={`/blog#${post.data.category}`} class="post-meta-tag">{categoryLabel}</a>
 				<span class="post-meta-sep">·</span>
@@ -89,8 +90,8 @@ if (postHeroMeta) {
 
 	<!-- ARTICLE BODY -->
 	<article class="post-body">
-		<div class="post-body-inner prose">
-			<Content />
+		<div class="post-body-inner prose blog-content">
+			<Content components={{ BlogBookCta }} />
 		</div>
 	</article>
 
@@ -252,11 +253,12 @@ if (postHeroMeta) {
 	}
 
 	/* Prose styles */
-	.prose :global(h2) {
+	/* Inside the blog content area, markdown h2s should look like h3 */
+	.blog-content :global(h2) {
 		font-family: 'Manrope', sans-serif;
-		font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+		font-size: 21px;
 		font-weight: 700;
-		letter-spacing: -0.02em;
+		line-height: 1.2;
 		color: var(--text);
 		margin: 2.5rem 0 1rem;
 	}
@@ -321,6 +323,16 @@ if (postHeroMeta) {
 		color: var(--emerald);
 		text-decoration: underline;
 		text-underline-offset: 0.2em;
+	}
+
+	.prose :global(.blog-book-cta__button) {
+		color: #f5f0e8;
+		text-decoration: none;
+	}
+
+	.prose :global(.blog-book-cta__button:hover) {
+		color: #f5f0e8;
+		text-decoration: none;
 	}
 
 	.prose :global(img) {
@@ -588,4 +600,5 @@ if (postHeroMeta) {
 			grid-template-columns: 1fr;
 		}
 	}
+
 </style>
