@@ -9,9 +9,10 @@ import charMalte from '../images/gluecklich-sein-malte.png';
 import charLea from '../images/gluecklich-sein-lea.png';
 import charElias from '../images/gluecklich-sein-elias.png';
 import charSofia from '../images/gluecklich-sein-sofia.png';
+import crossCover from '../images/sie-wollten-doch-nur-gluecklich-sein.jpg';
 
 /** YouTube-Video-ID aus der Embed-URL (z. B. youtube.com/watch?v=…) – vor Livegang eintragen */
-const youtubeVideoId = 'AeoZVJZOIf8';
+const youtubeVideoId = 'AXdtCTNjvXM';
 
 const siteOrigin = Astro.site?.origin ?? 'https://mgammersbach.de';
 const neuesWagenOg = await getImage({ src: ogImageSrc, width: 1200 });
@@ -236,6 +237,25 @@ const characters = [
 			<a href="#" class="btn btn-primary g-cta-btn" target="_blank" rel="noopener noreferrer">Jetzt bestellen</a>
 		</div>
 	</section>
+
+	<!-- 8. Cross-CTA: Zu Teil 1 -->
+	<section class="g-cross-cta">
+		<div class="g-cross-cta-inner">
+			<Image
+				src={crossCover}
+				alt="Buchcover: Sie wollten doch nur glücklich sein"
+				class="g-cross-cta-cover"
+				width={280}
+				height={420}
+			/>
+			<div class="g-cross-cta-text">
+				<span class="g-eyebrow">So fing alles an</span>
+				<h2>Sie wollten doch nur glücklich sein</h2>
+				<p class="g-char-desc g-cross-cta-sub">Erfahre, wie sich Elias, Lea, Malte und Sofia kennengelernt haben.</p>
+				<a href="/gluecklich-sein/" class="btn g-cross-cta-btn">Zu Teil 1</a>
+			</div>
+		</div>
+	</section>
 </Layout>
 
 <script>
@@ -384,7 +404,8 @@ const characters = [
 
 	/* Section H2s – default heading style (no eyebrow) */
 	.g-workshop-inner h2,
-	.g-netflix-inner h2 {
+	.g-netflix-inner h2,
+	.g-cross-cta-text h2 {
 		font-family: 'Manrope', sans-serif;
 		font-size: 28px;
 		font-weight: 700;
@@ -1020,5 +1041,62 @@ const characters = [
 			width: 18px;
 			height: 18px;
 		}
+	}
+
+	/* Cross-CTA */
+	.g-cross-cta {
+		background-color: var(--bg);
+		padding: 3rem 1.5rem;
+	}
+	.g-cross-cta-inner {
+		max-width: 860px;
+		margin: 0 auto;
+		border-top: 1px solid rgba(28, 28, 28, 0.12);
+		padding-top: 2rem;
+		display: flex;
+		align-items: center;
+		gap: 2rem;
+		justify-content: center;
+	}
+	.g-cross-cta-cover {
+		width: 140px;
+		height: 210px;
+		flex-shrink: 0;
+		display: block;
+		object-fit: cover;
+	}
+	.g-cross-cta-text {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+		max-width: 400px;
+	}
+
+	.g-cross-cta-text .g-eyebrow {
+		margin-bottom: 0;
+		color: var(--gold);
+	}
+
+	.g-cross-cta-text h2 {
+		text-align: left;
+		margin: 0 0 0.75rem;
+	}
+
+	.g-cross-cta-sub {
+		margin: 0 0 1rem;
+		text-align: left;
+	}
+	.g-cross-cta-btn {
+		align-self: flex-start;
+		background-color: #1A3A30;
+		color: var(--bg);
+	}
+	.g-cross-cta-btn:hover {
+		background-color: #132e25;
+	}
+
+	.g-cross-cta-text .g-cross-cta-sub {
+		text-align: left;
+		margin: 0 0 1rem;
 	}
 </style>
