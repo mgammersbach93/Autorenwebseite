@@ -1099,4 +1099,28 @@ const characters = [
 		text-align: left;
 		margin: 0 0 1rem;
 	}
+
+	@media (max-width: 768px) {
+		.g-cross-cta-inner {
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+		}
+
+		.g-cross-cta-text {
+			align-items: center;
+			max-width: 100%;
+		}
+
+		.g-cross-cta-text .g-eyebrow,
+		.g-cross-cta-text h2,
+		.g-cross-cta-sub,
+		.g-cross-cta-text .g-cross-cta-sub {
+			text-align: center;
+		}
+
+		.g-cross-cta-btn {
+			align-self: center;
+		}
+	}
 </style>
