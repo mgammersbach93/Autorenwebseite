@@ -1,4 +1,4 @@
-export const BLOG_CATEGORY_SLUGS = ['schreiben', 'lesen', 'wachsen', 'millennials'] as const;
+export const BLOG_CATEGORY_SLUGS = ['schreiben', 'lesen', 'wachsen'] as const;
 
 export type BlogCategorySlug = (typeof BLOG_CATEGORY_SLUGS)[number];
 
@@ -7,7 +7,6 @@ export const categoryLabels: Record<BlogCategorySlug, string> = {
 	schreiben: 'SCHREIBEN',
 	lesen: 'LESEN',
 	wachsen: 'WACHSEN',
-	millennials: 'MILLENNIALS',
 };
 
 export function isBlogCategorySlug(s: string): s is BlogCategorySlug {

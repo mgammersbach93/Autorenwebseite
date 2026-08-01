@@ -26,9 +26,9 @@ const ogImageUrl = new URL(blogOg.src, siteOrigin).href;
 	<section class="blog-hero">
 		<div class="blog-hero-inner">
 			<p class="blog-hero-eyebrow">Blog</p>
-			<h1 class="blog-hero-title">Alltagsimpulse</h1>
+			<h1 class="blog-hero-title">Seitenwechsel</h1>
 			<p class="blog-hero-subtext">
-				Geschichten über das Schreiben, die Millennials und Persönlichkeitsentwicklung.</p>
+				Impulse fürs Lesen, Schreiben und Wachsen.</p>
 			<a href="#alle-artikel" class="blog-hero-cta">Alle Artikel lesen</a>
 			<span class="blog-hero-quote" aria-hidden="true">"</span>
 		</div>
@@ -42,7 +42,6 @@ const ogImageUrl = new URL(blogOg.src, siteOrigin).href;
 				<a href="#schreiben" class="blog-tab filter-tag" data-category="schreiben">SCHREIBEN</a>
 				<a href="#lesen" class="blog-tab filter-tag" data-category="lesen">LESEN</a>
 				<a href="#wachsen" class="blog-tab filter-tag" data-category="wachsen">WACHSEN</a>
-				<a href="#millennials" class="blog-tab filter-tag" data-category="millennials">MILLENNIALS</a>
 			</div>
 			<div class="blog-filter-select-wrap">
 				<label for="blog-category-select" class="blog-category-select-label">Kategorie</label>
@@ -51,7 +50,6 @@ const ogImageUrl = new URL(blogOg.src, siteOrigin).href;
 					<option value="schreiben">SCHREIBEN</option>
 					<option value="lesen">LESEN</option>
 					<option value="wachsen">WACHSEN</option>
-					<option value="millennials">MILLENNIALS</option>
 				</select>
 			</div>
 		</div>
@@ -103,7 +101,6 @@ const ogImageUrl = new URL(blogOg.src, siteOrigin).href;
 		/** Legacy slug + bookmarks / old links */
 		function normalizeCategorySlug(slug) {
 			if (!slug) return '';
-			if (slug === 'millennial-life') return 'millennials';
 			return slug;
 		}
 
@@ -111,7 +108,7 @@ const ogImageUrl = new URL(blogOg.src, siteOrigin).href;
 			var h = window.location.hash.slice(1);
 			h = normalizeCategorySlug(h);
 			if (!h || h === 'alle' || h === 'alle-artikel') return 'alle';
-			if (h === 'schreiben' || h === 'lesen' || h === 'wachsen' || h === 'millennials') {
+			if (h === 'schreiben' || h === 'lesen' || h === 'wachsen') {
 				return h;
 			}
 			return 'alle';
@@ -130,7 +127,7 @@ const ogImageUrl = new URL(blogOg.src, siteOrigin).href;
 		function syncCategorySelect(category) {
 			if (!categorySelect) return;
 			category = normalizeCategorySlug(category);
-			if (category === 'alle' || category === 'schreiben' || category === 'lesen' || category === 'wachsen' || category === 'millennials') {
+			if (category === 'alle' || category === 'schreiben' || category === 'lesen' || category === 'wachsen') {
 				categorySelect.value = category;
 			}
 		}

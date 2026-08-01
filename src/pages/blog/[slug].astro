@@ -34,7 +34,6 @@ const categoryLabels: Record<string, string> = {
 	schreiben: 'SCHREIBEN',
 	lesen: 'LESEN',
 	wachsen: 'WACHSEN',
-	millennials: 'MILLENNIALS',
 };
 const categoryLabel = categoryLabels[post.data.category] ?? post.data.category;
 
@@ -62,7 +61,7 @@ if (postHeroMeta) {
 	<!-- POST HEADER: Headline + Meta -->
 	<header class="post-header">
 		<div class="post-header-inner">
-			<h1 class="post-title">{post.data.title}</h1>
+			<h2 class="post-title">{post.data.title}</h2>
 			<div class="post-meta">
 				<a href={`/blog#${post.data.category}`} class="post-meta-tag">{categoryLabel}</a>
 				<span class="post-meta-sep">·</span>
@@ -105,7 +104,7 @@ if (postHeroMeta) {
 				<p class="post-author-label">Geschrieben von</p>
 				<p class="post-author-box-name">{post.data.author}</p>
 				<p class="post-author-bio">
-					Self-Publishing Autor aus Köln. Er schreibt über das Schreiben, Persönlichkeitsentwicklung und das Leben der Millennials.
+					Self-Publishing-Autor aus Köln. Er schreibt über das Schreiben, Persönlichkeitsentwicklung und das Leben der Millennials.
 				</p>
 				<a href="/ueber-mich" class="btn btn-ghost">Mehr über Markus</a>
 			</div>

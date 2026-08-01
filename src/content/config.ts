@@ -8,7 +8,7 @@ const blog = defineCollection({
 		seoTitle: z.string().optional(),
 		seoDescription: z.string().optional(),
 		pubDate: z.date(),
-		category: z.enum(['schreiben', 'lesen', 'wachsen', 'millennials']),
+		category: z.enum(['schreiben', 'lesen', 'wachsen']),
 		image: z.string().optional(),
 		imageAlt: z.string().optional(),
 		author: z.string().default('Markus Gammersbach'),
