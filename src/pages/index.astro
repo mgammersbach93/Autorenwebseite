@@ -22,6 +22,9 @@ import galerieStrand from '../images/galerie/sie-wollten-doch-nur-gluecklich-sei
 import galerieTherme from '../images/galerie/sie-wollten-doch-nur-gluecklich-sein-therme.jpg';
 import galerieWeihnachten from '../images/galerie/sie-wollten-doch-nur-gluecklich-sein-weihnachten.jpg';
 import galerieZug from '../images/galerie/sie-wollten-doch-nur-gluecklich-sein-zug.jpg';
+import galerieNeuesWagenCouch from '../images/galerie/sie-wollten-endlich-neues-wagen-couch.jpg';
+import galerieNeuesWagenStrand from '../images/galerie/sie-wollten-endlich-neues-wagen-strand.jpg';
+import galerieNeuesWagenZimmer from '../images/galerie/sie-wollten-endlich-neues-wagen-zimmer.jpeg';
 
 const siteOrigin = Astro.site?.origin ?? 'https://mgammersbach.de';
 const heroOg = await getImage({ src: ogImageSrc, width: 1200 });
@@ -55,6 +58,9 @@ const galleryBasenames = [
 	'sie-wollten-doch-nur-gluecklich-sein-therme',
 	'sie-wollten-doch-nur-gluecklich-sein-weihnachten',
 	'sie-wollten-doch-nur-gluecklich-sein-zug',
+	'sie-wollten-endlich-neues-wagen-couch',
+	'sie-wollten-endlich-neues-wagen-strand',
+	'sie-wollten-endlich-neues-wagen-zimmer',
 ] as const;
 
 const galleryRotatorAlts = galleryBasenames.map((b) => galleryAltFromBasename(b));
@@ -73,6 +79,9 @@ const galleryRotatorUrls = [
 	galerieTherme.src,
 	galerieWeihnachten.src,
 	galerieZug.src,
+	galerieNeuesWagenCouch.src,
+	galerieNeuesWagenStrand.src,
+	galerieNeuesWagenZimmer.src,
 ];
 ---
 
